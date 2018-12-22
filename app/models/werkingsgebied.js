@@ -13,5 +13,6 @@ export default Model.extend({
   uri: attr(),
   naam: attr(),
   niveau: attr(),
-  bestuurseenheid: hasMany('bestuurseenheid', { inverse: 'werkingsgebied' })
+  bestuurseenheid: hasMany('bestuurseenheid', { inverse: 'werkingsgebied' }),
+  bestuurseenhedenInProvincie: hasMany('bestuurseenheid', { inverse: 'provincie' })
 });

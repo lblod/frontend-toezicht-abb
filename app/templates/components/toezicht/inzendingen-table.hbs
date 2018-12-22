@@ -3,7 +3,7 @@
   {{#t.content as |c|}}
     {{#c.header}}
       {{#unless displaySubset}}
-        <th>Provincie</th>
+        {{th-sortable label='Provincie' field='bestuurseenheid.provincie.naam' currentSorting=sort class="u-visible--tablet-landscape-up"}}
       {{/unless}}
       {{th-sortable label='Bestuurseenheid' field='bestuurseenheid' currentSorting=sort class="u-visible--tablet-landscape-up"}}
       {{th-sortable label='Type bestuur' field='bestuurseenheid.classificatie.label' currentSorting=sort class="u-visible--tablet-landscape-up"}}
@@ -17,7 +17,7 @@
     {{/c.header}}
     {{#c.body as |row|}}
       {{#unless displaySubset}}
-        <td><!-- Provincie --></td>
+        <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.provincie.naam}}</td>
       {{/unless}}
       <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.naam}}</td>
       <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.classificatie.label}}</td>

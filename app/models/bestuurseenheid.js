@@ -5,6 +5,7 @@ import { belongsTo, hasMany } from 'ember-data/relationships';
 export default Model.extend({
   naam: attr(),
   werkingsgebied: belongsTo('werkingsgebied', { inverse: 'bestuurseenheid' }),
+  provincie: belongsTo('werkingsgebied', { inverse: 'bestuurseenhedenInProvincie' }),
   classificatie: belongsTo('bestuurseenheid-classificatie-code', { inverse: null }),
   bestuursorganen: hasMany('bestuursorgaan', { inverse: 'bestuurseenheid' })
 });

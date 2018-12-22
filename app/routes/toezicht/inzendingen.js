@@ -4,6 +4,13 @@ import DataTableRouteMixin from 'ember-data-table/mixins/route';
 export default Route.extend(DataTableRouteMixin, {
   modelName: 'inzending-voor-toezicht',
   mergeQueryOptions() {
-    // TODO add filters
+    return {
+      include: [
+        'bestuurseenheid.classificatie',
+        'bestuurseenheid.provincie',
+        'status',
+        'besluit-type'
+      ].join(',')
+    };
   }
 });
