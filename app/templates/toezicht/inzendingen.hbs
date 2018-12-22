@@ -1,6 +1,7 @@
 {{title "Toezicht ABB"}}
+
 <div class="grid grid--collapse">
-  <div class="col--12-12 {{if hasActiveChildRoute "col--5-12 u-visible--tablet-landscape-up" " col--10-12 col--9-12--m"}}">
+  <div class="{{if hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
     <div class="container-flex--contain">
       <div class="data-table__actions u-border--fat--bottom">
         <div class="u-padding--round--tiny">
@@ -11,7 +12,7 @@
           </div>
         </div>
       </div>
-      {{toezicht/inzendingen-table class="container-flex--scroll" content=model sort=sort page=page size=size displaySubset=hasActiveChildRoute}}
+      {{toezicht/inzendingen-table class="container-flex--scroll" model=model isLoading=isLoadingModel sort=sort page=page size=size displaySubset=hasActiveChildRoute}}
     </div>
   </div>
   {{outlet}}

@@ -1,0 +1,42 @@
+<div class="col--5-12 col--12-12--m container-flex--contain u-border--light--left">
+  <div class="u-padding--trl--small u-border--light--bottom">
+    <div class="grid">
+      <div class="col--9-12">
+        {{shared/document-status-pill model.status class="u-spacer--tiny"}}
+        <h2 class="h3">Bekijk melding</h2>
+      </div>
+      <div class="col--3-12 u-align-right">
+        {{#link-to "toezicht.inzendingen.index" class="link--icon--close"}}
+          <span class="u-visually-hidden">Venster sluiten</span>
+        {{/link-to}}
+      </div>
+    </div>
+  </div>
+  <div class="container-flex--scroll u-padding--round--small">
+    <div class="form__row">
+      <div class="grid u-spacer--tiny">
+        <div class="col--6-12">
+          <div class="description-data__label">Verstuurd door</div>
+          <div class="description-data__value">{{model.lastModifier.fullName}}</div>
+        </div>
+        <div class="col--6-12">
+          <div class="description-data__label">Verstuurd op</div>
+          <div class="description-data__value">{{moment-format model.sentDate 'DD-MM-YYYY'}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="u-spacer"></div>
+      <label class="form__label">Bijgevoegde bestanden</label>
+      {{#each files as |file|}}
+        {{vo-mu-file-card file=file onDelete=null active=false}}
+      {{/each}}
+    </div>
+    {{root-form-node solution=model.formSolution onDynamicFormInit=(action "initDynamicForm") show=true}}
+  </div>
+  <div class="u-padding--round--small u-border--light--top">
+    <div class="button-group u-spacer--tiny">
+      {{#link-to "toezicht.inzendingen.index" class="button button--narrow button--alt"}}Sluit venster{{/link-to}}
+    </div>
+  </div>
+</div>

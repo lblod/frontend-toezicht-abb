@@ -1,4 +1,4 @@
-{{#data-table content=content isLoading=isLoading noDataMessage="Geen inzendingen gevonden"
+{{#data-table content=model isLoading=isLoading noDataMessage="Geen inzendingen gevonden"
      sort=sort page=page size=size class="data-table" as |t|}}
   {{#t.content as |c|}}
     {{#c.header}}
@@ -27,7 +27,7 @@
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
       {{shared/document-status-pill row.status}}
-      <td>{{#link-to 'toezicht.inzendingen.show' row.id }}Bekijk{{/link-to}}</td>
+      <td>{{#link-to 'toezicht.inzendingen.show' row}}Bekijk{{/link-to}}</td>
     {{/c.body}}
   {{/t.content}}
 {{/data-table}}
