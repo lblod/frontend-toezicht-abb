@@ -1,0 +1,91 @@
+/* ==========================================================================
+  Style overwrite ember-power-select
+ ========================================================================== */
+
+/* basic colors and sizing of dropdown */
+
+.ember-power-select-dropdown.ember-basic-dropdown-content--below,
+.ember-power-select-dropdown.ember-basic-dropdown-content--above,
+.ember-power-select-dropdown.ember-basic-dropdown-content--in-place,
+.ember-power-select-trigger {
+  border-radius: 0;
+  border-color: #cbd2da;
+  color: #333;
+}
+
+.ember-basic-dropdown-content.ember-power-select-dropdown.ember-basic-dropdown-content--below {
+  box-shadow: 0 2px 2px rgba(165, 179, 194, 0.5);
+}
+
+.ember-power-select-trigger {
+  line-height: 4.5rem;
+  padding: 0 1rem;
+  overflow: hidden;
+}
+
+.step .ember-power-select-trigger {
+  padding-right: 4.5rem;
+  height: 4.5rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ember-power-select-trigger.ember-basic-dropdown-trigger.ember-view.ember-power-select-trigger--active {
+  border-color: #cbd2da;
+  box-shadow: none;
+}
+
+.ember-power-select-trigger.ember-basic-dropdown-trigger.ember-view.ember-power-select-trigger--active:focus {
+  outline: none;
+}
+
+.ember-power-select-search-input {
+ font-family: flanders-sans,sans-serif;
+}
+
+.ember-power-select-search-input:focus {
+  outline: none;
+  border-color: #ffc515;
+  box-shadow: inset 0 0 0 1px #ffc515;
+}
+
+/* Select options
+ ========================================================================== */
+.ember-power-select-option.ember-power-select-option--loading-message,
+.ember-power-select-option.ember-power-select-option--no-matches-message,
+.ember-power-select-option.ember-power-select-option--search-message {
+  padding-left: 0.5rem;
+  color: #999999;
+}
+
+.ember-power-select-option {
+  padding-left: 3rem;
+  position: relative;
+}
+
+.ember-power-select-option[aria-selected="true"],
+.ember-power-select-option[aria-current="true"] {
+  background-color: #E8EBEE;
+  color: #0F68C9;
+  text-decoration: underline;
+
+   &:before {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 7px;
+    z-index: 2;
+    font-family: vlaanderen_iconfont;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    text-decoration: none;
+    text-transform: none;
+    content: "\E00C";
+    color: #0F68C9;
+  }
+}
+
+.ember-power-select-selected-item {
+  margin-left: 0;
+}
