@@ -2,10 +2,13 @@
   "name": "frontend-inzendingen-databank",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for frontend-inzendingen-databank goes here",
-  "repository": "",
+  "description": "Frontend of the inzendingen databank",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lblod/frontend-inzendingen-databank.git"
+  },
   "license": "MIT",
-  "author": "",
+  "author": "info@redpencil.io",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -20,7 +23,7 @@
   "devDependencies": {
     "@ember/jquery": "^0.5.2",
     "@ember/optional-features": "^0.6.3",
-    "@lblod/ember-mu-dynamic-forms": "^0.3.2",
+    "@lblod/ember-mu-dynamic-forms": "^0.3.3",
     "@lblod/ember-vo-mu-file-upload": "^0.3.1",
     "@lblod/ember-vo-webuniversum": "^0.19.2",
     "@lblod/ember-vo-webuniversum-data-table": "^0.2.10",
