@@ -20,6 +20,14 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+    moment: {
+      allowEmpty: true
+    },
+    'vo-webuniversum': {
+      version: '2.8.3',
+      header: '',
+      footer: ''
     }
   };
 

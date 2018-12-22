@@ -1,0 +1,33 @@
+{{#data-table content=content isLoading=isLoading noDataMessage="Geen inzendingen gevonden"
+     sort=sort page=page size=size class="data-table" as |t|}}
+  {{#t.content as |c|}}
+    {{#c.header}}
+      {{#unless displaySubset}}
+        <th>Provincie</th>
+      {{/unless}}
+      {{th-sortable label='Bestuurseenheid' field='bestuurseenheid' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+      {{th-sortable label='Type bestuur' field='bestuurseenheid.classificatie.label' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+      {{th-sortable label='Type document' field='besluitType.label' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+      {{#unless displaySubset}}
+        {{th-sortable label='Ztting / besluit' field='sessionDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+        {{th-sortable label='Verstuurd' field='sentDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+      {{/unless}}
+      {{th-sortable label='Status' field='status' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+      <th><!-- Actions --></th>
+    {{/c.header}}
+    {{#c.body as |row|}}
+      {{#unless displaySubset}}
+        <td><!-- Provincie --></td>
+      {{/unless}}
+      <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.naam}}</td>
+      <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.classificatie.label}}</td>
+      <td class="u-visible--tablet-landscape-up">{{row.besluitType.label}}</td>
+      {{#unless displaySubset}}
+        <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDate 'DD-MM-YYYY'}}</td>
+        <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
+      {{/unless}}
+      {{shared/document-status-pill row.status}}
+      <td>{{#link-to 'toezicht.inzendingen.show' row.id }}Bekijk{{/link-to}}</td>
+    {{/c.body}}
+  {{/t.content}}
+{{/data-table}}
