@@ -28,7 +28,7 @@
     <div class="form__row">
       <div class="u-spacer"></div>
       <label class="form__label">Bijgevoegde bestanden</label>
-      {{#each files as |file|}}
+      {{#each model.files as |file|}}
         {{vo-mu-file-card file=file onDelete=null active=false}}
       {{/each}}
     </div>
