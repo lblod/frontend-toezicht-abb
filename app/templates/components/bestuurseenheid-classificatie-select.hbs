@@ -1,0 +1,11 @@
+{{#power-select
+     placeholder="OCMW, Gemeente, ..."
+     search=(perform search)
+     searchPlaceholder="Typ om te zoeken..."
+     options=options
+     selected=selected
+     onchange=(action "changeSelected")
+     allowClear=true
+     as |classificatie|}}
+  {{classificatie.label}}
+{{/power-select}}

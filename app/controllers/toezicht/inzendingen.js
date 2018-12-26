@@ -10,5 +10,11 @@ export default Controller.extend({
   hasActiveChildRoute: computed('router.currentRouteName', function() {
     return this.get('router.currentRouteName').startsWith('toezicht.inzendingen')
       && this.get('router.currentRouteName') != 'toezicht.inzendingen.index';
-  })
+  }),
+
+  actions: {
+    resetFilters() {
+      ['bestuurseenheidId', 'classificatieId', 'provincieId', 'besluitTypeId'].forEach(filter => this.set(filter, null));
+    }
+  }
 });

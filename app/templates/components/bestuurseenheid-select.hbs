@@ -1,0 +1,11 @@
+{{#power-select
+     placeholder="Berchem, Hasselt, Gent, ..."
+     search=(perform search)
+     searchPlaceholder="Typ om te zoeken..."
+     options=options
+     selected=selected
+     onchange=(action "changeSelected")
+     allowClear=true
+     as |bestuurseenheid|}}
+  {{bestuurseenheid.naam}}
+{{/power-select}}

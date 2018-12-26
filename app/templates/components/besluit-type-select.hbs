@@ -1,0 +1,11 @@
+{{#power-select
+     placeholder="Besluitenlijst, jaarrekening, ..."
+     search=(perform search)
+     searchPlaceholder="Typ om te zoeken..."
+     options=options
+     selected=selected
+     onchange=(action "changeSelected")
+     allowClear=true
+     as |besluitType|}}
+  {{besluitType.label}}
+{{/power-select}}

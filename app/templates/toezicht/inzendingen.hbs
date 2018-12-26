@@ -9,6 +9,31 @@
             <div class="col--6-12 col--1-1--s">
               <h1 class="h2 u-spacer--tiny">Toezicht ABB</h1>
             </div>
+            <div class="col--6-12 col--1-1--s u-align-right--tablet-portrait-up">
+              <div class="button-group">
+                {{#wu-button-group class="u-hidden-mobile"}}
+                  {{#wu-button onClick=(action "resetFilters") isSmall=true isDark=true isLink=true isNarrow=true}}
+                    <i class="vi vi-cross vi-u-link button__icon" aria-hidden="true"></i> Herstel alle filters
+                  {{/wu-button}}
+                {{/wu-button-group}}
+              </div>
+            </div>
+          </div>
+          <div class="grid u-hidden-mobile">
+            <div class="col--4-12 col--6-12--m col--1-1--s">
+              <label class="label--subtle form__label">Bestuurseenheid</label>
+              {{bestuurseenheid-select value=bestuurseenheidId onSelectionChange=(action (mut bestuurseenheidId))}}
+
+              <label class="label--subtle form__label">Provincie</label>
+              {{provincie-select value=provincieId onSelectionChange=(action (mut provincieId))}}
+            </div>
+            <div class="col--4-12 col--6-12--m col--1-1--s">
+              <label class="label--subtle form__label">Type bestuur</label>
+              {{bestuurseenheid-classificatie-select value=classificatieId onSelectionChange=(action (mut classificatieId))}}
+
+              <label class="label--subtle form__label">Type document</label>
+              {{besluit-type-select value=besluitTypeId onSelectionChange=(action (mut besluitTypeId))}}
+            </div>
           </div>
         </div>
       </div>
