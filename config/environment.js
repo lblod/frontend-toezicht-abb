@@ -26,8 +26,8 @@ module.exports = function(environment) {
     },
     'vo-webuniversum': {
       version: '2.8.3',
-      header: '',
-      footer: ''
+      header: '//widgets.vlaanderen.be/widget/live/8cb0e2dd9fb843a88da86211c9ade78c',
+      footer: '//widgets.vlaanderen.be/widget/live/278abfe4c19f49daa667c00815f6ab12'
     }
   };
 
