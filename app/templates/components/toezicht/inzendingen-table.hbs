@@ -1,5 +1,5 @@
 {{#data-table content=model isLoading=isLoading noDataMessage="Geen inzendingen gevonden"
-     sort=sort page=page size=size class="data-table" as |t|}}
+     sort=sort page=page size=size class="container-flex--contain data-table" as |t|}}
   {{#t.content as |c|}}
     {{#c.header}}
       {{#unless displaySubset}}
@@ -9,7 +9,7 @@
       {{th-sortable label='Type bestuur' field='bestuurseenheid.classificatie.label' currentSorting=sort class="u-visible--tablet-landscape-up"}}
       {{th-sortable label='Type document' field='besluitType.label' currentSorting=sort class="u-visible--tablet-landscape-up"}}
       {{#unless displaySubset}}
-        {{th-sortable label='Ztting / besluit' field='sessionDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+        {{th-sortable label='Zitting / besluit' field='sessionDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
         {{th-sortable label='Verstuurd' field='sentDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
       {{/unless}}
       {{th-sortable label='Status' field='status' currentSorting=sort class="u-visible--tablet-landscape-up"}}
@@ -19,14 +19,14 @@
       {{#unless displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.provincie.naam}}</td>
       {{/unless}}
-      <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.naam}}</td>
+      <td class="u-visible--tablet-landscape-up" style="max-width: 250px;">{{row.bestuurseenheid.naam}}</td>
       <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.classificatie.label}}</td>
-      <td class="u-visible--tablet-landscape-up">{{row.besluitType.label}}</td>
+      <td class="u-visible--tablet-landscape-up" style="max-width: 250px;">{{row.besluitType.label}}</td>
       {{#unless displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDate 'DD-MM-YYYY'}}</td>
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
-      {{shared/document-status-pill row.status}}
+      {{shared/document-status-pill row.status class="u-spacer--top--tiny"}}
       <td>{{#link-to 'toezicht.inzendingen.show' row}}Bekijk{{/link-to}}</td>
     {{/c.body}}
   {{/t.content}}
