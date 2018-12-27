@@ -34,6 +34,16 @@
               <label class="label--subtle form__label">Type document</label>
               {{besluit-type-select value=besluitTypeId onSelectionChange=(action (mut besluitTypeId))}}
             </div>
+            <div class="col--4-12 col--1-1--m col--1-1--s">
+              <div class="grid">
+                <div class="col--1-1 col--6-12--m">
+                  {{sent-date-range fromValue=sentDateFrom toValue=sentDateTo}}
+                </div>
+                <div class="col--1-1 col--6-12--m">
+                  {{session-date-range fromValue=sessionDateFrom toValue=sessionDateTo}}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

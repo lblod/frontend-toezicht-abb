@@ -14,7 +14,14 @@ export default Controller.extend({
 
   actions: {
     resetFilters() {
-      ['bestuurseenheidId', 'classificatieId', 'provincieId', 'besluitTypeId'].forEach(filter => this.set(filter, null));
+      ['bestuurseenheidId',
+       'classificatieId',
+       'provincieId',
+       'besluitTypeId',
+       'sessionDateFrom',
+       'sessionDateTo',
+       'sentDateFrom',
+       'sentDateTo'].forEach(filter => this.set(filter, null));
     }
   }
 });

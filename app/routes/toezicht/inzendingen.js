@@ -12,10 +12,10 @@ export default Route.extend(DataTableRouteMixin, {
     classificatieId: { refreshModel: true },
     provincieId: { refreshModel: true },
     besluitTypeId: { refreshModel: true },
-    sessionDateStart: { refreshModel: true },
-    sessionDateEnd: { refreshModel: true },
-    sentDateStart: { refreshModel: true },
-    sentDateEnd: { refreshModel: true }
+    sessionDateFrom: { refreshModel: true },
+    sessionDateTo: { refreshModel: true },
+    sentDateFrom: { refreshModel: true },
+    sentDateTo: { refreshModel: true }
   },
   mergeQueryOptions(params) {
     const query = {
@@ -38,6 +38,18 @@ export default Route.extend(DataTableRouteMixin, {
 
     if (params.besluitTypeId)
       query['filter[besluit-type][id]'] = params.besluitTypeId;
+
+    if (params.sessionDateFrom)
+      query['filter[:gte:session-date]'] = params.sessionDateFrom;
+
+    if (params.sessionDateTo)
+      query['filter[:lte:session-date]'] = params.sessionDateTo;
+
+    if (params.sentDateFrom)
+      query['filter[:gte:sent-date]'] = params.sentDateFrom;
+
+    if (params.sentDateTo)
+      query['filter[:lte:sent-date]'] = params.sentDateTo;
 
     return query;
   }
