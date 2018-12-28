@@ -13,7 +13,7 @@
         {{th-sortable label='Verstuurd' field='sentDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
       {{/unless}}
       {{th-sortable label='Status' field='status' currentSorting=sort class="u-visible--tablet-landscape-up"}}
-      <th><!-- Actions --></th>
+      <th class="u-hide-on-print"><!-- Actions --></th>
     {{/c.header}}
     {{#c.body as |row|}}
       {{#unless displaySubset}}
@@ -26,8 +26,10 @@
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDate 'DD-MM-YYYY'}}</td>
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
-      {{shared/document-status-pill row.status class="u-spacer--top--tiny"}}
-      <td>{{#link-to 'toezicht.inzendingen.show' row}}Bekijk{{/link-to}}</td>
+      <td>
+	      {{shared/document-status-pill row.status class="u-spacer--top--tiny"}}
+	    </td>
+      <td class="u-hide-on-print">{{#link-to 'toezicht.inzendingen.show' row}}Bekijk{{/link-to}}</td>
     {{/c.body}}
   {{/t.content}}
 {{/data-table}}
