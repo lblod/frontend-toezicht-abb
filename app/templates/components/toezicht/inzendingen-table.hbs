@@ -26,7 +26,7 @@
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDate 'DD-MM-YYYY'}}</td>
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
-      {{shared/document-status-pill row.status}}
+      {{shared/status-pill row.melding.status}}
       <td>{{#link-to 'toezicht.inzendingen.show' row}}Bekijk{{/link-to}}</td>
     {{/c.body}}
   {{/t.content}}

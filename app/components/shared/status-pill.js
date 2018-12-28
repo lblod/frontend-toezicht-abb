@@ -1,7 +1,7 @@
 import { alias } from '@ember/object/computed';
 import Component from '@ember/component';
 
-const DocumentStatusPillComponent = Component.extend({
+const StatusPillComponent = Component.extend({
   tagName: 'label',
   classNames: ['pill', 'pill--clickable'],
   attributeBindings: ['resource'],
@@ -9,8 +9,8 @@ const DocumentStatusPillComponent = Component.extend({
   resource: alias('status.uri')
 });
 
-DocumentStatusPillComponent.reopenClass({
+StatusPillComponent.reopenClass({
   positionalParams: ['status']
 });
 
-export default DocumentStatusPillComponent;
+export default StatusPillComponent;
