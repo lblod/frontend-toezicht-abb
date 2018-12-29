@@ -1,9 +1,11 @@
 import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
+  currentSession: service(),
+
   tagName: '',
   model: null,
-  canEdit: true, // TODO get role from current session
 
   actions: {
     async initDynamicForm(dForm){

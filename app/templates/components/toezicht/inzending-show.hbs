@@ -35,7 +35,7 @@
     {{root-form-node solution=model.formSolution onDynamicFormInit=(action "initDynamicForm") show=true}}
   </div>
   <div class="u-padding--round--small u-border--light--top u-hide-on-print">
-    {{#if canEdit}}
+    {{#if currentSession.canWrite}}
       {{toezicht/inzending-feedback model=(await model.melding)}}
     {{else}}
       <div class="button-group u-spacer--tiny">
