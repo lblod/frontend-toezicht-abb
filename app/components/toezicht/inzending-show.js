@@ -1,25 +1,14 @@
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
 import { task, timeout } from 'ember-concurrency';
 
 export default Component.extend({
-  router: service(),
-
   tagName: '',
   model: null,
-
-  saveMelding() {
-    const melding = this.model.melding;
-
-
-  },
+  canEdit: true, // TODO get role from current session
 
   actions: {
     async initDynamicForm(dForm){
       this.set('dynamicForm', dForm);
-    },
-    saveMelding() {
-      this.saveMelding();
     }
   }
 });

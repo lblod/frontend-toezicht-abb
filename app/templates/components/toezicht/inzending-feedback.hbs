@@ -1,0 +1,16 @@
+{{#if initStatuses.lastSuccessful}}
+  <div class="alert alert--small alert--success u-spacer--tiny">
+    <label class="checkbox checkbox--block">
+      {{input type="checkbox" class="checkbox__toggle" checked=isHandled change=(action "toggleIsHandled" value='target.checked')}}
+      <span></span>
+      Melding afgehandeld
+    </label>
+    <div class="u-spacer--tiny"></div>
+    <label>Behandelaar <span class="text-fade">en eventueel extra informatie</span></label>
+    {{input class="input-field input-field--block" value=model.description}}
+  </div>
+  <div class="button-group u-spacer--tiny">
+    {{#wu-button onClick=(action "save") isNarrow=true}}Bewaar{{/wu-button}}
+    {{#wu-button onClick=(action "cancel") isNarrow=true isAlt=true}}Sluit venster{{/wu-button}}
+  </div>
+{{/if}}

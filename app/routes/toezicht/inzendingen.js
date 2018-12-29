@@ -22,7 +22,7 @@ export default Route.extend(DataTableRouteMixin, {
       include: [
         'bestuurseenheid.classificatie',
         'bestuurseenheid.provincie',
-        'status',
+        'melding.status',
         'besluit-type'
       ].join(',')
     };
