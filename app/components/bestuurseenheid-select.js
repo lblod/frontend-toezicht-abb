@@ -8,7 +8,8 @@ export default Component.extend({
   async init() {
     this._super(...arguments);
     const options = this.store.query('bestuurseenheid', {
-      sort: 'naam'
+      sort: 'naam',
+      include: ['classificatie']
     });
     this.set('options', options);
   },
@@ -30,6 +31,8 @@ export default Component.extend({
   search: task(function* (term) {
     yield timeout(600);
     return this.store.query('bestuurseenheid', {
+      sort: 'naam',
+      include: ['classificatie'],
       filter: { naam: term }
     });
   }),
