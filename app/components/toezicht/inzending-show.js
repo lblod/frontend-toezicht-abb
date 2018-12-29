@@ -5,5 +5,9 @@ export default Component.extend({
   currentSession: service(),
 
   tagName: '',
-  model: null
+  model: null,
+
+  actions: {
+    noop() {}
+  }
 });

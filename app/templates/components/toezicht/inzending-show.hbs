@@ -32,7 +32,7 @@
         {{vo-mu-file-card file=file onDelete=null active=false}}
       {{/each}}
     </div>
-    {{root-form-node solution=model.formSolution show=true}}
+    {{root-form-node solution=model.formSolution onDynamicFormInit=(action "noop") show=true}}
   </div>
   <div class="u-padding--round--small u-border--light--top u-hide-on-print">
     {{#if currentSession.canWrite}}
