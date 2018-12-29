@@ -1,3 +1,3 @@
-# frontend-inzendingen-databank
+# frontend-toezicht-abb
 
-Frontend of the inzendingen databank application
+Frontend of the Toezich ABB application

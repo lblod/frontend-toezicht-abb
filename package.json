@@ -1,11 +1,11 @@
 {
-  "name": "frontend-inzendingen-databank",
+  "name": "frontend-toezicht-abb",
   "version": "0.0.0",
   "private": true,
-  "description": "Frontend of the inzendingen databank",
+  "description": "Frontend of the Toezicht ABB application",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lblod/frontend-inzendingen-databank.git"
+    "url": "git+https://github.com/lblod/frontend-toezicht-abb.git"
   },
   "license": "MIT",
   "author": "info@redpencil.io",

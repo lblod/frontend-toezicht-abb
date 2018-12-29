@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'frontend-inzendingen-databank',
+    modulePrefix: 'frontend-toezicht-abb',
     environment,
     rootURL: '/',
     locationType: 'auto',

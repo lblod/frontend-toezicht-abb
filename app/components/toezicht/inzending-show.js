@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import { task, timeout } from 'ember-concurrency';
 
 export default Component.extend({
   tagName: '',

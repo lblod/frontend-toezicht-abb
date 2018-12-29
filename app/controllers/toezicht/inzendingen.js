@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import ENV from 'frontend-inzendingen-databank/config/environment';
+import ENV from 'frontend-toezicht-abb/config/environment';
 
 export default Controller.extend({
   router: service(),
