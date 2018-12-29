@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import ENV from 'frontend-toezicht-abb/config/environment';
 
 export default Controller.extend({
@@ -17,6 +17,11 @@ export default Controller.extend({
     this._super(...arguments);
     this.set('header', ENV['vo-webuniversum']['header']);
   },
+
+  filterChanged: observer('bestuurseenheidId', 'classificatieId', 'provincieId', 'besluitTypeId',
+                          'sessionDateFrom', 'sessionDateTo', 'sentDateFrom', 'sentDateTo', function() {
+    this.set('page', 0);
+  }),
 
   actions: {
     resetFilters() {
