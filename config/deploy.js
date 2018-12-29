@@ -11,13 +11,13 @@ module.exports = function(deployTarget) {
     'ssh-index': {
       username: 'root',
       host: 'dock.semte.ch',
-      remoteDir: '/data/digitaal-loket/dev-inzendingen-databank/inzendingen-databank-app',
+      remoteDir: '/data/digitaal-loket/dev-toezicht-abb/toezicht-abb-app',
       agent: process.env.SSH_AUTH_SOCK,
       port: 2275,
       allowOverwrite: true
     },
     'rsync': {
-      dest: '/data/digitaal-loket/dev-inzendingen-databank/inzendingen-databank-app',
+      dest: '/data/digitaal-loket/dev-toezicht-abb/toezicht-abb-app',
       username: 'root',
       host: 'dock.semte.ch',
       port: 2275,
