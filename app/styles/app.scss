@@ -42,3 +42,66 @@
     background-color: #B2B2B2;
   }
 }
+
+/* ==========================================================================
+  Style power select sizes
+ ========================================================================== */
+
+.ember-power-select-trigger--small .ember-power-select-trigger {
+	font-size: 1.4rem;
+	height: 3rem;
+	line-height: 2;
+	padding-left: 0.5rem;
+}
+
+.ember-power-select-option {
+	line-height: 2.2rem;
+	padding: 1rem 0 1rem 3rem;
+}
+
+/* ==========================================================================
+  Print
+  Style what printing looks like here.
+ ========================================================================== */
+
+@media print {
+
+	@page {
+		size: landscape;
+	}
+
+	.pill {
+		border-right: 1px solid $blue-gray-light;
+	}
+
+	.u-wide-on-print {
+		max-width: none;
+		width: 100%;
+	}
+
+	th.u-visible--tablet-landscape-up,
+	td.u-visible--tablet-landscape-up,
+	th {
+		display: table-cell !important;
+	}
+
+	.u-hide-on-print,
+	th.u-hide-on-print,
+	td.u-hide-on-print {
+		display: none !important;
+	}
+
+	.container,
+	.grid,
+	.container-flex--contain,
+	.container-flex--scroll {
+		overflow: visible !important;
+		display: block;
+		position: static;
+		height: auto;
+		flex: none;
+		flex-direction: unset;
+		flex-wrap: unset;
+	}
+}
+

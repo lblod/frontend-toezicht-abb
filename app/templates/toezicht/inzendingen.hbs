@@ -1,10 +1,12 @@
 {{title "Toezicht ABB"}}
 
+{{wu-widget src=header class="vo-header-widget"}}
+
 <div class="grid grid--collapse">
   <div class="{{if hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
     <div class="container-flex--contain">
-      <div class="data-table__actions u-border--fat--bottom">
-        <div class="u-padding--round--tiny">
+      <div class="u-border--fat--bottom u-hide-on-print">
+        <div class="u-padding--round--small">
           <div class="grid">
             <div class="col--6-12 col--1-1--s">
               <h1 class="h2 u-spacer--tiny">Toezicht ABB</h1>
@@ -15,6 +17,7 @@
                   {{#wu-button onClick=(action "resetFilters") isSmall=true isDark=true isLink=true isNarrow=true}}
                     <i class="vi vi-cross vi-u-link button__icon" aria-hidden="true"></i> Herstel alle filters
                   {{/wu-button}}
+					      	{{mu-logout class="u-display-inline-block"}}
                 {{/wu-button-group}}
               </div>
             </div>
@@ -22,17 +25,17 @@
           <div class="grid u-hidden-mobile">
             <div class="col--4-12 col--6-12--m col--1-1--s">
               <label class="label--subtle form__label">Bestuurseenheid</label>
-              {{bestuurseenheid-select value=bestuurseenheidId onSelectionChange=(action (mut bestuurseenheidId))}}
+              {{bestuurseenheid-select value=bestuurseenheidId onSelectionChange=(action (mut bestuurseenheidId)) class="ember-power-select-trigger--small"}}
 
               <label class="label--subtle form__label">Provincie</label>
-              {{provincie-select value=provincieId onSelectionChange=(action (mut provincieId))}}
+              {{provincie-select value=provincieId onSelectionChange=(action (mut provincieId)) class="ember-power-select-trigger--small"}}
             </div>
             <div class="col--4-12 col--6-12--m col--1-1--s">
               <label class="label--subtle form__label">Type bestuur</label>
-              {{bestuurseenheid-classificatie-select value=classificatieId onSelectionChange=(action (mut classificatieId))}}
+              {{bestuurseenheid-classificatie-select value=classificatieId onSelectionChange=(action (mut classificatieId)) class="ember-power-select-trigger--small"}}
 
               <label class="label--subtle form__label">Type document</label>
-              {{besluit-type-select value=besluitTypeId onSelectionChange=(action (mut besluitTypeId))}}
+              {{besluit-type-select value=besluitTypeId onSelectionChange=(action (mut besluitTypeId)) class="ember-power-select-trigger--small"}}
             </div>
             <div class="col--4-12 col--1-1--m col--1-1--s">
               <div class="grid">
@@ -47,7 +50,7 @@
           </div>
         </div>
       </div>
-      {{toezicht/inzendingen-table class="container-flex--scroll" model=model isLoading=isLoadingModel sort=sort page=page size=size displaySubset=hasActiveChildRoute}}
+	    {{toezicht/inzendingen-table class="container-flex--contain" model=model isLoading=isLoadingModel sort=sort page=page size=size displaySubset=hasActiveChildRoute}}
     </div>
   </div>
   {{outlet}}

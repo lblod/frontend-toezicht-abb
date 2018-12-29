@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
+import ENV from 'frontend-inzendingen-databank/config/environment';
 
 export default Controller.extend({
   router: service(),
@@ -11,6 +12,11 @@ export default Controller.extend({
     return this.get('router.currentRouteName').startsWith('toezicht.inzendingen')
       && this.get('router.currentRouteName') != 'toezicht.inzendingen.index';
   }),
+
+  init() {
+    this._super(...arguments);
+    this.set('header', ENV['vo-webuniversum']['header']);
+  },
 
   actions: {
     resetFilters() {

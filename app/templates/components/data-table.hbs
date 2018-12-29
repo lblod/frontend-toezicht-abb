@@ -1,0 +1,18 @@
+<div data-table class="container-flex--scroll">
+  {{#if hasBlock}}
+    {{yield (hash
+        content=(component 'data-table-content' content=content noDataMessage=noDataMessage enableSelection=enableSelection enableLineNumbers=enableLineNumbers onClickRow=(optional onClickRow) data-table=this class="container-flex--scroll")
+      )
+        this}}
+  {{else}}
+    {{component 'data-table-content' content=content noDataMessage=noDataMessage enableSelection=enableSelection enableLineNumbers=enableLineNumbers onClickRow=(optional onClickRow) data-table=this class="container-flex--scroll"}}
+  {{/if}}
+</div>
+
+{{#if content}}
+  <div class="data-table__actions data-table__actions--bottom">
+    {{number-pagination
+        page=page size=size nbOfItems=content.length sizeOptions=sizeOptions
+        total=content.meta.count links=content.meta.pagination}}
+  </div>
+{{/if}}

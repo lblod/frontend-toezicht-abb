@@ -1,0 +1,30 @@
+<form class="login-form" {{action "login" on="submit"}}>
+  <div class="login-form-name">
+    <label class="form__label">Gebruikersnaam</label>
+    {{input value=nickname placeholder=placeholder class="input-field input-field--block u-spacer--tiny"}}
+  </div>
+  <div class="login-form-password">
+    <label class="form__label">Paswoord</label>
+    {{input value=password type="password" class="input-field input-field--block u-spacer"}}
+  </div>
+	<div class="feedback-message">
+		{{#if loading}}
+			<div class="loader loader--light"><span class="u-visually-hidden">Aan het laden</span></div>
+			<p class="loading u-spacer">Bezig met gegevens verifiëren...</p>
+		{{/if}}
+		{{#if errorMessage}}
+			<div class="alert alert--warning">
+				<div class="alert__icon" aria-hidden="true"></div>
+				<div class="alert__content">
+					<div class="alert__title u-spacer--small">Aanmelden mislukt &mdash; probeer opnieuw</div>
+					<div class="alert__message">
+						<p class="u-spacer--small">Kan u zich niet aanmelden? Neem contact op met de Helpdesk Loket Lokaal Bestuur via <a href="mailto:loketlokaalbestuur@vlaanderen.be">loketlokaalbestuur@vlaanderen.be</a>.</p>
+						<p class="u-spacer--small smaller"><strong>Foutmelding:</strong> {{errorMessage}}</p>
+					</div>
+				</div>
+			</div>
+		{{/if}}
+	</div>
+
+  <button class="button {{if loading "button--loading"}}" disabled={{loading}}>Meld u aan</button>
+</form>
