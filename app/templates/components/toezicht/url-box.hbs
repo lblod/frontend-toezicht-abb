@@ -1,0 +1,22 @@
+<div class="form__row u-spacer--tiny">
+  <table class="data-table data-table--tight u-spacer--tb--small">
+    <thead>
+      <tr>
+        <th>Links naar documenten</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#if urls.firstObject}}
+        {{#each urls as |url|}}
+          <tr>
+            <td>
+              <a href="{{url.address}}" target="_blank">{{url.address}}</a>
+            </td>
+          </tr>
+        {{/each}}
+      {{else}}
+        <tr>Geen links gevonden</tr>
+      {{/if}}
+    </tbody>
+  </table>
+</div>

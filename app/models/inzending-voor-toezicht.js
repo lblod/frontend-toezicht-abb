@@ -36,5 +36,6 @@ export default Model.extend({
   taxType: belongsTo('toezicht-tax-type', { inverse: null }),
   files: hasMany('file', { inverse: null }),
   taxRates: hasMany('tax-rate', { inverse: null }),
-  melding: belongsTo('inzending-voor-toezicht-melding', { inverse: 'inzendingVoorToezicht' })
+  melding: belongsTo('inzending-voor-toezicht-melding', { inverse: 'inzendingVoorToezicht' }),
+  fileAddresses: hasMany('file-address', { inverse: null})
 });
