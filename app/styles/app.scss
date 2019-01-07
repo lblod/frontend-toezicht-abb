@@ -2,106 +2,23 @@
 @import 'ember-vo-webuniversum-data-table';
 @import 'ember-vo-webuniversum';
 
+@import 'print';
 @import 'restyle-ember-power-select';
-
-/* Status pills */
-.pill {
-  &[resource^="http://data.lblod.info/melding-statuses/"],
-  &[resource^="http://data.lblod.info/document-statuses/"] {
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 0;
-    position: relative;
-    white-space: nowrap;
-    padding-right: 10px;
-
-    &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      top: -1px;
-      right: -1px;
-      bottom: -1px;
-      width: 5px;
-    }
-  }
-  &[resource="http://data.lblod.info/melding-statuses/afgehandeld"]::after,
-  &[resource="http://data.lblod.info/document-statuses/concept"]::after {
-    background-color: #B2B2B2;
-  }
-  &[resource="http://data.lblod.info/document-statuses/goedgekeurd"]::after {
-    background-color: #333333;
-  }
-  &[resource="http://data.lblod.info/melding-statuses/te-behandelen"]::after,
-  &[resource="http://data.lblod.info/document-statuses/opmerking"]::after {
-    background-color: #FEE539;
-  }
-  &[resource="http://data.lblod.info/document-statuses/verstuurd"]::after {
-    background-color: #0F68C9
-  }
-  &[resource="http://data.lblod.info/document-statuses/prullenbak"]::after {
-    background-color: #B2B2B2;
-  }
-}
+@import 'document-status-pills';
 
 /* ==========================================================================
   Style power select sizes
  ========================================================================== */
 
-.ember-power-select-trigger--small .ember-power-select-trigger {
+.ember-power-select--small .ember-power-select-trigger { // remove when webunversum is updated
 	font-size: 1.4rem;
 	height: 3rem;
 	line-height: 2;
 	padding-left: 0.5rem;
 }
 
-.ember-power-select-option {
+.ember-power-select-option { // remove when webunversum is updated
 	line-height: 2.2rem;
 	padding: 1rem 0 1rem 3rem;
-}
-
-/* ==========================================================================
-  Print
-  Style what printing looks like here.
- ========================================================================== */
-
-@media print {
-
-	@page {
-		size: landscape;
-	}
-
-	.pill {
-		border-right: 1px solid $blue-gray-light;
-	}
-
-	.u-wide-on-print {
-		max-width: none;
-		width: 100%;
-	}
-
-	th.u-visible--tablet-landscape-up,
-	td.u-visible--tablet-landscape-up,
-	th {
-		display: table-cell !important;
-	}
-
-	.u-hide-on-print,
-	th.u-hide-on-print,
-	td.u-hide-on-print {
-		display: none !important;
-	}
-
-	.container,
-	.grid,
-	.container-flex--contain,
-	.container-flex--scroll {
-		overflow: visible !important;
-		display: block;
-		position: static;
-		height: auto;
-		flex: none;
-		flex-direction: unset;
-		flex-wrap: unset;
-	}
 }
 
