@@ -28,6 +28,7 @@ inflector.singular(/a([a-z])en$/,'aa$1');
 inflector.singular(/u([a-z])en$/,'uu$1');
 inflector.singular(/o([a-z])en$/,'oo$1');
 inflector.singular(/([auio])s$/,'$1s');
+inflector.irregular('account', 'accounts');
 inflector.irregular('file', 'files');
 inflector.irregular('document-status', 'document-statuses');
 inflector.irregular('melding-status', 'melding-statuses');
