@@ -17,8 +17,9 @@
                   {{#wu-button onClick=(action "resetFilters") isSmall=true isDark=true isLink=true isNarrow=true}}
                     <i class="vi vi-cross vi-u-link button__icon" aria-hidden="true"></i> Herstel alle filters
                   {{/wu-button}}
-					      	{{mu-logout class="u-display-inline-block"}}
-                  {{acmidm-logout}}
+                  <div class="u-display-inline-block">
+					      	  {{acmidm-logout class="button button--alt button--small"}}
+                  </div>
                 {{/wu-button-group}}
               </div>
             </div>
