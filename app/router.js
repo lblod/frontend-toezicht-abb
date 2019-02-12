@@ -22,6 +22,7 @@ Router.map(function() {
     path: '/*wildcard'
   });
 
+  this.route('mock-login');
 });
 
 export default Router;
