@@ -8,20 +8,23 @@
       <div class="u-border--fat--bottom u-hide-on-print">
         <div class="u-padding--round--small">
           <div class="grid">
-            <div class="col--6-12 col--1-1--s">
-              <h1 class="h2 u-spacer--tiny">Toezicht ABB</h1>
+            <div class="col--4-12 col--1-1--s">
+              <h1 class="h2 u-spacer--right--small u-display-inline-block">Toezicht ABB</h1>
             </div>
-            <div class="col--6-12 col--1-1--s u-align-right--tablet-portrait-up">
-              <div class="button-group">
-                {{#wu-button-group class="u-hidden-mobile"}}
-                  {{#wu-button onClick=(action "resetFilters") isSmall=true isDark=true isLink=true isNarrow=true}}
-                    <i class="vi vi-cross vi-u-link button__icon" aria-hidden="true"></i> Herstel alle filters
-                  {{/wu-button}}
-                  <div class="u-display-inline-block">
-					      	  {{acmidm-logout class="button button--alt button--small"}}
-                  </div>
-                {{/wu-button-group}}
-              </div>
+            <div class="col--8-12 col--1-1--s u-align-right--tablet-portrait-up">
+              {{#wu-button-group}}
+	            	<div class="u-display--inline-block u-padding--right--small">
+									<div class="checkbox--switch__wrapper checkbox--switch--small">
+										<input class="checkbox--switch" type="checkbox" name="toggle" id="toggle-1" value="">
+										<label class="checkbox--switch__label" for="toggle-1"></label>
+										<span>Toon enkel te behandelen dossiers</span>
+									</div>
+								</div>
+                {{#wu-button onClick=(action "resetFilters") isSmall=true isDark=true isLink=true isNarrow=true class="u-spacer--bottom--none u-hidden-mobile"}}
+                  <i class="vi vi-cross vi-u-link button__icon" aria-hidden="true"></i> Herstel alle filters
+                {{/wu-button}}
+                {{acmidm-logout class="button button--alt button--small u-spacer--bottom--none u-hidden-mobile"}}
+              {{/wu-button-group}}
             </div>
           </div>
           <div class="grid u-hidden-mobile">
