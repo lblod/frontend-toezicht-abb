@@ -6,22 +6,22 @@
         {{th-sortable label='Provincie' field='bestuurseenheid.provincie.naam' currentSorting=sort class="u-visible--tablet-landscape-up"}}
       {{/unless}}
       {{th-sortable label='Bestuurseenheid' field='bestuurseenheid' currentSorting=sort class="u-visible--tablet-landscape-up"}}
-      {{th-sortable label='Type bestuur' field='bestuurseenheid.classificatie.label' currentSorting=sort class="u-visible--tablet-landscape-up"}}
-      {{th-sortable label='Type document' field='besluitType.label' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+      {{th-sortable label='Type bestuur' field='bestuurseenheid.classificatie.label' currentSorting=sort class="u-visible--tablet-portrait-up"}}
+      {{th-sortable label='Type document' field='besluitType.label' currentSorting=sort}}
       {{#unless displaySubset}}
         {{th-sortable label='Zitting / besluit' field='sessionDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
         {{th-sortable label='Verstuurd' field='sentDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
       {{/unless}}
-      {{th-sortable label='Status' field='status' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+      {{th-sortable label='Status' field='status' currentSorting=sort}}
       <th class="u-hide-on-print"><!-- Actions --></th>
     {{/c.header}}
     {{#c.body as |row|}}
       {{#unless displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.provincie.naam}}</td>
       {{/unless}}
-      <td class="u-visible--tablet-landscape-up" style="max-width: 250px;">{{row.bestuurseenheid.naam}}</td>
+      <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.bestuurseenheid.naam}} <span class="u-hidden--tablet-landscape-up text-fade"><br>{{row.bestuurseenheid.classificatie.label}}</span></td>
       <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.classificatie.label}}</td>
-      <td class="u-visible--tablet-landscape-up" style="max-width: 250px;">{{row.besluitType.label}}</td>
+      <td style="max-width: 250px;">{{row.besluitType.label}} <span class="u-hidden--tablet-portrait-up text-fade"><br>{{row.bestuurseenheid.naam}} {{row.bestuurseenheid.classificatie.label}}</span></td>
       {{#unless displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDate 'DD-MM-YYYY'}}</td>
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
