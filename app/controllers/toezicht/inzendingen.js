@@ -19,7 +19,7 @@ export default Controller.extend({
   },
 
   filterChanged: observer('bestuurseenheidId', 'classificatieId', 'provincieId', 'besluitTypeId',
-                          'sessionDateFrom', 'sessionDateTo', 'sentDateFrom', 'sentDateTo', function() {
+                          'sessionDateFrom', 'sessionDateTo', 'sentDateFrom', 'sentDateTo', 'statusId', function() {
     this.set('page', 0);
   }),
 
@@ -32,7 +32,8 @@ export default Controller.extend({
        'sessionDateFrom',
        'sessionDateTo',
        'sentDateFrom',
-       'sentDateTo'].forEach(filter => this.set(filter, null));
+       'sentDateTo',
+       'statusId'].forEach(filter => this.set(filter, null));
     }
   }
 });
