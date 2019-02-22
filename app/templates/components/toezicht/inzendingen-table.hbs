@@ -12,7 +12,7 @@
         {{th-sortable label='Zitting / besluit' field='sessionDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
         {{th-sortable label='Verstuurd' field='sentDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
       {{/unless}}
-      {{th-sortable label='Status' field='status' currentSorting=sort}}
+      {{th-sortable label='Status' field='melding.status' currentSorting=sort}}
       <th class="u-hide-on-print"><!-- Actions --></th>
     {{/c.header}}
     {{#c.body as |row|}}
