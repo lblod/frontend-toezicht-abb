@@ -10,17 +10,17 @@ module.exports = function(deployTarget) {
     },
     'ssh-index': {
       username: 'root',
-      host: 'dock.semte.ch',
-      remoteDir: '/data/digitaal-loket/dev-toezicht-abb/toezicht-abb-app',
+      host: 'rpio-dev.s.redpencil.io',
+      remoteDir: '/data/app-toezicht-abb-dev/toezicht-abb-app',
       agent: process.env.SSH_AUTH_SOCK,
-      port: 2275,
+      port: 22,
       allowOverwrite: true
     },
     'rsync': {
-      dest: '/data/digitaal-loket/dev-toezicht-abb/toezicht-abb-app',
+      dest: '/data/app-toezicht-abb-dev/toezicht-abb-app',
       username: 'root',
-      host: 'dock.semte.ch',
-      port: 2275,
+      host: 'rpio-dev.s.redpencil.io',
+      port: 22,
       delete: false,
       privateKey: process.env.SSH_AUTH_SOCK,
       arg:['--verbose']
