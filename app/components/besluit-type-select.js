@@ -8,7 +8,8 @@ export default Component.extend({
   async init() {
     this._super(...arguments);
     const options = this.store.query('besluit-type', {
-      sort: 'label'
+      sort: 'label',
+      page: { size: 1000 }
     });
     this.set('options', options);
   },
