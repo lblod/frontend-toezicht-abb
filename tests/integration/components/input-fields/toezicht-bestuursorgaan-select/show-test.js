@@ -12,7 +12,7 @@ module('Integration | Component | input-fields/toezicht-bestuursorgaan-select/sh
 
     await render(hbs`{{input-fields/toezicht-bestuursorgaan-select/show}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom(this.element).hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | input-fields/toezicht-bestuursorgaan-select/sh
       {{/input-fields/toezicht-bestuursorgaan-select/show}}
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom(this.element).hasText('template block text');
   });
 });
