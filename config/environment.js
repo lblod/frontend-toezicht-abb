@@ -64,7 +64,7 @@ module.exports = function(environment) {
   }
 
   if (process.env.DEPLOY_ENV === 'production') {
-    ENV['torii']['providers']['acmidm-oauth2']['apiKey'] = '';
+    ENV['torii']['providers']['acmidm-oauth2']['apiKey'] = '581c5176-1a08-48d6-a9ef-e6fb95fe6010';
     ENV['torii']['providers']['acmidm-oauth2']['baseUrl'] = 'https://authenticatie.vlaanderen.be/op/v1/auth';
     ENV['torii']['providers']['acmidm-oauth2']['redirectUri'] = 'https://besluiten.abb.vlaanderen.be/authorization/callback';
     ENV['torii']['providers']['acmidm-oauth2']['logoutUrl'] = 'https://authenticatie.vlaanderen.be/op/v1/logout';
