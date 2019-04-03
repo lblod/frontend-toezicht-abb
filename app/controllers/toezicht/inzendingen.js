@@ -1,13 +1,18 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { computed, observer } from '@ember/object';
+import { bool } from '@ember/object/computed';
 import ENV from 'frontend-toezicht-abb/config/environment';
 
 export default Controller.extend({
   router: service(),
+  store: service(),
   page: 0,
   size: 20,
   sort: '-sent-date',
+  _toTreatStatusUri: "http://data.lblod.info/melding-statuses/te-behandelen",
+  isStatusFilterEnabled: bool('statusUri'),
+
   hasActiveChildRoute: computed('router.currentRouteName', function() {
     return this.get('router.currentRouteName').startsWith('toezicht.inzendingen')
       && this.get('router.currentRouteName') != 'toezicht.inzendingen.index';
@@ -19,11 +24,18 @@ export default Controller.extend({
   },
 
   filterChanged: observer('bestuurseenheidId', 'classificatieId', 'provincieId', 'besluitTypeId',
-                          'sessionDateFrom', 'sessionDateTo', 'sentDateFrom', 'sentDateTo', 'statusId', function() {
+                          'sessionDateFrom', 'sessionDateTo', 'sentDateFrom', 'sentDateTo', 'statusUri', function() {
     this.set('page', 0);
   }),
 
   actions: {
+    setToTreatStatus(event) {
+      this.set('statusUri', null);
+      if(event.target.checked) {
+        this.set('statusUri', this._toTreatStatusUri);
+      }
+    },
+
     resetFilters() {
       ['bestuurseenheidId',
        'classificatieId',
@@ -33,7 +45,7 @@ export default Controller.extend({
        'sessionDateTo',
        'sentDateFrom',
        'sentDateTo',
-       'statusId'].forEach(filter => this.set(filter, null));
+       'statusUri'].forEach(filter => this.set(filter, null));
     }
   }
 });
