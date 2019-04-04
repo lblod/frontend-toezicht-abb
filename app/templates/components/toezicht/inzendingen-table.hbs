@@ -25,7 +25,7 @@
         {{row.besluitType.label}} <br>
         <span class="u-hidden--tablet-portrait-up text-fade">{{row.bestuurseenheid.naam}} {{row.bestuurseenheid.classificatie.label}}</span><br>
         {{#if (eq row.regulationType 'Reglementen en verorderingen')}}
-          <span class="text-fade">Regulation type: {{row.regulationType}}</span>
+          <span class="text-fade">{{row.regulationType}}</span>
         {{/if}}
       </td>
       {{#unless displaySubset}}
