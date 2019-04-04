@@ -21,7 +21,13 @@
       {{/unless}}
       <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.bestuurseenheid.naam}} <span class="u-hidden--tablet-landscape-up text-fade"><br>{{row.bestuurseenheid.classificatie.label}}</span></td>
       <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.classificatie.label}}</td>
-      <td style="max-width: 250px;">{{row.besluitType.label}} <span class="u-hidden--tablet-portrait-up text-fade"><br>{{row.bestuurseenheid.naam}} {{row.bestuurseenheid.classificatie.label}}</span></td>
+      <td style="max-width: 250px;">
+        {{row.besluitType.label}} <br>
+        <span class="u-hidden--tablet-portrait-up text-fade">{{row.bestuurseenheid.naam}} {{row.bestuurseenheid.classificatie.label}}</span><br>
+        {{#if (eq row.regulationType 'Reglementen en verorderingen')}}
+          <span class="text-fade">Regulation type: {{row.regulationType}}</span>
+        {{/if}}
+      </td>
       {{#unless displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDate 'DD-MM-YYYY'}}</td>
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
