@@ -14,7 +14,15 @@
 
             <div class="col--8-12 col--1-1--s u-align-right--tablet-portrait-up">
               {{#wu-button-group}}
-                {{status-checkbox statusId=statusId}}
+                <div class="u-display--inline-block u-padding--right--small">
+                  <div class="checkbox--switch__wrapper checkbox--switch--small">
+                    {{wu-switch
+                        label="Toon enkel te behandelen dossiers"
+                        checked=isStatusFilterEnabled
+                        onClick=(action 'setToTreatStatus')
+                    }}
+                  </div>
+                </div>
                 {{#wu-button onClick=(action "resetFilters") isSmall=true isDark=true isLink=true isNarrow=true class="u-spacer--bottom--none u-hidden-mobile"}}
                   <i class="vi vi-cross vi-u-link button__icon" aria-hidden="true"></i> Herstel alle filters
                 {{/wu-button}}

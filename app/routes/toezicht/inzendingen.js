@@ -16,7 +16,7 @@ export default Route.extend(DataTableRouteMixin, {
     sessionDateTo: { refreshModel: true },
     sentDateFrom: { refreshModel: true },
     sentDateTo: { refreshModel: true },
-    statusId: { refreshModel: true }
+    statusUri: { refreshModel: true }
   },
   mergeQueryOptions(params) {
     const query = {
@@ -52,8 +52,8 @@ export default Route.extend(DataTableRouteMixin, {
     if (params.sentDateTo)
       query['filter[:lte:sent-date]'] = params.sentDateTo;
 
-    if (params.statusId)
-      query['filter[melding][status][id]'] = params.statusId;
+    if (params.statusUri)
+      query['filter[melding][status][:uri:]'] = params.statusUri;
 
     return query;
   }
