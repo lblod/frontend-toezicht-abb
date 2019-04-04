@@ -38,6 +38,5 @@ export default Model.extend({
   files: hasMany('file', { inverse: null }),
   taxRates: hasMany('tax-rate', { inverse: null }),
   melding: belongsTo('inzending-voor-toezicht-melding', { inverse: 'inzendingVoorToezicht' }),
-  fileAddresses: hasMany('file-address', { inverse: null}),
-  regulationType: attr()
+  fileAddresses: hasMany('file-address', { inverse: null})
 });
