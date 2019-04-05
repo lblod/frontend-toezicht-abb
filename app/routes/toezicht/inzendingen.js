@@ -12,7 +12,7 @@ export default Route.extend(DataTableRouteMixin, {
     classificatieId: { refreshModel: true },
     provincieId: { refreshModel: true },
     besluitTypeId: { refreshModel: true },
-    toezichtRegulationTypeId: { refreshModel: true },
+    regulationTypeId: { refreshModel: true },
     sessionDateFrom: { refreshModel: true },
     sessionDateTo: { refreshModel: true },
     sentDateFrom: { refreshModel: true },
@@ -42,8 +42,8 @@ export default Route.extend(DataTableRouteMixin, {
     if (params.besluitTypeId)
       query['filter[besluit-type][id]'] = params.besluitTypeId;
 
-    if (params.toezichtRegulationTypeId)
-      query['filter[regulation-type][id]'] = params.toezichtRegulationTypeId;
+    if (params.regulationTypeId)
+      query['filter[regulation-type][id]'] = params.regulationTypeId;
 
     if (params.sessionDateFrom)
       query['filter[:gte:session-date]'] = params.sessionDateFrom;
