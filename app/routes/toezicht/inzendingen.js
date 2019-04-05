@@ -26,7 +26,7 @@ export default Route.extend(DataTableRouteMixin, {
         'bestuurseenheid.provincie',
         'melding.status',
         'besluit-type',
-        //'toezicht-regulation-type'
+        'regulation-type'
       ].join(',')
     };
 
