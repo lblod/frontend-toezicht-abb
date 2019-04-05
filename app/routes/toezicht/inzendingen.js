@@ -43,7 +43,7 @@ export default Route.extend(DataTableRouteMixin, {
       query['filter[besluit-type][id]'] = params.besluitTypeId;
 
     if (params.toezichtRegulationTypeId)
-      query['filter[toezicht-regulation-type][id]'] = params.toezichtRegulationTypeId;
+      query['filter[regulation-type][id]'] = params.toezichtRegulationTypeId;
 
     if (params.sessionDateFrom)
       query['filter[:gte:session-date]'] = params.sessionDateFrom;
