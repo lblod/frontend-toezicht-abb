@@ -45,7 +45,7 @@
               <label class="label--subtle form__label">Type document</label>
               {{besluit-type-select value=besluitTypeId onSelectionChange=(action (mut besluitTypeId)) class="ember-power-select--small"}}
               
-              {{#if (eq besluitTypeId  '5b3955cc006323233e711c482f3a6bf39a8d3eba6bbdb2c672bdfcf2b2985b03')}}
+              {{#if isRegulation}}
                 <label class="label--subtle form__label">Type reglement of verordening</label>
                 {{toezicht-regulation-type-select value=regulationTypeId onSelectionChange=(action (mut regulationTypeId)) class="ember-power-select--small"}}
               {{/if}}

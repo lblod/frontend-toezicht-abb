@@ -28,6 +28,10 @@ export default Controller.extend({
     this.set('page', 0);
   }),
 
+  isRegulation: computed('besluitTypeId', function(){
+    return this.besluitTypeId === '5b3955cc006323233e711c482f3a6bf39a8d3eba6bbdb2c672bdfcf2b2985b03';
+  }),
+
   actions: {
     setToTreatStatus(event) {
       this.set('statusUri', null);
