@@ -56,8 +56,8 @@ export default Controller.extend({
     },
 
     readBesluitType(type) {
-      this.set('besluitTypeId', type.id);
-      this.set('besluitTypeUri', type.uri);
+      this.set('besluitTypeId',  type ? type.id : null);
+      this.set('besluitTypeUri', type ? type.uri: null);
     }
   }
 });
