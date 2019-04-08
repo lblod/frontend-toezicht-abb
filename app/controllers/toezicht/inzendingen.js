@@ -28,7 +28,7 @@ export default Controller.extend({
     this.set('page', 0);
   }),
 
-  isRegulation: computed('besluitType.id', function(){
+  isRegulation: computed('besluitType.isRegulation', function(){
     return this.get('besluitType.isRegulation');
   }),
 
