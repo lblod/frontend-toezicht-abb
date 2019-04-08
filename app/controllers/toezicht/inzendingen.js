@@ -32,10 +32,6 @@ export default Controller.extend({
     return this.get('besluitType.isRegulation');
   }),
 
-  besluitTypeId: computed('besluitType.id', function(){
-    return this.get('besluitType.id');
-  }),
-
   besluitTypeUri: computed('besluitType.uri', function(){
     return this.get('besluitType.uri');
   }),
@@ -63,6 +59,9 @@ export default Controller.extend({
 
     readBesluitType(type) {
       this.set('besluitType', type);
+      this.set('besluitTypeId', type ? type.id : null);
+      if (!type)
+        this.set('regulationTypeId', null);
     }
   }
 });
