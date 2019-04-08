@@ -22,10 +22,10 @@
       <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.bestuurseenheid.naam}} <span class="u-hidden--tablet-landscape-up text-fade"><br>{{row.bestuurseenheid.classificatie.label}}</span></td>
       <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.classificatie.label}}</td>
       <td style="max-width: 250px;">
-        {{row.besluitType.label}} <br>
+        {{row.besluitType.label}}<br>
         <span class="u-hidden--tablet-portrait-up text-fade">{{row.bestuurseenheid.naam}} {{row.bestuurseenheid.classificatie.label}}</span><br>
         {{#if row.isRegulation}}
-          <span class="text-fade">{{row.regulationType.label}}</span><br>
+          <span class="text-fade">{{row.regulationType.label}}</span>
         {{/if}}
       </td>
       {{#unless displaySubset}}
