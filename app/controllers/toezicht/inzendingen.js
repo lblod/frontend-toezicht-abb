@@ -23,14 +23,21 @@ export default Controller.extend({
     this.set('header', ENV['vo-webuniversum']['header']);
   },
 
-  filterChanged: observer('bestuurseenheidId', 'classificatieId', 'provincieId', 'besluitTypeId', 'besluitTypeUri',
-                          'toezichtRegulationTypeId', 'sessionDateFrom', 'sessionDateTo', 'sentDateFrom',
-                          'sentDateTo', 'statusUri', function() {
+  filterChanged: observer('bestuurseenheidId', 'classificatieId', 'provincieId',
+                          'besluitTypeId', 'besluitTypeUri', 'toezichtRegulationTypeId', 'sessionDateFrom', 'sessionDateTo', 'sentDateFrom', 'sentDateTo', 'statusUri', function() {
     this.set('page', 0);
   }),
 
-  isRegulation: computed('besluitTypeId', function(){
-    return this.besluitTypeUri === 'http://data.lblod.info/DecisionType/5b3955cc006323233e711c482f3a6bf39a8d3eba6bbdb2c672bdfcf2b2985b03';
+  isRegulation: computed('besluitType.id', function(){
+    return this.get('besluitType.isRegulation');
+  }),
+
+  besluitTypeId: computed('besluitType.id', function(){
+    return this.get('besluitType.id');
+  }),
+
+  besluitTypeUri: computed('besluitType.uri', function(){
+    return this.get('besluitType.uri');
   }),
 
   actions: {
@@ -56,8 +63,7 @@ export default Controller.extend({
     },
 
     readBesluitType(type) {
-      this.set('besluitTypeId',  type ? type.id : null);
-      this.set('besluitTypeUri', type ? type.uri: null);
+      this.set('besluitType', type);
     }
   }
 });
