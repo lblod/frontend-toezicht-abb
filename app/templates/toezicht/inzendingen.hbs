@@ -43,8 +43,8 @@
               {{bestuurseenheid-classificatie-select value=classificatieId onSelectionChange=(action (mut classificatieId)) class="ember-power-select--small"}}
 
               <label class="label--subtle form__label">Type document</label>
-              {{besluit-type-select value=besluitTypeId onSelectionChange=(action (mut besluitTypeId)) class="ember-power-select--small"}}
-              
+              {{besluit-type-select value=besluitTypeId onSelectionChange=(action "readBesluitType") class="ember-power-select--small"}}
+
               {{#if isRegulation}}
                 <label class="label--subtle form__label">Type reglement of verordening</label>
                 {{toezicht-regulation-type-select value=regulationTypeId onSelectionChange=(action (mut regulationTypeId)) class="ember-power-select--small"}}
