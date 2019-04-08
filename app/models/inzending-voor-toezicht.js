@@ -41,7 +41,7 @@ export default Model.extend({
   melding: belongsTo('inzending-voor-toezicht-melding', { inverse: 'inzendingVoorToezicht' }),
   fileAddresses: hasMany('file-address', { inverse: null}),
 
-  isRegulation: computed(function(){
+  isRegulation: computed('besluitType.isRegulation', function(){
     return this.get('besluitType.isRegulation');
   })
 });
