@@ -53,7 +53,6 @@ export default Controller.extend({
        'classificatieId',
        'provincieId',
        'besluitTypeId',
-       'besluitTypeUri',
        'toezichtRegulationTypeId',
        'sessionDateFrom',
        'sessionDateTo',
