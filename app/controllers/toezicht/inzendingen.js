@@ -29,7 +29,9 @@ export default Controller.extend({
   }),
 
   isRegulation: computed('besluitType.isRegulation', function(){
-    return this.get('besluitType.isRegulation') || this.get('besluitTypeId') === '5b3955cc006323233e711c482f3a6bf39a8d3eba6bbdb2c672bdfcf2b2985b03';
+    if (this.besluitType === undefined && this.besluitTypeId !== undefined)
+      this.set('besluitType', this.store.findRecord('besluitType', this.besluitTypeId));
+    return this.get('besluitType.isRegulation');
   }),
 
   besluitTypeUri: computed('besluitType.uri', function(){
