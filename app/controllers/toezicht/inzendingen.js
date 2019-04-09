@@ -57,7 +57,7 @@ export default Controller.extend({
 
     readBesluitType(type) {
       this.set('besluitType', type);
-      this.set('besluitTypeId', type ? type.id : null);
+      this.set('besluitTypeId', type && type.id);
       if (!type)
         this.set('regulationTypeId', null);
     }
