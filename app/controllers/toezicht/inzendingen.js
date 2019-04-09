@@ -28,12 +28,6 @@ export default Controller.extend({
     this.set('page', 0);
   }),
 
-  isRegulation: computed('besluitType.isRegulation', function(){
-    if (this.besluitType === undefined && this.besluitTypeId !== undefined)
-      this.set('besluitType', this.store.findRecord('besluitType', this.besluitTypeId));
-    return this.get('besluitType.isRegulation');
-  }),
-
   actions: {
     setToTreatStatus(event) {
       this.set('statusUri', null);

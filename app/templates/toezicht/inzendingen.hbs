@@ -45,7 +45,7 @@
               <label class="label--subtle form__label">Type document</label>
               {{besluit-type-select value=besluitTypeId onInit=(action "readBesluitType") onSelectionChange=(action "readBesluitType") class="ember-power-select--small"}}
 
-              {{#if isRegulation}}
+              {{#if besluitType.isRegulation}}
                 <label class="label--subtle form__label">Type reglement of verordening</label>
                 {{toezicht-regulation-type-select value=regulationTypeId onSelectionChange=(action (mut regulationTypeId)) class="ember-power-select--small"}}
               {{/if}}

@@ -24,7 +24,7 @@
       <td style="max-width: 250px;">
         {{row.besluitType.label}}<br>
         <span class="u-hidden--tablet-portrait-up text-fade">{{row.bestuurseenheid.naam}} {{row.bestuurseenheid.classificatie.label}}</span><br>
-        {{#if row.isRegulation}}
+        {{#if row.besluitType.isRegulation}}
           <span class="text-fade">{{row.regulationType.label}}</span>
         {{/if}}
       </td>
