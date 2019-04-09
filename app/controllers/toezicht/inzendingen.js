@@ -34,10 +34,6 @@ export default Controller.extend({
     return this.get('besluitType.isRegulation');
   }),
 
-  besluitTypeUri: computed('besluitType.uri', function(){
-    return this.get('besluitType.uri');
-  }),
-
   actions: {
     setToTreatStatus(event) {
       this.set('statusUri', null);
