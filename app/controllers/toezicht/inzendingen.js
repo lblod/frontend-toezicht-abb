@@ -49,7 +49,7 @@ export default Controller.extend({
        'statusUri'].forEach(filter => this.set(filter, null));
     },
 
-    readBesluitType(type) {
+    selectBesluitType(type) {
       this.set('besluitType', type);
       this.set('besluitTypeId', type && type.id);
     }
