@@ -19,6 +19,7 @@ export default Component.extend({
     if (this.value && !this.selected) {
       const besluitType = this.store.findRecord('besluit-type', this.value);
       this.set('selected', besluitType);
+      this.onInit(besluitType);
     } else if (!this.value) {
       this.set('selected', null);
     }
