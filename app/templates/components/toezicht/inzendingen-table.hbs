@@ -24,9 +24,7 @@
       <td style="max-width: 250px;">
         {{row.besluitType.label}}<br>
         <span class="u-hidden--tablet-portrait-up text-fade">{{row.bestuurseenheid.naam}} {{row.bestuurseenheid.classificatie.label}}</span><br>
-        {{#if row.besluitType.isRegulation}}
-          <span class="text-fade">{{row.regulationType.label}}</span>
-        {{/if}}
+        <span class="text-fade">{{row.regulationType.label}}</span>
       </td>
       {{#unless displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDate 'DD-MM-YYYY'}}</td>
