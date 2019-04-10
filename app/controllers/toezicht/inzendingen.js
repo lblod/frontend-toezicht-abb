@@ -24,7 +24,7 @@ export default Controller.extend({
   },
 
   filterChanged: observer('bestuurseenheidId', 'classificatieId', 'provincieId',
-                          'besluitType', 'regulationTypeId', 'sessionDateFrom', 'sessionDateTo', 'sentDateFrom', 'sentDateTo', 'statusUri', function() {
+                          'regulationTypeId', 'sessionDateFrom', 'sessionDateTo', 'sentDateFrom', 'sentDateTo', 'statusUri', function() {
     this.set('page', 0);
   }),
 
@@ -52,6 +52,7 @@ export default Controller.extend({
     selectBesluitType(type) {
       this.set('besluitType', type);
       this.set('besluitTypeId', type && type.id);
+      this.set('regulationTypeId', null);
     }
   }
 });
