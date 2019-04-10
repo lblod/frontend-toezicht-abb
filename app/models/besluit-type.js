@@ -1,7 +1,6 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
-import { computed }  from '@ember/object';
 import { equal } from '@ember/object/computed';
 
 export default Model.extend({

@@ -27,6 +27,7 @@ export default Component.extend({
 
   selected: null,
   value: null, // id of selected record
+  onInit: null,
   onSelectionChange: null,
 
   search: task(function* (term) {
