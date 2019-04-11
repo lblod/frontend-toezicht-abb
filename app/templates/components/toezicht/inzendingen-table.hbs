@@ -21,12 +21,16 @@
       {{/unless}}
       <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.bestuurseenheid.naam}} <span class="u-hidden--tablet-landscape-up text-fade"><br>{{row.bestuurseenheid.classificatie.label}}</span></td>
       <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.classificatie.label}}</td>
-      <td style="max-width: 250px;">{{row.besluitType.label}} <span class="u-hidden--tablet-portrait-up text-fade"><br>{{row.bestuurseenheid.naam}} {{row.bestuurseenheid.classificatie.label}}</span></td>
+      <td style="max-width: 250px;">
+        <p>{{row.besluitType.label}}</p>
+        <p class="small text-fade u-spacer--bottom--tiny">{{row.regulationType.label}}</p>
+	      <p class="u-hidden--tablet-portrait-up text-fade small">{{row.bestuurseenheid.classificatie.label}} {{row.bestuurseenheid.naam}}</p>
+      </td>
       {{#unless displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDate 'DD-MM-YYYY'}}</td>
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
-      <td>{{shared/status-pill row.melding.status class="u-spacer--top--tiny"}}</td>
+      <td>{{shared/status-pill row.melding.status}}</td>
       <td class="u-hide-on-print">{{#link-to 'toezicht.inzendingen.show' row}}Bekijk{{/link-to}}</td>
     {{/c.body}}
   {{/t.content}}

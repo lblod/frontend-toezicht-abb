@@ -12,6 +12,7 @@ export default Route.extend(DataTableRouteMixin, {
     classificatieId: { refreshModel: true },
     provincieId: { refreshModel: true },
     besluitTypeId: { refreshModel: true },
+    regulationTypeId: { refreshModel: true },
     sessionDateFrom: { refreshModel: true },
     sessionDateTo: { refreshModel: true },
     sentDateFrom: { refreshModel: true },
@@ -24,7 +25,8 @@ export default Route.extend(DataTableRouteMixin, {
         'bestuurseenheid.classificatie',
         'bestuurseenheid.provincie',
         'melding.status',
-        'besluit-type'
+        'besluit-type',
+        'regulation-type'
       ].join(',')
     };
 
@@ -39,6 +41,9 @@ export default Route.extend(DataTableRouteMixin, {
 
     if (params.besluitTypeId)
       query['filter[besluit-type][id]'] = params.besluitTypeId;
+
+    if (params.regulationTypeId)
+      query['filter[regulation-type][id]'] = params.regulationTypeId;
 
     if (params.sessionDateFrom)
       query['filter[:gte:session-date]'] = params.sessionDateFrom;

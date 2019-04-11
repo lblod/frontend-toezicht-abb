@@ -7,7 +7,7 @@ export default Component.extend({
 
   async init() {
     this._super(...arguments);
-    const options = this.store.query('besluit-type', {
+    const options = this.store.query('toezicht-regulation-type', {
       sort: 'label',
       page: { size: 1000 }
     });
@@ -17,9 +17,8 @@ export default Component.extend({
   async didReceiveAttrs() {
     this._super(...arguments);
     if (this.value && !this.selected) {
-      const besluitType = this.store.findRecord('besluit-type', this.value);
-      this.set('selected', besluitType);
-      this.onInit(besluitType);
+      const toezichtRegulationType = this.store.findRecord('toezicht-regulation-type', this.value);
+      this.set('selected', toezichtRegulationType);
     } else if (!this.value) {
       this.set('selected', null);
     }
@@ -27,12 +26,11 @@ export default Component.extend({
 
   selected: null,
   value: null, // id of selected record
-  onInit: null,
   onSelectionChange: null,
 
   search: task(function* (term) {
     yield timeout(600);
-    return this.store.query('besluit-type', {
+    return this.store.query('toezicht-regulation-type', {
       filter: { label: term }
     });
   }),
@@ -40,7 +38,7 @@ export default Component.extend({
   actions: {
     changeSelected(selected) {
       this.set('selected', selected);
-      this.onSelectionChange(selected);
+      this.onSelectionChange(selected && selected.id);
     }
   }
 });

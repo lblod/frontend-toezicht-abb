@@ -23,8 +23,9 @@ export default Controller.extend({
     this.set('header', ENV['vo-webuniversum']['header']);
   },
 
-  filterChanged: observer('bestuurseenheidId', 'classificatieId', 'provincieId', 'besluitTypeId',
-                          'sessionDateFrom', 'sessionDateTo', 'sentDateFrom', 'sentDateTo', 'statusUri', function() {
+  filterChanged: observer('bestuurseenheidId', 'classificatieId', 'provincieId',
+                          'besluitTypeId', 'regulationTypeId', 'sessionDateFrom', 'sessionDateTo',
+                          'sentDateFrom', 'sentDateTo', 'statusUri', function() {
     this.set('page', 0);
   }),
 
@@ -41,11 +42,18 @@ export default Controller.extend({
        'classificatieId',
        'provincieId',
        'besluitTypeId',
+       'regulationTypeId',
        'sessionDateFrom',
        'sessionDateTo',
        'sentDateFrom',
        'sentDateTo',
        'statusUri'].forEach(filter => this.set(filter, null));
+    },
+
+    selectBesluitType(type) {
+      this.set('besluitType', type);
+      this.set('besluitTypeId', type && type.id);
+      this.set('regulationTypeId', null);
     }
   }
 });

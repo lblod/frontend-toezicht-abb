@@ -23,7 +23,7 @@
                     }}
                   </div>
                 </div>
-                {{#wu-button onClick=(action "resetFilters") isSmall=true isDark=true isLink=true isNarrow=true class="u-spacer--bottom--none u-hidden-mobile"}}
+                {{#wu-button onClick=(action "resetFilters") isSmall=true isDark=true isLink=true isNarrow=true class="u-spacer--bottom--none"}}
                   <i class="vi vi-cross vi-u-link button__icon" aria-hidden="true"></i> Herstel alle filters
                 {{/wu-button}}
                 {{acmidm-logout class="button button--alt button--small u-spacer--bottom--none u-hidden-mobile"}}
@@ -31,19 +31,24 @@
             </div>
 
           </div>
-          <div class="grid u-hidden-mobile">
-            <div class="col--4-12 col--6-12--m col--1-1--s">
+          <div class="grid">
+            <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Bestuurseenheid</label>
               {{bestuurseenheid-select value=bestuurseenheidId onSelectionChange=(action (mut bestuurseenheidId)) class="ember-power-select--small"}}
               <label class="label--subtle form__label">Provincie</label>
               {{provincie-select value=provincieId onSelectionChange=(action (mut provincieId)) class="ember-power-select--small"}}
             </div>
-            <div class="col--4-12 col--6-12--m col--1-1--s">
+            <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Type bestuur</label>
               {{bestuurseenheid-classificatie-select value=classificatieId onSelectionChange=(action (mut classificatieId)) class="ember-power-select--small"}}
 
               <label class="label--subtle form__label">Type document</label>
-              {{besluit-type-select value=besluitTypeId onSelectionChange=(action (mut besluitTypeId)) class="ember-power-select--small"}}
+              {{besluit-type-select value=besluitTypeId onInit=(action (mut besluitType)) onSelectionChange=(action "selectBesluitType") class="ember-power-select--small"}}
+
+              {{#if besluitType.isRegulation}}
+                <label class="label--subtle form__label">Type reglement of verordening</label>
+                {{toezicht-regulation-type-select value=regulationTypeId onSelectionChange=(action (mut regulationTypeId)) class="ember-power-select--small"}}
+              {{/if}}
             </div>
             <div class="col--4-12 col--1-1--m col--1-1--s">
               <div class="grid">
