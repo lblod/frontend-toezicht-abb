@@ -74,9 +74,11 @@
     "loader.js": "^4.7.0",
     "postscribe": "^2.0.8",
     "qunit-dom": "^0.8.0",
-    "sass": "^1.15.2"
+    "sass": "^1.15.2",
+    "toezicht-form-fields": "^0.0.1"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
-  }
+  },
+  "dependencies": {}
 }
