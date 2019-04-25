@@ -9,7 +9,7 @@ export default Controller.extend({
   store: service(),
   page: 0,
   size: 20,
-  besluitTypes: [],
+  besluitTypes: null,
   sort: '-sent-date',
   _toTreatStatusUri: "http://data.lblod.info/melding-statuses/te-behandelen",
   isStatusFilterEnabled: bool('statusUri'),
@@ -31,7 +31,7 @@ export default Controller.extend({
   }),
 
   aRegulationIsSelected: computed('besluitTypes', function() {
-    return this.besluitTypes.some(type => type.isRegulation == true);
+    return this.besluitTypes && this.besluitTypes.some(type => type.isRegulation == true);
   }),
 
   actions: {
