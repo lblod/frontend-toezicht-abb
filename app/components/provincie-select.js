@@ -42,7 +42,7 @@ export default Component.extend({
 
   actions: {
     changeSelected(selected) {
-      this.set('selected', selected)
+      this.set('selected', selected);
       this.onSelectionChange(selected && selected.map(d => d.id));
     }
   }
