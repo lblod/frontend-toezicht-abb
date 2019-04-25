@@ -36,7 +36,7 @@ export default Component.extend({
       filter: { naam: term }
     });
   }),
-  
+
   actions: {
     changeSelected(selected) {
       this.set('selected', selected);
