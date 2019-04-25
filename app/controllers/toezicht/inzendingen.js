@@ -24,7 +24,7 @@ export default Controller.extend({
     this.set('header', ENV['vo-webuniversum']['header']);
   },
   
-  filterChanged: observer('bestuurseenheidIds', 'classificatieIds', 'provincieIds',
+  filterChanged: observer('bestuurseenheidIds','classificatieIds', 'provincieIds',
                           'besluitTypeIds', 'regulationTypeId', 'sessionDateFrom', 'sessionDateTo',
                           'sentDateFrom', 'sentDateTo', 'statusUri', function() {
     this.set('page', 0);
