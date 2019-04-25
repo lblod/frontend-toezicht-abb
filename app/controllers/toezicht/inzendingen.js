@@ -9,6 +9,7 @@ export default Controller.extend({
   store: service(),
   page: 0,
   size: 20,
+  besluitTypes: [],
   sort: '-sent-date',
   _toTreatStatusUri: "http://data.lblod.info/melding-statuses/te-behandelen",
   isStatusFilterEnabled: bool('statusUri'),
@@ -22,11 +23,15 @@ export default Controller.extend({
     this._super(...arguments);
     this.set('header', ENV['vo-webuniversum']['header']);
   },
-
-  filterChanged: observer('bestuurseenheidId', 'classificatieId', 'provincieId',
-                          'besluitTypeId', 'regulationTypeId', 'sessionDateFrom', 'sessionDateTo',
+  
+  filterChanged: observer('bestuurseenheidIds', 'classificatieIds', 'provincieIds',
+                          'besluitTypeIds', 'regulationTypeId', 'sessionDateFrom', 'sessionDateTo',
                           'sentDateFrom', 'sentDateTo', 'statusUri', function() {
     this.set('page', 0);
+  }),
+
+  aRegulationIsSelected: computed('besluitTypes', function() {
+    return this.besluitTypes.some(type => type.isRegulation == true);
   }),
 
   actions: {
@@ -38,10 +43,10 @@ export default Controller.extend({
     },
 
     resetFilters() {
-      ['bestuurseenheidId',
-       'classificatieId',
-       'provincieId',
-       'besluitTypeId',
+      ['bestuurseenheidIds',
+       'classificatieIds',
+       'provincieIds',
+       'besluitTypeIds',
        'regulationTypeId',
        'sessionDateFrom',
        'sessionDateTo',
@@ -50,9 +55,9 @@ export default Controller.extend({
        'statusUri'].forEach(filter => this.set(filter, null));
     },
 
-    selectBesluitType(type) {
-      this.set('besluitType', type);
-      this.set('besluitTypeId', type && type.id);
+    selectBesluitTypes(types) {
+      this.set('besluitTypes', types);
+      this.set('besluitTypeIds', types && types.map(d => d.id));
       this.set('regulationTypeId', null);
     }
   }

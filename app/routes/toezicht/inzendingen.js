@@ -8,10 +8,10 @@ export default Route.extend(DataTableRouteMixin, {
     size: { refreshModel: true },
     sort: { refreshModel: true },
     // filter params
-    bestuurseenheidId: { refreshModel: true },
-    classificatieId: { refreshModel: true },
-    provincieId: { refreshModel: true },
-    besluitTypeId: { refreshModel: true },
+    bestuurseenheidIds: { refreshModel: true },
+    classificatieIds: { refreshModel: true },
+    provincieIds: { refreshModel: true },
+    besluitTypeIds: { refreshModel: true },
     regulationTypeId: { refreshModel: true },
     sessionDateFrom: { refreshModel: true },
     sessionDateTo: { refreshModel: true },
@@ -30,17 +30,17 @@ export default Route.extend(DataTableRouteMixin, {
       ].join(',')
     };
 
-    if (params.bestuurseenheidId)
-      query['filter[bestuurseenheid][id]'] = params.bestuurseenheidId;
+    if (params.bestuurseenheidIds)
+      query['filter[bestuurseenheid][id]'] = params.bestuurseenheidIds;
 
-    if (params.classificatieId)
-      query['filter[bestuurseenheid][classificatie][id]'] = params.classificatieId;
+    if (params.classificatieIds)
+      query['filter[bestuurseenheid][classificatie][id]'] = params.classificatieIds;
 
-    if (params.provincieId)
-      query['filter[bestuurseenheid][provincie][id]'] = params.provincieId;
+    if (params.provincieIds)
+      query['filter[bestuurseenheid][provincie][id]'] = params.provincieIds;
 
-    if (params.besluitTypeId)
-      query['filter[besluit-type][id]'] = params.besluitTypeId;
+    if (params.besluitTypeIds)
+      query['filter[besluit-type][id]'] = params.besluitTypeIds;
 
     if (params.regulationTypeId)
       query['filter[regulation-type][id]'] = params.regulationTypeId;
