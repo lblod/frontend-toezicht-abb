@@ -57,8 +57,10 @@ export default Controller.extend({
 
     selectBesluitTypes(types) {
       this.set('besluitTypes', types);
-      this.set('besluitTypeIds', types && types.map(d => d.id));
-      this.set('regulationTypeId', null);
+      this.set('besluitTypeIds', types && types.map(d => d.get('id')));
+      //--- Clear the regulationId property if none of the selected besluitTypes (if any) is a regulation.
+      if (!this.besluitTypes.some(type => type.get('isRegulation')))
+        this.set('regulationTypeId', null);
     }
   }
 });
