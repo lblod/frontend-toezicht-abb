@@ -17,8 +17,8 @@ export default Component.extend({
   async didReceiveAttrs() {
     this._super(...arguments);
     if (this.value && !this.selected) {
-      const bestuurseenheid = this.store.findRecord('bestuurseenheid', this.value);
-      this.set('selected', bestuurseenheid);
+      const bestuurseenheids = await this.value.split(",").map(id => this.store.findRecord('bestuurseenheid', id));
+      this.set('selected', bestuurseenheids);
     } else if (!this.value) {
       this.set('selected', null);
     }
@@ -40,7 +40,7 @@ export default Component.extend({
   actions: {
     changeSelected(selected) {
       this.set('selected', selected);
-      this.onSelectionChange(selected && selected.map(d => d.id));
+      this.onSelectionChange(selected && selected.map(d => d.get('id')));
     }
   }
 });
