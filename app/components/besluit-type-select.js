@@ -17,9 +17,9 @@ export default Component.extend({
   async didReceiveAttrs() {
     this._super(...arguments);
     if (this.value && !this.selected) {
-      const besluitType = this.store.findRecord('besluit-type', this.value);
-      this.set('selected', besluitType);
-      this.onInit(besluitType);
+      const besluitTypes = await this.value.split(",").map(id => this.store.findRecord('besluit-type', id));
+      this.set('selected', besluitTypes);
+      this.onInit(besluitTypes);
     } else if (!this.value) {
       this.set('selected', null);
     }
