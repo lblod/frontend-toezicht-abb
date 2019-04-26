@@ -19,7 +19,10 @@ export default Component.extend({
   async didReceiveAttrs() {
     this._super(...arguments);
     if (this.value && !this.selected) {
-      const werkingsgebieds = await this.value.split(",").map(id => this.store.findRecord('werkingsgebied', id));
+      const werkingsgebieds = this.store.query('werkingsgebied', {
+        filter: { id: this.value },
+        page: { size: this.value.split(",").length}
+      });
       this.set('selected', werkingsgebieds);
     } else if (!this.value) {
       this.set('selected', null);
