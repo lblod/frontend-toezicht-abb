@@ -23,7 +23,7 @@ export default Controller.extend({
     this._super(...arguments);
     this.set('header', ENV['vo-webuniversum']['header']);
   },
-  
+
   filterChanged: observer('bestuurseenheidIds','classificatieIds', 'provincieIds',
                           'besluitTypeIds', 'regulationTypeId', 'sessionDateFrom', 'sessionDateTo',
                           'sentDateFrom', 'sentDateTo', 'statusUri', function() {
@@ -47,6 +47,13 @@ export default Controller.extend({
     },
 
     resetFilters() {
+      /** 
+       * RESET the local state
+       * This step is needed to trigger the aRegulationIsSelected computed property
+      */
+      this.set('besluitTypes', null);
+
+      //--- reset the filters
       ['bestuurseenheidIds',
        'classificatieIds',
        'provincieIds',
