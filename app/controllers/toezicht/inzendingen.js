@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { computed, observer } from '@ember/object';
 import { bool } from '@ember/object/computed';
 import ENV from 'frontend-toezicht-abb/config/environment';
+import { A }  from '@ember/array';
 
 export default Controller.extend({
   router: service(),
@@ -22,6 +23,7 @@ export default Controller.extend({
   init() {
     this._super(...arguments);
     this.set('header', ENV['vo-webuniversum']['header']);
+    this.besluitTypes = A();
   },
 
   filterChanged: observer(
@@ -41,11 +43,7 @@ export default Controller.extend({
   ),
 
   regulationTypeIsSelected: computed('besluitTypes.[]', function() {
-    try {
-      return this.besluitTypes.filterBy('isRegulation', true).length > 0;
-    } catch (err) {
-      return false;
-    }
+    return this.besluitTypes.filterBy('isRegulation', true).length > 0;
   }),
 
   actions: {
@@ -61,7 +59,7 @@ export default Controller.extend({
        * RESET the local state
        * This step is needed to trigger the aRegulationIsSelected computed property
       */
-      this.set('besluitTypes', null);
+      this.set('besluitTypes', A());
 
       //--- reset the filters
       ['bestuurseenheidIds',
