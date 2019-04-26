@@ -39,7 +39,7 @@ export default Controller.extend({
       this.set('page', 0);
   }),
 
-  aRegulationIsSelected: computed('besluitTypes', function() {
+  regulationTypeIsSelected: computed('besluitTypes.[]', function() {
     try {
       return this.besluitTypes.some(type => type.get('isRegulation'));
     } catch(err) {
