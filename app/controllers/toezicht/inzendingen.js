@@ -31,7 +31,11 @@ export default Controller.extend({
   }),
 
   aRegulationIsSelected: computed('besluitTypes', function() {
-    return this.besluitTypes && this.besluitTypes.some(type => type.isRegulation);
+    try {
+      return this.besluitTypes.some(type => type.get('isRegulation'));
+    } catch(err) {
+      false;
+    }
   }),
 
   actions: {
