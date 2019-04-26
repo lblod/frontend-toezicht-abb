@@ -39,11 +39,11 @@ export default Route.extend(DataTableRouteMixin, {
     if (params.provincieIds)
       query['filter[bestuurseenheid][provincie][id]'] = params.provincieIds;
 
-    if (params.besluitTypeIds)
+    if (params.besluitTypeIds) {
       query['filter[besluit-type][id]'] = params.besluitTypeIds;
-
-    if (params.regulationTypeId)
-      query['filter[regulation-type][id]'] = params.regulationTypeId;
+      if (params.regulationTypeId)
+        query['filter[regulation-type][id]'] = params.regulationTypeId;
+    }
 
     if (params.sessionDateFrom)
       query['filter[:gte:session-date]'] = params.sessionDateFrom;
