@@ -37,13 +37,14 @@ export default Controller.extend({
     'statusUri',
     function() {
       this.set('page', 0);
-  }),
+    }
+  ),
 
   regulationTypeIsSelected: computed('besluitTypes.[]', function() {
     try {
-      return this.besluitTypes.some(type => type.get('isRegulation'));
-    } catch(err) {
-      false;
+      return this.besluitTypes.filterBy('isRegulation', true).length > 0;
+    } catch (err) {
+      return false;
     }
   }),
 
