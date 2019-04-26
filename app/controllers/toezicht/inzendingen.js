@@ -42,8 +42,8 @@ export default Controller.extend({
     }
   ),
 
-  regulationTypeIsSelected: computed('besluitTypes.[]', function() {
-    return this.besluitTypes.filterBy('isRegulation', true).length > 0;
+  regulationTypeIsSelected: computed('besluitTypes.[]', 'besluitTypeIds', function() {
+    return this.besluitTypeIds ? this.besluitTypes.filterBy('isRegulation', true).length > 0 : false;
   }),
 
   actions: {
@@ -55,12 +55,6 @@ export default Controller.extend({
     },
 
     resetFilters() {
-      /** 
-       * RESET the local state
-       * This step is needed to trigger the aRegulationIsSelected computed property
-      */
-      this.set('besluitTypes', A());
-
       //--- reset the filters
       ['bestuurseenheidIds',
        'classificatieIds',
