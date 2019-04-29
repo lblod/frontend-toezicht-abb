@@ -3,12 +3,14 @@ import { inject as service } from '@ember/service';
 import { computed, observer } from '@ember/object';
 import { bool } from '@ember/object/computed';
 import ENV from 'frontend-toezicht-abb/config/environment';
+import { A }  from '@ember/array';
 
 export default Controller.extend({
   router: service(),
   store: service(),
   page: 0,
   size: 20,
+  besluitTypes: null,
   sort: '-sent-date',
   _toTreatStatusUri: "http://data.lblod.info/melding-statuses/te-behandelen",
   isStatusFilterEnabled: bool('statusUri'),
@@ -21,12 +23,27 @@ export default Controller.extend({
   init() {
     this._super(...arguments);
     this.set('header', ENV['vo-webuniversum']['header']);
+    this.besluitTypes = A();
   },
 
-  filterChanged: observer('bestuurseenheidId', 'classificatieId', 'provincieId',
-                          'besluitTypeId', 'regulationTypeId', 'sessionDateFrom', 'sessionDateTo',
-                          'sentDateFrom', 'sentDateTo', 'statusUri', function() {
-    this.set('page', 0);
+  filterChanged: observer(
+    'besluitTypeIds',
+    'bestuurseenheidIds',
+    'classificatieIds',
+    'provincieIds',
+    'regulationTypeId', 
+    'sentDateFrom',
+    'sentDateTo',
+    'sessionDateFrom',
+    'sessionDateTo',
+    'statusUri',
+    function() {
+      this.set('page', 0);
+    }
+  ),
+
+  regulationTypeIsSelected: computed('besluitTypes.[]', 'besluitTypeIds', function() {
+    return this.besluitTypeIds ? this.besluitTypes.filterBy('isRegulation', true).length > 0 : false;
   }),
 
   actions: {
@@ -38,10 +55,11 @@ export default Controller.extend({
     },
 
     resetFilters() {
-      ['bestuurseenheidId',
-       'classificatieId',
-       'provincieId',
-       'besluitTypeId',
+      //--- reset the filters
+      ['bestuurseenheidIds',
+       'classificatieIds',
+       'provincieIds',
+       'besluitTypeIds',
        'regulationTypeId',
        'sessionDateFrom',
        'sessionDateTo',
@@ -50,10 +68,12 @@ export default Controller.extend({
        'statusUri'].forEach(filter => this.set(filter, null));
     },
 
-    selectBesluitType(type) {
-      this.set('besluitType', type);
-      this.set('besluitTypeId', type && type.id);
-      this.set('regulationTypeId', null);
+    selectBesluitTypes(types) {
+      this.set('besluitTypes', types);
+      this.set('besluitTypeIds', types && types.map(d => d.get('id')));
+      //--- Clear the regulationId property if none of the selected besluitTypes (if any) is a regulation.
+      if (!this.besluitTypes.some(type => type.get('isRegulation')))
+        this.set('regulationTypeId', null);
     }
   }
 });

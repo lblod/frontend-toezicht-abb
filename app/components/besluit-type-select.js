@@ -17,9 +17,12 @@ export default Component.extend({
   async didReceiveAttrs() {
     this._super(...arguments);
     if (this.value && !this.selected) {
-      const besluitType = this.store.findRecord('besluit-type', this.value);
-      this.set('selected', besluitType);
-      this.onInit(besluitType);
+      const besluitTypes = this.store.query('besluit-type', {
+        filter: { id: this.value },
+        page: { size: this.value.split(",").length}
+      });
+      this.set('selected', besluitTypes);
+      this.onInit(besluitTypes);
     } else if (!this.value) {
       this.set('selected', null);
     }

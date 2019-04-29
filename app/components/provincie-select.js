@@ -19,8 +19,11 @@ export default Component.extend({
   async didReceiveAttrs() {
     this._super(...arguments);
     if (this.value && !this.selected) {
-      const werkingsgebied = this.store.findRecord('werkingsgebied', this.value);
-      this.set('selected', werkingsgebied);
+      const werkingsgebieds = this.store.query('werkingsgebied', {
+        filter: { id: this.value },
+        page: { size: this.value.split(",").length}
+      });
+      this.set('selected', werkingsgebieds);
     } else if (!this.value) {
       this.set('selected', null);
     }
@@ -43,7 +46,7 @@ export default Component.extend({
   actions: {
     changeSelected(selected) {
       this.set('selected', selected);
-      this.onSelectionChange(selected && selected.id);
+      this.onSelectionChange(selected && selected.map(d => d.get('id')));
     }
   }
 });
