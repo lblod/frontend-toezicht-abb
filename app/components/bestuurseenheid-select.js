@@ -36,7 +36,7 @@ export default Component.extend({
     return this.store.query('bestuurseenheid', {
       sort: 'naam',
       include: ['classificatie'],
-      filter: { naam: term }
+      filter: term
     });
   }),
 
