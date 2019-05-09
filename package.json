@@ -1,6 +1,6 @@
 {
   "name": "frontend-toezicht-abb",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "private": true,
   "description": "Frontend of the Toezicht ABB application",
   "repository": {
