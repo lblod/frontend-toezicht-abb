@@ -30,7 +30,7 @@ export default Model.extend({
   bestuurseenheid: belongsTo('bestuurseenheid', { inverse: null }),
   bestuursorgaan: belongsTo('bestuursorgaan', { inverse: null }),
   deliveryReportType: belongsTo('toezicht-delivery-report-type', { inverse: null }),
-  fileAddresses: hasMany('file-address', { inverse: null}),
+  fileAddresses: hasMany('file-address', { inverse: null }),
   files: hasMany('file', { inverse: null }),
   fiscalPeriod: belongsTo('toezicht-fiscal-period', { inverse: null }),
   formSolution: belongsTo('form-solution', { inverse: 'inzendingVoorToezicht' }),
