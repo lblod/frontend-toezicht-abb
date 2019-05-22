@@ -36,7 +36,7 @@ export default Model.extend({
   formSolution: belongsTo('form-solution', { inverse: 'inzendingVoorToezicht' }),
   inzendingType: belongsTo('toezicht-inzending-type', { inverse: null }),
   lastModifier: belongsTo('gebruiker', { inverse: null }),
-  melding: belongsTo('inzending-voor-toezicht-melding', { inverse: 'inzendingVoorToezicht' }),
+  melding: belongsTo('inzending-voor-toezicht-melding', { inverse: null }),
   nomenclature: belongsTo('toezicht-nomenclature', { inverse: null }),
   regulationType: belongsTo('toezicht-regulation-type', { inverse: null }),
   status: belongsTo('document-status', { inverse: null }),

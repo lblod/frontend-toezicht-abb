@@ -5,5 +5,5 @@ import { belongsTo } from 'ember-data/relationships';
 export default Model.extend({
   description: attr(),
   status: belongsTo('melding-status', { inverse: null }),
-  inzendingVoorToezicht: belongsTo('inzending-voor-toezicht', { inverse: 'melding' })
+  inzendingVoorToezicht: belongsTo('inzending-voor-toezicht', { inverse: null })
 });
