@@ -33,7 +33,7 @@ export default Model.extend({
   fileAddresses: hasMany('file-address', { inverse: null }),
   files: hasMany('file', { inverse: null }),
   fiscalPeriod: belongsTo('toezicht-fiscal-period', { inverse: null }),
-  formSolution: belongsTo('form-solution', { inverse: 'inzendingVoorToezicht' }),
+  formSolution: belongsTo('form-solution', { inverse: null }),
   inzendingType: belongsTo('toezicht-inzending-type', { inverse: null }),
   lastModifier: belongsTo('gebruiker', { inverse: null }),
   melding: belongsTo('inzending-voor-toezicht-melding', { inverse: null }),
