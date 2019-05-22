@@ -8,5 +8,5 @@ export default Model.extend({
   werkingsgebied: belongsTo('werkingsgebied', { inverse: null }),
   provincie: belongsTo('werkingsgebied', { inverse: 'bestuurseenhedenInProvincie' }),
   classificatie: belongsTo('bestuurseenheid-classificatie-code', { inverse: null }),
-  bestuursorganen: hasMany('bestuursorgaan', { inverse: 'bestuurseenheid' })
+  bestuursorganen: hasMany('bestuursorgaan', { inverse: null })
 });

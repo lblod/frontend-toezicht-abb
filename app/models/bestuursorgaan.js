@@ -7,7 +7,7 @@ export default Model.extend({
   naam: attr(),
   bindingStart: attr('date'),
   bindingEinde: attr('date'),
-  bestuurseenheid: belongsTo('bestuurseenheid', { inverse: 'bestuursorganen' }),
+  bestuurseenheid: belongsTo('bestuurseenheid', { inverse: null }),
   classificatie: belongsTo('bestuursorgaan-classificatie-code', { inverse: null }),
   isTijdsspecialisatieVan: belongsTo('bestuursorgaan', { inverse: 'heeftTijdsspecialisaties' }),
   heeftTijdsspecialisaties: hasMany('bestuursorgaan', { inverse: 'isTijdsspecialisatieVan' })
