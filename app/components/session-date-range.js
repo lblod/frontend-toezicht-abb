@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import moment from 'moment';
-import { computed, observer } from '@ember/object';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   classNames: ['js-accordion', 'js-accordion--open'],
@@ -33,14 +33,15 @@ export default Component.extend({
     }
   },
 
-  fromDateChanged: observer('_fromDate', function() {
+  fromDateChanged() {
     if (this._fromDate)
       this.set('fromValue', this._fromDate.toISOString());
-  }),
-  toDateChanged: observer('_toDate', function() {
+  },
+
+  toDateChanged() {
     if (this._toDate)
       this.set('toValue', this._toDate.toISOString());
-  }),
+  },
 
   actions: {
     resetFilter() {
