@@ -26,10 +26,6 @@ export default Controller.extend({
     this.besluitTypes = A();
   },
 
-  filterChanged() {
-    this.set('page', 0);
-  },
-
   regulationTypeIsSelected: computed('besluitTypes.[]', 'besluitTypeIds', function() {
     return this.besluitTypeIds ? this.besluitTypes.filterBy('isRegulation', true).length > 0 : false;
   }),

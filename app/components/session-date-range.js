@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import moment from 'moment';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 
 export default Component.extend({
   classNames: ['js-accordion', 'js-accordion--open'],
@@ -33,15 +33,17 @@ export default Component.extend({
     }
   },
 
-  fromDateChanged() {
+  // TODO: Remove observer when the wu-date-range component supports data down actions up
+  fromDateChanged: observer('_fromDate', function() { // eslint-disable-line ember/no-observers
     if (this._fromDate)
       this.set('fromValue', this._fromDate.toISOString());
-  },
+  }),
 
-  toDateChanged() {
+  // TODO: Remove observer when the wu-date-range component supports data down actions up
+  toDateChanged: observer('_toDate', function() { // eslint-disable-line ember/no-observers
     if (this._toDate)
       this.set('toValue', this._toDate.toISOString());
-  },
+  }),
 
   actions: {
     resetFilter() {
