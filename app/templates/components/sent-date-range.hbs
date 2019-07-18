@@ -1,8 +1,8 @@
 <label class="label--subtle form__label">{{label}}</label>
 
 {{#wu-button-group isInline=true class="button-group__inline--small"}}
-  {{wu-button label="Alle meldingen" onClick=(action "resetFilter") class=(if (not isFilterEnabled) 'button--active') isAlt=true isSmall=true isNarrow=true}}
-  {{wu-button label="Specifieke periode" onClick=(action "initRangeFilter") class=(if isFilterEnabled 'button--active') isAlt=true isSmall=true isNarrow=true}}
+  {{wu-button label="Alle meldingen" onClick=(action "resetFilter") class=(if (not isFilterEnabled) 'button--active') isAlt=true size=small isNarrow=true}}
+  {{wu-button label="Specifieke periode" onClick=(action "initRangeFilter") class=(if isFilterEnabled 'button--active') isAlt=true size=small isNarrow=true}}
 {{/wu-button-group}}
 
 {{#if isFilterEnabled}}
