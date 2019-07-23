@@ -53,10 +53,10 @@
             <div class="col--4-12 col--1-1--m col--1-1--s">
               <div class="grid">
                 <div class="col--1-1 col--6-12--m">
-                  {{sent-date-range fromValue=sentDateFrom toValue=sentDateTo}}
+                  {{sent-date-range fromValue=sentDateFrom toValue=sentDateTo onChangeFromValue=(action (mut sentDateFrom)) onChangeToValue=(action (mut sentDateTo))}}
                 </div>
                 <div class="col--1-1 col--6-12--m">
-                  {{session-date-range fromValue=sessionDateFrom toValue=sessionDateTo}}
+                  {{session-date-range fromValue=sessionDateFrom toValue=sessionDateTo onChangeFromValue=(action (mut sessionDateFrom)) onChangeToValue=(action (mut sessionDateTo))}}
                 </div>
               </div>
             </div>
