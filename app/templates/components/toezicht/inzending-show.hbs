@@ -25,13 +25,7 @@
         </div>
       </div>
     </div>
-    <div class="form__row">
-      <div class="u-spacer"></div>
-      <label class="form__label">Bijgevoegde bestanden</label>
-      {{#each model.files as |file|}}
-        {{vo-mu-file-card file=file onDelete=null active=false}}
-      {{/each}}
-    </div>
+    <div class="u-spacer"></div>
     {{root-form-node solution=model.formSolution onDynamicFormInit=(action "noop") show=true}}
   </div>
   <div class="u-padding--round--small u-border--light--top u-hide-on-print">
