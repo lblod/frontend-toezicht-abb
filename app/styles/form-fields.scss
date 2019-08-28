@@ -1,0 +1,28 @@
+/* Restyle form fields */
+
+.form__row--checkbox {
+  display: flex;
+  flex-direction: row-reverse;
+
+  .form__input {
+    flex: 0 0 auto;
+  }
+
+  .form__label {
+    flex: auto;
+  }
+
+  .checkbox {
+    margin-right: 0rem;
+  }
+}
+
+.form__row--file-addresses {
+	tr:first-child td {
+		border-top: 1px solid #CBD2DA;
+	}
+}
+
+.form__row--file-addresses td {
+	padding: 0.75rem 0 0 0;
+}
