@@ -1,0 +1,8 @@
+<div class="grid grid--collapse">
+  <div class="{{if hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
+    <div class="container-flex--contain">
+      {{toezicht/vlabel-inzendingen-table class="container-flex--contain" model=model isLoading=isLoadingModel sort=sort page=page size=size displaySubset=hasActiveChildRoute}}
+    </div>
+  </div>
+  {{outlet}}
+</div>
