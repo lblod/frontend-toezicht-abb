@@ -41,11 +41,11 @@ export default Component.extend({
     },
     async save() {
       await this.model.save();
-      this.router.transitionTo('toezicht.inzendingen.index');
+      this.router.transitionTo(this.parentIndexRoute);
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.router.transitionTo('toezicht.inzendingen.index');
+      this.router.transitionTo(this.parentIndexRoute);
     }
   }
 });

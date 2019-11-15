@@ -6,7 +6,7 @@
         <h2 class="h3">Bekijk melding</h2>
       </div>
       <div class="col--3-12 u-align-right u-hide-on-print">
-        {{#link-to "toezicht.inzendingen.index" class="link--icon--close"}}
+        {{#link-to parentIndexRoute class="link--icon--close"}}
           <span class="u-visually-hidden">Venster sluiten</span>
         {{/link-to}}
       </div>
@@ -30,10 +30,10 @@
   </div>
   <div class="u-padding--round--small u-border--light--top u-hide-on-print">
     {{#if currentSession.canWrite}}
-      {{toezicht/inzending-feedback model=(await model.melding)}}
+      {{toezicht/inzending-feedback model=(await model.melding) parentIndexRoute=parentIndexRoute}}
     {{else}}
       <div class="button-group u-spacer--tiny">
-        {{#link-to "toezicht.inzendingen.index" class="button button--narrow button--alt"}}Sluit venster{{/link-to}}
+        {{#link-to parentIndexRoute class="button button--narrow button--alt"}}Sluit venster{{/link-to}}
       </div>
     {{/if}}
   </div>
