@@ -9,6 +9,7 @@ export default Route.extend(DataTableRouteMixin, {
     sort: { refreshModel: true },
     // filter params
     bestuurseenheidIds: { refreshModel: true },
+    marCodeIds: { refreshModel: true },
     sessionDateFrom: { refreshModel: true },
     sessionDateTo: { refreshModel: true },
     sentDateFrom: { refreshModel: true },
@@ -37,6 +38,9 @@ export default Route.extend(DataTableRouteMixin, {
 
     if (params.bestuurseenheidIds)
       query['filter[bestuurseenheid][id]'] = params.bestuurseenheidIds;
+
+    if (params.marCodeIds)
+      query['filter[nomenclature][id]'] = params.marCodeIds;
 
     if (params.sessionDateFrom)
       query['filter[:gte:session-date]'] = params.sessionDateFrom;

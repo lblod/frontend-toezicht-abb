@@ -21,6 +21,8 @@
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Bestuurseenheid</label>
               {{bestuurseenheid-select value=bestuurseenheidIds onSelectionChange=(action (mut bestuurseenheidIds)) class="ember-power-select--small"}}
+              <label class="label--subtle form__label">Mar-code</label>
+              {{mar-code-select value=marCodeIds onSelectionChange=(action (mut marCodeIds)) class="ember-power-select--small"}}
             </div>
             <div class="col--4-12 col--1-1--m col--1-1--s">
               <div class="grid">

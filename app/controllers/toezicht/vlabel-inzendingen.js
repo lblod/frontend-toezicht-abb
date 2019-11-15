@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import { bool } from '@ember/object/computed';
+import moment from 'moment';
 import ENV from 'frontend-toezicht-abb/config/environment';
 import { A }  from '@ember/array';
 
@@ -30,6 +30,7 @@ export default Controller.extend({
     resetFilters() {
       //--- reset the filters
       ['bestuurseenheidIds',
+       'marCodeIds',
        'sessionDateFrom',
        'sessionDateTo',
        'sentDateFrom',
