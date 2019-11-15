@@ -12,8 +12,8 @@ export default Controller.extend({
   size: 20,
   besluitTypes: null,
   sort: '-sent-date',
-  _toTreatStatusUri: "http://data.lblod.info/melding-statuses/te-behandelen",
-  isStatusFilterEnabled: bool('statusUri'),
+  lastMonth: moment().subtract(1, 'month').startOf('day'),
+  nextYear: moment().add(1, 'year').startOf('day'),
 
   hasActiveChildRoute: computed('router.currentRouteName', function() {
     return this.get('router.currentRouteName').startsWith('toezicht.vlabel-inzendingen')
@@ -26,38 +26,18 @@ export default Controller.extend({
     this.besluitTypes = A();
   },
 
-  regulationTypeIsSelected: computed('besluitTypes.[]', 'besluitTypeIds', function() {
-    return this.besluitTypeIds ? this.besluitTypes.filterBy('isRegulation', true).length > 0 : false;
-  }),
-
   actions: {
-    setToTreatStatus(event) {
-      this.set('statusUri', null);
-      if(event.target.checked) {
-        this.set('statusUri', this._toTreatStatusUri);
-      }
-    },
-
     resetFilters() {
       //--- reset the filters
       ['bestuurseenheidIds',
-       'classificatieIds',
-       'provincieIds',
-       'besluitTypeIds',
-       'regulationTypeId',
        'sessionDateFrom',
        'sessionDateTo',
        'sentDateFrom',
        'sentDateTo',
-       'statusUri'].forEach(filter => this.set(filter, null));
-    },
-
-    selectBesluitTypes(types) {
-      this.set('besluitTypes', types);
-      this.set('besluitTypeIds', types && types.map(d => d.get('id')));
-      //--- Clear the regulationId property if none of the selected besluitTypes (if any) is a regulation.
-      if (!this.besluitTypes.some(type => type.get('isRegulation')))
-        this.set('regulationTypeId', null);
+       'dateOfEntryIntoForceFrom',
+       'dateOfEntryIntoForceTo',
+       'endDateFrom',
+       'endDateTo'].forEach(filter => this.set(filter, null));
     }
   }
 });

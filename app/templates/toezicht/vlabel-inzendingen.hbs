@@ -10,49 +10,35 @@
 
             <div class="col--8-12 col--1-1--s u-align-right--tablet-portrait-up">
               {{#wu-button-group}}
-                <div class="u-display--inline-block u-padding--right--small">
-                  <div class="checkbox--switch__wrapper checkbox--switch--small">
-                    {{wu-switch
-                        label="Toon enkel te behandelen dossiers"
-                        checked=isStatusFilterEnabled
-                        onClick=(action 'setToTreatStatus')
-                    }}
-                  </div>
-                </div>
                 {{#wu-button onClick=(action "resetFilters") size=small isDark=true isLink=true isNarrow=true class="u-spacer--bottom--none"}}
                   <i class="vi vi-cross vi-u-link button__icon" aria-hidden="true"></i> Herstel alle filters
                 {{/wu-button}}
                 {{acmidm-logout class="button button--alt button--small u-spacer--bottom--none u-hidden-mobile"}}
               {{/wu-button-group}}
             </div>
-
           </div>
           <div class="grid">
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Bestuurseenheid</label>
               {{bestuurseenheid-select value=bestuurseenheidIds onSelectionChange=(action (mut bestuurseenheidIds)) class="ember-power-select--small"}}
-              <label class="label--subtle form__label">Provincie</label>
-              {{provincie-select value=provincieIds onSelectionChange=(action (mut provincieIds)) class="ember-power-select--small"}}
-            </div>
-            <div class="col--4-12 col--6-12--m col--6-12--s">
-              <label class="label--subtle form__label">Type bestuur</label>
-              {{bestuurseenheid-classificatie-select value=classificatieIds onSelectionChange=(action (mut classificatieIds)) class="ember-power-select--small"}}
-
-              <label class="label--subtle form__label">Type document</label>
-              {{besluit-type-select value=besluitTypeIds onInit=(action (mut besluitTypes)) onSelectionChange=(action "selectBesluitTypes") class="ember-power-select--small"}}
-
-              {{#if regulationTypeIsSelected}}
-                <label class="label--subtle form__label">Type reglement of verordening</label>
-                {{toezicht-regulation-type-select value=regulationTypeId onSelectionChange=(action (mut regulationTypeId)) class="ember-power-select--small"}}
-              {{/if}}
             </div>
             <div class="col--4-12 col--1-1--m col--1-1--s">
               <div class="grid">
                 <div class="col--1-1 col--6-12--m">
-                  {{sent-date-range fromValue=sentDateFrom toValue=sentDateTo onChangeFromValue=(action (mut sentDateFrom)) onChangeToValue=(action (mut sentDateTo))}}
+                  {{date-range label="Periode verstuurd" fromValue=sentDateFrom toValue=sentDateTo onChangeFromValue=(action (mut sentDateFrom)) onChangeToValue=(action (mut sentDateTo))}}
                 </div>
                 <div class="col--1-1 col--6-12--m">
-                  {{session-date-range fromValue=sessionDateFrom toValue=sessionDateTo onChangeFromValue=(action (mut sessionDateFrom)) onChangeToValue=(action (mut sessionDateTo))}}
+                  {{date-range label="Periode zitting / besluit" initFromDate=lastMonth fromValue=sessionDateFrom toValue=sessionDateTo onChangeFromValue=(action (mut sessionDateFrom)) onChangeToValue=(action (mut sessionDateTo))}}
+                </div>
+              </div>
+            </div>
+            <div class="col--4-12 col--1-1--m col--1-1--s">
+              <div class="grid">
+                <div class="col--1-1 col--6-12--m">
+                  {{date-range label="Geldt vanaf" initToDate=nextYear fromValue=dateOfEntryIntoForceFrom toValue=dateOfEntryIntoForceTo onChangeFromValue=(action (mut dateOfEntryIntoForceFrom)) onChangeToValue=(action (mut dateOfEntryIntoForceTo))}}
+                </div>
+                <div class="col--1-1 col--6-12--m">
+                  {{date-range label="Geldt tot" initToDate=nextYear fromValue=endDateFrom toValue=endDateTo onChangeFromValue=(action (mut endDateFrom)) onChangeToValue=(action (mut endDateTo))}}
                 </div>
               </div>
             </div>

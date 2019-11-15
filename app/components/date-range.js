@@ -4,7 +4,6 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   classNames: ['js-accordion', 'js-accordion--open'],
-  label: 'Periode zitting / besluit',
 
   fromValue: null,  // ISO string
   toValue: null,  // ISO string
@@ -36,10 +35,24 @@ export default Component.extend({
     },
 
     initRangeFilter() {
-      const lastMonth = moment().subtract(1, 'month').startOf('day');
-      const today = moment().endOf('day');
-      this.onChangeFromValue(lastMonth.toDate().toISOString());
-      this.onChangeToValue(today.toDate().toISOString());
+      let initFromDate = null;
+      let initToDate = null;
+
+      if (this.initFromDate) {
+        initFromDate = this.initFromDate.toDate().toISOString();
+      } else {
+        const yesterday = moment().subtract(1, 'day').startOf('day');
+        initFromDate = yesterday.toDate().toISOString();
+      }
+      if (this.initToDate) {
+        initToDate = this.initToDate.toDate().toISOString();
+      } else {
+        const today = moment().endOf('day');
+        initToDate = today.toDate().toISOString();
+      }
+
+      this.onChangeFromValue(initFromDate);
+      this.onChangeToValue(initToDate);
     },
 
     updateDate(varName, date) {

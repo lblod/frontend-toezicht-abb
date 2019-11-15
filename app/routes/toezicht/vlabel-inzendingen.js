@@ -9,20 +9,18 @@ export default Route.extend(DataTableRouteMixin, {
     sort: { refreshModel: true },
     // filter params
     bestuurseenheidIds: { refreshModel: true },
-    classificatieIds: { refreshModel: true },
-    provincieIds: { refreshModel: true },
     sessionDateFrom: { refreshModel: true },
     sessionDateTo: { refreshModel: true },
     sentDateFrom: { refreshModel: true },
     sentDateTo: { refreshModel: true },
-    statusUri: { refreshModel: true }
+    dateOfEntryIntoForceFrom: { refreshModel: true },
+    dateOfEntryIntoForceTo: { refreshModel: true },
+    endDateFrom: { refreshModel: true },
+    endDateTo: { refreshModel: true }
   },
   mergeQueryOptions(params) {
     const query = {
       include: [
-        'bestuurseenheid.classificatie',
-        'bestuurseenheid.provincie',
-        'melding.status',
         'besluit-type',
         'regulation-type',
         'tax-type',
@@ -37,29 +35,32 @@ export default Route.extend(DataTableRouteMixin, {
 
     query['page[size]'] = 20;
 
-    // if (params.bestuurseenheidIds)
-    //   query['filter[bestuurseenheid][id]'] = params.bestuurseenheidIds;
-    //
-    // if (params.classificatieIds)
-    //   query['filter[bestuurseenheid][classificatie][id]'] = params.classificatieIds;
-    //
-    // if (params.provincieIds)
-    //   query['filter[bestuurseenheid][provincie][id]'] = params.provincieIds;
-    //
-    // if (params.sessionDateFrom)
-    //   query['filter[:gte:session-date]'] = params.sessionDateFrom;
-    //
-    // if (params.sessionDateTo)
-    //   query['filter[:lte:session-date]'] = params.sessionDateTo;
-    //
-    // if (params.sentDateFrom)
-    //   query['filter[:gte:sent-date]'] = params.sentDateFrom;
-    //
-    // if (params.sentDateTo)
-    //   query['filter[:lte:sent-date]'] = params.sentDateTo;
-    //
-    // if (params.statusUri)
-    //   query['filter[melding][status][:uri:]'] = params.statusUri;
+    if (params.bestuurseenheidIds)
+      query['filter[bestuurseenheid][id]'] = params.bestuurseenheidIds;
+
+    if (params.sessionDateFrom)
+      query['filter[:gte:session-date]'] = params.sessionDateFrom;
+
+    if (params.sessionDateTo)
+      query['filter[:lte:session-date]'] = params.sessionDateTo;
+
+    if (params.sentDateFrom)
+      query['filter[:gte:sent-date]'] = params.sentDateFrom;
+
+    if (params.sentDateTo)
+      query['filter[:lte:sent-date]'] = params.sentDateTo;
+
+    if (params.dateOfEntryIntoForceFrom)
+      query['filter[:gte:date-of-entry-into-force]'] = moment(params.dateOfEntryIntoForceFrom).format('YYYY-MM-DD');
+
+    if (params.dateOfEntryIntoForceTo)
+      query['filter[:lte:date-of-entry-into-force]'] = moment(params.dateOfEntryIntoForceTo).format('YYYY-MM-DD');
+
+    if (params.endDateFrom)
+      query['filter[:gte:end-date]'] = moment(params.endDateFrom).format('YYYY-MM-DD');
+
+    if (params.endDateTo)
+      query['filter[:lte:end-date]'] = moment(params.endDateTo).format('YYYY-MM-DD');
 
     return query;
   }
