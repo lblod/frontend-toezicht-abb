@@ -29,7 +29,9 @@ export default Service.extend({
       });
 
       this.set('canRead', this.canAccess('ABBDatabankToezicht-DatabankToezichtLezer') || this.canAccess('ABBDatabankToezicht-DatabankToezichtEditeur'));
+      this.set('canReadVlabel', this.canAccess('ABBDatabankToezicht-DatabankToezichtLezerVlabel') || this.canAccess('ABBDatabankToezicht-DatabankToezichtEditeurVlabel'));
       this.set('canWrite', this.canAccess('ABBDatabankToezicht-DatabankToezichtEditeur'));
+      this.set('canWriteVlabel', this.canAccess('ABBDatabankToezicht-DatabankToezichtEditeurVlabel'));
     }
   },
   canAccess(role) {

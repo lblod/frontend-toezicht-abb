@@ -29,7 +29,7 @@
     {{root-form-node solution=model.formSolution onDynamicFormInit=(action "noop") show=true}}
   </div>
   <div class="u-padding--round--small u-border--light--top u-hide-on-print">
-    {{#if currentSession.canWrite}}
+    {{#if currentSession.canWriteVlabel}}
       {{toezicht/inzending-feedback model=(await model.melding)}}
     {{else}}
       <div class="button-group u-spacer--tiny">

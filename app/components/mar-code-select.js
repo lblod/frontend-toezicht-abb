@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { task, timeout } from 'ember-concurrency';
+import config from '../config/environment';
 
 export default Component.extend({
   store: service(),
@@ -8,7 +9,8 @@ export default Component.extend({
   async init() {
     this._super(...arguments);
     const options = this.store.query('toezicht-nomenclature', {
-      sort: 'code'
+      sort: 'code',
+      'filter[:id:]': config.marCodes.join(',')
     });
     this.set('options', options);
   },

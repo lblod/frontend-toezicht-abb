@@ -10,9 +10,15 @@ export default Route.extend(ApplicationRouteMixin, {
     return this._loadCurrentSession();
   },
 
-  sessionAuthenticated() {
+  async sessionAuthenticated() {
     this._super(...arguments);
-    this._loadCurrentSession();
+    await this._loadCurrentSession();
+
+    if (this.currentSession.canReadVlabel) {
+      this.transitionTo('toezicht.vlabel-inzendingen.index');
+    } else {
+      this.transitionTo('toezicht.inzendingen.index');
+    }
   },
 
   sessionInvalidated() {
