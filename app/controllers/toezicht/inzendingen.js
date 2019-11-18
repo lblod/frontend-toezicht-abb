@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import { or, bool } from '@ember/object/computed';
+import { bool } from '@ember/object/computed';
 import ENV from 'frontend-toezicht-abb/config/environment';
 import { A }  from '@ember/array';
 

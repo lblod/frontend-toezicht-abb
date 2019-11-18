@@ -4,7 +4,6 @@ import { computed } from '@ember/object';
 import moment from 'moment';
 import ENV from 'frontend-toezicht-abb/config/environment';
 import { A }  from '@ember/array';
-import { or } from '@ember/object/computed';
 
 export default Controller.extend({
   router: service(),
