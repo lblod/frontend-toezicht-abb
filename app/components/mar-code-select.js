@@ -34,9 +34,8 @@ export default Component.extend({
 
   search: task(function* (term) {
     yield timeout(600);
-    return this.store.query('toezicht-nomenclature', {
-      sort: 'code',
-      filter: term
+    return this.options.filter(option => {
+      return option.label.toUpperCase().includes(term.toUpperCase());
     });
   }),
 
