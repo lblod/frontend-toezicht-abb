@@ -14,14 +14,14 @@ export default Component.extend({
     this.set('options', options);
   },
 
-  async didReceiveAttrs() {
+  didReceiveAttrs() {
     this._super(...arguments);
     if (this.value && !this.selected) {
-      const bestuurseenheids = this.store.query('bestuurseenheid', {
+      const bestuurseenheden = this.store.query('bestuurseenheid', {
         filter: { id: this.value },
         page: { size: this.value.split(",").length}
       });
-      this.set('selected', bestuurseenheids);
+      this.set('selected', bestuurseenheden);
     } else if (!this.value) {
       this.set('selected', null);
     }
