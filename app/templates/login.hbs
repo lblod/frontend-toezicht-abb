@@ -1,4 +1,4 @@
-{{wu-widget src=header class="vo-header-widget"}}
+<WuWidget @src={{header}} @class="vo-header-widget" />
 <div class="container-flex--scroll">
 	<div class="page">
 	  <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="main-content">
@@ -23,13 +23,13 @@
               <p>Het aanmelden gebeurt in een pop-up; zorg dat de instellingen van uw browser correct staan indien deze niet verschijnt.</p>
 	          </div>
 	          <div class="col--1-1--s col--6-12--m col--4-12 push--1-12--l">
-              {{acmidm-login}}
+              <AcmidmLogin />
 	          </div>
 	        </div>
 	      </div>
 	    </section>
 
 	  </div>
-	  {{wu-widget src=footer}}
+	  <WuWidget @src={{footer}} />
 	</div>
 </div>

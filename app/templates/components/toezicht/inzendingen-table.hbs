@@ -1,21 +1,20 @@
-{{#data-table content=model isLoading=isLoading noDataMessage="Geen inzendingen gevonden"
-     sort=sort page=page size=size class="container-flex--contain data-table" as |t|}}
-  {{#t.content as |c|}}
-    {{#c.header}}
+<DataTable @content={{model}} @isLoading={{isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain data-table" as |t|>
+  <t.content as |c|>
+    <c.header>
       {{#unless displaySubset}}
-        {{th-sortable label='Provincie' field='bestuurseenheid.provincie.naam' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+        <ThSortable @label="Provincie" @field="bestuurseenheid.provincie.naam" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
       {{/unless}}
-      {{th-sortable label='Bestuurseenheid' field='bestuurseenheid' currentSorting=sort class="u-visible--tablet-landscape-up"}}
-      {{th-sortable label='Type bestuur' field='bestuurseenheid.classificatie.label' currentSorting=sort class="u-visible--tablet-portrait-up"}}
-      {{th-sortable label='Type document' field='besluitType.label' currentSorting=sort}}
+      <ThSortable @label="Bestuurseenheid" @field="bestuurseenheid" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
+      <ThSortable @label="Type bestuur" @field="bestuurseenheid.classificatie.label" @currentSorting={{sort}} @class="u-visible--tablet-portrait-up" />
+      <ThSortable @label="Type document" @field="besluitType.label" @currentSorting={{sort}} />
       {{#unless displaySubset}}
-        {{th-sortable label='Zitting / besluit' field='sessionDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
-        {{th-sortable label='Verstuurd' field='sentDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+        <ThSortable @label="Zitting / besluit" @field="sessionDate" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
+        <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
       {{/unless}}
-      {{th-sortable label='Status' field='melding.status' currentSorting=sort}}
+      <ThSortable @label="Status" @field="melding.status" @currentSorting={{sort}} />
       <th class="u-hide-on-print"><!-- Actions --></th>
-    {{/c.header}}
-    {{#c.body as |row|}}
+    </c.header>
+    <c.body as |row|>
       {{#unless displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.provincie.naam}}</td>
       {{/unless}}
@@ -31,7 +30,7 @@
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
       <td>{{shared/status-pill row.melding.status}}</td>
-      <td class="u-hide-on-print">{{#link-to 'toezicht.inzendingen.show' row}}Bekijk{{/link-to}}</td>
-    {{/c.body}}
-  {{/t.content}}
-{{/data-table}}
+      <td class="u-hide-on-print"><LinkTo @route="toezicht.inzendingen.show" @model={{row}}>Bekijk</LinkTo></td>
+    </c.body>
+  </t.content>
+</DataTable>

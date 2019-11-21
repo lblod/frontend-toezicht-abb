@@ -1,18 +1,17 @@
-{{#data-table content=model isLoading=isLoading noDataMessage="Geen inzendingen gevonden"
-     sort=sort page=page size=size class="container-flex--contain data-table" as |t|}}
-  {{#t.content as |c|}}
-    {{#c.header}}
-      {{th-sortable label='Bestuurseenheid' field='bestuurseenheid' currentSorting=sort class="u-visible--tablet-landscape-up"}}
-      {{th-sortable label='MAR-code' field='nomenclature.label' currentSorting=sort class="u-visible--tablet-portrait-up"}}
+<DataTable @content={{model}} @isLoading={{isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain data-table" as |t|>
+  <t.content as |c|>
+    <c.header>
+      <ThSortable @label="Bestuurseenheid" @field="bestuurseenheid" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
+      <ThSortable @label="MAR-code" @field="nomenclature.label" @currentSorting={{sort}} @class="u-visible--tablet-portrait-up" />
       {{#unless displaySubset}}
-        {{th-sortable label='Zitting / besluit' field='sessionDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
-        {{th-sortable label='Verstuurd' field='sentDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+        <ThSortable @label="Zitting / besluit" @field="sessionDate" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
+        <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
       {{/unless}}
-      {{th-sortable label='Geldt vanaf' field='dateOfEntryIntoForce' currentSorting=sort class="u-visible--tablet-landscape-up"}}
-      {{th-sortable label='Geldt tot' field='endDate' currentSorting=sort class="u-visible--tablet-landscape-up"}}
+      <ThSortable @label="Geldt vanaf" @field="dateOfEntryIntoForce" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
+      <ThSortable @label="Geldt tot" @field="endDate" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
       <th class="u-hide-on-print"><!-- Actions --></th>
-    {{/c.header}}
-    {{#c.body as |row|}}
+    </c.header>
+    <c.body as |row|>
       <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.bestuurseenheid.naam}} <span class="u-hidden--tablet-landscape-up text-fade"><br>{{row.bestuurseenheid.classificatie.label}}</span></td>
       <td class="u-visible--tablet-landscape-up">{{row.nomenclature.label}}</td>
       {{#unless displaySubset}}
@@ -21,7 +20,7 @@
       {{/unless}}
       <td class="u-visible--tablet-landscape-up">{{moment-format row.dateOfEntryIntoForce 'DD-MM-YYYY'}}</td>
       <td class="u-visible--tablet-landscape-up">{{moment-format row.endDate 'DD-MM-YYYY'}}</td>
-      <td class="u-hide-on-print">{{#link-to 'toezicht.vlabel-inzendingen.show' row}}Bekijk{{/link-to}}</td>
-    {{/c.body}}
-  {{/t.content}}
-{{/data-table}}
+      <td class="u-hide-on-print"><LinkTo @route="toezicht.vlabel-inzendingen.show" @model={{row}}>Bekijk</LinkTo></td>
+    </c.body>
+  </t.content>
+</DataTable>

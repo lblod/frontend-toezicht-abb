@@ -1,11 +1,3 @@
-{{#power-select-multiple
-     placeholder="Antwerpen, Oost-Vlaanderen, ..."
-     search=(perform search)
-     searchPlaceholder="Typ om te zoeken..."
-     options=options
-     selected=selected
-     onchange=(action "changeSelected")
-     allowClear=true
-     as |werkingsgebied|}}
+<PowerSelectMultiple @placeholder="Antwerpen, Oost-Vlaanderen, ..." @search={{perform search}} @searchPlaceholder="Typ om te zoeken..." @options={{options}} @selected={{selected}} @onchange={{action "changeSelected"}} @allowClear={{true}} as |werkingsgebied|>
   {{werkingsgebied.naam}}
-{{/power-select-multiple}}
+</PowerSelectMultiple>

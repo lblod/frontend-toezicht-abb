@@ -12,7 +12,7 @@ module('Integration | Component | toezicht/vlabel-inzendingen-table', function(h
 
     await render(hbs`{{toezicht/vlabel-inzendingen-table}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom(this.element).hasText('');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +21,6 @@ module('Integration | Component | toezicht/vlabel-inzendingen-table', function(h
       {{/toezicht/vlabel-inzendingen-table}}
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom(this.element).hasText('template block text');
   });
 });

@@ -6,9 +6,9 @@
         <h2 class="h3">Bekijk melding</h2>
       </div>
       <div class="col--3-12 u-align-right u-hide-on-print">
-        {{#link-to "toezicht.vlabel-inzendingen.index" class="link--icon--close"}}
+        <LinkTo @route="toezicht.vlabel-inzendingen.index" class="link--icon--close">
           <span class="u-visually-hidden">Venster sluiten</span>
-        {{/link-to}}
+        </LinkTo>
       </div>
     </div>
   </div>
@@ -26,11 +26,11 @@
       </div>
     </div>
     <div class="u-spacer"></div>
-    {{root-form-node solution=model.formSolution onDynamicFormInit=(action "noop") show=true}}
+    <RootFormNode @solution={{model.formSolution}} @onDynamicFormInit={{action "noop"}} @show={{true}} />
   </div>
   <div class="u-padding--round--small u-border--light--top u-hide-on-print">
     <div class="button-group u-spacer--tiny">
-      {{#link-to "toezicht.vlabel-inzendingen.index" class="button button--narrow button--alt"}}Sluit venster{{/link-to}}
+      <LinkTo @route="toezicht.vlabel-inzendingen.index" class="button button--narrow button--alt">Sluit venster</LinkTo>
     </div>
   </div>
 </div>

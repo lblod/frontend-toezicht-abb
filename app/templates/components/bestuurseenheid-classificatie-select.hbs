@@ -1,11 +1,3 @@
-{{#power-select-multiple
-     placeholder="OCMW, Gemeente, ..."
-     search=(perform search)
-     searchPlaceholder="Typ om te zoeken..."
-     options=options
-     selected=selected
-     onchange=(action "changeSelected")
-     allowClear=true
-     as |classificatie|}}
+<PowerSelectMultiple @placeholder="OCMW, Gemeente, ..." @search={{perform search}} @searchPlaceholder="Typ om te zoeken..." @options={{options}} @selected={{selected}} @onchange={{action "changeSelected"}} @allowClear={{true}} as |classificatie|>
   {{classificatie.label}}
-{{/power-select-multiple}}
+</PowerSelectMultiple>
