@@ -15,7 +15,7 @@ export default Component.extend({
     this.set('options', options);
   },
 
-  async didReceiveAttrs() {
+  didReceiveAttrs() {
     this._super(...arguments);
     if (this.value && !this.selected) {
       const marCodes = this.store.query('toezicht-nomenclature', {

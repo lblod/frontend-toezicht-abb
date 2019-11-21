@@ -5,7 +5,7 @@ import { inject as service } from '@ember/service';
 export default Route.extend(AuthenticatedRouteMixin, {
   currentSession: service(),
 
-  async redirect() {
+  redirect() {
     if (this.currentSession.canReadVlabel) {
       this.transitionTo('toezicht.vlabel-inzendingen.index');
     } else {

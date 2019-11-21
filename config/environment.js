@@ -6,7 +6,7 @@ module.exports = function(environment) {
     environment,
     rootURL: '/',
     locationType: 'auto',
-    marCodes: [
+    marCodes: [  // MAR codes for Vlabel
       "0ce2d45f1bb5414e7cd4d9de7929097e7278260434ded0b16d336bb407e9f0ec",
       "6c8132fc24e1be8b0134380e308eef3adb1357f0fb8bbfa62eea8197916580fd",
       "06d669bb64d3959b0e515751a63a73cd2c4371686f7562111ab2e988141f9ea8"
