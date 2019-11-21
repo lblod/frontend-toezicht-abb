@@ -8,19 +8,35 @@ export default Component.extend({
   fromValue: null,  // ISO string
   toValue: null,  // ISO string
 
-  fromDate: computed('fromValue', function() {
-    try {
-      return new Date(Date.parse(this.fromValue));
-    } catch(e) {
-      return null;
+  fromDate: computed('fromValue', {
+    get() {
+      if (this._fromDate) {
+        return this._fromDate;
+      }
+      try {
+        return new Date(Date.parse(this.fromValue));
+      } catch(e) {
+        return null;
+      }
+    },
+    set(key, value) {
+      return this._fromDate = value;
     }
   }),
 
-  toDate: computed('toValue', function() {
-    try {
-      return new Date(Date.parse(this.toValue));
-    } catch(e) {
-      return null;
+  toDate: computed('toValue', {
+    get() {
+      if (this._toValue) {
+        return this._toValue;
+      }
+      try {
+        return new Date(Date.parse(this.toValue));
+      } catch(e) {
+        return null;
+      }
+    },
+    set(key, value) {
+      return this._toValue = value;
     }
   }),
 
