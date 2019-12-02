@@ -41,5 +41,6 @@ export default Model.extend({
   regulationType: belongsTo('toezicht-regulation-type', { inverse: null }),
   status: belongsTo('document-status', { inverse: null }),
   taxRates: hasMany('tax-rate', { inverse: null }),
-  taxType: belongsTo('toezicht-tax-type', { inverse: null }),
+  simplifiedTaxRates: hasMany('simplified-tax-rate', { inverse: null }),
+  taxType: belongsTo('toezicht-tax-type', { inverse: null })
 });
