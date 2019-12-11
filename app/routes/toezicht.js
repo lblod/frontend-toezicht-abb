@@ -17,6 +17,11 @@ export default Route.extend(AuthenticatedRouteMixin, {
     }
 
     const routeName = splittedRouteName.join('.');
-    this.transitionTo(routeName);
+
+    if (splittedRouteName[2] == 'show') {
+      this.transitionTo(routeName, transition.to.params.id);
+    } else {
+      this.transitionTo(routeName);
+    }
   }
 });

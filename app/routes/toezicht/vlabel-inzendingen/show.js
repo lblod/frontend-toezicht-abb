@@ -27,7 +27,7 @@ export default Route.extend({
 
   afterModel(model) {
     if (model.length == 0) {
-      this.transitionTo('route-not-found', 404);
+      this.transitionTo('route-not-found', 'route-not-found');
     }
   }
 });
