@@ -6,6 +6,9 @@ module.exports = function(environment) {
     environment,
     rootURL: '/',
     locationType: 'auto',
+    besluitTypeUri: "http://data.lblod.info/DecisionType/5b3955cc006323233e711c482f3a6bf39a8d3eba6bbdb2c672bdfcf2b2985b03", // Reglementen en verordeningen
+    regulationTypeUri: "http://data.lblod.info/RegulationType/ef35b053c004a25069c58090d967ade753dd02586b0f76b916a0ca82b7294d0b", // Belastingsreglement
+    taxTypeUri: "http://data.lblod.info/TaxType/0a9c8b98da3f166b86cfe827bc0e6b779a4dc2f7a69e7be6031fd1959eaedc0d", // Aanvullende belasting of opcentiem
     marCodes: [  // MAR codes for Vlabel
       "0ce2d45f1bb5414e7cd4d9de7929097e7278260434ded0b16d336bb407e9f0ec",
       "6c8132fc24e1be8b0134380e308eef3adb1357f0fb8bbfa62eea8197916580fd",

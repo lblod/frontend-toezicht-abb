@@ -8,22 +8,15 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
   redirect(model, transition) {
     const targetName = transition.targetName;
+    let splittedRouteName = targetName.split('.');
+
     if (this.currentSession.canReadVlabel) {
-      // if the target route is in the vlabel domain we transition to it,
-      // otherwise as we have the vlabel rights we redirect to the vlabel index.
-      if (targetName.split('.')[1] == 'vlabel-inzendingen') {
-        this.transitionTo(targetName);
-      } else {
-        this.transitionTo('toezicht.vlabel-inzendingen');
-      }
+      splittedRouteName[1] = 'vlabel-inzendingen';
     } else {
-      // if the target route is in the "regular" domain we transition to it,
-      // otherwise as we have the "regular" rights we redirect to the "regular" index.
-      if (targetName.split('.')[1] == 'inzendingen') {
-        this.transitionTo(targetName);
-      } else {
-        this.transitionTo('toezicht.inzendingen');
-      }
+      splittedRouteName[1] = 'inzendingen';
     }
+
+    const routeName = splittedRouteName.join('.');
+    this.transitionTo(routeName);
   }
 });

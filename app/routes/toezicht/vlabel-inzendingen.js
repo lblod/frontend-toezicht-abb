@@ -31,10 +31,10 @@ export default Route.extend(DataTableRouteMixin, {
       ].join(',')
     };
 
-    query['filter[besluit-type][:uri:]'] = "http://data.lblod.info/DecisionType/5b3955cc006323233e711c482f3a6bf39a8d3eba6bbdb2c672bdfcf2b2985b03"; // Reglementen en verordeningen
-    query['filter[regulation-type][:uri:]'] = "http://data.lblod.info/RegulationType/ef35b053c004a25069c58090d967ade753dd02586b0f76b916a0ca82b7294d0b"; // Belastingsreglement
-    query['filter[tax-type][:uri:]'] = "http://data.lblod.info/TaxType/0a9c8b98da3f166b86cfe827bc0e6b779a4dc2f7a69e7be6031fd1959eaedc0d"; // Aanvullende belasting of opcentiem
-    query['filter[nomenclature][:id:]'] = config.marCodes.join(','); // MAR7300, MAR7304 or MAR7305
+    query['filter[besluit-type][:uri:]'] = config.besluitTypeUri,
+    query['filter[regulation-type][:uri:]'] = config.regulationTypeUri,
+    query['filter[tax-type][:uri:]'] = config.taxTypeUri,
+    query['filter[nomenclature][:id:]'] = config.marCodes.join(',');
 
     query['page[size]'] = 20;
 
