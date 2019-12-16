@@ -1,8 +1,10 @@
 import Route from '@ember/routing/route';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
+import Snapshot from '../../utils/snapshot';
 
 export default Route.extend(DataTableRouteMixin, {
   modelName: 'inzending-voor-toezicht',
+
   queryParams: {
     page: { refreshModel: true },
     size: { refreshModel: true },
@@ -19,8 +21,22 @@ export default Route.extend(DataTableRouteMixin, {
     sentDateTo: { refreshModel: true },
     statusUri: { refreshModel: true }
   },
+
+  init() {
+    this._super(...arguments);
+    this.set('lastParams', new Snapshot());
+  },
+
+  lastParams: null,
+
   mergeQueryOptions(params) {
+    this.lastParams.stageLive( params );
+
+    if( !this.lastParams.fieldChanged('page') )
+      params.page = 0;
+
     const query = {
+      page: { number: params.page },
       include: [
         'bestuurseenheid.classificatie',
         'bestuurseenheid.provincie',
@@ -60,6 +76,16 @@ export default Route.extend(DataTableRouteMixin, {
     if (params.statusUri)
       query['filter[melding][status][:uri:]'] = params.statusUri;
 
+    this.lastParams.commit();
+
     return query;
+  },
+
+  setupController(controller) {
+    this._super(...arguments);
+
+    if( controller.page != this.lastParams.committed.page )
+      controller.set('page', this.lastParams.committed.page);
   }
+
 });

@@ -2,9 +2,11 @@ import Route from '@ember/routing/route';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import moment from 'moment';
 import config from '../../config/environment';
+import Snapshot from '../../utils/snapshot';
 
 export default Route.extend(DataTableRouteMixin, {
   modelName: 'inzending-voor-toezicht',
+
   queryParams: {
     page: { refreshModel: true },
     size: { refreshModel: true },
@@ -21,8 +23,22 @@ export default Route.extend(DataTableRouteMixin, {
     endDateFrom: { refreshModel: true },
     endDateTo: { refreshModel: true }
   },
+
+  init() {
+    this._super(...arguments);
+    this.set('lastParams', new Snapshot());
+  },
+
+  lastParams: null,
+
   mergeQueryOptions(params) {
+    this.lastParams.stageLive( params );
+
+    if( !this.lastParams.fieldChanged('page') )
+      params.page = 0;
+
     const query = {
+      page: { number: params.page },
       include: [
         'besluit-type',
         'regulation-type',
@@ -34,9 +50,7 @@ export default Route.extend(DataTableRouteMixin, {
     query['filter[besluit-type][:uri:]'] = config.besluitTypeUri,
     query['filter[regulation-type][:uri:]'] = config.regulationTypeUri,
     query['filter[tax-type][:uri:]'] = config.taxTypeUri,
-    query['filter[nomenclature][:id:]'] = config.marCodes.join(',');
-
-    query['page[size]'] = 20;
+    query['filter[nomenclature][id]'] = config.marCodes.join(',');
 
     if (params.bestuurseenheidIds)
       query['filter[bestuurseenheid][id]'] = params.bestuurseenheidIds;
@@ -68,6 +82,17 @@ export default Route.extend(DataTableRouteMixin, {
     if (params.endDateTo)
       query['filter[:lte:end-date]'] = moment(params.endDateTo).format('YYYY-MM-DD');
 
+    this.lastParams.commit();
+
     return query;
+  },
+
+
+  setupController(controller) {
+    this._super(...arguments);
+
+    if( controller.page != this.lastParams.committed.page )
+      controller.set('page', this.lastParams.committed.page);
   }
+
 });
