@@ -13,12 +13,6 @@ export default Route.extend(ApplicationRouteMixin, {
   async sessionAuthenticated() {
     this._super(...arguments);
     await this._loadCurrentSession();
-
-    if (this.currentSession.canReadVlabel) {
-      this.transitionTo('toezicht.vlabel-inzendingen.index');
-    } else {
-      this.transitionTo('toezicht.inzendingen.index');
-    }
   },
 
   sessionInvalidated() {
