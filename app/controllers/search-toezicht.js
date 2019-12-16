@@ -1,8 +1,6 @@
-import { alias } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import { bool } from '@ember/object/computed';
 import ENV from 'frontend-toezicht-abb/config/environment';
 import { A }  from '@ember/array';
 

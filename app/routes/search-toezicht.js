@@ -3,11 +3,10 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import fetch from 'fetch';
 import search from '../utils/mu-search';
 import Snapshot from '../utils/snapshot';
 
-export default class SearchToezichtRoute extends Route {
+export default class SearchToezichtRoute extends Route.extend( AuthenticatedRouteMixin, {}) {
   @service currentSession;
 
   queryParams = {
@@ -27,8 +26,6 @@ export default class SearchToezichtRoute extends Route {
   async model(params){
     const filter = {};
 
-    console.log( params.searchType );
-
     this.lastParams.stageLive( params );
     if( !this.lastParams.fieldChanged( "page" ) ) {
       params.page = 0;
@@ -46,7 +43,7 @@ export default class SearchToezichtRoute extends Route {
     });
   }
 
-  setupController(controller, model) {
+  setupController(controller) {
     super.setupController(...arguments);
 
     if( controller.page != this.lastParams.committed.page )
