@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import { inject as service } from '@ember/service';
 import ENV from 'frontend-toezicht-abb/config/environment';
+import { getOwner } from '@ember/application';
 
 export default Route.extend(ApplicationRouteMixin, {
   currentSession: service(),
@@ -11,8 +12,27 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   async sessionAuthenticated() {
-    this._super(...arguments);
     await this._loadCurrentSession();
+
+    // The current session needs to be loaded before we start transitioning
+    // because the transitioning depends on the user roles loaded in the current session
+
+    // Since not calling this._super(...arguments) on the first line doesn't work
+    // we copy the implementation ApplicationRouteMixin.sessionAuthenticated here
+    const attemptedTransition = this.get('session.attemptedTransition');
+    const cookies = getOwner(this).lookup('service:cookies');
+    const redirectTarget = cookies.read('ember_simple_auth-redirectTarget');
+
+    if (attemptedTransition) {
+      attemptedTransition.retry();
+      this.set('session.attemptedTransition', null);
+    } else if (redirectTarget) {
+      this.transitionTo(redirectTarget);
+      cookies.clear('ember_simple_auth-redirectTarget');
+    } else {
+      this.transitionTo(this.get('routeAfterAuthentication'));
+    }
+    // End of copy from ApplicationRouteMixin.sessionAuthenticated
   },
 
   sessionInvalidated() {
