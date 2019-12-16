@@ -16,16 +16,35 @@ export default class SearchToezichtRoute extends Route {
     size: { refreshModel: true }
   }
 
+  lastParams = null;
+
   async model(params){
     const filter = {};
 
+    if( !this.lastParams )
+      this.lastParams = params;
+
+    if( this.lastParams.searchType != params.searchType
+        || this.lastParams.searchString != params.searchString
+        || this.lastParams.size != params.size )
+      params.page = 0;
+
     filter[`:sqs:data`] = isEmpty(params.searchString) ? "*" : params.searchString;
     if( params.searchType ) filter["decisionType"] = params.searchType;
+
+    this.lastParams = Object.assign(params,{});
 
     return search('submissions', params.page, params.size, filter, function(item) {
       item.attributes.id = item.id;
       return item.attributes;
     });
+  }
+
+  setupController(controller, model) {
+    super.setupController(...arguments);
+
+    if( controller.page != this.lastParams.page )
+      controller.set('page', this.lastParams.page);
   }
 
   @action
