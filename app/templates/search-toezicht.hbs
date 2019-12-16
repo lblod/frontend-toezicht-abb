@@ -24,7 +24,7 @@
             </div>
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Type document</label>
-              <BesluitTypeSelectSingle @value={{besluitTypeIds}} @onInit={{action (mut besluitTypes)}} @onSelectionChange={{action "selectBesluitType"}} @class="ember-power-select--small" />
+              <BesluitTypeSelectSingle @value={{searchType}} @onInit={{action (mut searchType)}} @onSelectionChange={{action "selectBesluitType"}} @class="ember-power-select--small" />
 
               {{!--
                 {{#if regulationTypeIsSelected}}

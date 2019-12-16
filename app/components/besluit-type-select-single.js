@@ -17,12 +17,10 @@ export default Component.extend({
   async didReceiveAttrs() {
     this._super(...arguments);
     if (this.value && !this.selected) {
-      const besluitTypes = this.store.query('besluit-type', {
-        filter: { id: this.value },
-        page: { size: this.value.split(",").length}
+      const besluitTypes = await this.store.query('besluit-type', {
+        filter: { id: this.value }
       });
-      this.set('selected', besluitTypes);
-      this.onInit(besluitTypes);
+      this.set('selected', besluitTypes.firstObject);
     } else if (!this.value) {
       this.set('selected', null);
     }

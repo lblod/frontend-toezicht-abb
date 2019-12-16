@@ -12,8 +12,9 @@ export default Controller.extend({
   currentSession: service(),
   besluitType: null,
   besluitTypeUri: null,
+  besluitTypeId: null,
 
-  searchType: alias("besluitTypeUri"),
+  searchType: null,
 
   queryParams: ["searchString","searchType"],
   searchString: "",
@@ -34,13 +35,7 @@ export default Controller.extend({
 
   actions: {
     selectBesluitType(type) {
-      if( type ) {
-        this.set('besluitType', type);
-        this.set('besluitTypeUri', type.get('uri'));
-      } else {
-        this.set('besluitType', null);
-        this.set('besluitTypeUri', null);
-      }
+      this.set('searchType', type && type.id);
     }
   }
 });
