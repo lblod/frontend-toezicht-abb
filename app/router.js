@@ -21,6 +21,9 @@ Router.map(function() {
     this.route('disclaimer');
   });
   this.route('contact');
+  this.route('search-toezicht', function() {
+    this.route('show', { path: '/:id' });
+  });
   this.route('route-not-found', {
     path: '/*wildcard'
   });

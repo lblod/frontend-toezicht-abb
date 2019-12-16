@@ -1,0 +1,54 @@
+<div class="grid grid--collapse">
+  <div class="{{if hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
+    <div class="container-flex--contain">
+      <div class="u-border--fat--bottom u-hide-on-print">
+        <div class="u-padding--round--small">
+          <div class="grid">
+            <div class="col--4-12 col--1-1--s">
+              <h1 class="h2 u-spacer--right--small u-display-inline-block">Toezicht ABB zoek</h1>
+            </div>
+
+            <div class="col--8-12 col--1-1--s u-align-right--tablet-portrait-up">
+              <WuButtonGroup>
+                <AcmidmLogout @class="button button--alt button--small u-spacer--bottom--none u-hidden-mobile" />
+              </WuButtonGroup>
+            </div>
+
+          </div>
+          <div class="grid">
+            <div class="col--4-12 col--6-12--m col--6-12--s">
+              <label class="label--subtle form__label">Zoekterm</label>
+              <div>
+                {{input value=this.searchString placeholder="fiets"}}
+              </div>
+            </div>
+            <div class="col--4-12 col--6-12--m col--6-12--s">
+              <label class="label--subtle form__label">Type document</label>
+              <BesluitTypeSelectSingle @value={{besluitTypeIds}} @onInit={{action (mut besluitTypes)}} @onSelectionChange={{action "selectBesluitType"}} @class="ember-power-select--small" />
+
+              {{!--
+                {{#if regulationTypeIsSelected}}
+                  <label class="label--subtle form__label">Type reglement of verordening</label>
+                  <ToezichtRegulationTypeSelect @value={{regulationTypeId}} @onSelectionChange={{action (mut regulationTypeId)}} @class="ember-power-select--small" />
+                {{/if}}
+              --}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <Toezicht::InzendingenSearchTable @targetRoute="search-toezicht.show" @class="container-flex--contain" @model={{model}} @isLoading={{isLoadingModel}} @page={{page}} @size={{size}} @displaySubset={{hasActiveChildRoute}} />
+
+      <ul>
+        {{#each this.model.data as |item|}}
+          <li>
+            {{#link-to "search-toezicht.show" item.id}}
+              {{item.id}}
+            {{/link-to}}
+          </li>
+        {{/each}}
+      </ul>
+
+    </div>
+  </div>
+  {{outlet}}
+</div>
