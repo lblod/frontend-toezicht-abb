@@ -34,7 +34,22 @@ export default Route.extend(DataTableRouteMixin, {
   mergeQueryOptions(params) {
     this.lastParams.stageLive( params );
 
-    if( !this.lastParams.fieldChanged('page') )
+    const filterParams = [
+      'bestuurseenheidIds',
+      'classificatieIds',
+      'provincieIds',
+      'besluitTypeIds',
+      'regulationTypeId',
+      'sessionDateFrom',
+      'sessionDateTo',
+      'sentDateFrom',
+      'sentDateTo',
+      'statusUri',
+      'size',
+      'sort'
+    ];
+
+    if( this.lastParams.anyFieldChanged(filterParams) )
       params.page = 0;
 
     const query = {

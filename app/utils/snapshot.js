@@ -18,6 +18,14 @@ export default class Snapshot {
     this.base = Object.assign( this.future, {} );
   }
 
+  anyFieldChanged(fields) {
+    for (let field of fields) {
+      if (this.fieldChanged(field))
+        return true;
+    }
+    return false;
+  }
+
   fieldChanged(field) {
     if( !this.hasBase || !this.hasStaging ) {
       return this.baseOrEmpty.hasOwnProperty(field) || this.futureOrEmpty.hasOwnProperty(field);
