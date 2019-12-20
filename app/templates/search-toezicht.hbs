@@ -36,6 +36,9 @@
           </div>
         </div>
       </div>
+
+      <WuAlert @title="Waarschuwing">Deze pagina is gebouwd voor demo doeleinden en bevat geen recente data.</WuAlert>
+
       <Toezicht::InzendingenSearchTable @targetRoute="search-toezicht.show" @class="container-flex--contain" @model={{model}} @isLoading={{isLoadingModel}} @page={{page}} @size={{size}} @displaySubset={{hasActiveChildRoute}} />
 
       <ul>
