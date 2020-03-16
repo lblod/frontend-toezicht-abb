@@ -4,13 +4,13 @@
 		<form class="u-spacer--large js-formvalidation-bound">
 		  <div class="form__row">
 		    <label class="form__label form__label--large form__label--block" for="select">Waar gaat uw bericht over?</label>
-		    <WuRadioButton @label="Een functionaliteit, bug of probleem" @value="LoketLokaalBestuur@vlaanderen.be?subject=Functionaliteit of bug of probleem" @onChange={{action (mut mailto)}} @isBlock={{true}} />
-		    <WuRadioButton @label="Een inhoudelijke vraag" @value="LoketLokaalBestuur@vlaanderen.be?subject=Inhoudelijke vraag" @onChange={{action (mut mailto)}} @isBlock={{true}} />
+		    <WuRadioButton @label="Een functionaliteit, bug of probleem" @value="LoketLokaalBestuur@vlaanderen.be?subject=Functionaliteit of bug of probleem" @onChange={{fn (mut this.mailto)}} @isBlock={{true}} />
+		    <WuRadioButton @label="Een inhoudelijke vraag" @value="LoketLokaalBestuur@vlaanderen.be?subject=Inhoudelijke vraag" @onChange={{fn (mut this.mailto)}} @isBlock={{true}} />
 		    <div class="form__error" aria-describedby="radio-buttons"></div>
 		  </div>
 
-		  {{#if mailto}}
-		    <a href={{concat "mailto:" mailto}} class="button button--large">Bericht versturen</a>
+		  {{#if this.mailto}}
+		    <a href={{concat "mailto:" this.mailto}} class="button button--large">Bericht versturen</a>
 		  {{else}}
 		    <WuButton @label="Bericht versturen" @onClick={{null}} @size="large" @disabled={{true}} />
 		  {{/if}}
@@ -19,4 +19,4 @@
   </div>
 </section>
 
-<WuWidget @src={{footer}} />
+<WuWidget @src={{this.footer}} />

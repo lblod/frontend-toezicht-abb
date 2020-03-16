@@ -1,13 +1,17 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Component.extend({
-  currentSession: service(),
+@classic
+@tagName('')
+export default class InzendingShow extends Component {
+  @service
+  currentSession;
 
-  tagName: '',
-  model: null,
+  model = null;
 
-  actions: {
-    noop() {}
-  }
-});
+  @action
+  noop() {}
+}

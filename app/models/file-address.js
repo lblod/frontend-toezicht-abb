@@ -1,6 +1,11 @@
+import classic from 'ember-classic-decorator';
 import Model, { belongsTo, attr } from '@ember-data/model';
 
-export default Model.extend({
-  address: attr(),
-  replicatedFile: belongsTo('file', { inverse: null })
-});
+@classic
+export default class FileAddress extends Model {
+  @attr()
+  address;
+
+  @belongsTo('file', { inverse: null })
+  replicatedFile;
+}

@@ -1,5 +1,5 @@
 <div class="grid grid--collapse">
-  <div class="{{if hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
+  <div class="{{if this.hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
     <div class="container-flex--contain">
       <div class="u-border--fat--bottom u-hide-on-print">
         <div class="u-padding--round--small">
@@ -12,10 +12,10 @@
               <WuButtonGroup>
                 <div class="u-display--inline-block u-padding--right--small">
                   <div class="checkbox--switch__wrapper checkbox--switch--small">
-                    <WuSwitch @label="Toon enkel te behandelen dossiers" @checked={{isStatusFilterEnabled}} @onClick={{action "setToTreatStatus"}} />
+                    <WuSwitch @label="Toon enkel te behandelen dossiers" @checked={{this.isStatusFilterEnabled}} @onClick={{this.setToTreatStatus}} />
                   </div>
                 </div>
-                <WuButton @onClick={{action "resetFilters"}} @size={{small}} @isDark={{true}} @isLink={{true}} @isNarrow={{true}} @class="u-spacer--bottom--none">
+                <WuButton @onClick={{this.resetFilters}} @size="small" @isDark={{true}} @isLink={{true}} @isNarrow={{true}} @class="u-spacer--bottom--none">
                   <i class="vi vi-cross vi-u-link button__icon" aria-hidden="true"></i> Herstel alle filters
                 </WuButton>
                 <AcmidmLogout @class="button button--alt button--small u-spacer--bottom--none u-hidden-mobile" />
@@ -26,36 +26,36 @@
           <div class="grid">
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Bestuurseenheid</label>
-              <BestuurseenheidSelect @value={{bestuurseenheidIds}} @onSelectionChange={{action (mut bestuurseenheidIds)}} @class="ember-power-select--small" />
+              <BestuurseenheidSelect @value={{this.bestuurseenheidIds}} @onSelectionChange={{fn (mut this.bestuurseenehidIds)}} @class="ember-power-select--small" />
               <label class="label--subtle form__label">Provincie</label>
-              <ProvincieSelect @value={{provincieIds}} @onSelectionChange={{action (mut provincieIds)}} @class="ember-power-select--small" />
+              <ProvincieSelect @value={{this.provincieIds}} @onSelectionChange={{fn (mut this.provincieIds)}} @class="ember-power-select--small" />
             </div>
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Type bestuur</label>
-              <BestuurseenheidClassificatieSelect @value={{classificatieIds}} @onSelectionChange={{action (mut classificatieIds)}} @class="ember-power-select--small" />
+              <BestuurseenheidClassificatieSelect @value={{this.classificatieIds}} @onSelectionChange={{fn (mut this.classificatieIds)}} @class="ember-power-select--small" />
 
               <label class="label--subtle form__label">Type document</label>
-              <BesluitTypeSelect @value={{besluitTypeIds}} @onInit={{action (mut besluitTypes)}} @onSelectionChange={{action "selectBesluitTypes"}} @class="ember-power-select--small" />
+              <BesluitTypeSelect @value={{this.besluitTypeIds}} @onInit={{fn (mut this.besluitTypes)}} @onSelectionChange={{this.selectBesluitTypes}} @class="ember-power-select--small" />
 
-              {{#if regulationTypeIsSelected}}
+              {{#if this.regulationTypeIsSelected}}
                 <label class="label--subtle form__label">Type reglement of verordening</label>
-                <ToezichtRegulationTypeSelect @value={{regulationTypeId}} @onSelectionChange={{action (mut regulationTypeId)}} @class="ember-power-select--small" />
+                <ToezichtRegulationTypeSelect @value={{this.regulationTypeId}} @onSelectionChange={{fn (mut this.regulationTypeId)}} @class="ember-power-select--small" />
               {{/if}}
             </div>
             <div class="col--4-12 col--1-1--m col--1-1--s">
               <div class="grid">
                 <div class="col--1-1 col--6-12--m">
-                  <DateRange @label="Periode verstuurd" @fromValue={{sentDateFrom}} @toValue={{sentDateTo}} @onChangeFromValue={{action (mut sentDateFrom)}} @onChangeToValue={{action (mut sentDateTo)}} />
+                  <DateRange @label="Periode verstuurd" @fromValue={{this.sentDateFrom}} @toValue={{this.sentDateTo}} @onChangeFromValue={{fn (mut this.sentDateFrom)}} @onChangeToValue={{fn (mut this.sentDateTo)}} />
                 </div>
                 <div class="col--1-1 col--6-12--m">
-                  <DateRange @label="Periode zitting / besluit" @initFromDate={{lastMonth}} @fromValue={{sessionDateFrom}} @toValue={{sessionDateTo}} @onChangeFromValue={{action (mut sessionDateFrom)}} @onChangeToValue={{action (mut sessionDateTo)}} />
+                  <DateRange @label="Periode zitting / besluit" @initFromDate={{this.lastMonth}} @fromValue={{this.sessionDateFrom}} @toValue={{this.sessionDateTo}} @onChangeFromValue={{fn (mut this.sessionDateFrom)}} @onChangeToValue={{fn (mut this.sessionDateTo)}} />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Toezicht::InzendingenTable @class="container-flex--contain" @model={{model}} @isLoading={{isLoadingModel}} @sort={{sort}} @page={{page}} @size={{size}} @displaySubset={{hasActiveChildRoute}} />
+      <Toezicht::InzendingenTable @class="container-flex--contain" @model={{this.model}} @isLoading={{this.isLoadingModel}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @displaySubset={{this.hasActiveChildRoute}} />
     </div>
   </div>
   {{outlet}}

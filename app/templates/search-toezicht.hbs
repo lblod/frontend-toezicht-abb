@@ -1,5 +1,5 @@
 <div class="grid grid--collapse">
-  <div class="{{if hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
+  <div class="{{if this.hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
     <div class="container-flex--contain">
       <div class="u-border--fat--bottom u-hide-on-print">
         <div class="u-padding--round--small">
@@ -24,7 +24,7 @@
             </div>
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Type document</label>
-              <BesluitTypeSelectSingle @value={{searchType}} @onInit={{action (mut searchType)}} @onSelectionChange={{action "selectBesluitType"}} @class="ember-power-select--small" />
+              <BesluitTypeSelectSingle @value={{this.searchType}} @onInit={{fn (mut this.searchType)}} @onSelectionChange={{this.selectBesluitType}} @class="ember-power-select--small" />
 
               {{!--
                 {{#if regulationTypeIsSelected}}
@@ -39,7 +39,7 @@
 
       <WuAlert @title="Waarschuwing">Deze pagina is gebouwd voor demo doeleinden en bevat geen recente data.</WuAlert>
 
-      <Toezicht::InzendingenSearchTable @targetRoute="search-toezicht.show" @class="container-flex--contain" @model={{model}} @isLoading={{isLoadingModel}} @page={{page}} @size={{size}} @displaySubset={{hasActiveChildRoute}} />
+      <Toezicht::InzendingenSearchTable @targetRoute="search-toezicht.show" @class="container-flex--contain" @model={{this.model}} @isLoading={{this.isLoadingModel}} @page={{this.page}} @size={{this.size}} @displaySubset={{this.hasActiveChildRoute}} />
 
       <ul>
         {{#each this.model.data as |item|}}

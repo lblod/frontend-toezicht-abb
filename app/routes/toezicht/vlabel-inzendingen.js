@@ -1,13 +1,15 @@
+import classic from 'ember-classic-decorator';
 import Route from '@ember/routing/route';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import moment from 'moment';
 import config from '../../config/environment';
 import Snapshot from '../../utils/snapshot';
 
-export default Route.extend(DataTableRouteMixin, {
-  modelName: 'inzending-voor-toezicht',
+@classic
+export default class VlabelInzendingenRoute extends Route.extend(DataTableRouteMixin) {
+  modelName = 'inzending-voor-toezicht';
 
-  queryParams: {
+  queryParams = {
     page: { refreshModel: true },
     size: { refreshModel: true },
     sort: { refreshModel: true },
@@ -22,14 +24,14 @@ export default Route.extend(DataTableRouteMixin, {
     dateOfEntryIntoForceTo: { refreshModel: true },
     endDateFrom: { refreshModel: true },
     endDateTo: { refreshModel: true }
-  },
+  };
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     this.set('lastParams', new Snapshot());
-  },
+  }
 
-  lastParams: null,
+  lastParams = null;
 
   mergeQueryOptions(params) {
     this.lastParams.stageLive( params );
@@ -100,14 +102,12 @@ export default Route.extend(DataTableRouteMixin, {
     this.lastParams.commit();
 
     return query;
-  },
-
+  }
 
   setupController(controller) {
-    this._super(...arguments);
+    super.setupController(...arguments);
 
     if( controller.page != this.lastParams.committed.page )
       controller.set('page', this.lastParams.committed.page);
   }
-
-});
+}

@@ -1,12 +1,21 @@
-import Model, { attr, hasMany } from '@ember-data/model';
+import classic from 'ember-classic-decorator';
 import { equal } from '@ember/object/computed';
+import Model, { attr, hasMany } from '@ember-data/model';
 
-export default Model.extend({
-  uri: attr(),
-  label: attr(),
+@classic
+export default class MeldingStatus extends Model {
+  @attr()
+  uri;
 
-  meldingen: hasMany('inzending-voor-toezicht-melding', { inverse: null }),
+  @attr()
+  label;
 
-  isAfgehandeld: equal('uri', 'http://data.lblod.info/melding-statuses/afgehandeld'),
-  isTeBehandelen: equal('uri', 'http://data.lblod.info/melding-statuses/te-behandelen')
-});
+  @hasMany('inzending-voor-toezicht-melding', { inverse: null })
+  meldingen;
+
+  @equal('uri', 'http://data.lblod.info/melding-statuses/afgehandeld')
+  isAfgehandeld;
+
+  @equal('uri', 'http://data.lblod.info/melding-statuses/te-behandelen')
+  isTeBehandelen;
+}

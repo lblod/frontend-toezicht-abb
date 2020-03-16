@@ -1,21 +1,25 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import { task, timeout } from 'ember-concurrency';
 
-export default Component.extend({
-  store: service(),
+@classic
+export default class BesluitTypeSelect extends Component {
+  @service
+  store;
 
   async init() {
-    this._super(...arguments);
+    super.init(...arguments);
     const options = this.store.query('besluit-type', {
       sort: 'label',
       page: { size: 1000 }
     });
     this.set('options', options);
-  },
+  }
 
   async didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
     if (this.value && !this.selected) {
       const besluitTypes = this.store.query('besluit-type', {
         filter: { id: this.value },
@@ -26,24 +30,24 @@ export default Component.extend({
     } else if (!this.value) {
       this.set('selected', null);
     }
-  },
+  }
 
-  selected: null,
-  value: null, // id of selected record
-  onInit: null,
-  onSelectionChange: null,
+  selected = null;
+  value = null; // id of selected record
+  onInit = null;
+  onSelectionChange = null;
 
-  search: task(function* (term) {
+  @task(function* (term) {
     yield timeout(600);
     return this.store.query('besluit-type', {
       filter: { label: term }
     });
-  }),
+  })
+  search;
 
-  actions: {
-    changeSelected(selected) {
-      this.set('selected', selected);
-      this.onSelectionChange(selected);
-    }
+  @action
+  changeSelected(selected) {
+    this.set('selected', selected);
+    this.onSelectionChange(selected);
   }
-});
+}

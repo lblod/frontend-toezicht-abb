@@ -1,10 +1,15 @@
+import classic from 'ember-classic-decorator';
+import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import { inject as service } from '@ember/service';
 
-export default Route.extend(AuthenticatedRouteMixin, {
-  currentSession: service(),
-  router: service(),
+@classic
+export default class ToezichtRoute extends Route.extend(AuthenticatedRouteMixin) {
+  @service
+  currentSession;
+
+  @service
+  router;
 
   redirect(model, transition) {
     const targetName = transition.targetName;
@@ -24,4 +29,4 @@ export default Route.extend(AuthenticatedRouteMixin, {
       this.transitionTo(routeName);
     }
   }
-});
+}

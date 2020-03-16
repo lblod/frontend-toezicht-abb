@@ -1,7 +1,14 @@
+import classic from 'ember-classic-decorator';
 import Model, { attr } from '@ember-data/model';
 
-export default Model.extend({
-  label: attr(),
-  scopeNote: attr(),
-  uri: attr()
-});
+@classic
+export default class BestuurseenheidClassificatieCode extends Model {
+  @attr()
+  label;
+
+  @attr()
+  scopeNote;
+
+  @attr()
+  uri;
+}

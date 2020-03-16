@@ -1,21 +1,25 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import { task, timeout } from 'ember-concurrency';
 
-export default Component.extend({
-  store: service(),
+@classic
+export default class BestuurseenheidSelect extends Component {
+  @service
+  store;
 
   async init() {
-    this._super(...arguments);
+    super.init(...arguments);
     const options = this.store.query('bestuurseenheid', {
       sort: 'naam',
       include: ['classificatie']
     });
     this.set('options', options);
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
     if (this.value && !this.selected) {
       const bestuurseenheden = this.store.query('bestuurseenheid', {
         filter: { id: this.value },
@@ -25,25 +29,25 @@ export default Component.extend({
     } else if (!this.value) {
       this.set('selected', null);
     }
-  },
+  }
 
-  selected: null,
-  value: null, // id of selected record
-  onSelectionChange: null,
+  selected = null;
+  value = null; // id of selected record
+  onSelectionChange = null;
 
-  search: task(function* (term) {
+  @task(function* (term) {
     yield timeout(600);
     return this.store.query('bestuurseenheid', {
       sort: 'naam',
       include: ['classificatie'],
       filter: term
     });
-  }),
+  })
+  search;
 
-  actions: {
-    changeSelected(selected) {
-      this.set('selected', selected);
-      this.onSelectionChange(selected && selected.map(d => d.get('id')));
-    }
+  @action
+  changeSelected(selected) {
+    this.set('selected', selected);
+    this.onSelectionChange(selected && selected.map(d => d.get('id')));
   }
-});
+}

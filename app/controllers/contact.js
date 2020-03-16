@@ -1,9 +1,11 @@
+import classic from 'ember-classic-decorator';
 import Controller from '@ember/controller';
 import ENV from 'frontend-toezicht-abb/config/environment';
 
-export default Controller.extend({
+@classic
+export default class ContactController extends Controller {
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     this.set('footer', ENV['vo-webuniversum']['footer']);
   }
-});
+}

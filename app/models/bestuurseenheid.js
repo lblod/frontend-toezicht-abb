@@ -1,10 +1,23 @@
+import classic from 'ember-classic-decorator';
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
-export default Model.extend({
-  naam: attr(),
-  alternatieveNaam: attr('string-set'),
-  werkingsgebied: belongsTo('werkingsgebied', { inverse: null }),
-  provincie: belongsTo('werkingsgebied', { inverse: null }),
-  classificatie: belongsTo('bestuurseenheid-classificatie-code', { inverse: null }),
-  bestuursorganen: hasMany('bestuursorgaan', { inverse: null })
-});
+@classic
+export default class Bestuurseenheid extends Model {
+  @attr()
+  naam;
+
+  @attr('string-set')
+  alternatieveNaam;
+
+  @belongsTo('werkingsgebied', { inverse: null })
+  werkingsgebied;
+
+  @belongsTo('werkingsgebied', { inverse: null })
+  provincie;
+
+  @belongsTo('bestuurseenheid-classificatie-code', { inverse: null })
+  classificatie;
+
+  @hasMany('bestuursorgaan', { inverse: null })
+  bestuursorganen;
+}

@@ -1,10 +1,15 @@
+import classic from 'ember-classic-decorator';
 import Service, { inject as service } from '@ember/service';
 import { get, computed } from '@ember/object';
 import { task, waitForProperty } from 'ember-concurrency';
 
-export default Service.extend({
-  session: service('session'),
-  store: service('store'),
+@classic
+export default class CurrentSessionService extends Service {
+  @service('session')
+  session;
+
+  @service('store')
+  store;
 
   async load() {
     if (this.get('session.isAuthenticated')) {
@@ -31,25 +36,34 @@ export default Service.extend({
       this.set('canRead', this.canAccess('ABBDatabankToezicht-DatabankToezichtLezer') || this.canAccess('ABBDatabankToezicht-DatabankToezichtEditeur'));
       this.set('canWrite', this.canAccess('ABBDatabankToezicht-DatabankToezichtEditeur'));
     }
-  },
+  }
+
   canAccess(role) {
     return this._roles.includes(role);
-  },
+  }
+
   // constructs a task which resolves in the promise
-  makePropertyPromise: task(function * (property) {
+  @task(function * (property) {
     yield waitForProperty(this, property);
     return this.get(property);
-  }),
-  // this is a promise
-  account: computed('_account', function() {
-    return this.makePropertyPromise.perform('_account');
-  }),
-  // this contains a promise
-  user: computed('_user', function() {
-    return this.makePropertyPromise.perform('_user');
-  }),
-  // this contains a promise
-  group: computed('_group', function() {
-    return this.makePropertyPromise.perform('_group');
   })
-});
+  makePropertyPromise;
+
+  // this is a promise
+  @computed('_account')
+  get account() {
+    return this.makePropertyPromise.perform('_account');
+  }
+
+  // this contains a promise
+  @computed('_user')
+  get user() {
+    return this.makePropertyPromise.perform('_user');
+  }
+
+  // this contains a promise
+  @computed('_group')
+  get group() {
+    return this.makePropertyPromise.perform('_group');
+  }
+}

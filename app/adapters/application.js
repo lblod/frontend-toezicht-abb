@@ -1,6 +1,6 @@
-import JSONAPIAdapter from '@ember-data/adapter/json-api';
+import DS from 'ember-data';
 const maxRetries = 6;
-export default JSONAPIAdapter.extend({
+export default DS.JSONAPIAdapter.extend({
   init() {
     this._super(...arguments);
   },

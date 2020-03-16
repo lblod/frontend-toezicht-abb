@@ -1,8 +1,11 @@
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 
-export default Route.extend({
-  currentSession: service(),
+@classic
+export default class IndexRoute extends Route {
+  @service
+  currentSession;
 
   beforeModel() {
     if (this.currentSession.canReadVlabel) {
@@ -11,4 +14,4 @@ export default Route.extend({
       this.transitionTo('toezicht.inzendingen.index');
     }
   }
-});
+}

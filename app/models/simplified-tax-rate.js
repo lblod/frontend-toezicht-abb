@@ -1,5 +1,8 @@
+import classic from 'ember-classic-decorator';
 import Model, { attr } from '@ember-data/model';
 
-export default Model.extend({
-  amount: attr()
-});
+@classic
+export default class SimplifiedTaxRate extends Model {
+  @attr()
+  amount;
+}

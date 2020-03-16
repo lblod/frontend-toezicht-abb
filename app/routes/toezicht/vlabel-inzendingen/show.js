@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 import Route from '@ember/routing/route';
 import config from '../../../config/environment';
 
-export default Route.extend({
+@classic
+export default class ShowRoute extends Route {
   async model(params) {
     const queryParams = {
       'filter[id]': params.id,
@@ -23,11 +25,11 @@ export default Route.extend({
 
     const inzendingen = await this.store.query('inzending-voor-toezicht', queryParams);
     return inzendingen.firstObject || [];
-  },
+  }
 
   afterModel(model) {
     if (model.length == 0) {
       this.transitionTo('route-not-found', 'route-not-found');
     }
   }
-});
+}

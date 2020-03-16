@@ -1,23 +1,31 @@
-import Component from '@ember/component';
-import { equal } from '@ember/object/computed';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
+import { equal } from '@ember/object/computed';
+import Component from '@ember/component';
 import { task } from 'ember-concurrency';
 
-export default Component.extend({
-  router: service(),
-  store: service(),
+@classic
+@tagName('')
+export default class InzendingFeedback extends Component {
+  @service
+  router;
 
-  tagName: '',
-  model: null,
+  @service
+  store;
 
-  isHandled: equal('model.status.uri', 'http://data.lblod.info/melding-statuses/afgehandeld'),
+  model = null;
+
+  @equal('model.status.uri', 'http://data.lblod.info/melding-statuses/afgehandeld')
+  isHandled;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     this.initStatuses.perform();
-  },
+  }
 
-  initStatuses: task(function * () {
+  @task(function * () {
     let statuses = this.store.peekAll('melding-status');
     let teBehandelenStatus = statuses.find(status => status.uri == 'http://data.lblod.info/melding-statuses/te-behandelen');
     let afgehandeldStatus = statuses.find(status => status.uri == 'http://data.lblod.info/melding-statuses/afgehandeld');
@@ -30,22 +38,26 @@ export default Component.extend({
 
     this.set('teBehandelenStatus', teBehandelenStatus);
     this.set('afgehandeldStatus', afgehandeldStatus);
-  }),
+  })
+  initStatuses;
 
-  actions: {
-    toggleIsHandled(value) {
-      if (value)
-        this.model.set('status', this.afgehandeldStatus);
-      else
-        this.model.set('status', this.teBehandelenStatus);
-    },
-    async save() {
-      await this.model.save();
-      this.router.transitionTo(this.parentIndexRoute);
-    },
-    cancel() {
-      this.model.rollbackAttributes();
-      this.router.transitionTo(this.parentIndexRoute);
-    }
+  @action
+  toggleIsHandled(value) {
+    if (value)
+      this.model.set('status', this.afgehandeldStatus);
+    else
+      this.model.set('status', this.teBehandelenStatus);
   }
-});
+
+  @action
+  async save() {
+    await this.model.save();
+    this.router.transitionTo(this.parentIndexRoute);
+  }
+
+  @action
+  cancel() {
+    this.model.rollbackAttributes();
+    this.router.transitionTo(this.parentIndexRoute);
+  }
+}

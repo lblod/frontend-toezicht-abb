@@ -1,15 +1,18 @@
+import classic from 'ember-classic-decorator';
+import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
-import { inject as service } from '@ember/service';
 import ENV from 'frontend-toezicht-abb/config/environment';
 import { getOwner } from '@ember/application';
 
-export default Route.extend(ApplicationRouteMixin, {
-  currentSession: service(),
+@classic
+export default class ApplicationRoute extends Route.extend(ApplicationRouteMixin) {
+  @service
+  currentSession;
 
   beforeModel() {
     return this._loadCurrentSession();
-  },
+  }
 
   async sessionAuthenticated() {
     await this._loadCurrentSession();
@@ -33,14 +36,14 @@ export default Route.extend(ApplicationRouteMixin, {
       this.transitionTo(this.routeAfterAuthentication);
     }
     // End of copy from ApplicationRouteMixin.sessionAuthenticated
-  },
+  }
 
   sessionInvalidated() {
     const logoutUrl = ENV['torii']['providers']['acmidm-oauth2']['logoutUrl'];
     window.location.replace(logoutUrl);
-  },
+  }
 
   _loadCurrentSession() {
     return this.currentSession.load().catch(() => this.session.invalidate());
   }
-});
+}
