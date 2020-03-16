@@ -19,7 +19,7 @@
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Zoekterm</label>
               <div>
-                {{input value=this.searchString placeholder="fiets"}}
+                <Input @value={{this.searchString}} placeholder="fiets" />
               </div>
             </div>
             <div class="col--4-12 col--6-12--m col--6-12--s">
@@ -44,9 +44,9 @@
       <ul>
         {{#each this.model.data as |item|}}
           <li>
-            {{#link-to "search-toezicht.show" item.id}}
+            <LinkTo @route="search-toezicht.show" @model={{item.id}}>
               {{item.id}}
-            {{/link-to}}
+            </LinkTo>
           </li>
         {{/each}}
       </ul>

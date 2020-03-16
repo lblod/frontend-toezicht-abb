@@ -30,7 +30,7 @@ export default Route.extend(ApplicationRouteMixin, {
       this.transitionTo(redirectTarget);
       cookies.clear('ember_simple_auth-redirectTarget');
     } else {
-      this.transitionTo(this.get('routeAfterAuthentication'));
+      this.transitionTo(this.routeAfterAuthentication);
     }
     // End of copy from ApplicationRouteMixin.sessionAuthenticated
   },

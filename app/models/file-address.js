@@ -1,7 +1,6 @@
-import DS from 'ember-data';
-import { belongsTo } from 'ember-data/relationships';
+import Model, { belongsTo, attr } from '@ember-data/model';
 
-export default DS.Model.extend({
-  address: DS.attr(),
+export default Model.extend({
+  address: attr(),
   replicatedFile: belongsTo('file', { inverse: null })
 });
