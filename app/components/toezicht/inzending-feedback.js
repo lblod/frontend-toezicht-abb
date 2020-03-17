@@ -42,11 +42,11 @@ export default class InzendingFeedback extends Component {
   initStatuses;
 
   @action
-  toggleIsHandled(value) {
-    if (value)
-      this.model.set('status', this.afgehandeldStatus);
-    else
+  toggleIsHandled() {
+    if (this.isHandled)
       this.model.set('status', this.teBehandelenStatus);
+    else
+      this.model.set('status', this.afgehandeldStatus);
   }
 
   @action
