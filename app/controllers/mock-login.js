@@ -1,13 +1,12 @@
 import Controller from '@ember/controller';
 import { timeout } from 'ember-concurrency';
-import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency-decorators';
 
 export default class MockLoginController extends Controller {
-  @tracked queryParams = ['gemeente', 'page']
-  @tracked gemeente = ''
-  @tracked page = 0
-  @tracked size = 10
+  queryParams = ['gemeente', 'page'];
+  gemeente = '';
+  page = 0;
+  size = 10;
 
   @task
   queryStore = function*() {
@@ -21,14 +20,14 @@ export default class MockLoginController extends Controller {
       sort: 'gebruiker.achternaam'
     });
     return accounts;
-  }
+  };
 
   @task({ restartable: true })
   updateSearch = function*(value) {
     yield timeout(500);
-    this.set('page',0);
-    this.set('gemeente', value);
+    this.page = 0;
+    this.gemeente = value;
     const model = yield this.queryStore.perform();
-    this.set('model', model);
-  }
+    this.model = model;
+  };
 }

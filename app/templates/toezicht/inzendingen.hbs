@@ -35,7 +35,7 @@
               <BestuurseenheidClassificatieSelect @value={{this.classificatieIds}} @onSelectionChange={{fn (mut this.classificatieIds)}} @class="ember-power-select--small" />
 
               <label class="label--subtle form__label">Type document</label>
-              <BesluitTypeSelect @value={{this.besluitTypeIds}} @onInit={{fn (mut this.besluitTypes)}} @onSelectionChange={{this.selectBesluitTypes}} @class="ember-power-select--small" />
+              <BesluitTypeSelect @value={{this.besluitTypeIds}} @onInit={{this.updateBesluitTypes}} @onSelectionChange={{this.selectBesluitTypes}} @class="ember-power-select--small" />
 
               {{#if this.regulationTypeIsSelected}}
                 <label class="label--subtle form__label">Type reglement of verordening</label>

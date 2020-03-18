@@ -1,58 +1,55 @@
-import classic from 'ember-classic-decorator';
 import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { bool } from '@ember/object/computed';
+import { tracked } from '@glimmer/tracking';
 import Controller from '@ember/controller';
 import ENV from 'frontend-toezicht-abb/config/environment';
 import { A }  from '@ember/array';
 import moment from 'moment';
 
-@classic
 export default class InzendingenController extends Controller {
-  @service
-  router;
+  @service router;
+  @service store;
+  @service currentSession;
 
-  @service
-  store;
-
-  @service
-  currentSession;
+  @tracked statusUri;
+  @tracked isStatusFilterEnabled;
+  @tracked besluitTypeIds;
+  @tracked besluitTypes;
 
   page = 0;
   size = 20;
-  besluitTypes = null;
   sort = '-sent-date';
   _toTreatStatusUri = "http://data.lblod.info/melding-statuses/te-behandelen";
+
+  get isStatusFilterEnabled() {
+    return this.statusUri;
+  }
+
+  @computed('router.currentRouteName')
+  get hasActiveChildRoute() {
+    return this.router.currentRouteName.startsWith('toezicht.inzendingen')
+      && this.router.currentRouteName != 'toezicht.inzendingen.index';
+  }
 
   get lastMonth() {
     return moment().subtract(1, 'month').startOf('day');
   }
 
-  @bool('statusUri')
-  isStatusFilterEnabled;
-
-  @computed('router.currentRouteName')
-  get hasActiveChildRoute() {
-    return this.get('router.currentRouteName').startsWith('toezicht.inzendingen')
-      && this.get('router.currentRouteName') != 'toezicht.inzendingen.index';
-  }
-
-  init() {
-    super.init(...arguments);
-    this.set('header', ENV['vo-webuniversum']['header']);
-    this.besluitTypes = A();
-  }
-
-  @computed('besluitTypes.[]', 'besluitTypeIds')
   get regulationTypeIsSelected() {
     return this.besluitTypeIds ? this.besluitTypes.filterBy('isRegulation', true).length > 0 : false;
   }
 
+  constructor() {
+    super(...arguments);
+    this.header = ENV['vo-webuniversum']['header'];
+    this.besluitTypes = A();
+  }
+
   @action
   setToTreatStatus(event) {
-    this.set('statusUri', null);
+    this.statusUri = null;
     if(event.target.checked) {
-      this.set('statusUri', this._toTreatStatusUri);
+      this.statusUri = this._toTreatStatusUri;
     }
   }
 
@@ -73,10 +70,15 @@ export default class InzendingenController extends Controller {
 
   @action
   selectBesluitTypes(types) {
-    this.set('besluitTypes', types);
-    this.set('besluitTypeIds', types && types.map(d => d.get('id')));
+    this.besluitTypes = types;
+    this.besluitTypeIds = types && types.map(d => d.id);
     //--- Clear the regulationId property if none of the selected besluitTypes (if any) is a regulation.
-    if (!this.besluitTypes.some(type => type.get('isRegulation')))
-      this.set('regulationTypeId', null);
+    if (!this.besluitTypes.some(type => type.isRegulation))
+      this.regulationTypeId = null;
+  }
+
+  @action
+  updateBesluitTypes(types) {
+    this.besluitTypes = types;
   }
 }
