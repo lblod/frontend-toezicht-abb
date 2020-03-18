@@ -1,8 +1,6 @@
-import classic from 'ember-classic-decorator';
 import Route from '@ember/routing/route';
 import config from '../../../config/environment';
 
-@classic
 export default class ShowRoute extends Route {
   async model(params) {
     const queryParams = {

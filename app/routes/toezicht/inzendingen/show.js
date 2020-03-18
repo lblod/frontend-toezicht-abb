@@ -1,7 +1,5 @@
-import classic from 'ember-classic-decorator';
 import Route from '@ember/routing/route';
 
-@classic
 export default class ShowRoute extends Route {
   async model(params) {
     const inzendingen = await this.store.query('inzending-voor-toezicht', {

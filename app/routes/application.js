@@ -1,14 +1,11 @@
-import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import ENV from 'frontend-toezicht-abb/config/environment';
 import { getOwner } from '@ember/application';
 
-@classic
 export default class ApplicationRoute extends Route.extend(ApplicationRouteMixin) {
-  @service
-  currentSession;
+  @service currentSession;
 
   beforeModel() {
     return this._loadCurrentSession();
@@ -22,13 +19,13 @@ export default class ApplicationRoute extends Route.extend(ApplicationRouteMixin
 
     // Since not calling this._super(...arguments) on the first line doesn't work
     // we copy the implementation ApplicationRouteMixin.sessionAuthenticated here
-    const attemptedTransition = this.get('session.attemptedTransition');
+    const attemptedTransition = this.session.attemptedTransition;
     const cookies = getOwner(this).lookup('service:cookies');
     const redirectTarget = cookies.read('ember_simple_auth-redirectTarget');
 
     if (attemptedTransition) {
       attemptedTransition.retry();
-      this.set('session.attemptedTransition', null);
+      this.session.attemptedTransition = null;
     } else if (redirectTarget) {
       this.transitionTo(redirectTarget);
       cookies.clear('ember_simple_auth-redirectTarget');
