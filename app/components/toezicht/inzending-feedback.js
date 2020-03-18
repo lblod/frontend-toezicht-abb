@@ -1,13 +1,11 @@
 import classic from 'ember-classic-decorator';
 import { action } from '@ember/object';
-import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
 import { equal } from '@ember/object/computed';
 import Component from '@ember/component';
 import { task } from 'ember-concurrency';
 
 @classic
-@tagName('')
 export default class InzendingFeedback extends Component {
   @service
   router;
