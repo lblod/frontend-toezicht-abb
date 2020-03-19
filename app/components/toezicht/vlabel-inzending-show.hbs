@@ -2,11 +2,11 @@
   <div class="u-padding--trl--small u-border--light--bottom">
     <div class="grid">
       <div class="col--9-12 u-wide-on-print">
-        {{shared/status-pill this.model.melding.status class="u-spacer--tiny"}}
+        <Shared::StatusPill @status={{@model.melding.status}} class="u-spacer--tiny"/>
         <h2 class="h3">Bekijk melding</h2>
       </div>
       <div class="col--3-12 u-align-right u-hide-on-print">
-        <LinkTo @route="toezicht.vlabel-inzendingen.index" class="link--icon--close">
+        <LinkTo @route={{@parentIndexRoute}} class="link--icon--close">
           <span class="u-visually-hidden">Venster sluiten</span>
         </LinkTo>
       </div>
@@ -17,20 +17,20 @@
       <div class="grid u-spacer--tiny">
         <div class="col--6-12">
           <div class="description-data__label">Verstuurd door</div>
-          <div class="description-data__value">{{this.model.lastModifier.fullName}}</div>
+          <div class="description-data__value">{{@model.lastModifier.fullName}}</div>
         </div>
         <div class="col--6-12">
           <div class="description-data__label">Verstuurd op</div>
-          <div class="description-data__value">{{moment-format this.model.sentDate 'DD-MM-YYYY'}}</div>
+          <div class="description-data__value">{{moment-format @model.sentDate 'DD-MM-YYYY'}}</div>
         </div>
       </div>
     </div>
     <div class="u-spacer"></div>
-    <RootFormNode @solution={{this.model.formSolution}} @onDynamicFormInit={{this.noop}} @show={{true}} />
+    <RootFormNode @solution={{@model.formSolution}} @onDynamicFormInit={{this.noop}} @show={{true}} />
   </div>
   <div class="u-padding--round--small u-border--light--top u-hide-on-print">
     <div class="button-group u-spacer--tiny">
-      <LinkTo @route="toezicht.vlabel-inzendingen.index" class="button button--narrow button--alt">Sluit venster</LinkTo>
+      <LinkTo @route={{@parentIndexRoute}} class="button button--narrow button--alt">Sluit venster</LinkTo>
     </div>
   </div>
 </div>

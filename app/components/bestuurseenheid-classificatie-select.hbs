@@ -1,3 +1,5 @@
-<PowerSelectMultiple @placeholder="OCMW, Gemeente, ..." @search={{perform this.search}} @searchPlaceholder="Typ om te zoeken..." @searchEnabled={{true}} @options={{this.options}} @selected={{this.selected}} @onChange={{this.changeSelected}} @allowClear={{true}} as |classificatie|>
-  {{classificatie.label}}
-</PowerSelectMultiple>
+<div {{did-update this.updateSelectedValue @value}}>
+  <PowerSelectMultiple @placeholder="OCMW, Gemeente, ..." @search={{perform this.search}} @searchPlaceholder="Typ om te zoeken..." @searchEnabled={{true}} @options={{this.options}} @selected={{this.selected}} @onChange={{this.changeSelected}} @allowClear={{true}} as |classificatie|>
+    {{classificatie.label}}
+  </PowerSelectMultiple>
+</div>

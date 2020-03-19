@@ -1,40 +1,28 @@
-import classic from 'ember-classic-decorator';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { task, timeout } from 'ember-concurrency';
 import config from '../config/environment';
 
-@classic
 export default class MarCodeSelect extends Component {
-  @service
-  store;
+  @service store;
 
-  async init() {
-    super.init(...arguments);
+  @tracked selected = null;
+  @tracked value = null; // id of selected record
+  onSelectionChange = null;
+
+  constructor() {
+    super(...arguments);
+    if (this.args.value) {
+      this.selected = this.getMarCodesFromId(this.args.value);
+    }
     const options = this.store.query('toezicht-nomenclature', {
       sort: 'code',
       'filter[:id:]': config.marCodes.join(',')
     });
-    this.set('options', options);
+    this.options = options;
   }
-
-  didReceiveAttrs() {
-    super.didReceiveAttrs(...arguments);
-    if (this.value && !this.selected) {
-      const marCodes = this.store.query('toezicht-nomenclature', {
-        filter: { id: this.value },
-        page: { size: this.value.split(",").length}
-      });
-      this.set('selected', marCodes);
-    } else if (!this.value) {
-      this.set('selected', null);
-    }
-  }
-
-  selected = null;
-  value = null; // id of selected record
-  onSelectionChange = null;
 
   @task(function* (term) {
     yield timeout(600);
@@ -46,7 +34,24 @@ export default class MarCodeSelect extends Component {
 
   @action
   changeSelected(selected) {
-    this.set('selected', selected);
-    this.onSelectionChange(selected && selected.map(d => d.get('id')));
+    this.selected = selected;
+    this.args.onSelectionChange(selected && selected.map(d => d.get('id')));
+  }
+
+  @action
+  updateSelectedValue() {
+    if (this.args.value && !this.selected) {
+      this.selected = this.getMarCodesFromId(this.args.value);
+    } else if (!this.args.value) {
+      this.selected = null;
+    }
+  }
+
+  getMarCodesFromId(id) {
+    const marCodes = this.store.query('toezicht-nomenclature', {
+      filter: { id: id },
+      page: { size: id.split(",").length}
+    });
+    return marCodes;
   }
 }

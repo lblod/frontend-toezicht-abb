@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { action, computed } from '@ember/object';
+import { action } from '@ember/object';
 import moment from 'moment';
 import ENV from 'frontend-toezicht-abb/config/environment';
 
@@ -21,10 +21,9 @@ export default class VlabelInzendingenController extends Controller {
     return moment().add(1, 'year').startOf('day');
   }
 
-  @computed('router.currentRouteName')
   get hasActiveChildRoute() {
-    return this.router.currentRouteName.startsWith('toezicht.inzendingen')
-      && this.router.currentRouteName != 'toezicht.inzendingen.index';
+    return this.router.currentRouteName.startsWith('toezicht.vlabel-inzendingen')
+      && this.router.currentRouteName != 'toezicht.vlabel-inzendingen.index';
   }
 
   constructor() {

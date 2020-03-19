@@ -104,7 +104,6 @@ export default class VlabelInzendingenRoute extends Route.extend(DataTableRouteM
 
   setupController(controller) {
     super.setupController(...arguments);
-
     if( controller.page != this.lastParams.committed.page )
       controller.set('page', this.lastParams.committed.page);
   }

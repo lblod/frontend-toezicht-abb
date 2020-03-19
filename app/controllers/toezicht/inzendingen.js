@@ -1,10 +1,11 @@
-import { action, computed } from '@ember/object';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import Controller from '@ember/controller';
 import ENV from 'frontend-toezicht-abb/config/environment';
 import { A }  from '@ember/array';
 import moment from 'moment';
+import { bool } from '@ember/object/computed';
 
 export default class InzendingenController extends Controller {
   @service router;
@@ -21,11 +22,8 @@ export default class InzendingenController extends Controller {
   sort = '-sent-date';
   _toTreatStatusUri = "http://data.lblod.info/melding-statuses/te-behandelen";
 
-  get isStatusFilterEnabled() {
-    return this.statusUri;
-  }
+  @bool('statusUri') isStatusFilterEnabled;
 
-  @computed('router.currentRouteName')
   get hasActiveChildRoute() {
     return this.router.currentRouteName.startsWith('toezicht.inzendingen')
       && this.router.currentRouteName != 'toezicht.inzendingen.index';

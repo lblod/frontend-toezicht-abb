@@ -1,12 +1,14 @@
-<label class="label--subtle form__label">{{@label}}</label>
+<div class="js-accordion js-accordion--open" {{did-update this.updateSelectedValues @fromValue @toValue}}>
+  <label class="label--subtle form__label">{{@label}}</label>
 
-<WuButtonGroup @isInline={{true}} @class="button-group__inline--small">
-  <WuButton @label="Alle meldingen" @onClick={{this.resetFilter}} @class={{if (not this.isFilterEnabled) "button--active"}} @isAlt={{true}} @size="small" @isNarrow={{true}} />
-  <WuButton @label="Specifieke periode" @onClick={{this.initRangeFilter}} @class={{if this.isFilterEnabled "button--active"}} @isAlt={{true}} @size="small" @isNarrow={{true}} />
-</WuButtonGroup>
+  <WuButtonGroup @isInline={{true}} @class="button-group__inline--small">
+    <WuButton @label="Alle meldingen" @onClick={{this.resetFilter}} @class={{if (not this.isFilterEnabled) "button--active"}} @isAlt={{true}} @size="small" @isNarrow={{true}} />
+    <WuButton @label="Specifieke periode" @onClick={{this.initRangeFilter}} @class={{if this.isFilterEnabled "button--active"}} @isAlt={{true}} @size="small" @isNarrow={{true}} />
+  </WuButtonGroup>
 
-{{#if this.isFilterEnabled}}
-  <div class="accordion__content">
-    <WuDateRange @onChangeFromValue={{fn this.updateDate "fromDate"}} @onChangeToValue={{fn this.updateDate "toDate"}} @fromValue={{this.fromDate}} @toValue={{this.toDate}} @fromPlaceholder="01.01.2012" @fromMinDate="01.01.2012" @fromMaxDate="01.01.2050" @toPlaceholder="01.01.2019" @toMinDate="01.01.2012" @toMaxDate="01.01.2050" />
-  </div>
-{{/if}}
+  {{#if this.isFilterEnabled}}
+    <div class="accordion__content">
+      <WuDateRange @onChangeFromValue={{fn this.updateDate "fromDate"}} @onChangeToValue={{fn this.updateDate "toDate"}} @fromValue={{this.fromDate}} @toValue={{this.toDate}} @fromPlaceholder="01.01.2012" @fromMinDate="01.01.2012" @fromMaxDate="01.01.2050" @toPlaceholder="01.01.2019" @toMinDate="01.01.2012" @toMaxDate="01.01.2050" />
+    </div>
+  {{/if}}
+</div>

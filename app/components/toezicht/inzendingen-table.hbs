@@ -1,19 +1,19 @@
 {{!-- template-lint-disable no-html-comments  --}}
 {{!-- template-lint-disable no-inline-styles  --}}
-<DataTable @content={{this.model}} @isLoading={{this.isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain data-table" as |t|>
+<DataTable @content={{@model}} @isLoading={{this.isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}} @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
   <t.content as |c|>
     <c.header>
       {{#unless this.displaySubset}}
-        <ThSortable @label="Provincie" @field="bestuurseenheid.provincie.naam" @currentSorting={{this.sort}} @class="u-visible--tablet-landscape-up" />
+        <ThSortable @label="Provincie" @field="bestuurseenheid.provincie.naam" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
       {{/unless}}
-      <ThSortable @label="Bestuurseenheid" @field="bestuurseenheid" @currentSorting={{this.sort}} @class="u-visible--tablet-landscape-up" />
-      <ThSortable @label="Type bestuur" @field="bestuurseenheid.classificatie.label" @currentSorting={{this.sort}} @class="u-visible--tablet-portrait-up" />
-      <ThSortable @label="Type document" @field="besluitType.label" @currentSorting={{this.sort}} />
+      <ThSortable @label="Bestuurseenheid" @field="bestuurseenheid" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
+      <ThSortable @label="Type bestuur" @field="bestuurseenheid.classificatie.label" @currentSorting={{@sort}} @class="u-visible--tablet-portrait-up" />
+      <ThSortable @label="Type document" @field="besluitType.label" @currentSorting={{@sort}} />
       {{#unless this.displaySubset}}
-        <ThSortable @label="Zitting / besluit" @field="sessionDate" @currentSorting={{this.sort}} @class="u-visible--tablet-landscape-up" />
-        <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{this.sort}} @class="u-visible--tablet-landscape-up" />
+        <ThSortable @label="Zitting / besluit" @field="sessionDate" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
+        <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
       {{/unless}}
-      <ThSortable @label="Status" @field="melding.status" @currentSorting={{this.sort}} />
+      <ThSortable @label="Status" @field="melding.status" @currentSorting={{@sort}} />
       <th class="u-hide-on-print"><!-- Actions --></th>
     </c.header>
     <c.body as |row|>
@@ -31,7 +31,7 @@
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDate 'DD-MM-YYYY'}}</td>
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
-      <td>{{shared/status-pill row.melding.status}}</td>
+      <td><Shared::StatusPill @status={{row.melding.status}}/></td>
       <td class="u-hide-on-print"><LinkTo @route="toezicht.inzendingen.show" @model={{row}}>Bekijk</LinkTo></td>
     </c.body>
   </t.content>

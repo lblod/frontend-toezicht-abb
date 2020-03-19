@@ -1,39 +1,25 @@
-import classic from 'ember-classic-decorator';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { task, timeout } from 'ember-concurrency';
 
-@classic
 export default class BestuurseenheidSelect extends Component {
-  @service
-  store;
+  @service store;
 
-  async init() {
-    super.init(...arguments);
+  @tracked selected = null;
+
+  constructor() {
+    super(...arguments);
+    if (this.args.value) {
+      this.selected = this.getBestuurseenhedenFromId(this.args.value);
+    }
     const options = this.store.query('bestuurseenheid', {
       sort: 'naam',
       include: ['classificatie']
     });
-    this.set('options', options);
+    this.options = options;
   }
-
-  didReceiveAttrs() {
-    super.didReceiveAttrs(...arguments);
-    if (this.value && !this.selected) {
-      const bestuurseenheden = this.store.query('bestuurseenheid', {
-        filter: { id: this.value },
-        page: { size: this.value.split(",").length}
-      });
-      this.set('selected', bestuurseenheden);
-    } else if (!this.value) {
-      this.set('selected', null);
-    }
-  }
-
-  selected = null;
-  value = null; // id of selected record
-  onSelectionChange = null;
 
   @task(function* (term) {
     yield timeout(600);
@@ -47,7 +33,24 @@ export default class BestuurseenheidSelect extends Component {
 
   @action
   changeSelected(selected) {
-    this.set('selected', selected);
-    this.onSelectionChange(selected && selected.map(d => d.get('id')));
+    this.selected = selected;
+    this.args.onSelectionChange(selected && selected.map(d => d.get('id')));
+  }
+
+  @action
+  updateSelectedValue() {
+    if (this.args.value && !this.selected) {
+      this.selected = this.getBestuurseenhedenFromId(this.args.value);
+    } else if (!this.args.value) {
+      this.selected = null;
+    }
+  }
+
+  getBestuurseenhedenFromId(id) {
+    const bestuurseenheden = this.store.query('bestuurseenheid', {
+      filter: { id: id },
+      page: { size: id.split(",").length}
+    });
+    return bestuurseenheden;
   }
 }

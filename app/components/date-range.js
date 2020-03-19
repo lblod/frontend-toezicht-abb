@@ -1,16 +1,12 @@
-import classic from 'ember-classic-decorator';
-import { classNames } from '@ember-decorators/component';
-import { action, computed } from '@ember/object';
-import Component from '@ember/component';
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import moment from 'moment';
 
-@classic
-@classNames('js-accordion', 'js-accordion--open')
 export default class DateRange extends Component {
-  fromValue = null;  // ISO string
-  toValue = null;  // ISO string
+  @tracked fromValue = null;  // ISO string
+  @tracked toValue = null;  // ISO string
 
-  @computed('fromValue')
   get fromDate() {
     if (this._fromDate) {
       return this._fromDate;
@@ -26,7 +22,6 @@ export default class DateRange extends Component {
     return this._fromDate = value;
   }
 
-  @computed('toValue')
   get toDate() {
     if (this._toValue) {
       return this._toValue;
@@ -42,15 +37,22 @@ export default class DateRange extends Component {
     return this._toValue = value;
   }
 
-  @computed('fromValue', 'toValue')
   get isFilterEnabled() {
     return this.fromValue || this.toValue;
   }
 
+  constructor() {
+    super(...arguments);
+    this.fromValue = this.args.fromValue;
+    this.toValue = this.args.toValue;
+  }
+
   @action
   resetFilter() {
-    this.onChangeFromValue(null);
-    this.onChangeToValue(null);
+    this.fromValue = null;
+    this.toValue = null;
+    this.args.onChangeFromValue(null);
+    this.args.onChangeToValue(null);
   }
 
   @action
@@ -71,17 +73,26 @@ export default class DateRange extends Component {
       initToDate = today.toDate().toISOString();
     }
 
-    this.onChangeFromValue(initFromDate);
-    this.onChangeToValue(initToDate);
+    this.fromValue = initFromDate;
+    this.toValue = initToDate;
+    this.args.onChangeFromValue(initFromDate);
+    this.args.onChangeToValue(initToDate);
   }
 
   @action
   updateDate(varName, date) {
     const dateString = date.toISOString();
     if (varName == 'fromDate') {
-      this.onChangeFromValue(dateString);
+      this.args.onChangeFromValue(dateString);
     } else {
-      this.onChangeToValue(dateString);
+      this.args.onChangeToValue(dateString);
+    }
+  }
+
+  @action
+  updateSelectedValues() {
+    if (!this.args.fromValue && !this.args.toValue) {
+      this.resetFilter();
     }
   }
 }
