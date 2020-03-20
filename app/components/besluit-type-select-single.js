@@ -9,7 +9,6 @@ export default class BesluitTypeSelectSingle extends Component {
 
   @tracked selected = null;
   @tracked value = null; // id of selected record
-  onInit = null;
   onSelectionChange = null;
 
   constructor() {

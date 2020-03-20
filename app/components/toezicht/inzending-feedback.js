@@ -1,14 +1,11 @@
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
 import Component from '@glimmer/component';
 import { task } from 'ember-concurrency';
 
 export default class InzendingFeedback extends Component {
   @service router;
   @service store;
-
-  //@tracked model = null;
 
   get isHandled() {
     if (this.args.model)
