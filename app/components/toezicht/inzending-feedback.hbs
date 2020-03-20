@@ -7,7 +7,7 @@
     </label>
     <div class="u-spacer--tiny"></div>
     <label>Behandelaar <span class="text-fade">en eventueel extra informatie</span></label>
-    <Input class="input-field input-field--block" @value={{this.model.description}} />
+    <Input class="input-field input-field--block" @value={{@model.description}}/>
   </div>
   <div class="button-group u-spacer--tiny">
     <WuButton @onClick={{this.save}} @isNarrow={{true}}>Bewaar</WuButton>

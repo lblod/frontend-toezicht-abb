@@ -1,11 +1,9 @@
-import classic from 'ember-classic-decorator';
 import Route from '@ember/routing/route';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import moment from 'moment';
 import config from '../../config/environment';
 import Snapshot from '../../utils/snapshot';
 
-@classic
 export default class VlabelInzendingenRoute extends Route.extend(DataTableRouteMixin) {
   modelName = 'inzending-voor-toezicht';
 
@@ -26,9 +24,9 @@ export default class VlabelInzendingenRoute extends Route.extend(DataTableRouteM
     endDateTo: { refreshModel: true }
   };
 
-  init() {
-    super.init(...arguments);
-    this.set('lastParams', new Snapshot());
+  constructor() {
+    super(...arguments);
+    this.lastParams = new Snapshot();
   }
 
   lastParams = null;
@@ -106,7 +104,6 @@ export default class VlabelInzendingenRoute extends Route.extend(DataTableRouteM
 
   setupController(controller) {
     super.setupController(...arguments);
-
     if( controller.page != this.lastParams.committed.page )
       controller.set('page', this.lastParams.committed.page);
   }

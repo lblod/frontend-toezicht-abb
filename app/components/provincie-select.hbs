@@ -1,3 +1,5 @@
-<PowerSelectMultiple @placeholder="Antwerpen, Oost-Vlaanderen, ..." @search={{perform this.search}} @searchPlaceholder="Typ om te zoeken..." @searchEnabled={{true}} @options={{this.options}} @selected={{this.selected}} @onChange={{this.changeSelected}} @allowClear={{true}} as |werkingsgebied|>
-  {{werkingsgebied.naam}}
-</PowerSelectMultiple>
+<div class="ember-power-select--small" {{did-update this.updateSelectedValue @value}}>
+  <PowerSelectMultiple @placeholder="Antwerpen, Oost-Vlaanderen, ..." @search={{perform this.search}} @searchPlaceholder="Typ om te zoeken..." @searchEnabled={{true}} @options={{this.options}} @selected={{this.selected}} @onChange={{this.changeSelected}} @allowClear={{true}} as |werkingsgebied|>
+    {{werkingsgebied.naam}}
+  </PowerSelectMultiple>
+</div>

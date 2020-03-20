@@ -1,25 +1,16 @@
-import classic from 'ember-classic-decorator';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { action, computed } from '@ember/object';
+import { action } from '@ember/object';
 import moment from 'moment';
 import ENV from 'frontend-toezicht-abb/config/environment';
-import { A }  from '@ember/array';
 
-@classic
 export default class VlabelInzendingenController extends Controller {
-  @service
-  router;
-
-  @service
-  store;
-
-  @service
-  currentSession;
+  @service router;
+  @service store;
+  @service currentSession;
 
   page = 0;
   size = 20;
-  besluitTypes = null;
   sort = '-sent-date';
 
   get lastMonth() {
@@ -30,16 +21,14 @@ export default class VlabelInzendingenController extends Controller {
     return moment().add(1, 'year').startOf('day');
   }
 
-  @computed('router.currentRouteName')
   get hasActiveChildRoute() {
-    return this.get('router.currentRouteName').startsWith('toezicht.vlabel-inzendingen')
-      && this.get('router.currentRouteName') != 'toezicht.vlabel-inzendingen.index';
+    return this.router.currentRouteName.startsWith('toezicht.vlabel-inzendingen')
+      && this.router.currentRouteName != 'toezicht.vlabel-inzendingen.index';
   }
 
-  init() {
-    super.init(...arguments);
-    this.set('header', ENV['vo-webuniversum']['header']);
-    this.besluitTypes = A();
+  constructor() {
+    super(...arguments);
+    this.header = ENV['vo-webuniversum']['header'];
   }
 
   @action

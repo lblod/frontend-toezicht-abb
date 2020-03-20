@@ -1,27 +1,20 @@
-import classic from 'ember-classic-decorator';
 import { action } from '@ember/object';
-import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
-import { equal } from '@ember/object/computed';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { task } from 'ember-concurrency';
 
-@classic
-@tagName('')
 export default class InzendingFeedback extends Component {
-  @service
-  router;
+  @service router;
+  @service store;
 
-  @service
-  store;
+  get isHandled() {
+    if (this.args.model)
+      return this.args.model.get('status.uri') == 'http://data.lblod.info/melding-statuses/afgehandeld';
+    return false;
+  }
 
-  model = null;
-
-  @equal('model.status.uri', 'http://data.lblod.info/melding-statuses/afgehandeld')
-  isHandled;
-
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
     this.initStatuses.perform();
   }
 
@@ -36,28 +29,28 @@ export default class InzendingFeedback extends Component {
       afgehandeldStatus = statuses.find(status => status.uri == 'http://data.lblod.info/melding-statuses/afgehandeld');
     }
 
-    this.set('teBehandelenStatus', teBehandelenStatus);
-    this.set('afgehandeldStatus', afgehandeldStatus);
+    this.teBehandelenStatus = teBehandelenStatus;
+    this.afgehandeldStatus = afgehandeldStatus;
   })
   initStatuses;
 
   @action
   toggleIsHandled() {
     if (this.isHandled)
-      this.model.set('status', this.teBehandelenStatus);
+      this.args.model.status = this.teBehandelenStatus;
     else
-      this.model.set('status', this.afgehandeldStatus);
+      this.args.model.status = this.afgehandeldStatus;
   }
 
   @action
   async save() {
-    await this.model.save();
-    this.router.transitionTo(this.parentIndexRoute);
+    await this.args.model.save();
+    this.router.transitionTo(this.args.parentIndexRoute);
   }
 
   @action
-  cancel() {
-    this.model.rollbackAttributes();
-    this.router.transitionTo(this.parentIndexRoute);
+  async cancel() {
+    await this.args.model.rollbackAttributes();
+    this.router.transitionTo(this.args.parentIndexRoute);
   }
 }

@@ -1,9 +1,7 @@
-import classic from 'ember-classic-decorator';
 import Route from '@ember/routing/route';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import Snapshot from '../../utils/snapshot';
 
-@classic
 export default class InzendingenRoute extends Route.extend(DataTableRouteMixin) {
   modelName = 'inzending-voor-toezicht';
 
@@ -24,9 +22,9 @@ export default class InzendingenRoute extends Route.extend(DataTableRouteMixin) 
     statusUri: { refreshModel: true }
   };
 
-  init() {
-    super.init(...arguments);
-    this.set('lastParams', new Snapshot());
+  constructor() {
+    super(...arguments);
+    this.lastParams = new Snapshot();
   }
 
   lastParams = null;

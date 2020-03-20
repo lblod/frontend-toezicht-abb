@@ -1,8 +1,6 @@
-import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 
-@classic
 export default class MockLoginRoute extends Route {
   queryParams = {
     page: {
@@ -10,11 +8,8 @@ export default class MockLoginRoute extends Route {
     }
   };
 
-  @service
-  session;
-
-  @service
-  store;
+  @service session;
+  @service store;
 
   beforeModel() {
     if (this.session.isAuthenticated)

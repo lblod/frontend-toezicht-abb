@@ -1,16 +1,16 @@
 {{!-- template-lint-disable no-html-comments  --}}
 {{!-- template-lint-disable no-inline-styles  --}}
-<DataTable @content={{this.model}} @isLoading={{this.isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain data-table" as |t|>
+<DataTable @content={{@model}} @isLoading={{this.isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}} @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
   <t.content as |c|>
     <c.header>
-      <ThSortable @label="Bestuurseenheid" @field="bestuurseenheid" @currentSorting={{this.sort}} @class="u-visible--tablet-landscape-up" />
-      <ThSortable @label="MAR-code" @field="nomenclature.label" @currentSorting={{this.sort}} @class="u-visible--tablet-portrait-up" />
+      <ThSortable @label="Bestuurseenheid" @field="bestuurseenheid" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
+      <ThSortable @label="MAR-code" @field="nomenclature.label" @currentSorting={{@sort}} @class="u-visible--tablet-portrait-up" />
       {{#unless this.displaySubset}}
-        <ThSortable @label="Zitting / besluit" @field="sessionDate" @currentSorting={{this.sort}} @class="u-visible--tablet-landscape-up" />
-        <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{this.sort}} @class="u-visible--tablet-landscape-up" />
+        <ThSortable @label="Zitting / besluit" @field="sessionDate" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
+        <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
       {{/unless}}
-      <ThSortable @label="Geldt vanaf" @field="dateOfEntryIntoForce" @currentSorting={{this.sort}} @class="u-visible--tablet-landscape-up" />
-      <ThSortable @label="Geldt tot" @field="endDate" @currentSorting={{this.sort}} @class="u-visible--tablet-landscape-up" />
+      <ThSortable @label="Geldt vanaf" @field="dateOfEntryIntoForce" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
+      <ThSortable @label="Geldt tot" @field="endDate" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
       <th class="u-hide-on-print"><!-- Actions --></th>
     </c.header>
     <c.body as |row|>

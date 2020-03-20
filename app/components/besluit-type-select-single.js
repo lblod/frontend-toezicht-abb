@@ -1,39 +1,27 @@
-import classic from 'ember-classic-decorator';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { task, timeout } from 'ember-concurrency';
 
-@classic
 export default class BesluitTypeSelectSingle extends Component {
-  @service
-  store;
+  @service store;
 
-  async init() {
-    super.init(...arguments);
+  @tracked selected = null;
+  @tracked value = null; // id of selected record
+  onSelectionChange = null;
+
+  constructor() {
+    super(...arguments);
+    if (this.args.value) {
+      this.selected = this.getBesluitTypeFromId(this.args.value);
+    }
     const options = this.store.query('besluit-type', {
       sort: 'label',
       page: { size: 1000 }
     });
-    this.set('options', options);
+    this.options = options;
   }
-
-  async didReceiveAttrs() {
-    super.didReceiveAttrs(...arguments);
-    if (this.value && !this.selected) {
-      const besluitTypes = await this.store.query('besluit-type', {
-        filter: { id: this.value }
-      });
-      this.set('selected', besluitTypes.firstObject);
-    } else if (!this.value) {
-      this.set('selected', null);
-    }
-  }
-
-  selected = null;
-  value = null; // id of selected record
-  onInit = null;
-  onSelectionChange = null;
 
   @task(function* (term) {
     yield timeout(600);
@@ -45,7 +33,23 @@ export default class BesluitTypeSelectSingle extends Component {
 
   @action
   changeSelected(selected) {
-    this.set('selected', selected);
-    this.onSelectionChange(selected);
+    this.selected = selected;
+    this.args.onSelectionChange(selected);
+  }
+
+  @action
+  updateSelectedValue() {
+    if (this.args.value && !this.selected) {
+      this.selected = this.getBesluitTypeFromId(this.args.value);
+    } else if (!this.args.value) {
+      this.selected = null;
+    }
+  }
+
+  getBesluitTypeFromId(id) {
+    const besluitTypes = this.store.query('besluit-type', {
+      filter: { id: id }
+    });
+    return besluitTypes;
   }
 }
