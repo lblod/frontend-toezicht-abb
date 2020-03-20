@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency';
+import { restartableTask, task } from 'ember-concurrency-decorators';
 
 export default class MockLoginController extends Controller {
   queryParams = ['gemeente', 'page'];
@@ -8,7 +8,8 @@ export default class MockLoginController extends Controller {
   page = 0;
   size = 10;
 
-  @task(function*() {
+  @task
+  *queryStore() {
     const filter = { provider: 'https://github.com/lblod/mock-login-service' };
     if (this.gemeente)
       filter.gebruiker = { 'achternaam': this.gemeente };
@@ -19,14 +20,14 @@ export default class MockLoginController extends Controller {
       sort: 'gebruiker.achternaam'
     });
     return accounts;
-  }) queryStore;
+  }
 
-
-  @task({ restartable: true }, function*(value) {
+  @restartableTask
+  *updateSearch(value) {
     yield timeout(500);
     this.page = 0;
     this.gemeente = value;
     const model = yield this.queryStore.perform();
     this.model = model;
-  }) updateSearch;
+  }
 }
