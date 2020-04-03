@@ -5,7 +5,6 @@ import Controller from '@ember/controller';
 import ENV from 'frontend-toezicht-abb/config/environment';
 import { A }  from '@ember/array';
 import moment from 'moment';
-import { bool } from '@ember/object/computed';
 
 export default class InzendingenController extends Controller {
   @service router;
@@ -13,7 +12,6 @@ export default class InzendingenController extends Controller {
   @service currentSession;
 
   @tracked statusUri;
-  @tracked isStatusFilterEnabled;
   @tracked besluitTypeIds;
   @tracked besluitTypes;
 
@@ -22,7 +20,9 @@ export default class InzendingenController extends Controller {
   sort = '-sent-date';
   _toTreatStatusUri = "http://data.lblod.info/melding-statuses/te-behandelen";
 
-  @bool('statusUri') isStatusFilterEnabled;
+  get isStatusFilterEnabled() {
+    return this.statusUri != null;
+  }
 
   get hasActiveChildRoute() {
     return this.router.currentRouteName.startsWith('toezicht.inzendingen')
@@ -34,7 +34,7 @@ export default class InzendingenController extends Controller {
   }
 
   get regulationTypeIsSelected() {
-    return this.besluitTypeIds ? this.besluitTypes.filterBy('isRegulation', true).length > 0 : false;
+    return this.besluitTypeIds && this.besluitTypes.filterBy('isRegulation', true).length > 0;
   }
 
   constructor() {
@@ -46,14 +46,13 @@ export default class InzendingenController extends Controller {
   @action
   setToTreatStatus(event) {
     this.statusUri = null;
-    if(event.target.checked) {
+    if (event.target.checked) {
       this.statusUri = this._toTreatStatusUri;
     }
   }
 
   @action
   resetFilters() {
-    //--- reset the filters
     ['bestuurseenheidIds',
      'classificatieIds',
      'provincieIds',
