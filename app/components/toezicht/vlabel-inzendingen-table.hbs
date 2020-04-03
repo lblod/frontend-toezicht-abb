@@ -1,11 +1,11 @@
 {{!-- template-lint-disable no-html-comments  --}}
 {{!-- template-lint-disable no-inline-styles  --}}
-<DataTable @content={{@model}} @isLoading={{this.isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}} @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
+<DataTable @content={{@model}} @isLoading={{@isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}} @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
   <t.content as |c|>
     <c.header>
       <ThSortable @label="Bestuurseenheid" @field="bestuurseenheid" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
       <ThSortable @label="MAR-code" @field="nomenclature.label" @currentSorting={{@sort}} @class="u-visible--tablet-portrait-up" />
-      {{#unless this.displaySubset}}
+      {{#unless @displaySubset}}
         <ThSortable @label="Zitting / besluit" @field="sessionDate" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
         <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
       {{/unless}}
@@ -16,7 +16,7 @@
     <c.body as |row|>
       <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.bestuurseenheid.naam}} <span class="u-hidden--tablet-landscape-up text-fade"><br>{{row.bestuurseenheid.classificatie.label}}</span></td>
       <td class="u-visible--tablet-landscape-up">{{row.nomenclature.label}}</td>
-      {{#unless this.displaySubset}}
+      {{#unless @displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDate 'DD-MM-YYYY'}}</td>
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}

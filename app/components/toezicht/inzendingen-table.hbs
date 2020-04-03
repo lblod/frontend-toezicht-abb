@@ -1,15 +1,15 @@
 {{!-- template-lint-disable no-html-comments  --}}
 {{!-- template-lint-disable no-inline-styles  --}}
-<DataTable @content={{@model}} @isLoading={{this.isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}} @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
+<DataTable @content={{@model}} @isLoading={{@isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}} @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
   <t.content as |c|>
     <c.header>
-      {{#unless this.displaySubset}}
+      {{#unless @displaySubset}}
         <ThSortable @label="Provincie" @field="bestuurseenheid.provincie.naam" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
       {{/unless}}
       <ThSortable @label="Bestuurseenheid" @field="bestuurseenheid" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
       <ThSortable @label="Type bestuur" @field="bestuurseenheid.classificatie.label" @currentSorting={{@sort}} @class="u-visible--tablet-portrait-up" />
       <ThSortable @label="Type document" @field="besluitType.label" @currentSorting={{@sort}} />
-      {{#unless this.displaySubset}}
+      {{#unless @displaySubset}}
         <ThSortable @label="Zitting / besluit" @field="sessionDate" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
         <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
       {{/unless}}
@@ -17,7 +17,7 @@
       <th class="u-hide-on-print"><!-- Actions --></th>
     </c.header>
     <c.body as |row|>
-      {{#unless this.displaySubset}}
+      {{#unless @displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{row.bestuurseenheid.provincie.naam}}</td>
       {{/unless}}
       <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.bestuurseenheid.naam}} <span class="u-hidden--tablet-landscape-up text-fade"><br>{{row.bestuurseenheid.classificatie.label}}</span></td>
@@ -27,7 +27,7 @@
         <p class="small text-fade u-spacer--bottom--tiny">{{row.regulationType.label}}</p>
 	      <p class="u-hidden--tablet-portrait-up text-fade small">{{row.bestuurseenheid.classificatie.label}} {{row.bestuurseenheid.naam}}</p>
       </td>
-      {{#unless this.displaySubset}}
+      {{#unless @displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDate 'DD-MM-YYYY'}}</td>
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
