@@ -1,7 +1,7 @@
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
-import { task } from 'ember-concurrency';
+import { task } from 'ember-concurrency-decorators';
 
 export default class InzendingFeedback extends Component {
   @service router;
@@ -18,7 +18,8 @@ export default class InzendingFeedback extends Component {
     this.initStatuses.perform();
   }
 
-  @task(function * () {
+  @task
+  *initStatuses () {
     let statuses = this.store.peekAll('melding-status');
     let teBehandelenStatus = statuses.find(status => status.uri == 'http://data.lblod.info/melding-statuses/te-behandelen');
     let afgehandeldStatus = statuses.find(status => status.uri == 'http://data.lblod.info/melding-statuses/afgehandeld');
@@ -31,8 +32,7 @@ export default class InzendingFeedback extends Component {
 
     this.teBehandelenStatus = teBehandelenStatus;
     this.afgehandeldStatus = afgehandeldStatus;
-  })
-  initStatuses;
+  }
 
   @action
   toggleIsHandled() {

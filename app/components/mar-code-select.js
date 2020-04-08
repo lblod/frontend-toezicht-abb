@@ -2,7 +2,8 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { task, timeout } from 'ember-concurrency';
+import { timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency-decorators';
 import config from '../config/environment';
 
 export default class MarCodeSelect extends Component {
@@ -24,13 +25,13 @@ export default class MarCodeSelect extends Component {
     this.options = options;
   }
 
-  @task(function* (term) {
+  @task
+  *search (term) {
     yield timeout(600);
     return this.options.filter(option => {
       return option.label.toUpperCase().includes(term.toUpperCase());
     });
-  })
-  search;
+  }
 
   @action
   changeSelected(selected) {

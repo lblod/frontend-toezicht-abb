@@ -2,7 +2,8 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { task, timeout } from 'ember-concurrency';
+import { timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency-decorators';
 
 export default class ProvincieSelect extends Component {
   @service store;
@@ -25,7 +26,8 @@ export default class ProvincieSelect extends Component {
     this.options = options;
   }
 
-  @task(function* (term) {
+  @task
+  *search (term) {
     yield timeout(600);
     return this.store.query('werkingsgebied', {
       filter: {
@@ -33,8 +35,7 @@ export default class ProvincieSelect extends Component {
         naam: term
       }
     });
-  })
-  search;
+  }
 
   @action
   changeSelected(selected) {

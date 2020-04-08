@@ -1,6 +1,7 @@
 import Service, { inject as service } from '@ember/service';
 import { get } from '@ember/object';
-import { task, waitForProperty } from 'ember-concurrency';
+import { waitForProperty } from 'ember-concurrency';
+import { task } from 'ember-concurrency-decorators';
 import { tracked } from '@glimmer/tracking';
 
 export default class CurrentSessionService extends Service {
@@ -58,9 +59,9 @@ export default class CurrentSessionService extends Service {
   }
 
   // constructs a task which resolves in the promise
-  @task(function * (property) {
+  @task
+  *makePropertyPromise (property) {
     yield waitForProperty(this, property);
     return this.property;
-  })
-  makePropertyPromise;
+  }
 }
