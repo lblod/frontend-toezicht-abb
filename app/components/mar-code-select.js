@@ -7,22 +7,26 @@ import { task } from 'ember-concurrency-decorators';
 import config from '../config/environment';
 
 export default class MarCodeSelect extends Component {
-  @service store;
+  @service store
 
-  @tracked selected = null;
-  @tracked value = null; // id of selected record
-  onSelectionChange = null;
+  @tracked selected = null
+  @tracked options
 
   constructor() {
     super(...arguments);
-    if (this.args.value) {
-      this.selected = this.getMarCodesFromId(this.args.value);
-    }
-    const options = this.store.query('toezicht-nomenclature', {
+    this.loadData.perform();
+  }
+
+  @task
+  *loadData() {
+    const options = yield this.store.query('toezicht-nomenclature', {
       sort: 'code',
-      'filter[:id:]': config.marCodes.join(',')
+      'filter[:id:]': config.marCodes.join(','),
+      page: { size: config.marCodes.length }
     });
     this.options = options;
+
+    this.updateSelectedValue();
   }
 
   @task
@@ -40,19 +44,14 @@ export default class MarCodeSelect extends Component {
   }
 
   @action
-  updateSelectedValue() {
+  async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-      this.selected = this.getMarCodesFromId(this.args.value);
+      this.selected = await this.store.query('toezicht-nomenclature', {
+        filter: { id: this.args.value },
+        page: { size: this.args.value.split(',').length}
+      });
     } else if (!this.args.value) {
       this.selected = null;
     }
-  }
-
-  getMarCodesFromId(id) {
-    const marCodes = this.store.query('toezicht-nomenclature', {
-      filter: { id: id },
-      page: { size: id.split(",").length}
-    });
-    return marCodes;
   }
 }

@@ -6,20 +6,25 @@ import { timeout } from 'ember-concurrency';
 import { task } from 'ember-concurrency-decorators';
 
 export default class BestuurseenheidSelect extends Component {
-  @service store;
+  @service store
 
-  @tracked selected = null;
+  @tracked selected = null
+  @tracked options
 
   constructor() {
     super(...arguments);
-    if (this.args.value) {
-      this.selected = this.getBestuurseenhedenFromId(this.args.value);
-    }
-    const options = this.store.query('bestuurseenheid', {
+    this.loadData.perform();
+  }
+
+  @task
+  *loadData() {
+    const options = yield this.store.query('bestuurseenheid', {
       sort: 'naam',
       include: ['classificatie']
     });
     this.options = options;
+
+    this.updateSelectedValue();
   }
 
   @task
@@ -39,19 +44,14 @@ export default class BestuurseenheidSelect extends Component {
   }
 
   @action
-  updateSelectedValue() {
+  async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-      this.selected = this.getBestuurseenhedenFromId(this.args.value);
+      this.selected = await this.store.query('bestuurseenheid', {
+        filter: { id: this.args.value },
+        page: { size: this.args.value.split(',').length}
+      });
     } else if (!this.args.value) {
       this.selected = null;
     }
-  }
-
-  getBestuurseenhedenFromId(id) {
-    const bestuurseenheden = this.store.query('bestuurseenheid', {
-      filter: { id: id },
-      page: { size: id.split(",").length}
-    });
-    return bestuurseenheden;
   }
 }
