@@ -1,7 +1,7 @@
 <div class="js-accordion js-accordion--open" {{did-update this.updateSelectedValues @fromValue @toValue}}>
   <label class="label--subtle form__label">{{@label}}</label>
 
-  <WuButtonGroup @isInline={{true}} @class="button-group__inline--small">
+  <WuButtonGroup @isInline={{true}} @class="button-group__inline--small u-spacer--bottom--tinier">
     <WuButton @label="Alle meldingen" @onClick={{this.resetFilter}} @class={{if (not this.isFilterEnabled) "button--active"}} @isAlt={{true}} @size="small" @isNarrow={{true}} />
     <WuButton @label="Specifieke periode" @onClick={{this.initRangeFilter}} @class={{if this.isFilterEnabled "button--active"}} @isAlt={{true}} @size="small" @isNarrow={{true}} />
   </WuButtonGroup>
