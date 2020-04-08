@@ -51,40 +51,43 @@ export default class DateRange extends Component {
   resetFilter() {
     this.fromValue = null;
     this.toValue = null;
-    this.args.onChangeFromValue(null);
-    this.args.onChangeToValue(null);
+    this.args.onChangeFromValue(this.fromValue);
+    this.args.onChangeToValue(this.toValue);
   }
 
   @action
   initRangeFilter() {
-    let initFromDate = null;
-    let initToDate = null;
+    let initFromValue = null;
+    let initToValue = null;
 
-    if (this.initFromDate) {
-      initFromDate = this.initFromDate.toDate().toISOString();
+    if (this.args.defaultFromDate) {
+      initFromValue = this.args.defaultFromDate.toDate().toISOString();
     } else {
       const yesterday = moment().subtract(1, 'day').startOf('day');
-      initFromDate = yesterday.toDate().toISOString();
-    }
-    if (this.initToDate) {
-      initToDate = this.initToDate.toDate().toISOString();
-    } else {
-      const today = moment().endOf('day');
-      initToDate = today.toDate().toISOString();
+      initFromValue = yesterday.toDate().toISOString();
     }
 
-    this.fromValue = initFromDate;
-    this.toValue = initToDate;
-    this.args.onChangeFromValue(initFromDate);
-    this.args.onChangeToValue(initToDate);
+    if (this.args.defaultToDate) {
+      initToValue = this.args.defaultToDate.toDate().toISOString();
+    } else {
+      const today = moment().endOf('day');
+      initToValue = today.toDate().toISOString();
+    }
+
+    this.fromValue = initFromValue;
+    this.toValue = initToValue;
+    this.args.onChangeFromValue(this.fromValue);
+    this.args.onChangeToValue(this.toValue);
   }
 
   @action
   updateDate(varName, date) {
     const dateString = date.toISOString();
     if (varName == 'fromDate') {
+      this.fromValue = dateString;
       this.args.onChangeFromValue(dateString);
     } else {
+      this.toValue = dateString;
       this.args.onChangeToValue(dateString);
     }
   }
@@ -92,7 +95,12 @@ export default class DateRange extends Component {
   @action
   updateSelectedValues() {
     if (!this.args.fromValue && !this.args.toValue) {
-      this.resetFilter();
+      // Filters have been reset from outside the compenent.
+      // so we need to reset the internal state
+      this.fromValue = null;
+      this.toValue = null;
+      this.fromDate = null;
+      this.toDate = null;
     }
   }
 }

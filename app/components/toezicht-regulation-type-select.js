@@ -9,7 +9,7 @@ export default class ToezichtRegulationTypeSelect extends Component {
   @service store;
 
   @tracked selected = null;
-  @tracked value = null; // id of selected record
+
   onSelectionChange = null;
 
   constructor() {
@@ -35,7 +35,7 @@ export default class ToezichtRegulationTypeSelect extends Component {
   @action
   changeSelected(selected) {
     this.selected = selected;
-    this.args.onSelectionChange(selected && selected.map(d => d.get('id')));
+    this.args.onSelectionChange(selected && selected.get('id'));
   }
 
   @action

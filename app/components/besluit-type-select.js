@@ -6,29 +6,34 @@ import { timeout } from 'ember-concurrency';
 import { task } from 'ember-concurrency-decorators';
 
 export default class BesluitTypeSelect extends Component {
-  @service store;
+  @service store
 
-  @tracked selected = null;
-  @tracked value = null; // id of selected record
-  onSelectionChange = null;
+  @tracked selected = null
+  @tracked options
 
   constructor() {
     super(...arguments);
-    if (this.args.value) {
-      this.selected = this.getBesluitTypesFromId(this.args.value);
-    }
-    const options = this.store.query('besluit-type', {
+    this.loadData.perform();
+  }
+
+  @task
+  *loadData() {
+    const options = yield this.store.query('besluit-type', {
       sort: 'label',
       page: { size: 1000 }
     });
     this.options = options;
+
+    this.updateSelectedValue();
   }
 
   @task
   *search (term) {
     yield timeout(600);
     return this.store.query('besluit-type', {
-      filter: { label: term }
+      filter: { label: term },
+      sort: 'label',
+      page: { size: 1000 }
     });
   }
 
@@ -39,19 +44,14 @@ export default class BesluitTypeSelect extends Component {
   }
 
   @action
-  updateSelectedValue() {
+  async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-      this.selected = this.getBesluitTypesFromId(this.args.value);
+      this.selected = await this.store.query('besluit-type', {
+        filter: { id: this.args.value },
+        page: { size: this.args.value.split(',').length}
+      });
     } else if (!this.args.value) {
       this.selected = null;
     }
-  }
-
-  getBesluitTypesFromId(id) {
-    const besluitTypes = this.store.query('besluit-type', {
-      filter: { id: id },
-      page: { size: id.split(",").length}
-    });
-    return besluitTypes;
   }
 }

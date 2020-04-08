@@ -45,12 +45,12 @@ export default class InzendingFeedback extends Component {
   @action
   async save() {
     await this.args.model.save();
-    this.router.transitionTo(this.args.parentIndexRoute);
+    this.router.transitionTo('toezicht.meldingen.index');
   }
 
   @action
   async cancel() {
     await this.args.model.rollbackAttributes();
-    this.router.transitionTo(this.args.parentIndexRoute);
+    this.router.transitionTo('toezicht.meldingen.index');
   }
 }
