@@ -24,12 +24,12 @@
             </div>
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Type document</label>
-              <BesluitTypeSelectSingle @value={{this.searchType}} @onInit={{this.updateBesluitType}} @onSelectionChange={{this.selectBesluitType}} @class="ember-power-select--small" />
+              <BesluitTypeSelectSingle @value={{this.searchType}} @onInit={{this.updateBesluitType}} @onSelectionChange={{this.selectBesluitType}} />
 
               {{!--
                 {{#if regulationTypeIsSelected}}
                   <label class="label--subtle form__label">Type reglement of verordening</label>
-                  <ToezichtRegulationTypeSelect @value={{regulationTypeId}} @onSelectionChange={{action (mut regulationTypeId)}} @class="ember-power-select--small" />
+                  <ToezichtRegulationTypeSelect @value={{regulationTypeId}} @onSelectionChange={{action (mut regulationTypeId)}} />
                 {{/if}}
               --}}
             </div>

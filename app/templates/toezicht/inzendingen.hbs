@@ -1,3 +1,4 @@
+<WuWidget @src={{this.header}} @class="vo-header-widget" />
 <div class="grid grid--collapse">
   <div class="{{if this.hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
     <div class="container-flex--contain">
@@ -26,26 +27,32 @@
           <div class="grid">
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Bestuurseenheid</label>
-              <BestuurseenheidSelect @value={{this.bestuurseenheidIds}} @onSelectionChange={{fn (mut this.bestuurseenheidIds)}} @class="ember-power-select--small" />
+              <BestuurseenheidSelect @value={{this.bestuurseenheidIds}} @onSelectionChange={{fn (mut this.bestuurseenheidIds)}} />
               <label class="label--subtle form__label">Provincie</label>
-              <ProvincieSelect @value={{this.provincieIds}} @onSelectionChange={{fn (mut this.provincieIds)}} @class="ember-power-select--small" />
+              <ProvincieSelect @value={{this.provincieIds}} @onSelectionChange={{fn (mut this.provincieIds)}} />
             </div>
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Type bestuur</label>
-              <BestuurseenheidClassificatieSelect @value={{this.classificatieIds}} @onSelectionChange={{fn (mut this.classificatieIds)}} @class="ember-power-select--small" />
+              <BestuurseenheidClassificatieSelect @value={{this.classificatieIds}} @onSelectionChange={{fn (mut this.classificatieIds)}} />
 
               <label class="label--subtle form__label">Type document</label>
-              <BesluitTypeSelect @value={{this.besluitTypeIds}} @onInit={{this.updateBesluitTypes}} @onSelectionChange={{this.selectBesluitTypes}} @class="ember-power-select--small" />
+              <div class="ember-power-select--small">
+                <BesluitTypeSelect @value={{this.besluitTypeIds}} @onInit={{this.updateBesluitTypes}} @onSelectionChange={{this.selectBesluitTypes}} />
+              </div>
 
               {{#if this.regulationTypeIsSelected}}
                 <label class="label--subtle form__label">Type reglement of verordening</label>
-                <ToezichtRegulationTypeSelect @value={{this.regulationTypeId}} @onSelectionChange={{fn (mut this.regulationTypeId)}} @class="ember-power-select--small" />
+                <div class="ember-power-select--small">
+                  <ToezichtRegulationTypeSelect @value={{this.regulationTypeId}} @onSelectionChange={{fn (mut this.regulationTypeId)}} />
+                </div>
               {{/if}}
             </div>
             <div class="col--4-12 col--1-1--m col--1-1--s">
               <div class="grid">
                 <div class="col--1-1 col--6-12--m">
-                  <DateRange @label="Periode verstuurd" @fromValue={{this.sentDateFrom}} @toValue={{this.sentDateTo}} @onChangeFromValue={{fn (mut this.sentDateFrom)}} @onChangeToValue={{fn (mut this.sentDateTo)}} />
+                  <div class="u-spacer--bottom--tinier">
+                    <DateRange @label="Periode verstuurd" @fromValue={{this.sentDateFrom}} @toValue={{this.sentDateTo}} @onChangeFromValue={{fn (mut this.sentDateFrom)}} @onChangeToValue={{fn (mut this.sentDateTo)}} />
+                  </div>
                 </div>
                 <div class="col--1-1 col--6-12--m">
                   <DateRange @label="Periode zitting / besluit" @initFromDate={{this.lastMonth}} @fromValue={{this.sessionDateFrom}} @toValue={{this.sessionDateTo}} @onChangeFromValue={{fn (mut this.sessionDateFrom)}} @onChangeToValue={{fn (mut this.sessionDateTo)}} />
