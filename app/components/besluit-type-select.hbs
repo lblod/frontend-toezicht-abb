@@ -1,5 +1,14 @@
 <div class="ember-power-select--small" {{did-update this.updateSelectedValue @value}}>
-  <PowerSelectMultiple @placeholder="Besluitenlijst, jaarrekening, ..." @search={{perform this.search}} @searchPlaceholder="Typ om te zoeken..." @searchEnabled={{true}} @options={{this.options}} @selected={{this.selected}} @onChange={{this.changeSelected}} @allowClear={{true}} as |besluitType|>
+  <PowerSelectMultiple
+    @placeholder="Besluitenlijst, jaarrekening, ..."
+    @search={{perform this.search}}
+    @searchPlaceholder="Typ om te zoeken..."
+    @searchEnabled={{true}}
+    @loadingMessage="Aan het laden..."
+    @options={{this.options}}
+    @selected={{this.selected}}
+    @onChange={{this.changeSelected}}
+    @allowClear={{true}} as |besluitType|>
     {{besluitType.label}}
   </PowerSelectMultiple>
 </div>

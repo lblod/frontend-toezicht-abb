@@ -1,54 +1,57 @@
-import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
+import { task, restartableTask } from 'ember-concurrency-decorators';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class ToezichtRegulationTypeSelect extends Component {
-  @service store;
+  @service store
 
-  @tracked selected = null;
-
-  onSelectionChange = null;
+  @tracked selected = null
+  @tracked options
 
   constructor() {
     super(...arguments);
-    if (this.args.value) {
-      this.selected = this.getRegulationTypeFromId(this.args.value);
-    }
-    const options = this.store.query('toezicht-regulation-type', {
-      sort: 'label',
-      page: { size: 1000 }
-    });
-    this.options = options;
+    this.loadData.perform();
   }
 
   @task
+  *loadData() {
+    const options = yield this.store.query('toezicht-regulation-type', {
+      sort: 'label',
+      page: { size: 100 }
+    });
+    this.options = options;
+
+    this.updateSelectedValue();
+  }
+
+  @restartableTask
   *search (term) {
     yield timeout(600);
     return this.store.query('toezicht-regulation-type', {
-      filter: { label: term }
+      filter: { label: term },
+      sort: 'label',
+      page: { size: 100 }
     });
   }
 
   @action
   changeSelected(selected) {
     this.selected = selected;
-    this.args.onSelectionChange(selected && selected.get('id'));
+    this.args.onSelectionChange(selected && selected.map(d => d.get('id')));
   }
 
   @action
-  updateSelectedValue() {
+  async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-      this.selected = this.getRegulationTypeFromId(this.args.value);
+      this.selected = await this.store.query('toezicht-regulation-type', {
+        filter: { id: this.args.value },
+        page: { size: this.args.value.split(',').length}
+      });
     } else if (!this.args.value) {
       this.selected = null;
     }
-  }
-
-  getRegulationTypeFromId(id) {
-    const toezichtRegulationType = this.store.findRecord('toezicht-regulation-type', id);
-    return toezichtRegulationType;
   }
 }

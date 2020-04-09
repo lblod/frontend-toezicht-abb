@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
+import { task, restartableTask } from 'ember-concurrency-decorators';
 import config from '../config/environment';
 
 export default class MarCodeSelect extends Component {
@@ -29,7 +29,7 @@ export default class MarCodeSelect extends Component {
     this.updateSelectedValue();
   }
 
-  @task
+  @restartableTask
   *search (term) {
     yield timeout(600);
     return this.options.filter(option => {

@@ -43,6 +43,7 @@ export default class InzendingenRegularComponent extends Component {
 
   set isStatusFilterEnabled(value) {
     // TODO remove-function once WuSwitch isn't 2-way bounded anymore
+    // This setter has no meaning because the status is correctly updated by the setToTreatStatus
     return this._blackhole = value;
   }
 
@@ -77,6 +78,7 @@ export default class InzendingenRegularComponent extends Component {
   @action
   resetFilters() {
     this.filter.reset();
+    this.besluitTypes = [];
     this.args.onFilterChange(this.filter);
   }
 }

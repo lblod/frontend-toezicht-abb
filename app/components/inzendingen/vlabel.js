@@ -2,7 +2,6 @@ import Component from '@glimmer/component';
 import moment from 'moment';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { task } from 'ember-concurrency-decorators';
 import { inject as service } from '@ember/service';
 import InzendingenFilter from '../../utils/inzendingen-filter';
 

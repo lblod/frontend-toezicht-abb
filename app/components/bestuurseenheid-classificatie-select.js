@@ -3,27 +3,30 @@ import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
+import { task, restartableTask } from 'ember-concurrency-decorators';
 
 export default class BestuurseenheidClassificatieSelect extends Component {
-  @service store;
+  @service store
 
-  @tracked selected = null;
-  @tracked value = null; // id of selected record
-  onSelectionChange = null;
+  @tracked selected = null
+  @tracked options
 
   constructor() {
     super(...arguments);
-    if (this.args.value) {
-      this.selected = this.getBestuurseenheidClassificatiesFromId(this.args.value);
-    }
-    const options = this.store.query('bestuurseenheid-classificatie-code', {
-      sort: 'label'
-    });
-    this.options = options;
+    this.loadData.perform();
   }
 
   @task
+  *loadData() {
+    const options = yield this.store.query('bestuurseenheid-classificatie-code', {
+      sort: 'label'
+    });
+    this.options = options;
+
+    this.updateSelectedValue();
+  }
+
+  @restartableTask
   *search (term) {
     yield timeout(600);
     return this.store.query('bestuurseenheid-classificatie-code', {
@@ -38,19 +41,14 @@ export default class BestuurseenheidClassificatieSelect extends Component {
   }
 
   @action
-  updateSelectedValue() {
+  async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-      this.selected = this.getBestuurseenheidClassificatiesFromId(this.args.value);
+      this.selected = await this.store.query('bestuurseenheid-classificatie-code', {
+        filter: { id: this.args.value },
+        page: { size: this.args.value.split(',').length}
+      });
     } else if (!this.args.value) {
       this.selected = null;
     }
-  }
-
-  getBestuurseenheidClassificatiesFromId(id) {
-    const bestuurseenheidClassificatieCode = this.store.query('bestuurseenheid-classificatie-code', {
-      filter: { id: id },
-      page: { size: id.split(",").length}
-    });
-    return bestuurseenheidClassificatieCode;
   }
 }

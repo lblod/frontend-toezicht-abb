@@ -1,9 +1,9 @@
-import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
+import { task, restartableTask } from 'ember-concurrency-decorators';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class BesluitTypeSelect extends Component {
   @service store
@@ -20,20 +20,20 @@ export default class BesluitTypeSelect extends Component {
   *loadData() {
     const options = yield this.store.query('besluit-type', {
       sort: 'label',
-      page: { size: 1000 }
+      page: { size: 100 }
     });
     this.options = options;
 
     this.updateSelectedValue();
   }
 
-  @task
+  @restartableTask
   *search (term) {
     yield timeout(600);
     return this.store.query('besluit-type', {
       filter: { label: term },
       sort: 'label',
-      page: { size: 1000 }
+      page: { size: 100 }
     });
   }
 
