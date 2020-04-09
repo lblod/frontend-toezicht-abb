@@ -5,7 +5,7 @@
         <div class="u-padding--round--small">
           <div class="grid">
             <div class="col--4-12 col--1-1--s">
-              <h1 class="h2 u-spacer--right--small u-display-inline-block">Toezicht ABB zoek</h1>
+              <h1 class="h2 u-spacer--right--small u-display-inline-block">Toezicht ABB: zoeken</h1>
             </div>
 
             <div class="col--8-12 col--1-1--s u-align-right--tablet-portrait-up">
@@ -24,14 +24,7 @@
             </div>
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Type document</label>
-              <BesluitTypeSelectSingle @value={{this.searchType}} @onInit={{this.updateBesluitType}} @onSelectionChange={{this.selectBesluitType}} />
-
-              {{!--
-                {{#if regulationTypeIsSelected}}
-                  <label class="label--subtle form__label">Type reglement of verordening</label>
-                  <ToezichtRegulationTypeSelect @value={{regulationTypeId}} @onSelectionChange={{action (mut regulationTypeId)}} />
-                {{/if}}
-              --}}
+              <BesluitTypeSelect @value={{this.searchType}} @onSelectionChange={{this.selectBesluitType}} />
             </div>
           </div>
         </div>
@@ -40,16 +33,6 @@
       <WuAlert @title="Waarschuwing">Deze pagina is gebouwd voor demo doeleinden en bevat geen recente data.</WuAlert>
 
       <Toezicht::InzendingenSearchTable @targetRoute="search-toezicht.show" @class="container-flex--contain" @model={{this.model}} @isLoading={{this.isLoadingModel}} @page={{this.page}} @size={{this.size}} @displaySubset={{this.hasActiveChildRoute}} />
-
-      <ul>
-        {{#each this.model.data as |item|}}
-          <li>
-            <LinkTo @route="search-toezicht.show" @model={{item.id}}>
-              {{item.id}}
-            </LinkTo>
-          </li>
-        {{/each}}
-      </ul>
 
     </div>
   </div>

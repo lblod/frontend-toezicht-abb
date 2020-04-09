@@ -11,8 +11,8 @@ export default class ToezichtInzendingenController extends Controller {
   sort = '-sent-date';
 
   get hasActiveChildRoute() {
-    return this.router.currentRouteName.startsWith('toezicht.meldingen')
-      && this.router.currentRouteName != 'toezicht.meldingen.index';
+    return this.router.currentRouteName.startsWith('toezicht.inzendingen')
+      && this.router.currentRouteName != 'toezicht.inzendingen.index';
   }
 
   @action

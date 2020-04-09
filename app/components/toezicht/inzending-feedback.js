@@ -45,12 +45,12 @@ export default class InzendingFeedback extends Component {
   @action
   async save() {
     await this.args.model.save();
-    this.router.transitionTo('toezicht.inzendingen.index');
+    this.router.transitionTo(this.args.onCloseRoute);
   }
 
   @action
   async cancel() {
     await this.args.model.rollbackAttributes();
-    this.router.transitionTo('toezicht.inzendingen.index');
+    this.router.transitionTo(this.args.onCloseRoute);
   }
 }
