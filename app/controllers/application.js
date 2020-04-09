@@ -1,4 +1,3 @@
-import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 import ENV from 'frontend-toezicht-abb/config/environment';
 
@@ -7,6 +6,4 @@ export default class ApplicationController extends Controller {
     super(...arguments);
     this.header = ENV['vo-webuniversum']['header'];
   }
-
-  @service session;
 }

@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 
-export default class ShowRoute extends Route {
+export default class ToezichtInzendingenShowRoute extends Route {
   async model(params) {
     const inzendingen = await this.store.query('inzending-voor-toezicht', {
       filter: {

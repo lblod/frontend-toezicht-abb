@@ -12,12 +12,6 @@ Router.map(function() {
     this.route('inzendingen', function() {
       this.route('show', { path: '/:id' });
     });
-    this.route('vlabel-inzendingen', function() {
-      this.route('show', { path: '/:id' });
-    });
-    this.route('meldingen', function() {
-      this.route('show', { path: '/:id' });
-    });
   });
   this.route('legaal', function() {
     this.route('cookieverklaring');

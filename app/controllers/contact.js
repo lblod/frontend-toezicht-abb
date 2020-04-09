@@ -1,4 +1,3 @@
-import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 import ENV from 'frontend-toezicht-abb/config/environment';
 
