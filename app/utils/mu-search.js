@@ -25,8 +25,8 @@ const getPaginationMetadata = function(pageNumber, size, total) {
   return pagination;
 };
 
-async function muSearch(index, page, size, filter, dataMapping) {
-  let endpoint = `/${index}/search?page[size]=${size}&page[number]=${page}`;
+async function muSearch(basePath, page, size, filter, dataMapping) {
+  let endpoint = `${basePath}/search?page[size]=${size}&page[number]=${page}`;
 
   for (let field in filter) {
     endpoint += `&filter[${field}]=${filter[field]}`;
