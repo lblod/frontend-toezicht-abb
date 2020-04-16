@@ -1,0 +1,8 @@
+<span style="color: lightcoral">submissions route</span>
+<ul style="color: lightgreen">
+  <li>Normal user</li>
+  {{#if this.canReadVlabel}}
+    <li>Vlabel user</li>
+  {{/if}}
+</ul>
+{{outlet}}

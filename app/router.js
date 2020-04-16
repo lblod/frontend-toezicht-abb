@@ -16,6 +16,11 @@ Router.map(function() {
       this.route('show', { path: '/:id' });
     });
   });
+
+  this.route('supervision', function() {
+    this.route('submissions');
+  });
+
   this.route('legaal', function() {
     this.route('cookieverklaring');
     this.route('disclaimer');
