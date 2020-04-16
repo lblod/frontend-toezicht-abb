@@ -1,8 +1,14 @@
-<span style="color: lightcoral">submissions route</span>
-<ul style="color: lightgreen">
-  <li>Normal user</li>
-  {{#if this.canReadVlabel}}
-    <li>Vlabel user</li>
-  {{/if}}
-</ul>
-{{outlet}}
+<div class="grid grid--collapse">
+  <div class="{{if hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
+    <div class="container-flex--contain">
+      <Submissions::RegularTable @class="container-flex--contain"
+                                 @model={{model}}
+                                 @isLoading={{isLoadingModel}}
+                                 @sort={{this.sort}}
+                                 @page={{this.page}}
+                                 @size={{this.size}}
+                                 @displaySubset={{this.hasActiveChildRoute}}/>
+    </div>
+  </div>
+  {{outlet}}
+</div>

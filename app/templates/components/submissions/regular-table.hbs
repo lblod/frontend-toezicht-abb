@@ -1,0 +1,40 @@
+<DataTable @content={{model}} @isLoading={{isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain data-table" as |t|>
+  <t.content as |c|>
+    <c.header>
+      {{#unless displaySubset}}
+        <ThSortable @label="Provincie" @field="organization.provincie.naam" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
+      {{/unless}}
+      <ThSortable @label="Bestuurseenheid" @field="organization" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
+      <ThSortable @label="Type bestuur" @field="organization.classificatie.label" @currentSorting={{sort}} @class="u-visible--tablet-portrait-up" />
+      <!-- TODO make this filterable -->
+      <th>Type document</th>
+      {{#unless displaySubset}}
+        <ThSortable @label="Zitting / besluit" @field="formData.sessionStartedAtTime" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
+        <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
+      {{/unless}}
+      <ThSortable @label="Status" @field="status.label" @currentSorting={{sort}} />
+      <!-- TODO add this back when the page is available -->
+      <!-- <th class="u-hide-on-print"></th> -->
+    </c.header>
+    <c.body as |row|>
+      {{#unless displaySubset}}
+        <td class="u-visible--tablet-landscape-up">{{row.organization.provincie.naam}}</td>
+      {{/unless}}
+      <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.organization.naam}} <span class="u-hidden--tablet-landscape-up text-fade"><br>{{row.organization.classificatie.label}}</span></td>
+      <td class="u-visible--tablet-landscape-up">{{row.organization.classificatie.label}}</td>
+      <td style="max-width: 250px;">
+        <Submissions::Type @formData={{row.formData}}/>
+      </td>
+      {{#unless displaySubset}}
+        <td class="u-visible--tablet-landscape-up">{{moment-format row.formData.sessionStartedAtTime 'DD-MM-YYYY'}}</td>
+        <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
+      {{/unless}}
+      <td>
+        <!-- TODO rewrite to work with octane -->
+        {{shared/status-pill row.status}}
+      </td>
+      <!-- TODO add this back when the page is available -->
+      <!--<td class="u-hide-on-print"><LinkTo @route="toezicht.inzendingen.show" @model={{row}}>Bekijk</LinkTo></td> -->
+    </c.body>
+  </t.content>
+</DataTable>
