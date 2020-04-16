@@ -13,8 +13,7 @@
         <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
       {{/unless}}
       <ThSortable @label="Status" @field="status.label" @currentSorting={{sort}} />
-      <!-- TODO add this back when the page is available -->
-      <!-- <th class="u-hide-on-print"></th> -->
+      <th class="u-hide-on-print"><!-- Action links --></th>
     </c.header>
     <c.body as |row|>
       {{#unless displaySubset}}
@@ -33,8 +32,7 @@
         <!-- TODO rewrite to work with octane -->
         {{shared/status-pill row.status}}
       </td>
-      <!-- TODO add this back when the page is available -->
-      <!--<td class="u-hide-on-print"><LinkTo @route="toezicht.inzendingen.show" @model={{row}}>Bekijk</LinkTo></td> -->
+      <td class="u-hide-on-print"><LinkTo @route="supervision.submissions.show" @model={{row}}>Bekijk</LinkTo></td>
     </c.body>
   </t.content>
 </DataTable>

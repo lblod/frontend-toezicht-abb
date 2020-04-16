@@ -18,7 +18,9 @@ Router.map(function() {
   });
 
   this.route('supervision', function() {
-    this.route('submissions');
+    this.route('submissions', function() {
+      this.route('show', { path: '/:id' });
+    });
   });
 
   this.route('legaal', function() {
