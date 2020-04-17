@@ -1,6 +1,8 @@
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
+import classic from 'ember-classic-decorator';
+import Model, { attr } from '@ember-data/model';
 
-export default Model.extend({
-  label: attr()
-});
+@classic
+export default class ToezichtDocumentAuthenticityType extends Model {
+  @attr()
+  label;
+}

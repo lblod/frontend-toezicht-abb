@@ -1,16 +1,25 @@
 import Controller from '@ember/controller';
-import { task, timeout } from 'ember-concurrency';
+import { timeout } from 'ember-concurrency';
+import { restartableTask, task } from 'ember-concurrency-decorators';
+import ENV from 'frontend-toezicht-abb/config/environment';
 
-export default Controller.extend({
-  queryParams: ['gemeente', 'page'],
-  gemeente: '',
-  page: 0,
-  size: 10,
+export default class MockLoginController extends Controller {
+  constructor() {
+    super(...arguments);
+    this.header = ENV['vo-webuniversum']['header'];
+    this.footer = ENV['vo-webuniversum']['footer'];
+  }
 
-  queryStore: task(function * () {
+  queryParams = ['gemeente', 'page'];
+  gemeente = '';
+  page = 0;
+  size = 10;
+
+  @task
+  *queryStore() {
     const filter = { provider: 'https://github.com/lblod/mock-login-service' };
     if (this.gemeente)
-      filter.gebruiker = { 'achternaam': this.gemeente};
+      filter.gebruiker = { 'achternaam': this.gemeente };
     const accounts = yield this.store.query('account', {
       include: 'gebruiker,gebruiker.bestuurseenheden',
       filter: filter,
@@ -18,12 +27,14 @@ export default Controller.extend({
       sort: 'gebruiker.achternaam'
     });
     return accounts;
-  }),
-  updateSearch: task(function * (value) {
+  }
+
+  @restartableTask
+  *updateSearch(value) {
     yield timeout(500);
-    this.set('page',0);
-    this.set('gemeente', value);
+    this.page = 0;
+    this.gemeente = value;
     const model = yield this.queryStore.perform();
-    this.set('model', model);
-  }).restartable()
-});
+    this.model = model;
+  }
+}

@@ -1,16 +1,7 @@
-import { alias } from '@ember/object/computed';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 
-const StatusPillComponent = Component.extend({
-  tagName: 'label',
-  classNames: ['pill'],
-  attributeBindings: ['resource'],
-  status: null,
-  resource: alias('status.uri')
-});
-
-StatusPillComponent.reopenClass({
-  positionalParams: ['status']
-});
+class StatusPillComponent extends Component {
+  static positionalParams = ['status'];
+}
 
 export default StatusPillComponent;

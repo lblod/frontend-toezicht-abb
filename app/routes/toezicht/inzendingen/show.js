@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 
-export default Route.extend({
+export default class ToezichtInzendingenShowRoute extends Route {
   async model(params) {
     const inzendingen = await this.store.query('inzending-voor-toezicht', {
       filter: {
@@ -18,4 +18,4 @@ export default Route.extend({
     });
     return inzendingen.firstObject;
   }
-});
+}

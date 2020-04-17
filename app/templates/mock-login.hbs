@@ -1,43 +1,47 @@
-<div class="page">
-  <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="main-content">
-    <header class="content-header content-header--small content-header--half-image u-spacer--large">
-      <div class="content-header__wrapper">
-        <picture class="content-header__bg"><img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt="" title=""></picture>
-        <div class="layout layout--wide">
-          <div class="content-header__content">
-            <div class="content-header__logo-wrapper"><a href="#" class="content-header__entity-logo content-header__entity-logo--lowercase"><span class="content-header__entity-logo__prefix">Vlaanderen</span><span class="content-header__entity-logo__title">is lokaal bestuur</span></a></div>
+<div class="container-flex--scroll">
+  <div class="page">
+    <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="main-content">
+      <header class="content-header content-header--small content-header--half-image u-spacer--large">
+        <div class="content-header__wrapper">
+          <picture class="content-header__bg"><img sizes="50vw" src="/assets/images/inzendingen-header-1600.jpg" srcset="/assets/images/inzendingen-header-320.jpg 320w, /assets/images/inzendingen-header-1024.jpg 1024w, /assets/images/inzendingen-header-1600.jpg 1600w" role="none" alt="" title=""></picture>
+          <div class="layout layout--wide">
+            <div class="content-header__content">
+              <div class="content-header__logo-wrapper"><a href="#" class="content-header__entity-logo content-header__entity-logo--lowercase"><span class="content-header__entity-logo__prefix">Vlaanderen</span><span class="content-header__entity-logo__title">is lokaal bestuur</span></a></div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="col--9-12--s col--5-12--m col--6-12">
+        <div class="grid grid--align-right u-spacer--large">
+          <div class="col--1-1 col--10-12--m col--6-12--l">
+            <h2 class="h4 u-spacer">Kies een bestuurseenheid om mee in te loggen.</h2>
+            <input class="input-field input-field--block u-spacer--tiny js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{this.gemeente}} autofocus oninput={{perform this.updateSearch value='target.value'}}>
+            <MockLogin as |login|>
+              {{#if this.queryStore.isRunning}}
+                <div class="loader-wrapper">
+                  <div class="loader">
+                    <span class="u-visually-hidden">Aan het laden</span>
+                  </div>
+                </div>
+              {{else}}
+                {{#if login.errorMessage}}
+                  <WuAlert @title={{login.errorMessage}} @isWarning={{true}} />
+                {{/if}}
+                <login.each-account @accounts={{this.model}} as |account|>
+                  <WuInfoTile @class="u-spacer--tiny" as |i|>
+                    <i.content>
+                      {{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}
+                    </i.content>
+                  </WuInfoTile>
+                </login.each-account>
+                <NumberPagination @page={{this.page}} @size={{this.size}} @nbOfItems={{this.model.length}} @total={{this.model.meta.count}} @links={{this.model.meta.pagination}} />
+              {{/if}}
+            </MockLogin>
           </div>
         </div>
       </div>
-    </header>
-    <div class="col--9-12--s col--5-12--m col--6-12">
-      <div class="grid grid--align-right">
-        <div class="col--1-1 col--10-12--m col--6-12--l">
-          <h2 class="h4 u-spacer">Kies een bestuurseenheid om mee in te loggen.</h2>
-          <input class="input-field input-field--block u-spacer--tiny js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{gemeente}} autofocus oninput={{perform updateSearch value='target.value'}}>
-          <MockLogin as |login|>
-            {{#if queryStore.isRunning}}
-              <div class="loader-wrapper">
-                <div class="loader">
-                  <span class="u-visually-hidden">Aan het laden</span>
-                </div>
-              </div>
-            {{else}}
-              {{#if login.errorMessage}}
-                <WuAlert @title={{login.errorMessage}} @isWarning={{true}} />
-              {{/if}}
-              <login.each-account @accounts={{model}} as |account|>
-                <WuInfoTile @class="u-spacer--tiny" as |i|>
-                  <i.content>
-                    {{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}
-                  </i.content>
-                </WuInfoTile>
-              </login.each-account>
-              <NumberPagination @page={{page}} @size={{size}} @nbOfItems={{model.length}} @total={{model.meta.count}} @links={{model.meta.pagination}} />
-            {{/if}}
-          </MockLogin>
-        </div>
-      </div>
     </div>
+    <WuWidget @src={{this.footer}} />
   </div>
 </div>

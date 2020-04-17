@@ -1,6 +1,9 @@
+import classic from 'ember-classic-decorator';
 import FormSolution from '@lblod/ember-mu-dynamic-forms/models/form-solution' ;
-import { belongsTo } from 'ember-data/relationships';
+import { belongsTo } from '@ember-data/model';
 
-export default FormSolution.extend({
-  inzendingVoorToezicht: belongsTo('inzending-voor-toezicht')
-});
+@classic
+export default class _FormSolution extends FormSolution {
+  @belongsTo('inzending-voor-toezicht')
+  inzendingVoorToezicht;
+}

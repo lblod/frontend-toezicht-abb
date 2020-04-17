@@ -1,17 +1,28 @@
-import Model from 'ember-data/model';
+import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
-import attr from 'ember-data/attr';
-import { hasMany } from 'ember-data/relationships';
+import Model, { attr, hasMany } from '@ember-data/model';
 
-export default Model.extend({
-  voornaam: attr(),
-  achternaam: attr(),
-  account: hasMany('account', { inverse: null}),
-  bestuurseenheden: hasMany('bestuurseenheid'),
-  group: computed('bestuurseenheden', function () {
+@classic
+export default class Gebruiker extends Model {
+  @attr()
+  voornaam;
+
+  @attr()
+  achternaam;
+
+  @hasMany('account', { inverse: null})
+  account;
+
+  @hasMany('bestuurseenheid')
+  bestuurseenheden;
+
+  @computed('bestuurseenheden')
+  get group() {
     return this.get('bestuurseenheden.firstObject');
-  }),
-  fullName: computed('voornaam', 'achternaam', function() {
+  }
+
+  @computed('voornaam', 'achternaam')
+  get fullName() {
     return `${this.voornaam} ${this.achternaam}`.trim();
-  })
-});
+  }
+}

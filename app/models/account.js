@@ -1,9 +1,14 @@
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
-import { belongsTo } from 'ember-data/relationships';
+import classic from 'ember-classic-decorator';
+import Model, { attr, belongsTo } from '@ember-data/model';
 
-export default Model.extend({
-  voId: attr(),
-  provider: attr(),
-  gebruiker: belongsTo('gebruiker', { inverse: null})
-});
+@classic
+export default class Account extends Model {
+  @attr()
+  voId;
+
+  @attr()
+  provider;
+
+  @belongsTo('gebruiker', { inverse: null})
+  gebruiker;
+}

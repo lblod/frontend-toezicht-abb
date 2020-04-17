@@ -1,10 +1,10 @@
 import Controller from '@ember/controller';
 import ENV from 'frontend-toezicht-abb/config/environment';
 
-export default Controller.extend({
-  init() {
-    this._super(...arguments);
-    this.set('header', ENV['vo-webuniversum']['header']);
-    this.set('footer', ENV['vo-webuniversum']['footer']);
+export default class LoginController extends Controller {
+  constructor() {
+    super(...arguments);
+    this.header = ENV['vo-webuniversum']['header'];
+    this.footer = ENV['vo-webuniversum']['footer'];
   }
-});
+}

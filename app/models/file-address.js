@@ -1,7 +1,11 @@
-import DS from 'ember-data';
-import { belongsTo } from 'ember-data/relationships';
+import classic from 'ember-classic-decorator';
+import Model, { belongsTo, attr } from '@ember-data/model';
 
-export default DS.Model.extend({
-  address: DS.attr(),
-  replicatedFile: belongsTo('file', { inverse: null })
-});
+@classic
+export default class FileAddress extends Model {
+  @attr()
+  address;
+
+  @belongsTo('file', { inverse: null })
+  replicatedFile;
+}

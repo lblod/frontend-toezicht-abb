@@ -1,49 +1,57 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { timeout } from 'ember-concurrency';
+import { task, restartableTask } from 'ember-concurrency-decorators';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { task, timeout } from 'ember-concurrency';
 
-export default Component.extend({
-  store: service(),
+export default class BesluitTypeSelect extends Component {
+  @service store
 
-  async init() {
-    this._super(...arguments);
-    const options = this.store.query('besluit-type', {
+  @tracked selected = null
+  @tracked options
+
+  constructor() {
+    super(...arguments);
+    this.loadData.perform();
+  }
+
+  @task
+  *loadData() {
+    const options = yield this.store.query('besluit-type', {
       sort: 'label',
-      page: { size: 1000 }
+      page: { size: 100 }
     });
-    this.set('options', options);
-  },
+    this.options = options;
 
-  async didReceiveAttrs() {
-    this._super(...arguments);
-    if (this.value && !this.selected) {
-      const besluitTypes = this.store.query('besluit-type', {
-        filter: { id: this.value },
-        page: { size: this.value.split(",").length}
-      });
-      this.set('selected', besluitTypes);
-      this.onInit(besluitTypes);
-    } else if (!this.value) {
-      this.set('selected', null);
-    }
-  },
+    this.updateSelectedValue();
+  }
 
-  selected: null,
-  value: null, // id of selected record
-  onInit: null,
-  onSelectionChange: null,
-
-  search: task(function* (term) {
+  @restartableTask
+  *search (term) {
     yield timeout(600);
     return this.store.query('besluit-type', {
-      filter: { label: term }
+      filter: { label: term },
+      sort: 'label',
+      page: { size: 100 }
     });
-  }),
+  }
 
-  actions: {
-    changeSelected(selected) {
-      this.set('selected', selected);
-      this.onSelectionChange(selected);
+  @action
+  changeSelected(selected) {
+    this.selected = selected;
+    this.args.onSelectionChange(selected);
+  }
+
+  @action
+  async updateSelectedValue() {
+    if (this.args.value && !this.selected) {
+      this.selected = await this.store.query('besluit-type', {
+        filter: { id: this.args.value },
+        page: { size: this.args.value.split(',').length}
+      });
+    } else if (!this.args.value) {
+      this.selected = null;
     }
   }
-});
+}

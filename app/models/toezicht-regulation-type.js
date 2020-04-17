@@ -1,7 +1,11 @@
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
+import classic from 'ember-classic-decorator';
+import Model, { attr } from '@ember-data/model';
 
-export default Model.extend({
-  label: attr(),
-  position: attr()
-});
+@classic
+export default class ToezichtRegulationType extends Model {
+  @attr()
+  label;
+
+  @attr()
+  position;
+}

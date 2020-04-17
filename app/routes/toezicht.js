@@ -1,27 +1,5 @@
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import { inject as service } from '@ember/service';
 
-export default Route.extend(AuthenticatedRouteMixin, {
-  currentSession: service(),
-  router: service(),
-
-  redirect(model, transition) {
-    const targetName = transition.targetName;
-    let splittedRouteName = targetName.split('.');
-
-    if (this.currentSession.canReadVlabel) {
-      splittedRouteName[1] = 'vlabel-inzendingen';
-    } else {
-      splittedRouteName[1] = 'inzendingen';
-    }
-
-    const routeName = splittedRouteName.join('.');
-
-    if (splittedRouteName[2] == 'show') {
-      this.transitionTo(routeName, transition.to.params.id);
-    } else {
-      this.transitionTo(routeName);
-    }
-  }
-});
+export default class ToezichtRoute extends Route.extend(AuthenticatedRouteMixin) {
+}

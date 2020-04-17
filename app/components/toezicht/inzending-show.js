@@ -1,13 +1,10 @@
-import Component from '@ember/component';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  currentSession: service(),
+export default class InzendingShow extends Component {
+  @service currentSession;
 
-  tagName: '',
-  model: null,
-
-  actions: {
-    noop() {}
-  }
-});
+  @action
+  noop() {}
+}

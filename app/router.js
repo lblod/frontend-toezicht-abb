@@ -12,9 +12,6 @@ Router.map(function() {
     this.route('inzendingen', function() {
       this.route('show', { path: '/:id' });
     });
-    this.route('vlabel-inzendingen', function() {
-      this.route('show', { path: '/:id' });
-    });
   });
 
   this.route('supervision', function() {

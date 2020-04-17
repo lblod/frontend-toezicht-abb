@@ -1,14 +1,19 @@
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
-import { equal } from '@ember/object/computed';
-import { hasMany } from 'ember-data/relationships';
+import Model, { attr, hasMany } from '@ember-data/model';
 
-export default Model.extend({
-  uri: attr(),
-  label: attr(),
+export const TO_TREAT_STATUS = 'http://data.lblod.info/melding-statuses/te-behandelen';
+export const TREATENED_STATUS = 'http://data.lblod.info/melding-statuses/afgehandeld';
 
-  meldingen: hasMany('inzending-voor-toezicht-melding', { inverse: null }),
+export default class MeldingStatus extends Model {
+  @attr uri
+  @attr label
 
-  isAfgehandeld: equal('uri', 'http://data.lblod.info/melding-statuses/afgehandeld'),
-  isTeBehandelen: equal('uri', 'http://data.lblod.info/melding-statuses/te-behandelen')
-});
+  @hasMany('inzending-voor-toezicht-melding', { inverse: null }) meldingen
+
+  get isAfgehandeld() {
+    return this.uri == TREATENED_STATUS;
+  }
+
+  get isTeBehandelen() {
+    return this.uri == TO_TREAT_STATUS;
+  }
+}

@@ -1,23 +1,25 @@
-import Component from '@ember/component';
-import { equal } from '@ember/object/computed';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { task } from 'ember-concurrency';
+import Component from '@glimmer/component';
+import { task } from 'ember-concurrency-decorators';
 
-export default Component.extend({
-  router: service(),
-  store: service(),
+export default class InzendingFeedback extends Component {
+  @service router;
+  @service store;
 
-  tagName: '',
-  model: null,
+  get isHandled() {
+    if (this.args.model)
+      return this.args.model.get('status.uri') == 'http://data.lblod.info/melding-statuses/afgehandeld';
+    return false;
+  }
 
-  isHandled: equal('model.status.uri', 'http://data.lblod.info/melding-statuses/afgehandeld'),
-
-  init() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments);
     this.initStatuses.perform();
-  },
+  }
 
-  initStatuses: task(function * () {
+  @task
+  *initStatuses () {
     let statuses = this.store.peekAll('melding-status');
     let teBehandelenStatus = statuses.find(status => status.uri == 'http://data.lblod.info/melding-statuses/te-behandelen');
     let afgehandeldStatus = statuses.find(status => status.uri == 'http://data.lblod.info/melding-statuses/afgehandeld');
@@ -28,24 +30,27 @@ export default Component.extend({
       afgehandeldStatus = statuses.find(status => status.uri == 'http://data.lblod.info/melding-statuses/afgehandeld');
     }
 
-    this.set('teBehandelenStatus', teBehandelenStatus);
-    this.set('afgehandeldStatus', afgehandeldStatus);
-  }),
-
-  actions: {
-    toggleIsHandled(value) {
-      if (value)
-        this.model.set('status', this.afgehandeldStatus);
-      else
-        this.model.set('status', this.teBehandelenStatus);
-    },
-    async save() {
-      await this.model.save();
-      this.router.transitionTo(this.parentIndexRoute);
-    },
-    cancel() {
-      this.model.rollbackAttributes();
-      this.router.transitionTo(this.parentIndexRoute);
-    }
+    this.teBehandelenStatus = teBehandelenStatus;
+    this.afgehandeldStatus = afgehandeldStatus;
   }
-});
+
+  @action
+  toggleIsHandled() {
+    if (this.isHandled)
+      this.args.model.status = this.teBehandelenStatus;
+    else
+      this.args.model.status = this.afgehandeldStatus;
+  }
+
+  @action
+  async save() {
+    await this.args.model.save();
+    this.router.transitionTo(this.args.onCloseRoute);
+  }
+
+  @action
+  async cancel() {
+    await this.args.model.rollbackAttributes();
+    this.router.transitionTo(this.args.onCloseRoute);
+  }
+}
