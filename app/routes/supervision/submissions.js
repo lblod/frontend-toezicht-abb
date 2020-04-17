@@ -6,7 +6,6 @@ import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import config from '../../config/environment';
 import Snapshot from "../../utils/snapshot";
 
-// TODO do selective filtering based on the model, based on if the user is a Vlabel User
 export default class SupervisionSubmissionsRoute extends Route.extend(DataTableRouteMixin) {
   @service currentSession;
 
@@ -36,14 +35,16 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
 
     let query;
     if (this.currentSession.canReadVlabel) {
-      // TODO correct inclusions and filtering
       query = {
-        page: {number: params.page}
+        page: {number: params.page},
+        include: [
+          'form-data',
+        ]
       }
-      // query['filter[besluit-type][:uri:]'] = config.besluitTypeUri;
-      // query['filter[form-data][types][:uri:]'] = config.regulationTypeUri;
-      // query['filter[form-data][tax-type][:uri:]'] = config.taxTypeUri;
-      // query['filter[form-data][chart-of-account][id]'] = config.marCodes.join(',');
+      query['filter[form-data][types][:uri:]'] = config.regulationTypeUri;
+      query['filter[form-data][tax-type][:uri:]'] = config.taxTypeUri;
+      query['filter[form-data][chart-of-account][id]'] = config.marCodes.join(',');
+
     } else {
       query = {
         page: {number: params.page}
