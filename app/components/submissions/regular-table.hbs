@@ -29,8 +29,7 @@
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
       <td>
-        <!-- TODO rewrite to work with octane -->
-        {{shared/status-pill row.status}}
+        <Shared::StatusPill @status={{row.status}}/>
       </td>
       <td class="u-hide-on-print"><LinkTo @route="supervision.submissions.show" @model={{row}}>Bekijk</LinkTo></td>
     </c.body>
