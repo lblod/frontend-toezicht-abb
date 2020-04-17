@@ -1,0 +1,14 @@
+<div {{did-insert (perform this.loadData)}} {{did-update (perform this.loadData) @submission }}>
+  {{#if this.loadData.isRunning}}
+    <span>(re-)Constructing the form ...</span>
+  {{/if}}
+  {{#each this.loadData.lastSuccessful.value as |formData|}}
+    <SubmissionForm
+            @form={{formData.form}}
+            @graphs={{formData.graphs}}
+            @sourceNode={{formData.sourceNode}}
+            @formStore={{formData.formStore}}
+            @show={{true}}
+            @forceShowErrors={{false}} />
+  {{/each}}
+</div>

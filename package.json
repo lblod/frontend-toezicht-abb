@@ -21,6 +21,8 @@
     "test": "ember test"
   },
   "devDependencies": {
+    "@appuniversum/ember-appuniversum": "0.0.16",
+    "@appuniversum/appuniversum": "^0.0.7",
     "@ember/optional-features": "^1.1.0",
     "@lblod/ember-acmidm-login": "^1.0.0",
     "@ember/render-modifiers": "^1.0.2",
@@ -29,10 +31,11 @@
     "@lblod/ember-mock-login": "^0.4.7",
     "@lblod/ember-mu-dynamic-forms": "^0.3.6",
     "@lblod/ember-toezicht-form-fields": "^0.5.1",
+    "@lblod/ember-submission-form-fields": "^0.4.2",
     "@lblod/ember-vo-mu-file-upload": "^0.4.2",
-    "@lblod/ember-vo-webuniversum": "^0.22.1",
-    "@lblod/ember-vo-webuniversum-data-table": "^0.2.16",
-    "@lblod/ember-vo-webuniversum-widget": "^0.1.6",
+    "@lblod/ember-vo-webuniversum": "^0.22.7",
+    "@lblod/ember-vo-webuniversum-data-table": "^0.2.11",
+    "@lblod/ember-vo-webuniversum-widget": "^0.1.4",
     "babel-eslint": "^10.0.3",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^1.5.2",
@@ -80,7 +83,8 @@
     "loader.js": "^4.7.0",
     "postscribe": "^2.0.8",
     "qunit-dom": "^0.9.2",
-    "sass": "^1.23.7"
+    "sass": "^1.23.7",
+    "browser-rdflib": "^1.0.0"
   },
   "engines": {
     "node": "8.* || >= 10.*"

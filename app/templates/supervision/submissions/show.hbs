@@ -21,13 +21,12 @@
         </div>
         <div class="col--6-12">
           <div class="description-data__label">Verstuurd op</div>
-          <div class="description-data__value">{{moment-format model.sentDate 'DD-MM-YYYY'}}</div>
+          <div class="description-dparentIndexRouteata__value">{{moment-format model.sentDate 'DD-MM-YYYY'}}</div>
         </div>
       </div>
     </div>
     <div class="u-spacer"></div>
-    <!-- TODO replace this with readonly form from submissions -->
-    <!-- <RootFormNode @solution={{model.formSolution}} @onDynamicFormInit={{action "noop"}} @show={{true}} /> -->
+    <Submissions::Form @submission={{model}}/>
   </div>
   <div class="u-padding--round--small u-border--light--top u-hide-on-print">
       <div class="button-group u-spacer--tiny">
