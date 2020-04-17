@@ -96,49 +96,49 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
     }
 
     if (params.bestuurseenheidIds)
-      query['filter[bestuurseenheid][id]'] = params.bestuurseenheidIds;
+      query['filter[organization][:id:]'] = params.bestuurseenheidIds;
 
     if (params.classificatieIds)
-      query['filter[bestuurseenheid][classificatie][id]'] = params.classificatieIds;
+      query['filter[organization][classificatie][:id:]'] = params.classificatieIds;
 
     if (params.marCodeIds)
-      query['filter[nomenclature][id]'] = params.marCodeIds;
+      query['[form-data][chart-of-account][:id:]'] = params.marCodeIds;
 
     if (params.provincieIds)
-      query['filter[bestuurseenheid][provincie][id]'] = params.provincieIds;
+      query['filter[organization][provincie][:id:]'] = params.provincieIds;
 
     if (params.besluitTypeIds) {
-      query['filter[besluit-type][id]'] = params.besluitTypeIds;
+      query['filter[form-data][types][:id:]'] = params.besluitTypeIds;
       if (params.regulationTypeId)
-        query['filter[regulation-type][id]'] = params.regulationTypeId;
+        query['filterform-data][types][:id:]'] = params.regulationTypeId;
     }
 
     if (params.sessionDateFrom)
-      query['filter[:gte:session-date]'] = params.sessionDateFrom;
+      query['filter[form-data][session-started-at-time]'] = params.sessionDateFrom;
 
     if (params.sessionDateTo)
-      query['filter[:lte:session-date]'] = params.sessionDateTo;
+      query['filter[form-data][session-started-at-time]'] = params.sessionDateTo;
 
     if (params.sentDateFrom)
-      query['filter[:gte:sent-date]'] = params.sentDateFrom;
+      query['filter[form-data][date-publication][:id:]'] = params.sentDateFrom;
 
     if (params.sentDateTo)
-      query['filter[:lte:sent-date]'] = params.sentDateTo;
+      query['filter[form-data][date-publication][:id:]'] = params.sentDateTo;
 
     if (params.dateOfEntryIntoForceFrom)
-      query['filter[:gte:date-of-entry-into-force]'] = moment(params.dateOfEntryIntoForceFrom).format('YYYY-MM-DD');
+      query['filter[form-data][first-date-in-force][:id:]'] = moment(params.dateOfEntryIntoForceFrom).format('YYYY-MM-DD');
 
     if (params.dateOfEntryIntoForceTo)
-      query['filter[:lte:date-of-entry-into-force]'] = moment(params.dateOfEntryIntoForceTo).format('YYYY-MM-DD');
+      query['filter[form-data][first-date-in-force][:id:]'] = moment(params.dateOfEntryIntoForceTo).format('YYYY-MM-DD');
 
     if (params.endDateFrom)
-      query['filter[:gte:end-date]'] = moment(params.endDateFrom).format('YYYY-MM-DD');
+      query['filter[form-data][date-no-longer-in-force][:id:]'] = moment(params.endDateFrom).format('YYYY-MM-DD');
 
     if (params.endDateTo)
-      query['filter[:lte:end-date]'] = moment(params.endDateTo).format('YYYY-MM-DD');
+      query['filter[form-data][date-no-longer-in-force][:id:]'] = moment(params.endDateTo).format('YYYY-MM-DD');
 
     if (params.statusUri)
-      query['filter[melding][status][:uri:]'] = params.statusUri;
+      query['filter[status][:uri:]'] = params.statusUri;
 
     this.lastParams.commit();
 
