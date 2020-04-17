@@ -1,7 +1,21 @@
 <div class="grid grid--collapse">
-  <div class="{{if hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up"
-                   "col--12-12"}}">
+  <div class="{{if hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
     <div class="container-flex--contain">
+      <!-- TODO maybe move this to application.hbs in the future? -->
+      <div class="u-border--fat--bottom u-hide-on-print">
+        <div class="u-padding--round--small">
+          <div class="grid">
+            <div class="col--4-12 col--1-1--s">
+              <h1 class="h2 u-spacer--right--small u-display-inline-block">Toezicht ABB (new)</h1>
+            </div>
+            <div class="col--8-12 col--1-1--s u-align-right--tablet-portrait-up">
+              <WuButtonGroup>
+                <AcmidmLogout @class="button button--alt button--small u-spacer--bottom--none u-hidden-mobile" />
+              </WuButtonGroup>
+            </div>
+          </div>
+        </div>
+      </div>
       {{#if canReadVlabel}}
         <Submissions::VlabelTable @class="container-flex--contain"
                                   @model={{model}}
