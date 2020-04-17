@@ -1,7 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-
-import ENV from 'frontend-toezicht-abb/config/environment';
+import { action } from '@ember/object';
 
 export default class SupervisionSubmissionsController extends Controller {
   @service router;
@@ -11,11 +10,6 @@ export default class SupervisionSubmissionsController extends Controller {
   size = 20;
   sort = '-sent-date';
 
-  constructor() {
-    super(...arguments);
-    this.set('header', ENV['vo-webuniversum']['header']);
-  }
-
   get hasActiveChildRoute() {
       return this.router.currentRouteName.startsWith('supervision.submissions')
         && this.router.currentRouteName !== 'supervision.submissions.index';
@@ -23,5 +17,12 @@ export default class SupervisionSubmissionsController extends Controller {
 
   get canReadVlabel() {
     return this.currentSession.canReadVlabel;
+  }
+
+  @action
+  updateQueryParams(filter) {
+    if (filter) {
+      filter.keys.forEach(key => this.set(key, filter[key]));
+    }
   }
 }
