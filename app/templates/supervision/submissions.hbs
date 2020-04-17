@@ -1,13 +1,24 @@
 <div class="grid grid--collapse">
-  <div class="{{if hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
+  <div class="{{if hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up"
+                   "col--12-12"}}">
     <div class="container-flex--contain">
-      <Submissions::RegularTable @class="container-flex--contain"
-                                 @model={{model}}
-                                 @isLoading={{isLoadingModel}}
-                                 @sort={{this.sort}}
-                                 @page={{this.page}}
-                                 @size={{this.size}}
-                                 @displaySubset={{this.hasActiveChildRoute}}/>
+      {{#if canReadVlabel}}
+        <Submissions::VlabelTable @class="container-flex--contain"
+                                  @model={{model}}
+                                  @isLoading={{isLoadingModel}}
+                                  @sort={{this.sort}}
+                                  @page={{this.page}}
+                                  @size={{this.size}}
+                                  @displaySubset={{this.hasActiveChildRoute}}//>
+      {{else}}
+        <Submissions::RegularTable @class="container-flex--contain"
+                                   @model={{model}}
+                                   @isLoading={{isLoadingModel}}
+                                   @sort={{this.sort}}
+                                   @page={{this.page}}
+                                   @size={{this.size}}
+                                   @displaySubset={{this.hasActiveChildRoute}}/>
+      {{/if}}
     </div>
   </div>
   {{outlet}}
