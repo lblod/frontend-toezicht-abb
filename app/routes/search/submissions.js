@@ -22,7 +22,7 @@ export default class SearchSubmissionsRoute extends Route {
     this.lastParams = new Snapshot();
   }
 
-  async model(params){
+  model(params){
     const filter = {};
 
     this.lastParams.stageLive( params );

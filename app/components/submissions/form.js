@@ -51,6 +51,6 @@ export default class SubmissionsFormComponent extends Component {
       formStore: formStore,
       graphs: graphs,
       sourceNode: new rdflib.NamedNode(submissionDocument.uri)
-    }]
+    }];
   }
 }

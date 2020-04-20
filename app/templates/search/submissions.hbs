@@ -32,7 +32,13 @@
 
       <WuAlert @title="Waarschuwing">Deze pagina is gebouwd voor demo doeleinden en bevat geen recente data.</WuAlert>
 
-      <Toezicht::InzendingenSearchTable @targetRoute="search.submissions.show" @class="container-flex--contain" @model={{this.model}} @isLoading={{this.isLoadingModel}} @page={{this.page}} @size={{this.size}} @displaySubset={{this.hasActiveChildRoute}} />
+      <Submissions::SearchTable @class="container-flex--contain"
+        @model={{this.model}}
+        @isLoading={{this.isLoadingModel}}
+        @sort={{this.sort}}
+        @page={{this.page}}
+        @size={{this.size}}
+        @displaySubset={{this.hasActiveChildRoute}}/>
 
     </div>
   </div>

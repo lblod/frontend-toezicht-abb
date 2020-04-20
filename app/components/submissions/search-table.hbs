@@ -1,0 +1,36 @@
+{{!-- template-lint-disable no-html-comments  --}}
+{{!-- template-lint-disable no-inline-styles  --}}
+<DataTable @content={{@model}} @isLoading={{@isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}} @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
+  <t.content as |c|>
+    <c.header>
+      {{#unless displaySubset}}
+        <th>Provincie</th>
+      {{/unless}}
+      <th>Bestuurseenheid</th>
+      <th>Type bestuur</th>
+      <th>Type document</th>
+      {{#unless displaySubset}}
+        <th>Zitting / besluit</th>
+        <th>Verstuurd</th>
+      {{/unless}}
+      <th>Status</th>
+      <th class="u-hide-on-print">{{!-- Action links --}}</th>
+    </c.header>
+    <c.body as |row|>
+      {{#unless @displaySubset}}
+        <td class="u-visible--tablet-landscape-up">{{row.province}}</td>
+      {{/unless}}
+      <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.administrativeUnit}} <span class="u-hidden--tablet-landscape-up text-fade"><br>{{row.administrativeUnitClassification}}</span></td>
+      <td class="u-visible--tablet-landscape-up">{{row.administrativeUnitClassification}}</td>
+      <td style="max-width: 250px;">
+        <p>{{row.documentTypeLabel}}</p>
+      </td>
+      {{#unless @displaySubset}}
+        <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDateTime 'DD-MM-YYYY HH:mm'}}</td>
+        <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
+      {{/unless}}
+      <td>{{row.status}}</td>
+      <td class="u-hide-on-print"><LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo></td>
+    </c.body>
+  </t.content>
+</DataTable>

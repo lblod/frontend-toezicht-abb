@@ -19,7 +19,9 @@ Router.map(function() {
     });
   });
   this.route('search', function() {
-    this.route('submissions');
+    this.route('submissions', function() {
+      this.route('show', { path: '/:id' });
+    });
   });
   this.route('legaal', function() {
     this.route('cookieverklaring');
