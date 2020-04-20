@@ -114,28 +114,28 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
     }
 
     if (params.sessionDateFrom)
-      query['filter[form-data][session-started-at-time]'] = params.sessionDateFrom;
+      query['filter[form-data][:gte:session-started-at-time]'] = params.sessionDateFrom;
 
     if (params.sessionDateTo)
-      query['filter[form-data][session-started-at-time]'] = params.sessionDateTo;
+      query['filter[form-data][:lte:session-started-at-time]'] = params.sessionDateTo;
 
     if (params.sentDateFrom)
-      query['filter[form-data][date-publication][:id:]'] = params.sentDateFrom;
+      query['filter[form-data][:gte:date-publication]'] = params.sentDateFrom;
 
     if (params.sentDateTo)
-      query['filter[form-data][date-publication][:id:]'] = params.sentDateTo;
+      query['filter[form-data][:lte:date-publication]'] = params.sentDateTo;
 
     if (params.dateOfEntryIntoForceFrom)
-      query['filter[form-data][first-date-in-force][:id:]'] = moment(params.dateOfEntryIntoForceFrom).format('YYYY-MM-DD');
+      query['filter[form-data][:gte:first-date-in-force]'] = moment(params.dateOfEntryIntoForceFrom).format('YYYY-MM-DD');
 
     if (params.dateOfEntryIntoForceTo)
-      query['filter[form-data][first-date-in-force][:id:]'] = moment(params.dateOfEntryIntoForceTo).format('YYYY-MM-DD');
+      query['filter[form-data][:lte:first-date-in-force]'] = moment(params.dateOfEntryIntoForceTo).format('YYYY-MM-DD');
 
     if (params.endDateFrom)
-      query['filter[form-data][date-no-longer-in-force][:id:]'] = moment(params.endDateFrom).format('YYYY-MM-DD');
+      query['filter[form-data][:gte:date-no-longer-in-force]'] = moment(params.endDateFrom).format('YYYY-MM-DD');
 
     if (params.endDateTo)
-      query['filter[form-data][date-no-longer-in-force][:id:]'] = moment(params.endDateTo).format('YYYY-MM-DD');
+      query['filter[form-data][:lte:date-no-longer-in-force]'] = moment(params.endDateTo).format('YYYY-MM-DD');
 
     if (params.statusUri)
       query['filter[status][:uri:]'] = params.statusUri;

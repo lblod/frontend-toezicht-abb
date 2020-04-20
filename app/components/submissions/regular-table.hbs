@@ -47,6 +47,16 @@
                                                                                                     'regulationTypeId'}} />
         {{/if}} -->
       </div>
+      <div class="col--4-12 col--1-1--m col--1-1--s">
+        <div class="grid">
+          <div class="col--1-1 col--6-12--m">
+            <Filter::DateRange @label="Periode verstuurd" @fromValue={{@filter.sentDateFrom}} @toValue={{@filter.sentDateTo}} @onChangeFromValue={{fn this.setFilter 'sentDateFrom'}} @onChangeToValue={{fn this.setFilter 'sentDateTo'}} />
+          </div>
+          <div class="col--1-1 col--6-12--m">
+            <Filter::DateRange @label="Periode zitting / besluit" @defaultFromDate={{this.lastMonth}} @fromValue={{@filter.sessionDateFrom}} @toValue={{@filter.sessionDateTo}} @onChangeFromValue={{fn this.setFilter 'sessionDateFrom'}} @onChangeToValue={{fn this.setFilter 'sessionDateTo'}} />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
