@@ -89,8 +89,8 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
       query['include'] = [
         'organization.classificatie',
         'organization.provincie',
-        'status'
-        //   'besluit-type',
+        'status',
+        'form-data.types',
         //   'regulation-type'
       ].join(',');
     }
@@ -110,7 +110,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
     if (params.besluitTypeIds) {
       query['filter[form-data][types][:id:]'] = params.besluitTypeIds;
       if (params.regulationTypeId)
-        query['filterform-data][types][:id:]'] = params.regulationTypeId;
+        query['filter[form-data][types][:id:]'] = params.regulationTypeId;
     }
 
     if (params.sessionDateFrom)

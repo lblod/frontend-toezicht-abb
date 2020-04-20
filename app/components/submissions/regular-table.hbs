@@ -17,8 +17,21 @@
       <div class="col--4-12 col--6-12--m col--6-12--s">
         <label class="label--subtle form__label">Bestuurseenheid</label>
         <Filter::AdministrativeUnitSelect @value={{@filter.bestuurseenheidIds}} @onSelectionChange={{fn this.setFilter 'bestuurseenheidIds'}} />
+
         <label class="label--subtle form__label">Provincie</label>
         <Filter::ProvinceSelect @value={{@filter.provincieIds}} @onSelectionChange={{fn this.setFilter 'provincieIds'}} />
+      </div>
+      <div class="col--4-12 col--6-12--m col--6-12--s">
+        <!-- <label class="label--subtle form__label">Type bestuur</label>
+        <BestuurseenheidClassificatieSelect @value={{@filter.classificatieIds}} @onSelectionChange={{fn this.setFilter 'classificatieIds'}} /> -->
+
+        <label class="label--subtle form__label">Type document</label>
+        <Filter::DecisionTypeSelect @value={{@filter.besluitTypeIds}} @onSelectionChange={{this.selectBesluitTypes}} />
+
+        <!-- {{#if this.regulationTypeIsSelected}}
+          <label class="label--subtle form__label">Type reglement of verordening</label>
+          <ToezichtRegulationTypeSelect @value={{@filter.regulationTypeId}} @onSelectionChange={{fn this.setFilter 'regulationTypeId'}} />
+        {{/if}} -->
       </div>
     </div>
   </div>
