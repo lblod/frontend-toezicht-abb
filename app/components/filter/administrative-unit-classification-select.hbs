@@ -1,0 +1,14 @@
+<div class="ember-power-select--small" {{did-update this.updateSelectedValue @value}}>
+  <PowerSelectMultiple
+          @placeholder="OCMW, Gemeente, ..."
+          @search={{perform this.search}}
+          @searchPlaceholder="Type om te zoeken..."
+          @searchEnabled={{true}}
+          @loadingMessage="Aan het laden..."
+          @options={{this.options}}
+          @selected={{this.selected}}
+          @onChange={{this.changeSelected}}
+          @allowClear={{true}} as |classificatie|>
+    {{classificatie.label}}
+  </PowerSelectMultiple>
+</div>

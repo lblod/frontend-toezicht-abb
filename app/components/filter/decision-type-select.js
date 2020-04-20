@@ -1,9 +1,11 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { timeout } from 'ember-concurrency';
-import { task, restartableTask } from 'ember-concurrency-decorators';
-import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import {tracked} from '@glimmer/tracking';
+import {timeout} from 'ember-concurrency';
+import {task, restartableTask} from 'ember-concurrency-decorators';
+import {action} from '@ember/object';
+import {inject as service} from '@ember/service';
+
+const DECISION_TYPE_CONCEPT_SCHEME = 'http://lblod.data.gift/concept-schemes/71e6455e-1204-46a6-abf4-87319f58eaa5'
 
 export default class FilterDecisionTypeSelectComponent extends Component {
   @service store
@@ -17,10 +19,15 @@ export default class FilterDecisionTypeSelectComponent extends Component {
   }
 
   @task
-  *loadData() {
+  * loadData() {
     const options = yield this.store.query('concept', {
+      filter: {
+        "concept-schemes": {
+          ":uri:": DECISION_TYPE_CONCEPT_SCHEME
+        }
+      },
       sort: 'label',
-      page: { size: 100 }
+      page: {size: 100}
     });
     this.options = options;
 
@@ -28,12 +35,17 @@ export default class FilterDecisionTypeSelectComponent extends Component {
   }
 
   @restartableTask
-  *search (term) {
+  * search(term) {
     yield timeout(600);
     return this.store.query('concept', {
-      filter: { label: term },
+      filter: {
+        label: term,
+        "concept-schemes": {
+          ":uri:": DECISION_TYPE_CONCEPT_SCHEME
+        }
+      },
       sort: 'label',
-      page: { size: 100 }
+      page: {size: 100}
     });
   }
 
@@ -47,8 +59,13 @@ export default class FilterDecisionTypeSelectComponent extends Component {
   async updateSelectedValue() {
     if (this.args.value && !this.selected) {
       this.selected = await this.store.query('concept', {
-        filter: { id: this.args.value },
-        page: { size: this.args.value.split(',').length}
+        filter: {
+          id: this.args.value,
+          "concept-schemes": {
+            ":uri:": DECISION_TYPE_CONCEPT_SCHEME
+          }
+        },
+        page: {size: this.args.value.split(',').length}
       });
     } else if (!this.args.value) {
       this.selected = null;
