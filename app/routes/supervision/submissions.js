@@ -86,13 +86,13 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
 
     } else {
       // TODO translate this to meldingsplichtige
-      // query['include'] = [
-      //   'bestuurseenheid.classificatie',
-      //   'bestuurseenheid.provincie',
-      //   'melding.status',
-      //   'besluit-type',
-      //   'regulation-type'
-      // ].join(',');
+      query['include'] = [
+        'organization.classificatie',
+        'organization.provincie',
+        'status'
+        //   'besluit-type',
+        //   'regulation-type'
+      ].join(',');
     }
 
     if (params.bestuurseenheidIds)
