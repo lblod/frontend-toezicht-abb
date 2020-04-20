@@ -6,10 +6,23 @@
         <Submissions::VlabelTable @class="container-flex--contain"
                                   @model={{model}}
                                   @isLoading={{isLoadingModel}}
-                                  @sort={{this.sort}}
+                                  @displaySubset={{this.hasActiveChildRoute}}
+                                  @filter={{hash
+                bestuurseenheidIds=this.bestuurseenheidIds
+                marCodeIds=this.marCodeIds
+                sessionDateFrom=this.sessionDateFrom
+                sessionDateTo=this.sessionDateTo
+                sentDateFrom=this.sentDateFrom
+                sentDateTo=this.sentDateTo
+                dateOfEntryIntoForceFrom=this.dateOfEntryIntoForceFrom
+                dateOfEntryIntoForceTo=this.dateOfEntryIntoForceTo
+                endDateFrom=this.endDateFrom
+                endDateTo=this.endDateTo
+        }}
                                   @page={{this.page}}
                                   @size={{this.size}}
-                                  @displaySubset={{this.hasActiveChildRoute}}//>
+                                  @sort={{this.sort}}
+                                  @onFilterChange={{this.updateQueryParams}}/>
       {{else}}
         <Submissions::RegularTable @class="container-flex--contain"
                                    @model={{model}}
