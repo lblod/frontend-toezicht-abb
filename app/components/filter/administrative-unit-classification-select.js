@@ -4,8 +4,7 @@ import Component from '@glimmer/component';
 import {tracked} from '@glimmer/tracking';
 import {timeout} from 'ember-concurrency';
 import {task, restartableTask} from 'ember-concurrency-decorators';
-
-const ADMIN_UNIT_CLASS_CONCEPT_SCHEME = 'http://data.vlaanderen.be/id/conceptscheme/BestuurseenheidClassificatieCode';
+import {ADMINISTRATIVE_CLASSIFICATION} from "../../models/concept-scheme";
 
 export default class AdministrativeUnitClassificationSelectComponent extends Component {
   @service store
@@ -23,7 +22,7 @@ export default class AdministrativeUnitClassificationSelectComponent extends Com
     const options = yield this.store.query('concept', {
       filter: {
         "concept-schemes": {
-          ":uri:": ADMIN_UNIT_CLASS_CONCEPT_SCHEME
+          ":uri:": ADMINISTRATIVE_CLASSIFICATION
         }
       },
       sort: 'label'
@@ -40,7 +39,7 @@ export default class AdministrativeUnitClassificationSelectComponent extends Com
       filter: {
         label: term,
         "concept-schemes": {
-          ":uri:": ADMIN_UNIT_CLASS_CONCEPT_SCHEME
+          ":uri:": ADMINISTRATIVE_CLASSIFICATION
         }
       }
     });
@@ -59,7 +58,7 @@ export default class AdministrativeUnitClassificationSelectComponent extends Com
         filter: {
           id: this.args.value,
           "concept-schemes": {
-            ":uri:": ADMIN_UNIT_CLASS_CONCEPT_SCHEME
+            ":uri:": ADMINISTRATIVE_CLASSIFICATION
           }
         },
         page: {size: this.args.value.split(',').length}

@@ -6,7 +6,7 @@ import {task} from 'ember-concurrency-decorators';
 import {inject as service} from '@ember/service';
 import {TO_TREAT_STATUS} from '../../models/melding-status';
 import InzendingenFilter from '../../utils/inzendingen-filter';
-import {DECISION_TYPE_CONCEPT_SCHEME} from "../filter/decision-type-select";
+import {DECISION_TYPE} from "../../models/concept-scheme";
 
 export default class SubmissionRegularTableComponent extends Component {
   @service store
@@ -27,7 +27,7 @@ export default class SubmissionRegularTableComponent extends Component {
         filter: {
           id: this.filter.besluitTypeIds,
           "concept-schemes": {
-            ":uri:": DECISION_TYPE_CONCEPT_SCHEME
+            ":uri:": DECISION_TYPE
           }
         },
         page: {size: this.filter.besluitTypeIds.split(',').length}

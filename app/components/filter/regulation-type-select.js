@@ -4,9 +4,9 @@ import { timeout } from 'ember-concurrency';
 import { task, restartableTask } from 'ember-concurrency-decorators';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import {DECISION_TYPE_CONCEPT_SCHEME} from "./decision-type-select";
+import {REGULATION} from "../../models/concept-scheme";
 
-const REGULATIONS_CONCEPT_SCHEME = 'http://lblod.data.gift/concept-schemes/c93ccd41-aee7-488f-86d3-038de890d05a';
+
 
 export default class FilterRegulationTypeSelectComponent extends Component {
   @service store
@@ -24,7 +24,7 @@ export default class FilterRegulationTypeSelectComponent extends Component {
     const options = yield this.store.query('concept', {
       filter: {
         "concept-schemes": {
-          ":uri:": REGULATIONS_CONCEPT_SCHEME
+          ":uri:": REGULATION
         }
       },
       sort: 'label',
@@ -42,7 +42,7 @@ export default class FilterRegulationTypeSelectComponent extends Component {
       filter: {
         label: term,
         "concept-schemes": {
-          ":uri:": REGULATIONS_CONCEPT_SCHEME
+          ":uri:": REGULATION
         }
       },
       sort: 'label',
@@ -63,7 +63,7 @@ export default class FilterRegulationTypeSelectComponent extends Component {
         filter: {
           id: this.args.value,
           "concept-schemes": {
-            ":uri:": REGULATIONS_CONCEPT_SCHEME
+            ":uri:": REGULATION
           }
         },
         page: { size: this.args.value.split(',').length}
