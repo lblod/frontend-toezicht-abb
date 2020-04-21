@@ -123,7 +123,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
       query['filter[form-data][:gte:date-publication]'] = params.sentDateFrom;
 
     if (params.sentDateTo)
-      query['filter[form-data][:lte:date-publication]'] = params.sentDateTo;
+      query['filter[:lte:sent-date]'] = params.sentDateTo;
 
     if (params.dateOfEntryIntoForceFrom)
       query['filter[form-data][:gte:first-date-in-force]'] = moment(params.dateOfEntryIntoForceFrom).format('YYYY-MM-DD');
