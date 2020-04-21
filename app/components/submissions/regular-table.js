@@ -1,11 +1,12 @@
 import Component from '@glimmer/component';
 import moment from 'moment';
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
-import { task } from 'ember-concurrency-decorators';
-import { inject as service } from '@ember/service';
-import { TO_TREAT_STATUS } from '../../models/melding-status';
+import {tracked} from '@glimmer/tracking';
+import {action} from '@ember/object';
+import {task} from 'ember-concurrency-decorators';
+import {inject as service} from '@ember/service';
+import {TO_TREAT_STATUS} from '../../models/melding-status';
 import InzendingenFilter from '../../utils/inzendingen-filter';
+import {DECISION_TYPE_CONCEPT_SCHEME} from "../filter/decision-type-select";
 
 export default class SubmissionRegularTableComponent extends Component {
   @service store
@@ -20,11 +21,16 @@ export default class SubmissionRegularTableComponent extends Component {
   }
 
   @task
-  *loadData() {
+  * loadData() {
     if (this.filter.besluitTypeIds) {
-      this.besluitTypes = yield this.store.query('besluit-type', {
-        filter: { id: this.filter.besluitTypeIds },
-        page: { size: this.filter.besluitTypeIds.split(',').length}
+      this.besluitTypes = yield this.store.query('concept', {
+        filter: {
+          id: this.filter.besluitTypeIds,
+          "concept-schemes": {
+            ":uri:": DECISION_TYPE_CONCEPT_SCHEME
+          }
+        },
+        page: {size: this.filter.besluitTypeIds.split(',').length}
       });
     }
   }

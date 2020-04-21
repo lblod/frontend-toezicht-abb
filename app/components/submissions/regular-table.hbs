@@ -41,11 +41,11 @@
         <label class="label--subtle form__label">Type document</label>
         <Filter::DecisionTypeSelect @value={{@filter.besluitTypeIds}} @onSelectionChange={{this.selectBesluitTypes}} />
 
-        <!-- {{#if this.regulationTypeIsSelected}}
+        {{#if this.regulationTypeIsSelected}}
           <label class="label--subtle form__label">Type reglement of verordening</label>
-          <ToezichtRegulationTypeSelect @value={{@filter.regulationTypeId}} @onSelectionChange={{fn this.setFilter
+          <Filter::RegulationTypeSelect @value={{@filter.regulationTypeId}} @onSelectionChange={{fn this.setFilter
                                                                                                     'regulationTypeId'}} />
-        {{/if}} -->
+        {{/if}}
       </div>
       <div class="col--4-12 col--1-1--m col--1-1--s">
         <div class="grid">

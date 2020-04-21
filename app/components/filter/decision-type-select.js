@@ -5,7 +5,7 @@ import {task, restartableTask} from 'ember-concurrency-decorators';
 import {action} from '@ember/object';
 import {inject as service} from '@ember/service';
 
-const DECISION_TYPE_CONCEPT_SCHEME = 'http://lblod.data.gift/concept-schemes/71e6455e-1204-46a6-abf4-87319f58eaa5'
+export const DECISION_TYPE_CONCEPT_SCHEME = 'http://lblod.data.gift/concept-schemes/71e6455e-1204-46a6-abf4-87319f58eaa5'
 
 export default class FilterDecisionTypeSelectComponent extends Component {
   @service store
