@@ -22,7 +22,7 @@ export default class FilterChartOfAccountSelectComponent extends Component {
   *loadData() {
     const options = yield this.store.query('concept', {
       filter: {
-        "id": VLABEL_CHART_OF_ACCOUNTS.join(',')
+        id: VLABEL_CHART_OF_ACCOUNTS.join(',')
       },
       sort: 'label',
     });
@@ -37,7 +37,7 @@ export default class FilterChartOfAccountSelectComponent extends Component {
     return this.store.query('concept', {
       filter: {
         label: term,
-        "id": VLABEL_CHART_OF_ACCOUNTS.join(',')
+        id: VLABEL_CHART_OF_ACCOUNTS.join(',')
       }
     });
   }

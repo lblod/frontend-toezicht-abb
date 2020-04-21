@@ -84,13 +84,11 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
       query['filter[form-data][chart-of-account][id]'] = VLABEL_CHART_OF_ACCOUNTS.join(',');
 
     } else {
-      // TODO translate this to meldingsplichtige
       query['include'] = [
         'organization.classificatie',
         'organization.provincie',
         'status',
-        'form-data.types',
-        //   'regulation-type'
+        'form-data.types'
       ].join(',');
     }
 
