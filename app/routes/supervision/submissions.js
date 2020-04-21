@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import config from '../../config/environment';
 import Snapshot from "../../utils/snapshot";
+import {VLABEL_CHART_OF_ACCOUNTS, VLABEL_TYPE} from "../../models/concept";
 
 export default class SupervisionSubmissionsRoute extends Route.extend(DataTableRouteMixin) {
   @service currentSession;
@@ -77,12 +78,10 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
     if (this.currentSession.canReadVlabel) {
       query['include'] = [
         'form-data.types',
-        'form-data.tax-type',
         'form-data.chart-of-account',
       ]
-      query['filter[form-data][types][:uri:]'] = config.regulationTypeUri;
-      query['filter[form-data][tax-type][:uri:]'] = config.taxTypeUri;
-      query['filter[form-data][chart-of-account][id]'] = config.marCodes.join(',');
+      query['filter[form-data][types][:uri:]'] = VLABEL_TYPE;
+      query['filter[form-data][chart-of-account][id]'] = VLABEL_CHART_OF_ACCOUNTS.join(',');
 
     } else {
       // TODO translate this to meldingsplichtige
