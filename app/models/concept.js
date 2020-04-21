@@ -1,6 +1,6 @@
 import Model, { attr, hasMany } from '@ember-data/model';
 
-export const VLABEL_TYPE = 'https://data.vlaanderen.be/id/concept/BesluitType/b2d0734d-13d0-44b4-9af8-1722933c5288';
+export const VLABEL_TYPE = 'https://data.vlaanderen.be/id/concept/BesluitType/efa4ec5a-b006-453f-985f-f986ebae11bc';
 export const VLABEL_CHART_OF_ACCOUNTS = [
   '26c19fe6b53e2e759a0b9467ce33ef37fc268dd9467cfba91381214549a01d19',
   'fad34acdd5a6d17b59d58678542b65e9c364d2c84bf49fea8611ecc2d6ce3411',

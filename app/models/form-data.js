@@ -8,7 +8,7 @@ export default class FormDataModel extends Model {
   @attr("date") firstDateInForce;
   @attr("date") dateNoLongerInForce;
   @attr authenticityType;
-  @attr chartOfAccount;
+  // @attr chartOfAccount;
   @attr taxType;
   @attr taxRate;
   @attr hasAdditionalTaxRate;
@@ -20,4 +20,5 @@ export default class FormDataModel extends Model {
   @belongsTo("submission") submission;
   @belongsTo("bestuurseenheid") isAbout;
   @belongsTo("bestuursorgaan") passedBy;
+  @belongsTo("chart-of-account") chartOfAccount;
 }

@@ -5,6 +5,7 @@ import { tracked } from '@glimmer/tracking';
 import { timeout } from 'ember-concurrency';
 import { task, restartableTask } from 'ember-concurrency-decorators';
 import {VLABEL_CHART_OF_ACCOUNTS} from "../../models/concept";
+import {CHART_OF_ACCOUNT} from "../../models/concept-scheme";
 
 
 export default class FilterChartOfAccountSelectComponent extends Component {
@@ -22,7 +23,10 @@ export default class FilterChartOfAccountSelectComponent extends Component {
   *loadData() {
     const options = yield this.store.query('concept', {
       filter: {
-        id: VLABEL_CHART_OF_ACCOUNTS.join(',')
+        id: VLABEL_CHART_OF_ACCOUNTS.join(','),
+        "concept-schemes": {
+          ":uri:": CHART_OF_ACCOUNT
+        }
       },
       sort: 'label',
     });
@@ -37,7 +41,10 @@ export default class FilterChartOfAccountSelectComponent extends Component {
     return this.store.query('concept', {
       filter: {
         label: term,
-        id: VLABEL_CHART_OF_ACCOUNTS.join(',')
+        id: VLABEL_CHART_OF_ACCOUNTS.join(','),
+        "concept-schemes": {
+          ":uri:": CHART_OF_ACCOUNT
+        }
       }
     });
   }
@@ -54,6 +61,9 @@ export default class FilterChartOfAccountSelectComponent extends Component {
       this.selected = await this.store.query('concept', {
         filter: {
           id: this.args.value,
+          "concept-schemes": {
+            ":uri:": CHART_OF_ACCOUNT
+          }
         },
         page: {size: this.args.value.split(',').length}
       });
