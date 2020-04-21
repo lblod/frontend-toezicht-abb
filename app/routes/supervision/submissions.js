@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import config from '../../config/environment';
 import Snapshot from "../../utils/snapshot";
+import {VLABEL_CHART_OF_ACCOUNTS, VLABEL_TYPE} from "../../models/concept";
 
 export default class SupervisionSubmissionsRoute extends Route.extend(DataTableRouteMixin) {
   @service currentSession;
@@ -77,22 +78,17 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
     if (this.currentSession.canReadVlabel) {
       query['include'] = [
         'form-data.types',
-        'form-data.tax-type',
         'form-data.chart-of-account',
       ]
-      query['filter[form-data][types][:uri:]'] = config.regulationTypeUri;
-      query['filter[form-data][tax-type][:uri:]'] = config.taxTypeUri;
-      query['filter[form-data][chart-of-account][id]'] = config.marCodes.join(',');
-
+      query['filter[form-data][types][:uri:]'] = VLABEL_TYPE;
+      query['filter[form-data][chart-of-account][id]'] = VLABEL_CHART_OF_ACCOUNTS.join(',');
     } else {
-      // TODO translate this to meldingsplichtige
-      // query['include'] = [
-      //   'bestuurseenheid.classificatie',
-      //   'bestuurseenheid.provincie',
-      //   'melding.status',
-      //   'besluit-type',
-      //   'regulation-type'
-      // ].join(',');
+      query['include'] = [
+        'organization.classificatie',
+        'organization.provincie',
+        'status',
+        'form-data.types'
+      ].join(',');
     }
 
     if (params.bestuurseenheidIds)
@@ -110,32 +106,32 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
     if (params.besluitTypeIds) {
       query['filter[form-data][types][:id:]'] = params.besluitTypeIds;
       if (params.regulationTypeId)
-        query['filterform-data][types][:id:]'] = params.regulationTypeId;
+        query['filter[form-data][types][:id:]'] = params.regulationTypeId;
     }
 
     if (params.sessionDateFrom)
-      query['filter[form-data][session-started-at-time]'] = params.sessionDateFrom;
+      query['filter[form-data][:gte:session-started-at-time]'] = params.sessionDateFrom;
 
     if (params.sessionDateTo)
-      query['filter[form-data][session-started-at-time]'] = params.sessionDateTo;
+      query['filter[form-data][:lte:session-started-at-time]'] = params.sessionDateTo;
 
     if (params.sentDateFrom)
-      query['filter[form-data][date-publication][:id:]'] = params.sentDateFrom;
+      query['filter[form-data][:gte:date-publication]'] = params.sentDateFrom;
 
     if (params.sentDateTo)
-      query['filter[form-data][date-publication][:id:]'] = params.sentDateTo;
+      query['filter[:lte:sent-date]'] = params.sentDateTo;
 
     if (params.dateOfEntryIntoForceFrom)
-      query['filter[form-data][first-date-in-force][:id:]'] = moment(params.dateOfEntryIntoForceFrom).format('YYYY-MM-DD');
+      query['filter[form-data][:gte:first-date-in-force]'] = moment(params.dateOfEntryIntoForceFrom).format('YYYY-MM-DD');
 
     if (params.dateOfEntryIntoForceTo)
-      query['filter[form-data][first-date-in-force][:id:]'] = moment(params.dateOfEntryIntoForceTo).format('YYYY-MM-DD');
+      query['filter[form-data][:lte:first-date-in-force]'] = moment(params.dateOfEntryIntoForceTo).format('YYYY-MM-DD');
 
     if (params.endDateFrom)
-      query['filter[form-data][date-no-longer-in-force][:id:]'] = moment(params.endDateFrom).format('YYYY-MM-DD');
+      query['filter[form-data][:gte:date-no-longer-in-force]'] = moment(params.endDateFrom).format('YYYY-MM-DD');
 
     if (params.endDateTo)
-      query['filter[form-data][date-no-longer-in-force][:id:]'] = moment(params.endDateTo).format('YYYY-MM-DD');
+      query['filter[form-data][:lte:date-no-longer-in-force]'] = moment(params.endDateTo).format('YYYY-MM-DD');
 
     if (params.statusUri)
       query['filter[status][:uri:]'] = params.statusUri;
