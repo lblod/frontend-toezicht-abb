@@ -134,7 +134,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
       query['filter[form-data][:lte:date-no-longer-in-force]'] = moment(params.endDateTo).format('YYYY-MM-DD');
 
     if (params.statusUri)
-      query['filter[status][:uri:]'] = params.statusUri;
+      query['filter[review][status][:uri:]'] = params.statusUri;
 
     this.lastParams.commit();
 

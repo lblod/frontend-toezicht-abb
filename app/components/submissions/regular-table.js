@@ -4,9 +4,9 @@ import {tracked} from '@glimmer/tracking';
 import {action} from '@ember/object';
 import {task} from 'ember-concurrency-decorators';
 import {inject as service} from '@ember/service';
-import {TO_TREAT_STATUS} from '../../models/melding-status';
 import InzendingenFilter from '../../utils/inzendingen-filter';
 import {DECISION_TYPE} from "../../models/concept-scheme";
+import {TREAT_STATUS} from "../../models/submission-review-status";
 
 export default class SubmissionRegularTableComponent extends Component {
   @service store
@@ -64,7 +64,7 @@ export default class SubmissionRegularTableComponent extends Component {
     this.filter.statusUri = null;
 
     if (event.target.checked) {
-      this.filter.statusUri = TO_TREAT_STATUS;
+      this.filter.statusUri = TREAT_STATUS;
     }
 
     this.args.onFilterChange(this.filter);
