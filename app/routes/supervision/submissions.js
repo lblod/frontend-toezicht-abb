@@ -86,7 +86,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
       query['include'] = [
         'organization.classificatie',
         'organization.provincie',
-        'status',
+        'review.status',
         'form-data.types'
       ].join(',');
     }

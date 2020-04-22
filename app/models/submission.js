@@ -24,5 +24,6 @@ export default class Submission extends Model {
   @belongsTo('submission-document-status') status;
   @hasMany('file') files;
   @belongsTo('automatic-submission-task') task;
+  @belongsTo('submission-review') review;
 }
 

@@ -10,7 +10,7 @@ export default class SupervisionSubmissionsShowRoute extends Route {
       include: [
         'organization.classificatie',
         'organization.provincie',
-        'status',
+        'review.status',
         'form-data.types',
         'last-modifier',
       ].join(',')

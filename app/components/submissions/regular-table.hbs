@@ -82,7 +82,7 @@
         <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{sort}}
                     @class="u-visible--tablet-landscape-up"/>
       {{/unless}}
-      <ThSortable @label="Status" @field="status.label" @currentSorting={{sort}} />
+      <ThSortable @label="Status" @field="review.status" @currentSorting={{sort}} />
       <th class="u-hide-on-print"><!-- Action links --></th>
     </c.header>
     <c.body as |row|>
@@ -100,7 +100,7 @@
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
       <td>
-        <Shared::StatusPill @status={{row.status}}/>
+        <Shared::StatusPill @status={{row.review.status}}/>
       </td>
       <td class="u-hide-on-print">
         <LinkTo @route="supervision.submissions.show" @model={{row.id}}>Bekijk</LinkTo>

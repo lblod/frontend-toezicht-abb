@@ -32,6 +32,7 @@ inflector.irregular('account', 'accounts');
 inflector.irregular('file', 'files');
 inflector.irregular('document-status', 'document-statuses');
 inflector.irregular('melding-status', 'melding-statuses');
+inflector.irregular('review-status', 'review-statuses');
 inflector.irregular('inzending-voor-toezicht', 'inzendingen-voor-toezicht');
 inflector.irregular('toezicht-account-acceptance-status', 'toezicht-account-acceptance-statuses');
 inflector.irregular('toezicht-fiscal-period', 'toezicht-fiscal-periods');
