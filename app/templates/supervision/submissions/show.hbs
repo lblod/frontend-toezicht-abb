@@ -29,8 +29,13 @@
     <Submissions::Form @submission={{model}}/>
   </div>
   <div class="u-padding--round--small u-border--light--top u-hide-on-print">
-    <div class="button-group u-spacer--tiny">
-      <LinkTo @route="supervision.submissions.index" class="button button--narrow button--alt">Sluit venster</LinkTo>
-    </div>
+    {{#if this.currentSession.canWrite}}
+      <Submissions::Review @model={{await model.review}} @status={{await model.review.status}}
+                                   @onCloseRoute={{'supervision.submissions.index'}} />
+    {{else}}
+      <div class="button-group u-spacer--tiny">
+        <LinkTo @route="supervision.submissions.index" class="button button--narrow button--alt">Sluit venster</LinkTo>
+      </div>
+    {{/if}}
   </div>
 </div>

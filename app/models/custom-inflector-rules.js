@@ -33,6 +33,7 @@ inflector.irregular('file', 'files');
 inflector.irregular('document-status', 'document-statuses');
 inflector.irregular('melding-status', 'melding-statuses');
 inflector.irregular('review-status', 'review-statuses');
+inflector.irregular('review-status', 'review-statuses');
 inflector.irregular('inzending-voor-toezicht', 'inzendingen-voor-toezicht');
 inflector.irregular('toezicht-account-acceptance-status', 'toezicht-account-acceptance-statuses');
 inflector.irregular('toezicht-fiscal-period', 'toezicht-fiscal-periods');
@@ -47,5 +48,6 @@ inflector.irregular('submission-document', 'submission-documents');
 inflector.irregular('form-data', 'form-data');
 inflector.irregular('concept', 'concepts');
 inflector.irregular('concept-scheme', 'concept-schemes');
+inflector.irregular('submission-review', 'submission-reviews');
 // Meet Ember Inspector's expectation of an export
 export default {};
