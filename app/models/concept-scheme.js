@@ -7,6 +7,7 @@ export const CHART_OF_ACCOUNT = 'http://lblod.data.gift/concept-schemes/b65b15ba
 
 export default class ConceptSchemeModel extends Model {
   @attr uri
+
   @hasMany('concept', { inverse: null }) concepts
   @hasMany('concept', { inverse: null }) topConcepts
 }

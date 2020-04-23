@@ -10,6 +10,7 @@ export const VLABEL_CHART_OF_ACCOUNTS = [
 export default class ConceptModel extends Model {
   @attr uri
   @attr label
+
   @hasMany("concept-scheme", { inverse: null }) conceptSchemes
   @hasMany("concept-scheme", { inverse: null }) topConceptSchemes
 

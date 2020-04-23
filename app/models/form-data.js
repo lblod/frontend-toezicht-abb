@@ -8,7 +8,6 @@ export default class FormDataModel extends Model {
   @attr("date") firstDateInForce;
   @attr("date") dateNoLongerInForce;
   @attr authenticityType;
-  // @attr chartOfAccount;
   @attr taxType;
   @attr taxRate;
   @attr hasAdditionalTaxRate;
