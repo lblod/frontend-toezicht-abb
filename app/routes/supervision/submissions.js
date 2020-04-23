@@ -62,12 +62,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
   mergeQueryOptions(params) {
     this.lastParams.stageLive(params);
 
-    const filterParams = [
-      'size',
-      'sort'
-    ];
-
-    if (this.lastParams.anyFieldChanged(filterParams))
+    if (this.lastParams.anyFieldChanged(this.filterParams))
       params.page = 0;
 
     const query = {
@@ -78,7 +73,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
       query['include'] = [
         'form-data.types',
         'form-data.chart-of-account',
-      ]
+      ];
       query['filter[form-data][types][:uri:]'] = VLABEL_TYPE;
       query['filter[form-data][chart-of-account][id]'] = VLABEL_CHART_OF_ACCOUNTS.join(',');
     } else {
