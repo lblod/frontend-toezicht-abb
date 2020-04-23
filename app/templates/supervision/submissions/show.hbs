@@ -17,7 +17,11 @@
       <div class="grid u-spacer--tiny">
         <div class="col--6-12">
           <div class="description-data__label">Verstuurd door</div>
-          <div class="description-data__value">{{this.model.lastModifier.fullName}}</div>
+          {{#if this.model.lastModifier.fullName}}
+            <div class="description-data__value">{{this.model.lastModifier.fullName}}</div>
+          {{else if this.model.task.created}}
+            <div class="description-data__value"><p>Automatisch aangemaakt bij publicatie</p></div>
+          {{/if}}
         </div>
         <div class="col--6-12">
           <div class="description-data__label">Verstuurd op</div>
@@ -31,9 +35,9 @@
   <div class="u-padding--round--small u-border--light--top u-hide-on-print">
     {{#if this.currentSession.canWrite}}
       <Submissions::Review
-        @model={{await this.model.review}}
-        @status={{await this.model.review.status}}
-        @onCloseRoute={{'supervision.submissions.index'}} />
+              @model={{await this.model.review}}
+              @status={{await this.model.review.status}}
+              @onCloseRoute={{'supervision.submissions.index'}} />
     {{else}}
       <div class="button-group u-spacer--tiny">
         <LinkTo @route="supervision.submissions.index" class="button button--narrow button--alt">Sluit venster</LinkTo>
