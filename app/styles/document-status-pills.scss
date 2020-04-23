@@ -6,6 +6,7 @@
 
 .pill {
   &[resource^="http://data.lblod.info/melding-statuses/"],
+  &[resource^="http://lblod.data.gift/concepts/"],
   &[resource^="http://data.lblod.info/document-statuses/"] {
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 0;
@@ -24,6 +25,7 @@
     }
   }
   &[resource="http://data.lblod.info/melding-statuses/afgehandeld"]::after,
+  &[resource="http://lblod.data.gift/concepts/5b36ed48-491c-4177-ae31-31338dc46de1"]::after,
   &[resource="http://data.lblod.info/document-statuses/concept"]::after {
     background-color: #B2B2B2;
   }
@@ -31,6 +33,7 @@
     background-color: #333333;
   }
   &[resource="http://data.lblod.info/melding-statuses/te-behandelen"]::after,
+  &[resource="http://lblod.data.gift/concepts/d72999bf-2ef4-4332-bd6e-49c8a9e2498e"]::after,
   &[resource="http://data.lblod.info/document-statuses/opmerking"]::after {
     background-color: #FEE539;
   }
