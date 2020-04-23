@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import {warn} from '@ember/debug';
+import { tracked } from '@glimmer/tracking';
 
 import rdflib from 'browser-rdflib';
 import fetch from 'fetch';
@@ -11,7 +12,18 @@ const RDF = new rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
 const FORM = new rdflib.Namespace("http://lblod.data.gift/vocabularies/forms/");
 
 export default class SubmissionsFormComponent extends Component {
-  @service store;
+  @service store
+  @service router
+
+  @tracked form
+  @tracked formStore
+  @tracked graphs
+  @tracked sourceNode
+
+  constructor() {
+    super(...arguments);
+    this.loadData.perform();
+  }
 
   @task
   *loadData() {
@@ -20,8 +32,8 @@ export default class SubmissionsFormComponent extends Component {
     const submissionDocument = yield submission.submissionDocument;
 
     if (!submissionDocument) {
-      warn('No submission document, Transitioning to index.');
-      this.transitionTo('supervision.submissions');
+      warn('No submission document. Transitioning to index.');
+      this.router.transitionToRoute('supervision.submissions');
     }
 
     const response = yield fetch(`/submission-forms/${submissionDocument.id}`);
@@ -43,14 +55,9 @@ export default class SubmissionsFormComponent extends Component {
       formStore.parse(source, sourceGraph, "text/turtle");
     }
 
-    const graphs = {formGraph, sourceGraph, metaGraph};
-    const formNode = formStore.any(undefined, RDF("type"), FORM("Form"), formGraph);
-
-    return [{
-      form: formNode,
-      formStore: formStore,
-      graphs: graphs,
-      sourceNode: new rdflib.NamedNode(submissionDocument.uri)
-    }];
+    this.formStore = formStore;
+    this.graphs = {formGraph, sourceGraph, metaGraph};
+    this.form = formStore.any(undefined, RDF("type"), FORM("Form"), formGraph);
+    this.sourceNode = new rdflib.NamedNode(submissionDocument.uri);
   }
 }
