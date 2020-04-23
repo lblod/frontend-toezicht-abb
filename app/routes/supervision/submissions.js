@@ -4,7 +4,6 @@ import {inject as service} from '@ember/service';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import moment from 'moment';
 
-import config from '../../config/environment';
 import Snapshot from "../../utils/snapshot";
 import {VLABEL_CHART_OF_ACCOUNTS, VLABEL_TYPE} from "../../models/concept";
 
@@ -116,7 +115,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
       query['filter[form-data][:lte:session-started-at-time]'] = params.sessionDateTo;
 
     if (params.sentDateFrom)
-      query['filter[form-data][:gte:date-publication]'] = params.sentDateFrom;
+      query['filter[:gte:sent-date]'] = params.sentDateFrom;
 
     if (params.sentDateTo)
       query['filter[:lte:sent-date]'] = params.sentDateTo;
