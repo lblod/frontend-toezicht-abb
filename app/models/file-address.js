@@ -1,9 +1,7 @@
 import Model, { belongsTo, attr } from '@ember-data/model';
 
 export default class FileAddress extends Model {
-  @attr()
-  address;
+  @attr() address;
 
-  @belongsTo('file', { inverse: null })
-  replicatedFile;
+  @belongsTo('file', { inverse: null }) replicatedFile;
 }

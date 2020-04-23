@@ -1,12 +1,8 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
 
 export default class Account extends Model {
-  @attr()
-  voId;
+  @attr() voId;
+  @attr() provider;
 
-  @attr()
-  provider;
-
-  @belongsTo('gebruiker', { inverse: null})
-  gebruiker;
+  @belongsTo('gebruiker', { inverse: null}) gebruiker;
 }

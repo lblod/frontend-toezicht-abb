@@ -1,17 +1,11 @@
 import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class Gebruiker extends Model {
-  @attr()
-  voornaam;
+  @attr()voornaam;
+  @attr() achternaam;
 
-  @attr()
-  achternaam;
-
-  @hasMany('account', { inverse: null})
-  account;
-
-  @hasMany('bestuurseenheid')
-  bestuurseenheden;
+  @hasMany('account', { inverse: null}) account;
+  @hasMany('bestuurseenheid') bestuurseenheden;
 
   get group() {
     return this.get('bestuurseenheden.firstObject');
