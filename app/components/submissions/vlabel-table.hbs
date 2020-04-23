@@ -21,7 +21,7 @@
       <div class="col--4-12 col--6-12--m col--6-12--s">
         <label class="label--subtle form__label">Bestuurseenheid</label>
         <Filter::AdministrativeUnitSelect @value={{@filter.bestuurseenheidIds}} @onSelectionChange={{fn this.setFilter
-                                                                                                        'provincieIds'}} />
+                                                                                                        'bestuurseenheidIds'}} />
         <label class="label--subtle form__label">MAR-code</label>
         <Filter::ChartOfAccountSelect @value={{@filter.marCodeIds}} @onSelectionChange={{fn this.setFilter 'marCodeIds'}} />
       </div>
