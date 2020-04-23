@@ -29,7 +29,7 @@
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDateTime 'DD-MM-YYYY HH:mm'}}</td>
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
-      <td>{{row.status}}</td>
+      <td><label class="pill">{{capitalize row.status}}</label></td>
       <td class="u-hide-on-print"><LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo></td>
     </c.body>
   </t.content>

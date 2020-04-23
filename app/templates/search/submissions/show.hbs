@@ -2,7 +2,7 @@
   <div class="u-padding--trl--small u-border--light--bottom">
     <div class="grid">
       <div class="col--9-12 u-wide-on-print">
-        {{shared/status-pill this.model.status class="u-spacer--tiny"}}
+        <Submissions::StatusPill @status={{this.model.review.status}} class="u-spacer--tiny"/>
         <h2 class="h3">Bekijk melding</h2>
       </div>
       <div class="col--3-12 u-align-right u-hide-on-print">
@@ -29,8 +29,15 @@
     <Submissions::Form @submission={{this.model}}/>
   </div>
   <div class="u-padding--round--small u-border--light--top u-hide-on-print">
+    {{#if this.currentSession.canWrite}}
+      <Submissions::Review
+              @model={{await this.model.review}}
+              @status={{await this.model.review.status}}
+              @onCloseRoute={{'search.submissions.index'}} />
+    {{else}}
       <div class="button-group u-spacer--tiny">
         <LinkTo @route="search.submissions.index" class="button button--narrow button--alt">Sluit venster</LinkTo>
       </div>
+    {{/if}}
   </div>
 </div>
