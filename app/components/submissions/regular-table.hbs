@@ -66,7 +66,7 @@
            @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
   <t.content as |c|>
     <c.header>
-      {{#unless displaySubset}}
+      {{#unless @displaySubset}}
         <ThSortable @label="Provincie" @field="organization.provincie.naam" @currentSorting={{sort}}
                     @class="u-visible--tablet-landscape-up"/>
       {{/unless}}
@@ -86,7 +86,7 @@
       <th class="u-hide-on-print"><!-- Action links --></th>
     </c.header>
     <c.body as |row|>
-      {{#unless displaySubset}}
+      {{#unless @displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{row.organization.provincie.naam}}</td>
       {{/unless}}
       <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.organization.naam}} <span
@@ -95,7 +95,7 @@
       <td style="max-width: 250px;">
         <Submissions::Type @formData={{row.formData}}/>
       </td>
-      {{#unless displaySubset}}
+      {{#unless @displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{moment-format row.formData.sessionStartedAtTime 'DD-MM-YYYY'}}</td>
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
