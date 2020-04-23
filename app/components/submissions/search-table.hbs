@@ -3,13 +3,13 @@
 <DataTable @content={{@model}} @isLoading={{@isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}} @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
   <t.content as |c|>
     <c.header>
-      {{#unless displaySubset}}
+      {{#unless @displaySubset}}
         <th>Provincie</th>
       {{/unless}}
       <th>Bestuurseenheid</th>
       <th>Type bestuur</th>
       <th>Type document</th>
-      {{#unless displaySubset}}
+      {{#unless @displaySubset}}
         <th>Zitting / besluit</th>
         <th>Verstuurd</th>
       {{/unless}}
