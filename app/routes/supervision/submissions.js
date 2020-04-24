@@ -92,7 +92,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
       query['filter[organization][classificatie][:id:]'] = params.classificatieIds;
 
     if (params.marCodeIds)
-      query['[form-data][chart-of-account][:id:]'] = params.marCodeIds;
+      query['filter[form-data][chart-of-account][:id:]'] = params.marCodeIds;
 
     if (params.provincieIds)
       query['filter[organization][provincie][:id:]'] = params.provincieIds;
