@@ -76,7 +76,7 @@
                   @class="u-visible--tablet-portrait-up"/>
       <!-- TODO make this filterable -->
       <th>Type document</th>
-      {{#unless displaySubset}}
+      {{#unless @displaySubset}}
         <ThSortable @label="Zitting / besluit" @field="formData.sessionStartedAtTime" @currentSorting={{sort}}
                     @class="u-visible--tablet-landscape-up"/>
         <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{sort}}
