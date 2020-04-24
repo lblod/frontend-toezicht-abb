@@ -1,9 +1,9 @@
-import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import {action} from '@ember/object';
+import {inject as service} from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { timeout } from 'ember-concurrency';
-import { task, restartableTask } from 'ember-concurrency-decorators';
+import {tracked} from '@glimmer/tracking';
+import {timeout} from 'ember-concurrency';
+import {task, restartableTask} from 'ember-concurrency-decorators';
 
 export default class FilterAdministrativeUnitSelectComponent extends Component {
   @service store
@@ -17,7 +17,7 @@ export default class FilterAdministrativeUnitSelectComponent extends Component {
   }
 
   @task
-  *loadData() {
+  * loadData() {
     const options = yield this.store.query('bestuurseenheid', {
       sort: 'naam',
       include: ['classificatie']
@@ -28,7 +28,7 @@ export default class FilterAdministrativeUnitSelectComponent extends Component {
   }
 
   @restartableTask
-  *search (term) {
+  * search(term) {
     yield timeout(600);
     return this.store.query('bestuurseenheid', {
       sort: 'naam',
@@ -46,10 +46,12 @@ export default class FilterAdministrativeUnitSelectComponent extends Component {
   @action
   async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-      this.selected = await this.store.query('bestuurseenheid', {
-        filter: { id: this.args.value },
-        page: { size: this.args.value.split(',').length}
-      });
+      if (this.args.value.length > 0 && this.selected <= 0) {
+        this.selected = await this.store.query('bestuurseenheid', {
+          filter: {id: this.args.value},
+          page: {size: this.args.value.length}
+        });
+      }
     } else if (!this.args.value) {
       this.selected = null;
     }

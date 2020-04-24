@@ -58,15 +58,17 @@ export default class FilterChartOfAccountSelectComponent extends Component {
   @action
   async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-      this.selected = await this.store.query('concept', {
-        filter: {
-          id: this.args.value,
-          "concept-schemes": {
-            ":uri:": CHART_OF_ACCOUNT
-          }
-        },
-        page: {size: this.args.value.split(',').length}
-      });
+      if (this.args.value.length > 0 && this.selected <= 0) {
+        this.selected = await this.store.query('concept', {
+          filter: {
+            id: this.args.value,
+            "concept-schemes": {
+              ":uri:": CHART_OF_ACCOUNT
+            }
+          },
+          page: {size: this.args.value.split(',').length}
+        });
+      }
     } else if (!this.args.value) {
       this.selected = null;
     }
