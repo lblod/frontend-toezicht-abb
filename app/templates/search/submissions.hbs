@@ -24,7 +24,7 @@
             </div>
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Type document</label>
-              <BesluitTypeSelect @value={{this.searchType}} @onSelectionChange={{this.selectBesluitType}} />
+              <Filter::DecisionTypeSelect @value={{this.searchType}} @onSelectionChange={{this.selectBesluitType}} />
             </div>
           </div>
         </div>
@@ -39,7 +39,6 @@
         @page={{this.page}}
         @size={{this.size}}
         @displaySubset={{this.hasActiveChildRoute}}/>
-
     </div>
   </div>
   {{outlet}}
