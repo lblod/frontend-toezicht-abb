@@ -75,7 +75,7 @@
       <ThSortable @label="Type bestuur" @field="organization.classificatie.label" @currentSorting={{sort}}
                   @class="u-visible--tablet-portrait-up"/>
       <!-- TODO make this filterable -->
-      <th>Type document</th>
+      <ThSortable @field="formData.decisionType.label" @currentSorting={{this.sort}} @label="Type document"/>
       {{#unless @displaySubset}}
         <ThSortable @label="Zitting / besluit" @field="formData.sessionStartedAtTime" @currentSorting={{sort}}
                     @class="u-visible--tablet-landscape-up"/>
@@ -93,7 +93,12 @@
               class="u-hidden--tablet-landscape-up text-fade"><br>{{row.organization.classificatie.label}}</span></td>
       <td class="u-visible--tablet-landscape-up">{{row.organization.classificatie.label}}</td>
       <td style="max-width: 250px;">
-        <Submissions::Type @formData={{row.formData}}/>
+        {{#if row.formData.decisionType}}
+          <p>{{row.formData.decisionType.label}}</p>
+        {{else}}
+          <p class="text-fade">Geen type</p>
+        {{/if}}
+        <p class="text-fade">{{row.formData.regulationType.label}}</p>
       </td>
       {{#unless @displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{moment-format row.formData.sessionStartedAtTime 'DD-MM-YYYY'}}</td>
