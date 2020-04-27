@@ -1,0 +1,22 @@
+/* ==========================================================================
+   #SHAME
+   Dirty temporary css for demo purposes.
+   Some parts will be reused, but most of them will not.
+   ========================================================================== */
+
+/* ==========================================================================
+  Style power select sizes
+ ========================================================================== */
+
+.ember-power-select--small .ember-power-select-trigger {
+  font-size: 1.4rem;
+  height: 3rem;
+  line-height: 2;
+  padding-left: 0.5rem;
+} // remove when webunversum is updated
+
+.ember-power-select-option {
+  line-height: 2.2rem;
+  padding: 1rem 0 1rem 3rem;
+} // remove when webunversum is updated
+
