@@ -23,7 +23,12 @@
       <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.administrativeUnit}} <span class="u-hidden--tablet-landscape-up text-fade"><br>{{row.administrativeUnitClassification}}</span></td>
       <td class="u-visible--tablet-landscape-up">{{row.administrativeUnitClassification}}</td>
       <td style="max-width: 250px;">
-        <p>{{row.documentTypeLabel}}</p>
+        {{#if row.decisionTypeLabel}}
+          <p>{{row.decisionTypeLabel}}</p>
+        {{else}}
+          <p class="text-fade">Geen type</p>
+        {{/if}}
+        <p class="text-fade">{{row.regulationTypeLabel}}</p>
       </td>
       {{#unless @displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDateTime 'DD-MM-YYYY HH:mm'}}</td>
