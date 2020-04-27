@@ -30,7 +30,6 @@ inflector.singular(/o([a-z])en$/,'oo$1');
 inflector.singular(/([auio])s$/,'$1s');
 inflector.irregular('account', 'accounts');
 inflector.irregular('file', 'files');
-inflector.irregular('document-status', 'document-statuses');
 inflector.irregular('review-status', 'review-statuses');
 inflector.irregular('form-solution', 'form-solutions');
 inflector.irregular('form-input', 'form-inputs');
