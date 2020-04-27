@@ -23,5 +23,6 @@ export default class Submission extends Model {
   @hasMany('file') files;
   @belongsTo('automatic-submission-task') task;
   @belongsTo('submission-review') review;
+  @belongsTo('inzending-voor-toezicht') inzendingVoorToezicht;
 }
 

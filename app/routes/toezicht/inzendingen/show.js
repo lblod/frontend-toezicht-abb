@@ -1,21 +1,21 @@
 import Route from '@ember/routing/route';
 
 export default class ToezichtInzendingenShowRoute extends Route {
+
   async model(params) {
-    const inzendingen = await this.store.query('inzending-voor-toezicht', {
+
+    const submissions = await this.store.query('submission', {
       filter: {
-        id: params.id
-      },
-      include: [
-        'status',
-        'last-modifier',
-        'bestuurseenheid',
-        'inzending-type',
-        'besluit-type',
-        'bestuursorgaan',
-        'tax-rates'
-      ].join(',')
+        "inzending-voor-toezicht": {
+          id: params.id
+        }
+      }
     });
-    return inzendingen.firstObject;
+    const submission = submissions.firstObject;
+    if(submission) {
+      this.transitionTo('supervision.submissions.show', submission);
+    } else {
+      this.transitionTo('route-not-found');
+    }
   }
 }
