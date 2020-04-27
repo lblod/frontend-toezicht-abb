@@ -49,12 +49,10 @@ export default class FilterProvinceSelectComponent extends Component {
   @action
   async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-      if (this.args.value.length > 0 && this.selected <= 0) {
         this.selected = await this.store.query('werkingsgebied', {
           filter: {id: this.args.value},
-          page: {size: this.args.value.length}
+          page: {size: this.args.value.split(',').length}
         });
-      }
     } else if (!this.args.value) {
       this.selected = null;
     }

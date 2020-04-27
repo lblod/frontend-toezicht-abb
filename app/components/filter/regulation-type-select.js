@@ -59,7 +59,6 @@ export default class FilterRegulationTypeSelectComponent extends Component {
   @action
   async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-      if (this.args.value.length > 0 && this.selected <= 0) {
         this.selected = await this.store.query('concept', {
           filter: {
             id: this.args.value,
@@ -67,9 +66,8 @@ export default class FilterRegulationTypeSelectComponent extends Component {
               ":uri:": REGULATION
             }
           },
-          page: {size: this.args.value.length}
+          page: {size: this.args.value.split(',').length}
         });
-      }
     } else if (!this.args.value) {
       this.selected = null;
     }
