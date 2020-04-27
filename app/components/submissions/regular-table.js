@@ -7,6 +7,7 @@ import {inject as service} from '@ember/service';
 import InzendingenFilter from '../../utils/inzendingen-filter';
 import {DECISION_TYPE} from "../../models/concept-scheme";
 import {TREAT_STATUS} from "../../models/submission-review-status";
+import { typeOf } from '@ember/utils';
 
 export default class SubmissionRegularTableComponent extends Component {
   @service store
@@ -55,7 +56,10 @@ export default class SubmissionRegularTableComponent extends Component {
 
   @action
   setFilter(key, value) {
-    this.filter[key] = value;
+    if (typeOf(value) == 'array')
+      this.filter[key] = value.join(',');
+    else
+      this.filter[key] = value;
     this.args.onFilterChange(this.filter);
   }
 

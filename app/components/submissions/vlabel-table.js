@@ -4,6 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import InzendingenFilter from '../../utils/inzendingen-filter';
+import { typeOf } from '@ember/utils';
 
 export default class SubmissionsVlabelTableComponent extends Component {
   @service store
@@ -25,7 +26,10 @@ export default class SubmissionsVlabelTableComponent extends Component {
 
   @action
   setFilter(key, value) {
-    this.filter[key] = value;
+    if (typeOf(value) == 'array')
+      this.filter[key] = value.join(',');
+    else
+      this.filter[key] = value;
     this.args.onFilterChange(this.filter);
   }
 
