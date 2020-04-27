@@ -6,7 +6,7 @@ export default class InzendingenFilter {
   @tracked marCodeIds
   @tracked provincieIds
   @tracked besluitTypeIds
-  @tracked regulationTypeId
+  @tracked regulationTypeIds
   @tracked sessionDateFrom
   @tracked sessionDateTo
   @tracked sentDateFrom
@@ -29,7 +29,7 @@ export default class InzendingenFilter {
       'marCodeIds',
       'provincieIds',
       'besluitTypeIds',
-      'regulationTypeId',
+      'regulationTypeIds',
       'sessionDateFrom',
       'sessionDateTo',
       'sentDateFrom',

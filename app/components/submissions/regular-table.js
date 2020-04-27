@@ -80,7 +80,7 @@ export default class SubmissionRegularTableComponent extends Component {
     this.filter.besluitTypeIds = types && types.map(d => d.id);
 
     if (!this.besluitTypes.find(type => type.isRegulation))
-      this.filter.regulationTypeId = null;
+      this.filter.regulationTypeIds = null;
 
     this.args.onFilterChange(this.filter);
   }

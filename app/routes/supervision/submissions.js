@@ -18,7 +18,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
     'marCodeIds',
     'provincieIds',
     'besluitTypeIds',
-    'regulationTypeId',
+    'regulationTypeIds',
     'sessionDateFrom',
     'sessionDateTo',
     'sentDateFrom',
@@ -42,7 +42,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
     marCodeIds: {refreshModel: true},
     provincieIds: {refreshModel: true},
     besluitTypeIds: {refreshModel: true},
-    regulationTypeId: {refreshModel: true},
+    regulationTypeIds: {refreshModel: true},
     sessionDateFrom: {refreshModel: true},
     sessionDateTo: {refreshModel: true},
     sentDateFrom: {refreshModel: true},
@@ -100,8 +100,8 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
 
     if (params.besluitTypeIds) {
       query['filter[form-data][decision-type][:id:]'] = params.besluitTypeIds;
-      if (params.regulationTypeId)
-         query['filter[form-data][regulation-type][:id:]'] = params.regulationTypeId;
+      if (params.regulationTypeIds)
+         query['filter[form-data][regulation-type][:id:]'] = params.regulationTypeIds;
     }
 
     if (params.sessionDateFrom)

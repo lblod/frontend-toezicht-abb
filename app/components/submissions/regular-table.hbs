@@ -43,8 +43,8 @@
 
         {{#if this.regulationTypeIsSelected}}
           <label class="label--subtle form__label">Type reglement of verordening</label>
-          <Filter::RegulationTypeSelect @value={{@filter.regulationTypeId}} @onSelectionChange={{fn this.setFilter
-                                                                                                    'regulationTypeId'}} />
+          <Filter::RegulationTypeSelect @value={{@filter.regulationTypeIds}} @onSelectionChange={{fn this.setFilter
+                                                                                                    'regulationTypeIds'}} />
         {{/if}}
       </div>
       <div class="col--4-12 col--1-1--m col--1-1--s">

@@ -16,7 +16,7 @@ export default class ToezichtInzendingenRoute extends Route.extend(DataTableRout
     'marCodeIds',
     'provincieIds',
     'besluitTypeIds',
-    'regulationTypeId',
+    'regulationTypeIds',
     'sessionDateFrom',
     'sessionDateTo',
     'sentDateFrom',
@@ -40,7 +40,7 @@ export default class ToezichtInzendingenRoute extends Route.extend(DataTableRout
     marCodeIds: { refreshModel: true },
     provincieIds: { refreshModel: true },
     besluitTypeIds: { refreshModel: true },
-    regulationTypeId: { refreshModel: true },
+    regulationTypeIds: { refreshModel: true },
     sessionDateFrom: { refreshModel: true },
     sessionDateTo: { refreshModel: true },
     sentDateFrom: { refreshModel: true },
@@ -106,8 +106,8 @@ export default class ToezichtInzendingenRoute extends Route.extend(DataTableRout
 
     if (params.besluitTypeIds) {
       query['filter[besluit-type][id]'] = params.besluitTypeIds;
-      if (params.regulationTypeId)
-        query['filter[regulation-type][id]'] = params.regulationTypeId;
+      if (params.regulationTypeIds)
+        query['filter[regulation-type][id]'] = params.regulationTypeIds;
     }
 
     if (params.sessionDateFrom)
