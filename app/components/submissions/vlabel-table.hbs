@@ -67,7 +67,6 @@
     </c.header>
     <c.body as |row|>
       <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.organization.naam}} <span class="u-hidden--tablet-landscape-up text-fade"><br>{{row.organization.classificatie.label}}</span></td>
-      <!-- <td class="u-visible--tablet-landscape-up">{{shared/mar-label row.formData.chartOfAccount}}</td> -->
       <td class="u-visible--tablet-landscape-up">{{row.formData.chartOfAccount.notation}} - {{row.formData.chartOfAccount.label}}</td>
       {{#unless @displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{moment-format row.formData.sessionStartedAtTime 'DD-MM-YYYY'}}</td>
