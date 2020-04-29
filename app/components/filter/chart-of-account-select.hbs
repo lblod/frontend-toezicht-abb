@@ -4,11 +4,12 @@
           @search={{perform this.search}}
           @searchPlaceholder="Typ om te zoeken..."
           @searchEnabled={{true}}
+          @searchField="label"
           @loadingMessage="Aan het laden..."
           @options={{this.options}}
           @selected={{this.selected}}
           @onChange={{this.changeSelected}}
           @allowClear={{true}} as |code|>
-    {{shared/mar-label code}}
+    {{code.notation}} - {{code.label}}
   </PowerSelectMultiple>
 </div>
