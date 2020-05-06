@@ -14,7 +14,7 @@ export default class SearchSubmissionsRoute extends Route {
   queryParams = {
     administrativeUnites: { refreshModel: true },
     administrativeUnitClassifications: { refreshModel: true },
-    chartOfAccounts: { refreshModel: true },
+    // chartOfAccounts: { refreshModel: true },
     provinces: { refreshModel: true },
     decisionTypes: { refreshModel: true },
     regulationTypes: { refreshModel: true },
@@ -40,7 +40,11 @@ export default class SearchSubmissionsRoute extends Route {
     }
 
     query[`:sqs:data`] = isEmpty(params.searchString) ? "*" : params.searchString;
-    if( params.decisionTypes ) query["documentTypeUuid"] = params.decisionTypes;
+    if( params.administrativeUnites ) query["administrativeUnitUUID"] = params.administrativeUnites;
+    if( params.administrativeUnitClassifications ) query["administrativeUnitClassificationUUID"] = params.administrativeUnitClassifications;
+    if( params.provinces ) query["provinceUUID"] = params.provinces;
+    if( params.decisionTypes ) query["documentTypeUUID"] = params.decisionTypes;
+    if( params.regulationTypes ) query["regulationTypeUUID"] = params.regulationTypes;
 
     this.lastParams.commit();
 
