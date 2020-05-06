@@ -14,11 +14,14 @@ export default class SearchSubmissionsRoute extends Route {
   queryParams = {
     administrativeUnites: { refreshModel: true },
     administrativeUnitClassifications: { refreshModel: true },
-    // chartOfAccounts: { refreshModel: true },
     provinces: { refreshModel: true },
     decisionTypes: { refreshModel: true },
     regulationTypes: { refreshModel: true },
-    searchString: { refreshModel: true },
+    sessionDateFrom: { refreshModel: true },
+    sessionDateTo: { refreshModel: true },
+    sentDateFrom: { refreshModel: true },
+    sentDateTo: { refreshModel: true },
+    search: { refreshModel: true },
     page: { refreshModel: true },
     size: { refreshModel: true }
   }
@@ -39,12 +42,18 @@ export default class SearchSubmissionsRoute extends Route {
       params.page = 0;
     }
 
-    query[`:sqs:data`] = isEmpty(params.searchString) ? "*" : params.searchString;
+    query[`:sqs:data`] = isEmpty(params.search) ? "*" : params.search;
     if( params.administrativeUnites ) query["administrativeUnitUUID"] = params.administrativeUnites;
     if( params.administrativeUnitClassifications ) query["administrativeUnitClassificationUUID"] = params.administrativeUnitClassifications;
     if( params.provinces ) query["provinceUUID"] = params.provinces;
-    if( params.decisionTypes ) query["documentTypeUUID"] = params.decisionTypes;
-    if( params.regulationTypes ) query["regulationTypeUUID"] = params.regulationTypes;
+    if( params.decisionTypes ) {
+      query["documentTypeUUID"] = params.decisionTypes;
+      if (params.regulationTypeIds) query["regulationTypeUUID"] = params.regulationTypes;
+    }
+    if( params.sessionDateFrom ) query[":gte:sessionDateTime"] = params.sessionDateFrom;
+    if( params.sessionDateTo ) query[":lte:sessionDateTime"] = params.sessionDateTo;
+    if( params.sentDateFrom ) query[":gte:sentDate"] = params.sentDateFrom;
+    if( params.sentDateTo ) query[":lte:sentDate"] = params.sentDateTo;
 
     this.lastParams.commit();
 

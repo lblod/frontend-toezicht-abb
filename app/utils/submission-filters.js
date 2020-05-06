@@ -1,9 +1,10 @@
-import { tracked } from '@glimmer/tracking';
+import {tracked} from '@glimmer/tracking';
 
 export default class SubmissionFilter {
   @tracked administrativeUnites
   @tracked administrativeUnitClassifications
-  @tracked chartOfAccounts
+  // TODO vlabel search?
+  //  @tracked chartOfAccounts
   @tracked provinces
   @tracked decisionTypes
   @tracked regulationTypes
@@ -11,11 +12,13 @@ export default class SubmissionFilter {
   @tracked sessionDateTo
   @tracked sentDateFrom
   @tracked sentDateTo
-  @tracked status
-  @tracked dateOfEntryIntoForceFrom
-  @tracked dateOfEntryIntoForceTo
-  @tracked endDateFrom
-  @tracked endDateTo
+  @tracked search
+  // TODO vlabel search?
+  //  @tracked status
+  //  @tracked dateOfEntryIntoForceFrom
+  //  @tracked dateOfEntryIntoForceTo
+  //  @tracked endDateFrom
+  //  @tracked endDateTo
 
   constructor(params) {
     const keys = Object.keys(params);
@@ -26,7 +29,6 @@ export default class SubmissionFilter {
     return [
       'administrativeUnites',
       'administrativeUnitClassifications',
-      'chartOfAccounts',
       'provinces',
       'decisionTypes',
       'regulationTypes',
@@ -34,11 +36,7 @@ export default class SubmissionFilter {
       'sessionDateTo',
       'sentDateFrom',
       'sentDateTo',
-      'status',
-      'dateOfEntryIntoForceFrom',
-      'dateOfEntryIntoForceTo',
-      'endDateFrom',
-      'endDateTo'
+      'search'
     ];
   }
 

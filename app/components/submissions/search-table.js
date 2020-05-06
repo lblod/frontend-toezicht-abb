@@ -4,6 +4,7 @@ import {tracked} from "@glimmer/tracking";
 import {action} from '@ember/object';
 
 import {task} from "ember-concurrency-decorators";
+import moment from 'moment';
 
 import {DECISION_TYPE} from "../../models/concept-scheme";
 
@@ -31,9 +32,12 @@ export default class SubmissionsSearchTableComponent extends Component {
     }
   }
 
-  // TODO
   get regulationTypeIsSelected() {
     return this.decisionTypes.filterBy('isRegulation', true).length > 0;
+  }
+
+  get lastMonth() {
+    return moment().subtract(1, 'month').startOf('day');
   }
 
   @action
