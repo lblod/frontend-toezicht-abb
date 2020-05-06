@@ -1,6 +1,36 @@
 {{!-- template-lint-disable no-html-comments  --}}
 {{!-- template-lint-disable no-inline-styles  --}}
-<DataTable @content={{@model}} @isLoading={{@isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}} @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
+<div class="u-border--fat--bottom u-hide-on-print">
+  <div class="u-padding--round--small">
+    <div class="grid">
+      <div class="col--4-12 col--6-12--m col--6-12--s">
+        <label class="label--subtle form__label">Bestuurseenheid</label>
+        <Filter::AdministrativeUnitSelect @value={{@filter.administrativeUnites}} @onSelectionChange={{fn @setFilter
+                                                                                                        'administrativeUnites'}} />
+
+        <label class="label--subtle form__label">Provincie</label>
+        <Filter::ProvinceSelect @value={{@filter.provinces}} @onSelectionChange={{fn @setFilter
+                                                                                        'provinces'}} />
+      </div>
+      <div class="col--4-12 col--6-12--m col--6-12--s">
+        <label class="label--subtle form__label">Type bestuur</label>
+        <Filter::AdministrativeUnitClassificationSelect @value={{@filter.administrativeUnitClassifications}} @onSelectionChange={{fn
+        @setFilter 'administrativeUnitClassifications'}} />
+
+        <label class="label--subtle form__label">Type document</label>
+        <Filter::DecisionTypeSelect @value={{@filter.decisionTypes}} @onSelectionChange={{this.selectDecisionTypes}} />
+
+        {{#if this.regulationTypeIsSelected}}
+          <label class="label--subtle form__label">Type reglement of verordening</label>
+          <Filter::RegulationTypeSelect @value={{@filter.regulationTypes}} @onSelectionChange={{fn @setFilter
+                                                                                                     'regulationTypes'}} />
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
+<DataTable @content={{@model}} @isLoading={{@isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}}
+           @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
   <t.content as |c|>
     <c.header>
       {{#unless @displaySubset}}
@@ -20,7 +50,8 @@
       {{#unless @displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{row.province}}</td>
       {{/unless}}
-      <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.administrativeUnit}} <span class="u-hidden--tablet-landscape-up text-fade"><br>{{row.administrativeUnitClassification}}</span></td>
+      <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.administrativeUnit}} <span
+              class="u-hidden--tablet-landscape-up text-fade"><br>{{row.administrativeUnitClassification}}</span></td>
       <td class="u-visible--tablet-landscape-up">{{row.administrativeUnitClassification}}</td>
       <td style="max-width: 250px;">
         {{#if row.decisionTypeLabel}}
@@ -35,7 +66,9 @@
         <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
       {{/unless}}
       <td><label class="pill">{{capitalize row.status}}</label></td>
-      <td class="u-hide-on-print"><LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo></td>
+      <td class="u-hide-on-print">
+        <LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo>
+      </td>
     </c.body>
   </t.content>
 </DataTable>

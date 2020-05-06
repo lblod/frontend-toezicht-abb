@@ -1,5 +1,6 @@
 <div class="grid grid--collapse">
-  <div class="{{if this.hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up" "col--12-12"}}">
+  <div class="{{if this.hasActiveChildRoute "col--7-12 u-hidden--tablet-portrait-up u-visible--tablet-landscape-up"
+                   "col--12-12"}}">
     <div class="container-flex--contain">
       <div class="u-border--fat--bottom u-hide-on-print">
         <div class="u-padding--round--small">
@@ -10,7 +11,7 @@
 
             <div class="col--8-12 col--1-1--s u-align-right--tablet-portrait-up">
               <WuButtonGroup>
-                <AcmidmLogout @class="button button--alt button--small u-spacer--bottom--none u-hidden-mobile" />
+                <AcmidmLogout @class="button button--alt button--small u-spacer--bottom--none u-hidden-mobile"/>
               </WuButtonGroup>
             </div>
 
@@ -19,12 +20,8 @@
             <div class="col--4-12 col--6-12--m col--6-12--s">
               <label class="label--subtle form__label">Zoekterm</label>
               <div>
-                <Input @value={{this.searchString}} placeholder="fiets" />
+                <Input @value={{this.searchString}} placeholder="fiets"/>
               </div>
-            </div>
-            <div class="col--4-12 col--6-12--m col--6-12--s">
-              <label class="label--subtle form__label">Type document</label>
-              <Filter::DecisionTypeSelect @value={{this.searchType}} @onSelectionChange={{this.selectBesluitType}} />
             </div>
           </div>
         </div>
@@ -33,12 +30,15 @@
       <WuAlert @title="Waarschuwing">Deze pagina is gebouwd voor demo doeleinden en bevat geen recente data.</WuAlert>
 
       <Submissions::SearchTable @class="container-flex--contain"
-        @model={{this.model}}
-        @isLoading={{this.isLoadingModel}}
-        @sort={{this.sort}}
-        @page={{this.page}}
-        @size={{this.size}}
-        @displaySubset={{this.hasActiveChildRoute}}/>
+                                @model={{this.model}}
+                                @isLoading={{this.isLoadingModel}}
+                                @filter={{this.filter}}
+                                @setFilter={{this.setFilter}}
+                                @onFilterChange={{this.updateQueryParams}}
+                                @sort={{this.sort}}
+                                @page={{this.page}}
+                                @size={{this.size}}
+                                @displaySubset={{this.hasActiveChildRoute}}/>
     </div>
   </div>
   {{outlet}}

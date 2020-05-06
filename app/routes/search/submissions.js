@@ -4,12 +4,20 @@ import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import search from '../../utils/mu-search';
 import Snapshot from '../../utils/snapshot';
+import SubmissionFilter from "../../utils/submission-filters";
+import {tracked} from "@glimmer/tracking";
 
 export default class SearchSubmissionsRoute extends Route {
   @service currentSession;
+  @tracked filter;
 
   queryParams = {
-    searchType: { refreshModel: true },
+    administrativeUnites: { refreshModel: true },
+    administrativeUnitClassifications: { refreshModel: true },
+    chartOfAccounts: { refreshModel: true },
+    provinces: { refreshModel: true },
+    decisionTypes: { refreshModel: true },
+    regulationTypes: { refreshModel: true },
     searchString: { refreshModel: true },
     page: { refreshModel: true },
     size: { refreshModel: true }
@@ -23,19 +31,20 @@ export default class SearchSubmissionsRoute extends Route {
   }
 
   model(params){
-    const filter = {};
-
+    this.filter = new SubmissionFilter(params);
     this.lastParams.stageLive( params );
-    if( !this.lastParams.fieldChanged( "page" ) ) {
+    const query = {};
+
+    if( !this.lastParams.anyFieldChanged(this.filter.keys) ) {
       params.page = 0;
     }
 
-    filter[`:sqs:data`] = isEmpty(params.searchString) ? "*" : params.searchString;
-    if( params.searchType ) filter["documentTypeUuid"] = params.searchType;
+    query[`:sqs:data`] = isEmpty(params.searchString) ? "*" : params.searchString;
+    if( params.decisionTypes ) query["documentTypeUuid"] = params.decisionTypes;
 
     this.lastParams.commit();
 
-    return search('/search/submissions', params.page, params.size, filter, function(item) {
+    return search('/search/submissions', params.page, params.size, query, function(item) {
       item.attributes.id = item.id;
       return item.attributes;
     });
@@ -44,8 +53,9 @@ export default class SearchSubmissionsRoute extends Route {
   setupController(controller) {
     super.setupController(...arguments);
 
-    if( controller.page != this.lastParams.committed.page )
+    if( controller.page !== this.lastParams.committed.page )
       controller.set('page', this.lastParams.committed.page );
+    controller.set('filter', this.filter);
   }
 
   @action
