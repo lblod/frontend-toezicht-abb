@@ -10,6 +10,16 @@
       </div>
       <div class="col--8-12 col--1-1--s u-align-right--tablet-portrait-up">
         <WuButtonGroup>
+          <div class="u-display--inline-block u-padding--right--small">
+            <div class="checkbox--switch__wrapper">
+              <WuSwitch @label="Toon enkel te behandelen dossiers" @checked={{this.isStatusFilterEnabled}}
+                        @onClick={{this.setToTreatStatus}} />
+            </div>
+          </div>
+          <WuButton @onClick={{this.resetFilters}} @isDark={{true}} @isLink={{true}} @isNarrow={{true}}
+                    @class="u-spacer--bottom--none">
+            <i class="vi vi-cross vi-u-link button__icon" aria-hidden="true"></i> Herstel alle filters
+          </WuButton>
           <AcmidmLogout @class="button button--alt button--small u-spacer--bottom--none u-hidden-mobile"/>
         </WuButtonGroup>
       </div>

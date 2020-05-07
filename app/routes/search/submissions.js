@@ -22,6 +22,7 @@ export default class SearchSubmissionsRoute extends Route {
     sentDateFrom: { refreshModel: true },
     sentDateTo: { refreshModel: true },
     search: { refreshModel: true },
+    status: {refreshModel: true},
     page: { refreshModel: true },
     size: { refreshModel: true }
   }
@@ -54,6 +55,7 @@ export default class SearchSubmissionsRoute extends Route {
     if( params.sessionDateTo ) query[":lte:sessionDateTime"] = params.sessionDateTo;
     if( params.sentDateFrom ) query[":gte:sentDate"] = params.sentDateFrom;
     if( params.sentDateTo ) query[":lte:sentDate"] = params.sentDateTo;
+    if( params.status ) query["statusUUID"] = params.status;
 
     this.lastParams.commit();
 

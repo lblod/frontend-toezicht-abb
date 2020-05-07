@@ -13,8 +13,8 @@ export default class SubmissionFilter {
   @tracked sentDateFrom
   @tracked sentDateTo
   @tracked search
+  @tracked status
   // TODO vlabel search?
-  //  @tracked status
   //  @tracked dateOfEntryIntoForceFrom
   //  @tracked dateOfEntryIntoForceTo
   //  @tracked endDateFrom
@@ -36,7 +36,8 @@ export default class SubmissionFilter {
       'sessionDateTo',
       'sentDateFrom',
       'sentDateTo',
-      'search'
+      'search',
+      'status'
     ];
   }
 
