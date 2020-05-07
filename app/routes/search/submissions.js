@@ -49,13 +49,13 @@ export default class SearchSubmissionsRoute extends Route {
     }
 
     query[`:sqs:data`] = isEmpty(params.search) ? "*" : params.search;
-    if( params.administrativeUnites ) query[":terms:administrativeUnitUUID"] = params.administrativeUnites;
-    if( params.administrativeUnitClassifications ) query[":terms:administrativeUnitClassificationUUID"] = params.administrativeUnitClassifications;
+    if( params.administrativeUnites ) query["administrativeUnitUUID"] = params.administrativeUnites;
+    if( params.administrativeUnitClassifications ) query["administrativeUnitClassificationUUID"] = params.administrativeUnitClassifications;
     if( params.chartOfAccounts ) query[":terms:chartOfAccountUUID"] = params.chartOfAccounts;
-    if( params.provinces ) query[":terms:provinceUUID"] = params.provinces;
+    if( params.provinces ) query["provinceUUID"] = params.provinces;
     if( params.decisionTypes ) {
-      query[":terms:documentTypeUUID"] = params.decisionTypes;
-      if (params.regulationTypeIds) query[":terms:regulationTypeUUID"] = params.regulationTypes;
+      query["documentTypeUUID"] = params.decisionTypes;
+      if (params.regulationTypes) query["regulationTypeUUID"] = params.regulationTypes;
     }
     if( params.sessionDateFrom ) query[":gte:sessionDateTime"] = params.sessionDateFrom;
     if( params.sessionDateTo ) query[":lte:sessionDateTime"] = params.sessionDateTo;
@@ -65,7 +65,7 @@ export default class SearchSubmissionsRoute extends Route {
     if( params.dateOfEntryIntoForceTo ) query[":lte:dateOfEntryIntoForce"] = params.dateOfEntryIntoForceTo;
     if( params.endDateFrom ) query[":gte:endDate"] = params.endDateFrom;
     if( params.endDateTo ) query[":lte:endDate"] = params.endDateTo;
-    if( params.status ) query[":terms:statusUUID"] = params.status;
+    if( params.status ) query["statusUUID"] = params.status;
 
     this.lastParams.commit();
 
