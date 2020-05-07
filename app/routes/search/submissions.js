@@ -14,6 +14,7 @@ export default class SearchSubmissionsRoute extends Route {
   queryParams = {
     administrativeUnites: { refreshModel: true },
     administrativeUnitClassifications: { refreshModel: true },
+    chartOfAccounts: { refreshModel: true },
     provinces: { refreshModel: true },
     decisionTypes: { refreshModel: true },
     regulationTypes: { refreshModel: true },
@@ -22,6 +23,10 @@ export default class SearchSubmissionsRoute extends Route {
     sentDateFrom: { refreshModel: true },
     sentDateTo: { refreshModel: true },
     search: { refreshModel: true },
+    dateOfEntryIntoForceFrom: { refreshModel: true },
+    dateOfEntryIntoForceTo: { refreshModel: true },
+    endDateFrom: { refreshModel: true },
+    endDateTo: { refreshModel: true },
     status: {refreshModel: true},
     page: { refreshModel: true },
     size: { refreshModel: true }
@@ -44,18 +49,23 @@ export default class SearchSubmissionsRoute extends Route {
     }
 
     query[`:sqs:data`] = isEmpty(params.search) ? "*" : params.search;
-    if( params.administrativeUnites ) query["administrativeUnitUUID"] = params.administrativeUnites;
-    if( params.administrativeUnitClassifications ) query["administrativeUnitClassificationUUID"] = params.administrativeUnitClassifications;
-    if( params.provinces ) query["provinceUUID"] = params.provinces;
+    if( params.administrativeUnites ) query[":terms:administrativeUnitUUID"] = params.administrativeUnites;
+    if( params.administrativeUnitClassifications ) query[":terms:administrativeUnitClassificationUUID"] = params.administrativeUnitClassifications;
+    if( params.chartOfAccounts ) query[":terms:chartOfAccountUUID"] = params.chartOfAccounts;
+    if( params.provinces ) query[":terms:provinceUUID"] = params.provinces;
     if( params.decisionTypes ) {
-      query["documentTypeUUID"] = params.decisionTypes;
-      if (params.regulationTypeIds) query["regulationTypeUUID"] = params.regulationTypes;
+      query[":terms:documentTypeUUID"] = params.decisionTypes;
+      if (params.regulationTypeIds) query[":terms:regulationTypeUUID"] = params.regulationTypes;
     }
     if( params.sessionDateFrom ) query[":gte:sessionDateTime"] = params.sessionDateFrom;
     if( params.sessionDateTo ) query[":lte:sessionDateTime"] = params.sessionDateTo;
     if( params.sentDateFrom ) query[":gte:sentDate"] = params.sentDateFrom;
     if( params.sentDateTo ) query[":lte:sentDate"] = params.sentDateTo;
-    if( params.status ) query["statusUUID"] = params.status;
+    if( params.dateOfEntryIntoForceFrom ) query[":gte:dateOfEntryIntoForce"] = params.dateOfEntryIntoForceFrom;
+    if( params.dateOfEntryIntoForceTo ) query[":lte:dateOfEntryIntoForce"] = params.dateOfEntryIntoForceTo;
+    if( params.endDateFrom ) query[":gte:endDate"] = params.endDateFrom;
+    if( params.endDateTo ) query[":lte:endDate"] = params.endDateTo;
+    if( params.status ) query[":terms:statusUUID"] = params.status;
 
     this.lastParams.commit();
 

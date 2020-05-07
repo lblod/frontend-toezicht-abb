@@ -29,14 +29,17 @@
     <WuAlert @title="Waarschuwing">Deze pagina is gebouwd voor demo doeleinden en bevat geen recente data.</WuAlert>
 
     <!-- FILTERS -->
-    <div class="grid">
-      <div class="col--12-12 col--12-12--m col--12-12--s u-spacer--bottom--small">
+    <div class="grid u-spacer--bottom--small">
+      <div class="col--12-12 col--12-12--m col--12-12--s">
         <AuLabel>Zoekterm</AuLabel>
         <AuInput
-        @width={{"block"}}
-        @value={{@filter.search}}
-        {{on "change" (fn @setFilter @filter.search 'search')}}/>
+                @width={{"block"}}
+                @value={{@filter.search}}
+          {{on "change" (fn @setFilter @filter.search 'search')}}/>
       </div>
+    </div>
+    <AuLabel>Regular filters</AuLabel>
+    <div class="grid u-spacer--bottom--small">
       <div class="col--4-12 col--6-12--m col--6-12--s">
         <label class="label--subtle form__label">Bestuurseenheid</label>
         <Filter::AdministrativeUnitSelect @value={{@filter.administrativeUnites}} @onSelectionChange={{fn @setFilter
@@ -73,6 +76,30 @@
                                @fromValue={{@filter.sessionDateFrom}} @toValue={{@filter.sessionDateTo}}
                                @onChangeFromValue={{fn @setFilter 'sessionDateFrom'}} @onChangeToValue={{fn @setFilter
                                                                                                             'sessionDateTo'}} />
+          </div>
+        </div>
+      </div>
+    </div>
+    <AuLabel>Vlabel specific filters</AuLabel>
+    <div class="grid">
+      <div class="col--4-12 col--6-12--m col--6-12--s">
+        <label class="label--subtle form__label">MAR-code</label>
+        <Filter::ChartOfAccountSelect @value={{@filter.chartOfAccounts}} @onSelectionChange={{fn @setFilter
+                                                                                            'chartOfAccounts'}} />
+      </div>
+      <div class="col--4-12 col--1-1--m col--1-1--s">
+        <div class="grid">
+          <div class="col--1-1 col--6-12--m">
+            <Filter::DateRange @label="Geldt vanaf" @defaultToDate={{this.nextYear}}
+                               @fromValue={{@filter.dateOfEntryIntoForceFrom}}
+                               @toValue={{@filter.dateOfEntryIntoForceTo}} @onChangeFromValue={{fn @setFilter
+                                                                                                   'dateOfEntryIntoForceFrom'}}
+                               @onChangeToValue={{fn @setFilter 'dateOfEntryIntoForceTo'}} />
+          </div>
+          <div class="col--1-1 col--6-12--m">
+            <Filter::DateRange @label="Geldt tot" @defaultToDate={{this.nextYear}} @fromValue={{@filter.endDateFrom}}
+                               @toValue={{@filter.endDateTo}} @onChangeFromValue={{fn @setFilter 'endDateFrom'}}
+                               @onChangeToValue={{fn @setFilter 'endDateTo'}} />
           </div>
         </div>
       </div>

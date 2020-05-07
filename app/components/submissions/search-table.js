@@ -33,12 +33,16 @@ export default class SubmissionsSearchTableComponent extends Component {
     }
   }
 
-  get regulationTypeIsSelected() {
-    return this.decisionTypes.filterBy('isRegulation', true).length > 0;
+  get nextYear() {
+    return moment().add(1, 'year').startOf('day');
   }
 
   get lastMonth() {
     return moment().subtract(1, 'month').startOf('day');
+  }
+
+  get regulationTypeIsSelected() {
+    return this.decisionTypes.filterBy('isRegulation', true).length > 0;
   }
 
   get isStatusFilterEnabled() {
