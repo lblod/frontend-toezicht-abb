@@ -39,7 +39,7 @@ export default class SearchSubmissionsRoute extends Route {
     this.lastParams.stageLive( params );
     const query = {};
 
-    if( !this.lastParams.anyFieldChanged(this.filter.keys) ) {
+    if(this.lastParams.anyFieldChanged(this.filter.keys) ) {
       params.page = 0;
     }
 
