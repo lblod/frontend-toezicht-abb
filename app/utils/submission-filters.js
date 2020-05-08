@@ -15,8 +15,8 @@ export default class SubmissionFilter {
   @tracked status
   @tracked dateOfEntryIntoForceFrom
   @tracked dateOfEntryIntoForceTo
-  @tracked endDateFrom
-  @tracked endDateTo
+  @tracked dateNoLongerInForceFrom
+  @tracked dateNoLongerInForceTo
 
   constructor(params) {
     const keys = Object.keys(params);
@@ -39,8 +39,8 @@ export default class SubmissionFilter {
       'status',
       'dateOfEntryIntoForceFrom',
       'dateOfEntryIntoForceTo',
-      'endDateFrom',
-      'endDateTo'
+      'dateNoLongerInForceFrom',
+      'dateNoLongerInForceTo'
     ];
   }
 

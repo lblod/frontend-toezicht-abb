@@ -63,8 +63,8 @@ export default class SearchSubmissionsRoute extends Route {
     if( params.sentDateTo ) query[":lte:sentDate"] = params.sentDateTo;
     if( params.dateOfEntryIntoForceFrom ) query[":gte:dateOfEntryIntoForce"] = params.dateOfEntryIntoForceFrom;
     if( params.dateOfEntryIntoForceTo ) query[":lte:dateOfEntryIntoForce"] = params.dateOfEntryIntoForceTo;
-    if( params.endDateFrom ) query[":gte:endDate"] = params.endDateFrom;
-    if( params.endDateTo ) query[":lte:endDate"] = params.endDateTo;
+    if( params.dateNoLongerInForceFrom ) query[":gte:dateNoLongerInForce"] = params.dateNoLongerInForceFrom;
+    if( params.dateNoLongerInForceTo ) query[":lte:dateNoLongerInForce"] = params.dateNoLongerInForceTo;
     if( params.status ) query["statusUUID"] = params.status;
 
     this.lastParams.commit();
