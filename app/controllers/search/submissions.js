@@ -16,11 +16,6 @@ export default class SearchSubmissionsController extends Controller {
   }
 
   @action
-  selectBesluitType(type) {
-    this.set('searchType', type && type.map(t => t.id));
-  }
-
-  @action
   setFilter(key, value) {
     if (typeOf(value) === 'array') {
       this.filter[key] = value.join(',');
