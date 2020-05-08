@@ -25,8 +25,8 @@ export default class SearchSubmissionsRoute extends Route {
     search: { refreshModel: true },
     dateOfEntryIntoForceFrom: { refreshModel: true },
     dateOfEntryIntoForceTo: { refreshModel: true },
-    endDateFrom: { refreshModel: true },
-    endDateTo: { refreshModel: true },
+    dateNoLongerInForceFrom: { refreshModel: true },
+    dateNoLongerInForceTo: { refreshModel: true },
     status: {refreshModel: true},
     page: { refreshModel: true },
     size: { refreshModel: true }
