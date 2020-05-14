@@ -35,7 +35,7 @@
         <AuInput
                 @width={{"block"}}
                 @value={{@filter.search}}
-          {{on "change" (fn @setFilter @filter.search 'search')}}/>
+          {{on "keyup" (fn @setFilter @filter.search 'search')}}/>
       </div>
     </div>
     <AuLabel>Regular filters</AuLabel>
@@ -85,7 +85,7 @@
       <div class="col--4-12 col--6-12--m col--6-12--s">
         <label class="label--subtle form__label">MAR-code</label>
         <Filter::ChartOfAccountSelect @value={{@filter.chartOfAccounts}} @onSelectionChange={{fn @setFilter
-                                                                                            'chartOfAccounts'}} />
+                                                                                                 'chartOfAccounts'}} />
       </div>
       <div class="col--4-12 col--1-1--m col--1-1--s">
         <div class="grid">
@@ -97,8 +97,10 @@
                                @onChangeToValue={{fn @setFilter 'dateOfEntryIntoForceTo'}} />
           </div>
           <div class="col--1-1 col--6-12--m">
-            <Filter::DateRange @label="Geldt tot" @defaultToDate={{this.nextYear}} @fromValue={{@filter.dateNoLongerInForceFrom}}
-                               @toValue={{@filter.dateNoLongerInForceTo}} @onChangeFromValue={{fn @setFilter 'dateNoLongerInForceFrom'}}
+            <Filter::DateRange @label="Geldt tot" @defaultToDate={{this.nextYear}}
+                               @fromValue={{@filter.dateNoLongerInForceFrom}}
+                               @toValue={{@filter.dateNoLongerInForceTo}} @onChangeFromValue={{fn @setFilter
+                                                                                                  'dateNoLongerInForceFrom'}}
                                @onChangeToValue={{fn @setFilter 'dateNoLongerInForceTo'}} />
           </div>
         </div>
