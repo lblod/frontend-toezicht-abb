@@ -35,7 +35,7 @@
         <AuInput
                 @width={{"block"}}
                 @value={{@filter.search}}
-          {{on "keyup" (fn @setFilter @filter.search 'search')}}/>
+          {{on "keyup" (perform this.search)}}/>
       </div>
     </div>
     <AuLabel>Regular filters</AuLabel>

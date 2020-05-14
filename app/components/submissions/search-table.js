@@ -3,7 +3,8 @@ import {tracked} from "@glimmer/tracking";
 
 import {action} from '@ember/object';
 
-import {task} from "ember-concurrency-decorators";
+import { timeout } from 'ember-concurrency';
+import {task, restartableTask} from "ember-concurrency-decorators";
 import moment from 'moment';
 
 import {DECISION_TYPE} from "../../models/concept-scheme";
@@ -53,6 +54,12 @@ export default class SubmissionsSearchTableComponent extends Component {
     // TODO remove-function once WuSwitch isn't 2-way bounded anymore
     // This setter has no meaning because the status is correctly updated by the setToTreatStatus
     return this._blackhole = value;
+  }
+
+  @restartableTask
+  *search() {
+    yield timeout(250);
+    this.args.setFilter(this.args.filter.search, 'search');
   }
 
   @action
