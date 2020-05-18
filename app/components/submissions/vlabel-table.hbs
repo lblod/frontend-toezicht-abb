@@ -53,16 +53,16 @@
 <DataTable @content={{@model}} @isLoading={{@isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}} @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
   <t.content as |c|>
     <c.header>
-      <ThSortable @label="Bestuurseenheid" @field="organization" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
+      <ThSortable @label="Bestuurseenheid" @field="organization" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
       <!-- TODO find out what field this is -->
-      <ThSortable @label="MAR-code" @field="formData.chartOfAccount" @currentSorting={{sort}} @class="u-visible--tablet-portrait-up" />
+      <ThSortable @label="MAR-code" @field="formData.chartOfAccount" @currentSorting={{@sort}} @class="u-visible--tablet-portrait-up" />
       {{#unless @displaySubset}}
-        <ThSortable @label="Zitting / besluit" @field="formData.sessionStartedAtTime" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
-        <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
+        <ThSortable @label="Zitting / besluit" @field="formData.sessionStartedAtTime" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
+        <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
       {{/unless}}
       <!-- TODO find equivalent -->
-      <ThSortable @label="Geldt vanaf" @field="formData.firstDateInForce" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
-      <ThSortable @label="Geldt tot" @field="formData.dateNoLongerInForce" @currentSorting={{sort}} @class="u-visible--tablet-landscape-up" />
+      <ThSortable @label="Geldt vanaf" @field="formData.firstDateInForce" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
+      <ThSortable @label="Geldt tot" @field="formData.dateNoLongerInForce" @currentSorting={{@sort}} @class="u-visible--tablet-landscape-up" />
       <th class="u-hide-on-print"><!-- Actions --></th>
     </c.header>
     <c.body as |row|>

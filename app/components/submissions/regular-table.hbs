@@ -67,22 +67,22 @@
   <t.content as |c|>
     <c.header>
       {{#unless @displaySubset}}
-        <ThSortable @label="Provincie" @field="organization.provincie.naam" @currentSorting={{sort}}
+        <ThSortable @label="Provincie" @field="organization.provincie.naam" @currentSorting={{@sort}}
                     @class="u-visible--tablet-landscape-up"/>
       {{/unless}}
-      <ThSortable @label="Bestuurseenheid" @field="organization" @currentSorting={{sort}}
+      <ThSortable @label="Bestuurseenheid" @field="organization" @currentSorting={{@sort}}
                   @class="u-visible--tablet-landscape-up"/>
-      <ThSortable @label="Type bestuur" @field="organization.classificatie.label" @currentSorting={{sort}}
+      <ThSortable @label="Type bestuur" @field="organization.classificatie.label" @currentSorting={{@sort}}
                   @class="u-visible--tablet-portrait-up"/>
       <!-- TODO make this filterable -->
-      <ThSortable @field="formData.decisionType.label" @currentSorting={{this.sort}} @label="Type document"/>
+      <ThSortable @field="formData.decisionType.label" @currentSorting={{@sort}} @label="Type document"/>
       {{#unless @displaySubset}}
-        <ThSortable @label="Zitting / besluit" @field="formData.sessionStartedAtTime" @currentSorting={{sort}}
+        <ThSortable @label="Zitting / besluit" @field="formData.sessionStartedAtTime" @currentSorting={{@sort}}
                     @class="u-visible--tablet-landscape-up"/>
-        <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{sort}}
+        <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{@sort}}
                     @class="u-visible--tablet-landscape-up"/>
       {{/unless}}
-      <ThSortable @label="Status" @field="review.status" @currentSorting={{sort}} />
+      <ThSortable @label="Status" @field="review.status" @currentSorting={{@sort}} />
       <th class="u-hide-on-print"><!-- Action links --></th>
     </c.header>
     <c.body as |row|>
