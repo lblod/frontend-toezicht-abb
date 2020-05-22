@@ -44,3 +44,33 @@
     background-color: #B2B2B2;
   }
 }
+
+/* ==========================================================================
+  Status pills new
+  Style what status pills look like here.
+ ========================================================================== */
+
+$au-pill-color-success                : $au-white !default;
+$au-pill-background-color-success     : $au-green-700 !default;
+$au-pill-border-color-success         : $au-green-700 !default;
+$au-pill-color-warning                : $au-yellow-900 !default;
+$au-pill-background-color-warning     : $au-yellow-400 !default;
+$au-pill-border-color-warning         : $au-yellow-400 !default;
+
+.au-c-pill {
+  font-size: 1.2rem !important;
+
+  &[resource="http://lblod.data.gift/concepts/5b36ed48-491c-4177-ae31-31338dc46de1"],
+  &[resource="Afgehandeld"] {
+    color: $au-pill-color-success !important;
+    background-color: $au-pill-background-color-success !important;
+    border-color: $au-pill-border-color-success !important;
+  }
+
+  &[resource="http://lblod.data.gift/concepts/d72999bf-2ef4-4332-bd6e-49c8a9e2498e"],
+  &[resource="Te behandelen"] {
+    color: $au-pill-color-warning !important;
+    background-color: $au-pill-background-color-warning !important;
+    border-color: $au-pill-border-color-warning !important;
+  }
+}
