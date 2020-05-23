@@ -20,3 +20,66 @@
   padding: 1rem 0 1rem 3rem;
 } // remove when webunversum is updated
 
+.au-c-main-container {
+  height: 100%;
+}
+
+.au-u-border-bottom {
+  border-bottom: .1rem solid $au-gray-300;
+}
+
+.au-c-hr {
+  margin: $au-unit 0;
+  border: none;
+  border-bottom: 1px solid $au-gray-300;
+}
+
+.date-range__group {
+  width: 100%;
+  float: none;
+  margin: $au-unit-small 0;
+}
+
+.date-range__group+.date-range__group {
+  margin-left: 0;
+}
+
+.date-range__label {
+  width: 4rem;
+}
+
+.au-c-main-container {
+
+  @include mq($until: large) {
+    overflow: scroll;
+  }
+}
+
+.au-c-main-container__content {
+  flex-basis: 100%;
+
+  @include mq($until: large) {
+    overflow: visible;
+    height: auto;
+  }
+
+  @include mq($from: large) {
+    height: 100%;
+    flex-basis: 0;
+    flex-grow: 999;
+  }
+}
+
+.au-c-main-container__sidebar {
+  flex-basis: 100%;
+
+  @include mq($until: large) {
+    overflow: visible;
+    height: auto;
+  }
+
+  @include mq($from: large) {
+    flex-basis: 35rem;
+    height: 100%;
+  }
+}
