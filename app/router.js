@@ -9,7 +9,11 @@ export default class Router extends EmberRouter {
 Router.map(function() {
   this.route('login');
 
-  this.route('toezicht.inzendingen.show', { path: '/toezicht/inzendingen/:id' });
+  this.route('toezicht', function() { // keep supporting old inzending URLs
+    this.route('inzendingen', function() {
+      this.route('show', { path: '/:id' });
+    });
+  });
 
   this.route('supervision', function() {
     this.route('submissions', function() {
