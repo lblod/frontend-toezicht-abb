@@ -2,7 +2,9 @@
   <PowerSelectMultiple
           @placeholder="MAR7300, MAR7304, ..."
           @search={{perform this.search}}
-          @searchEnabled={{false}}
+          @searchPlaceholder="Typ om te zoeken..."
+          @searchEnabled={{true}}
+          @searchField="label"
           @loadingMessage="Aan het laden..."
           @options={{this.options}}
           @selected={{this.selected}}
