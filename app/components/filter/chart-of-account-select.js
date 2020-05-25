@@ -50,6 +50,11 @@ export default class FilterChartOfAccountSelectComponent extends Component {
   }
 
   @action
+  matcher(option, searchTerm) {
+    return `${option.notation} - ${option.label}`.indexOf(searchTerm);
+  }
+
+  @action
   changeSelected(selected) {
     this.selected = selected;
     this.args.onSelectionChange(selected && selected.map(d => d.get('id')));
