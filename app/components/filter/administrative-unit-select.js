@@ -54,4 +54,8 @@ export default class FilterAdministrativeUnitSelectComponent extends Component {
       this.selected = null;
     }
   }
+
+  optionTemplate(option) {
+    return `${option.naam} (${option.classificatie.label})`;
+  }
 }

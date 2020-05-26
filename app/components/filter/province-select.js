@@ -1,9 +1,9 @@
-import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import {action} from '@ember/object';
+import {inject as service} from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { timeout } from 'ember-concurrency';
-import { task, restartableTask } from 'ember-concurrency-decorators';
+import {tracked} from '@glimmer/tracking';
+import {timeout} from 'ember-concurrency';
+import {task, restartableTask} from 'ember-concurrency-decorators';
 
 export default class FilterProvinceSelectComponent extends Component {
   @service store
@@ -17,7 +17,7 @@ export default class FilterProvinceSelectComponent extends Component {
   }
 
   @task
-  *loadData() {
+  * loadData() {
     const options = yield this.store.query('werkingsgebied', {
       filter: {
         niveau: 'provincie'
@@ -30,7 +30,7 @@ export default class FilterProvinceSelectComponent extends Component {
   }
 
   @restartableTask
-  *search (term) {
+  * search(term) {
     yield timeout(600);
     return this.store.query('werkingsgebied', {
       filter: {
@@ -39,6 +39,8 @@ export default class FilterProvinceSelectComponent extends Component {
       }
     });
   }
+
+
 
   @action
   changeSelected(selected) {
@@ -49,10 +51,10 @@ export default class FilterProvinceSelectComponent extends Component {
   @action
   async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-        this.selected = await this.store.query('werkingsgebied', {
-          filter: {id: this.args.value},
-          page: {size: this.args.value.split(',').length}
-        });
+      this.selected = await this.store.query('werkingsgebied', {
+        filter: {id: this.args.value},
+        page: {size: this.args.value.split(',').length}
+      });
     } else if (!this.args.value) {
       this.selected = null;
     }
