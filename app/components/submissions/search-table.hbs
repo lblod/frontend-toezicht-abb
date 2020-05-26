@@ -144,7 +144,9 @@
                   <th class="u-visible--tablet-landscape-up">Provincie</th>
                 {{/unless}}
                 <th class="u-visible--tablet-portrait-up" style="max-width: 250px;">Bestuurseenheid</th>
+                {{#unless @displaySubset}}
                 <th class="u-visible--tablet-landscape-up">Type bestuur</th>
+                {{/unless}}
                 <th style="max-width: 250px;">Type document</th>
                 {{#unless @displaySubset}}
                   <th class="u-visible--tablet-landscape-up">Zitting / besluit</th>
@@ -157,9 +159,16 @@
                 {{#unless @displaySubset}}
                   <td class="u-visible--tablet-landscape-up">{{row.province}}</td>
                 {{/unless}}
-                <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.administrativeUnit}} <span
-                        class="u-hidden--tablet-landscape-up text-fade"><br>{{row.administrativeUnitClassification}}</span></td>
-                <td class="u-visible--tablet-landscape-up">{{row.administrativeUnitClassification}}</td>
+                <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.administrativeUnit}}
+                  {{#if @displaySubset}}
+                    <p class="text-fade">{{row.administrativeUnitClassification}}</p>
+                  {{else}}
+                    <p class="u-hidden--tablet-landscape-up text-fade">{{row.administrativeUnitClassification}}</p>
+                  {{/if}}
+                </td>
+                {{#unless @displaySubset}}
+                  <td class="u-visible--tablet-landscape-up">{{row.administrativeUnitClassification}}</td>
+                {{/unless}}
                 <td style="max-width: 250px;">
                   {{#if row.decisionTypeLabel}}
                     <p>{{row.decisionTypeLabel}}</p>
