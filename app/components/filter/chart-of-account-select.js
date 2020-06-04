@@ -4,7 +4,6 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { timeout } from 'ember-concurrency';
 import { task, restartableTask } from 'ember-concurrency-decorators';
-import {VLABEL_CHART_OF_ACCOUNTS} from "../../models/concept";
 import {CHART_OF_ACCOUNT} from "../../models/concept-scheme";
 
 
@@ -23,12 +22,11 @@ export default class FilterChartOfAccountSelectComponent extends Component {
   *loadData() {
     const options = yield this.store.query('concept', {
       filter: {
-        id: VLABEL_CHART_OF_ACCOUNTS.join(','),
         "concept-schemes": {
           ":uri:": CHART_OF_ACCOUNT
         }
       },
-      sort: 'label',
+      sort: 'search-label',
     });
     this.options = options;
 
@@ -40,8 +38,7 @@ export default class FilterChartOfAccountSelectComponent extends Component {
     yield timeout(600);
     return this.store.query('concept', {
       filter: {
-        label: term,
-        id: VLABEL_CHART_OF_ACCOUNTS.join(','),
+        "search-label": term,
         "concept-schemes": {
           ":uri:": CHART_OF_ACCOUNT
         }

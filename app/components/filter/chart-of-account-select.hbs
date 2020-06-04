@@ -4,12 +4,12 @@
           @search={{perform this.search}}
           @searchPlaceholder="Typ om te zoeken..."
           @searchEnabled={{true}}
-          @searchField="label"
+          @searchField={{"searchLabel"}}
           @loadingMessage="Aan het laden..."
           @options={{this.options}}
           @selected={{this.selected}}
           @onChange={{this.changeSelected}}
           @allowClear={{true}} as |code|>
-    {{code.notation}} - {{code.label}}
+    {{code.searchLabel}}
   </PowerSelectMultiple>
 </div>
