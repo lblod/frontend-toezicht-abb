@@ -1,6 +1,6 @@
 {{#if this.initStatuses.lastSuccessful}}
   <div class="alert alert--small alert--success u-spacer--tiny">
-    <label class="checkbox checkbox--block checkbox--disabled" disabled={{@readonly}}>
+    <label class="checkbox checkbox--block {{if @readonly "checkbox--disabled" }}" disabled={{@readonly}}>
       <Input @type="checkbox"
              class="checkbox__toggle"
              @checked={{this.isHandled}}
