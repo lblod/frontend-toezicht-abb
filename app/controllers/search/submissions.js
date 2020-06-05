@@ -8,7 +8,7 @@ export default class SearchSubmissionsController extends Controller {
 
   searchString = "";
   page = 0;
-  size = 10;
+  size = 20;
 
   get hasActiveChildRoute() {
     return this.router.currentRouteName.startsWith('search.submissions')

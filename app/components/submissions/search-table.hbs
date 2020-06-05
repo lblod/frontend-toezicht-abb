@@ -141,18 +141,39 @@
             <t.content as |c|>
               <c.header>
                 {{#unless @displaySubset}}
-                  <th class="u-visible--tablet-landscape-up">Provincie</th>
+                  <ThSortable @label="Provincie"
+                              @field="province"
+                              @currentSorting={{@sort}}
+                              @class="u-visible--tablet-landscape-up"/>
                 {{/unless}}
-                <th class="u-visible--tablet-portrait-up" style="max-width: 250px;">Bestuurseenheid</th>
+                <ThSortable @label="Bestuurseenheid"
+                            @field="administrativeUnit"
+                            @currentSorting={{@sort}}
+                            @class="u-visible--tablet-landscape-up"
+                            style="max-width: 250px;"/>
                 {{#unless @displaySubset}}
-                <th class="u-visible--tablet-landscape-up">Type bestuur</th>
+                <ThSortable @label="Type bestuur"
+                            @field="administrativeUnitClassification"
+                            @currentSorting={{@sort}}
+                            @class="u-visible--tablet-landscape-up"/>
                 {{/unless}}
-                <th style="max-width: 250px;">Type document</th>
+                <ThSortable @label="Type document"
+                            @field="decisionType"
+                            @currentSorting={{@sort}}
+                            style="max-width: 250px;"/>
                 {{#unless @displaySubset}}
-                  <th class="u-visible--tablet-landscape-up">Zitting / besluit</th>
-                  <th class="u-visible--tablet-landscape-up">Verstuurd</th>
+                  <ThSortable @label="Zitting / besluit"
+                              @field="sessionDatetime"
+                              @currentSorting={{@sort}}
+                              @class="u-visible--tablet-landscape-up"/>
+                  <ThSortable @label="Verstuurd"
+                              @field="sentDate"
+                              @currentSorting={{@sort}}
+                              @class="u-visible--tablet-landscape-up"/>
                 {{/unless}}
-                <th>Status</th>
+                <ThSortable @label="Status"
+                            @field="status"
+                            @currentSorting={{@sort}}/>
                 <th class="u-hide-on-print">{{!-- Action links --}}</th>
               </c.header>
               <c.body as |row|>
@@ -170,15 +191,15 @@
                   <td class="u-visible--tablet-landscape-up">{{row.administrativeUnitClassification}}</td>
                 {{/unless}}
                 <td style="max-width: 250px;">
-                  {{#if row.decisionTypeLabel}}
-                    <p>{{row.decisionTypeLabel}}</p>
+                  {{#if row.decisionType}}
+                    <p>{{row.decisionType}}</p>
                   {{else}}
                     <p class="text-fade">Geen type</p>
                   {{/if}}
-                  <p class="text-fade">{{row.regulationTypeLabel}}</p>
+                  <p class="text-fade">{{row.regulationType}}</p>
                 </td>
                 {{#unless @displaySubset}}
-                  <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDateTime 'DD-MM-YYYY HH:mm'}}</td>
+                  <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDatetime 'DD-MM-YYYY HH:mm'}}</td>
                   <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
                 {{/unless}}
                 <td>

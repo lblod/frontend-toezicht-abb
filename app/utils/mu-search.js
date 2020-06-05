@@ -1,6 +1,7 @@
 import fetch from 'fetch';
 import ArrayProxy from '@ember/array/proxy';
 import { A } from '@ember/array';
+import camelCase from 'lodash.camelcase';
 
 const getPaginationMetadata = function(pageNumber, size, total) {
   const pagination = {};
@@ -25,13 +26,17 @@ const getPaginationMetadata = function(pageNumber, size, total) {
   return pagination;
 };
 
-async function muSearch(basePath, page, size, filter, dataMapping) {
+async function muSearch(basePath, page, size, sort, filter, dataMapping) {
   let endpoint = `${basePath}/search?page[size]=${size}&page[number]=${page}`;
 
   for (let field in filter) {
     endpoint += `&filter[${field}]=${filter[field]}`;
   }
 
+  if(sort) {
+      let isDesc = (sort) => sort.charAt(0) === '-';
+      endpoint += `&sort[${isDesc(sort) ? camelCase(sort.substr(1)) : camelCase(sort)}]=${isDesc(sort) ? 'desc' : 'asc'}`;
+  }
   const { count, data } = await (await fetch(endpoint)).json();
   const pagination = getPaginationMetadata(page, size, count);
   const entries = A(data.map(dataMapping));
