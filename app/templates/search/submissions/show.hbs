@@ -34,7 +34,8 @@
         <Submissions::Review
                 @model={{await this.model.review}}
                 @status={{await this.model.review.status}}
-                @onCloseRoute={{'search.submissions.index'}} />
+                @onCloseRoute={{'search.submissions.index'}}
+                @readonly={{true}}/>
       {{else}}
         <div class="button-group u-spacer--tiny">
           <LinkTo @route="search.submissions.index" class="button button--narrow button--alt">Sluit venster</LinkTo>
