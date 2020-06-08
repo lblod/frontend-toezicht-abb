@@ -59,6 +59,7 @@ $au-pill-border-color-warning         : $au-yellow-400 !default;
 
 .au-c-pill {
   font-size: 1.2rem !important;
+  white-space: nowrap;
 
   &[resource="http://lblod.data.gift/concepts/5b36ed48-491c-4177-ae31-31338dc46de1"],
   &[resource="Afgehandeld"] {
