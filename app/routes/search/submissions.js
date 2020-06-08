@@ -51,7 +51,6 @@ export default class SearchSubmissionsRoute extends Route {
     }
 
     query[`:sqs:data`] = isEmpty(params.search) ? "*" : params.search;
-    // TODO change to classification
     if (params.administrativeUnites) query["administrativeUnitUUID"] = params.administrativeUnites;
     if (params.administrativeUnitClassifications) {
       query["administrativeUnitClassificationUUID"] = params.administrativeUnitClassifications;
