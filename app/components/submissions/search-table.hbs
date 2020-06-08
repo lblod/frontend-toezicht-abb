@@ -156,7 +156,6 @@
                 <ThSortable @label="Bestuurseenheid"
                             @field="administrativeUnit"
                             @currentSorting={{@sort}}
-                            @class="u-visible--tablet-landscape-up"
                             style="max-width: 250px;"/>
                 {{#unless @displaySubset}}
                 <ThSortable @label="Type bestuur"
@@ -187,7 +186,7 @@
                 {{#unless @displaySubset}}
                   <td class="u-visible--tablet-landscape-up">{{row.province}}</td>
                 {{/unless}}
-                <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.administrativeUnit}}
+                <td style="max-width: 250px;">{{row.administrativeUnit}}
                   {{#if @displaySubset}}
                     <p class="text-fade">{{row.administrativeUnitClassification}}</p>
                   {{else}}
