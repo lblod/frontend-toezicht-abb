@@ -74,15 +74,17 @@ export default class SubmissionsSearchTableComponent extends Component {
   }
 
   @action
-  selectAdministrativeUnits(units) {
+  selectAdministrativeUnitClassifications(units) {
     if (units.length <= 0) {
-      this.args.filter.governingBodyClassification = null;
-      this.args.filter.administrativeUnites = null;
+      this.args.filter.governingBodyClassifications = null;
+      this.args.filter.administrativeUnitClassifications = null;
       this.args.onFilterChange();
     } else {
-      this.args.setFilter('administrativeUnites', units);
+      this.args.setFilter('administrativeUnitClassifications', units);
     }
   }
+
+
 
   @action
   setToTreatStatus(event) {
