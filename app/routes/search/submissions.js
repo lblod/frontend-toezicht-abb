@@ -28,7 +28,7 @@ export default class SearchSubmissionsRoute extends Route {
     dateNoLongerInForceFrom: {refreshModel: true},
     dateNoLongerInForceTo: {refreshModel: true},
     status: {refreshModel: true},
-    governingBodyClassification: {refreshModel: true},
+    governingBodyClassifications: {refreshModel: true},
     page: {refreshModel: true},
     size: {refreshModel: true},
     sort: {refreshModel: true}
@@ -51,11 +51,11 @@ export default class SearchSubmissionsRoute extends Route {
     }
 
     query[`:sqs:data`] = isEmpty(params.search) ? "*" : params.search;
-    if (params.administrativeUnites) {
-      query["administrativeUnitUUID"] = params.administrativeUnites;
-      if (params.governingBodyClassification) query["governingBodyClassificationUUID"] = params.governingBodyClassification;
+    if (params.administrativeUnites) query["administrativeUnitUUID"] = params.administrativeUnites;
+    if (params.administrativeUnitClassifications) {
+      query["administrativeUnitClassificationUUID"] = params.administrativeUnitClassifications;
+      if (params.governingBodyClassifications) query["governingBodyClassificationUUID"] = params.governingBodyClassifications;
     }
-    if (params.administrativeUnitClassifications) query["administrativeUnitClassificationUUID"] = params.administrativeUnitClassifications;
     if (params.chartOfAccounts) query[":terms:chartOfAccountUUID"] = params.chartOfAccounts;
     if (params.provinces) query["provinceUUID"] = params.provinces;
     if (params.decisionTypes) {
