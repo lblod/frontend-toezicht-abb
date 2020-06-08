@@ -2,11 +2,11 @@
 {{!-- template-lint-disable no-inline-styles  --}}
 <div class="container-flex--contain">
   <div class="au-u-padding-small au-u-border-bottom">
-    <div class="grid">
-      <div class="col--6-12">
+    <div class="au-o-grid au-o-grid--flush">
+      <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium">
         <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny">Toezicht ABB - Beleidsmedewerkers</AuHeading>
       </div>
-      <div class="col--6-12">
+      <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium">
         <AuAlert @alertIcon="alert-triangle" @alertTitle="Deze pagina is gebouwd voor demo doeleinden en bevat geen recente data."  @alertskin={{"warning"}} @alertsize={{"small"}} class="au-u-margin-none" />
       </div>
     </div>
@@ -20,11 +20,11 @@
 
             <div class="au-c-sidebar__content">
 
-              <div class="grid grid--collapse">
-                <div class="col--6-12">
+              <div class="au-o-grid au-o-grid--flush">
+                <div class="au-o-grid__item au-u-1-2">
                   <AuHeading @level="2" @skin="3" class="au-u-margin-top-tiny au-u-margin-bottom">Filter dossiers</AuHeading>
                 </div>
-                <div class="col--6-12 au-u-text-right">
+                <div class="au-o-grid__item au-u-1-2 au-u-text-right">
                   <WuButton @onClick={{this.resetFilters}}
                             class="au-c-button au-c-button--secondary">
                     <AuIcon @icon="cross" @alignment="left" /> Reset filters
@@ -151,7 +151,7 @@
                   <ThSortable @label="Provincie"
                               @field="province"
                               @currentSorting={{@sort}}
-                              @class="u-visible--tablet-landscape-up"/>
+                              @class="au-u-visible-medium-up"/>
                 {{/unless}}
                 <ThSortable @label="Bestuurseenheid"
                             @field="administrativeUnit"
@@ -161,7 +161,7 @@
                 <ThSortable @label="Type bestuur"
                             @field="administrativeUnitClassification"
                             @currentSorting={{@sort}}
-                            @class="u-visible--tablet-landscape-up"/>
+                            @class="au-u-visible-medium-up"/>
                 {{/unless}}
                 <ThSortable @label="Type document"
                             @field="decisionType"
@@ -171,11 +171,11 @@
                   <ThSortable @label="Zitting / besluit"
                               @field="sessionDatetime"
                               @currentSorting={{@sort}}
-                              @class="u-visible--tablet-landscape-up"/>
+                              @class="au-u-visible-medium-up"/>
                   <ThSortable @label="Verstuurd"
                               @field="sentDate"
                               @currentSorting={{@sort}}
-                              @class="u-visible--tablet-landscape-up"/>
+                              @class="au-u-visible-medium-up"/>
                 {{/unless}}
                 <ThSortable @label="Status"
                             @field="status"
@@ -184,17 +184,17 @@
               </c.header>
               <c.body as |row|>
                 {{#unless @displaySubset}}
-                  <td class="u-visible--tablet-landscape-up">{{row.province}}</td>
+                  <td class="au-u-visible-medium-up">{{row.province}}</td>
                 {{/unless}}
                 <td style="max-width: 250px;">{{row.administrativeUnit}}
                   {{#if @displaySubset}}
                     <p class="text-fade">{{row.administrativeUnitClassification}}</p>
                   {{else}}
-                    <p class="u-hidden--tablet-landscape-up text-fade">{{row.administrativeUnitClassification}}</p>
+                    <p class="au-u-visible-medium-up text-fade">{{row.administrativeUnitClassification}}</p>
                   {{/if}}
                 </td>
                 {{#unless @displaySubset}}
-                  <td class="u-visible--tablet-landscape-up">{{row.administrativeUnitClassification}}</td>
+                  <td class="au-u-visible-medium-up">{{row.administrativeUnitClassification}}</td>
                 {{/unless}}
                 <td style="max-width: 250px;">
                   {{#if row.decisionType}}
@@ -205,8 +205,8 @@
                   <p class="text-fade">{{row.regulationType}}</p>
                 </td>
                 {{#unless @displaySubset}}
-                  <td class="u-visible--tablet-landscape-up">{{moment-format row.sessionDatetime 'DD-MM-YYYY HH:mm'}}</td>
-                  <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
+                  <td class="au-u-visible-medium-up">{{moment-format row.sessionDatetime 'DD-MM-YYYY HH:mm'}}</td>
+                  <td class="au-u-visible-medium-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
                 {{/unless}}
                 <td>
                   <AuPill resource="{{capitalize row.status}}">{{capitalize row.status}}</AuPill>
