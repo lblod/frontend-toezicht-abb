@@ -57,7 +57,7 @@
                     <div class="au-u-margin-bottom-small">
                       <AuLabel>Bestuurseenheid</AuLabel>
                       <Filter::AdministrativeUnitSelect @value={{@filter.administrativeUnites}}
-                                                        @onSelectionChange={{fn @setFilter 'administrativeUnites'}} />
+                                                        @onSelectionChange={{this.selectAdministrativeUnits}}/>
                     </div>
                     <div class="au-u-margin-bottom-small">
                       <AuLabel>Provincie</AuLabel>
@@ -68,6 +68,13 @@
                       <AuLabel>Type bestuur</AuLabel>
                       <Filter::AdministrativeUnitClassificationSelect @value={{@filter.administrativeUnitClassifications}}
                                                                       @onSelectionChange={{fn @setFilter 'administrativeUnitClassifications'}} />
+                    </div>
+                    <div class="au-u-margin-bottom-small">
+                      {{#if @filter.administrativeUnites}}
+                        <AuLabel>Type Bestuursorgaan</AuLabel>
+                        <Filter::GoverningBodyClassificationSelect @filter={{@filter}}
+                                                                   @onSelectionChange={{fn @setFilter 'governingBodyClassification'}} />
+                      {{/if}}
                     </div>
                     <hr class="au-c-hr">
                   </div>

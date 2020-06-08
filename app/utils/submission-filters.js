@@ -13,6 +13,7 @@ export default class SubmissionFilter {
   @tracked sentDateTo
   @tracked search
   @tracked status
+  @tracked governingBodyClassification
   @tracked dateOfEntryIntoForceFrom
   @tracked dateOfEntryIntoForceTo
   @tracked dateNoLongerInForceFrom
@@ -37,6 +38,7 @@ export default class SubmissionFilter {
       'sentDateTo',
       'search',
       'status',
+      'governingBodyClassification',
       'dateOfEntryIntoForceFrom',
       'dateOfEntryIntoForceTo',
       'dateNoLongerInForceFrom',

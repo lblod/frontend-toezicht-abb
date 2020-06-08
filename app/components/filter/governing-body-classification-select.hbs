@@ -1,0 +1,15 @@
+<div class="ember-power-select--small" {{did-update this.updateSelectedValue @value}}>
+  <PowerSelectMultiple
+          @placeholder="Burgemeester, Gemeenteraad, ..."
+          @search={{perform this.search}}
+          @searchField={{"label"}}
+          @searchPlaceholder="Type om te zoeken..."
+          @searchEnabled={{true}}
+          @loadingMessage="Aan het laden..."
+          @options={{this.options}}
+          @selected={{this.selected}}
+          @onChange={{this.changeSelected}}
+          @allowClear={{true}} as |classificatie|>
+    {{classificatie.label}}
+  </PowerSelectMultiple>
+</div>
