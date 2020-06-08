@@ -3,7 +3,7 @@ import {tracked} from "@glimmer/tracking";
 
 import {action} from '@ember/object';
 
-import { timeout } from 'ember-concurrency';
+import {timeout} from 'ember-concurrency';
 import {task, restartableTask} from "ember-concurrency-decorators";
 import moment from 'moment';
 
@@ -57,7 +57,7 @@ export default class SubmissionsSearchTableComponent extends Component {
   }
 
   @restartableTask
-  *search() {
+  * search() {
     yield timeout(250);
     this.args.setFilter(this.args.filter.search, 'search');
   }
@@ -71,6 +71,17 @@ export default class SubmissionsSearchTableComponent extends Component {
       this.args.filter.regulationTypes = null;
 
     this.args.onFilterChange();
+  }
+
+  @action
+  selectAdministrativeUnits(units) {
+    if (units.length <= 0) {
+      this.args.filter.governingBodyClassification = null;
+      this.args.filter.administrativeUnites = null;
+      this.args.onFilterChange();
+    } else {
+      this.args.setFilter('administrativeUnites', units);
+    }
   }
 
   @action
