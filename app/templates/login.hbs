@@ -21,8 +21,10 @@
               <p class="u-spacer">Lukt het aanmelden niet? Neem contact op met uw interne beheerder. Indien er zich een probleem voordoet, contacteer <a href="https://overheid.vlaanderen.be/ict/ict-diensten/gebruikersbeheer">gebruikersbeheer Vlaanderen</a>.</p>
               <p>Het aanmelden gebeurt in een pop-up; zorg dat de instellingen van uw browser correct staan indien deze niet verschijnt.</p>
             </div>
-            <div class="col--1-1--s col--6-12--m col--4-12 push--1-12--l">
-              <AcmidmLogin />
+            <div class="col--1-1--s col--6-12--m col--4-12 push--1-12--l au-u-text-right">
+              <AcmidmLogin role="menuitem" @styles="au-c-button">
+                <AuIcon @icon="login" @alignment="left" />Aanmelden
+              </AcmidmLogin>
             </div>
           </div>
         </div>

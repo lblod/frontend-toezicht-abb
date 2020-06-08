@@ -1,8 +1,14 @@
 <div class="container">
   <AuMainHeader @brandLink="https://www.vlaanderen.be/nl" @homeRoute="index" @appTitle="Toezicht ABB" @contactRoute="contact">
-    <AcmidmLogout @tagName="button" class="au-c-button au-c-button--tertiary" role="menuitem">
-      <AuIcon @icon="logout" @alignment="left" /> Afmelden
-    </AcmidmLogout>
+    {{#if session.isAuthenticated}}
+      <AcmidmLogout @tagName="button" class="au-c-button au-c-button--tertiary" role="menuitem">
+        <AuIcon @icon="logout" @alignment="left" /> Afmelden
+      </AcmidmLogout>
+    {{else}}
+      <AcmidmLogin role="menuitem" @styles="au-c-button au-c-button--tertiary">
+        <AuIcon @icon="login" @alignment="left" />Aanmelden
+      </AcmidmLogin>
+    {{/if}}
   </AuMainHeader>
 
   <div class="container-flex--contain">
