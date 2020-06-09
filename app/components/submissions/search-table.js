@@ -58,9 +58,10 @@ export default class SubmissionsSearchTableComponent extends Component {
 
   @restartableTask
   * search() {
-    yield timeout(250);
-    this.args.setFilter(this.args.filter.search, 'search');
+    yield timeout(500);
+    yield this.args.setFilter(this.args.filter.search, 'search');
   }
+
 
   @action
   selectDecisionTypes(types) {
@@ -83,7 +84,6 @@ export default class SubmissionsSearchTableComponent extends Component {
       this.args.setFilter('administrativeUnitClassifications', units);
     }
   }
-
 
 
   @action
