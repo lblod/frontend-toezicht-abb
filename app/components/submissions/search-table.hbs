@@ -41,14 +41,13 @@
                       <AuInput
                               @width={{"block"}}
                               @value={{@filter.search}}
-                              {{on "keyup" (perform this.search)}}/>
+                              {{on "input" (perform this.search)}}/>
                       <div class="au-c-tooltip-container">
                         <button class="au-c-button au-c-button--tertiary au-c-button--tooltip" aria-labelledby="zoekresultaten-meer-informatie">
                           <AuIcon @icon="info-circle" @alignment="left" /> Zoekresultaten kunnen onvolledig zijn
                         </button>
                         <div role="tooltip" id="zoekresultaten-meer-informatie">Webpagina's en leesbare PDF's zijn doorzoekbaar &mdash; ingescande PDF's of afbeeldingen niet.</div>
                       </div>
-                      {{!-- <AuHelpText><AuBadge @icon="info-circle" @size="small" />Webpagina's en leesbare PDF's zijn doorzoekbaar &mdash; ingescande PDF's of afbeeldingen niet. Zoekresultaten kunnen bijgevolg afwijken.</AuHelpText> --}}
                     </div>
 
                     <div class="au-u-margin-bottom-small">
