@@ -37,11 +37,18 @@
                   <div class="au-u-padding-left-tiny au-u-padding-right-tiny">
 
                     <div class="au-u-margin-bottom">
-                      <AuLabel>Zoekterm</AuLabel>
+                      <AuLabel>Zoek in inhoud dossier</AuLabel>
                       <AuInput
                               @width={{"block"}}
                               @value={{@filter.search}}
                               {{on "keyup" (perform this.search)}}/>
+                      <div class="au-c-tooltip-container">
+                        <button class="au-c-button au-c-button--tertiary au-c-button--tooltip" aria-labelledby="zoekresultaten-meer-informatie">
+                          <AuIcon @icon="info-circle" @alignment="left" /> Zoekresultaten kunnen onvolledig zijn
+                        </button>
+                        <div role="tooltip" id="zoekresultaten-meer-informatie">Webpagina's en leesbare PDF's zijn doorzoekbaar &mdash; ingescande PDF's of afbeeldingen niet.</div>
+                      </div>
+                      {{!-- <AuHelpText><AuBadge @icon="info-circle" @size="small" />Webpagina's en leesbare PDF's zijn doorzoekbaar &mdash; ingescande PDF's of afbeeldingen niet. Zoekresultaten kunnen bijgevolg afwijken.</AuHelpText> --}}
                     </div>
 
                     <div class="au-u-margin-bottom-small">
@@ -83,18 +90,20 @@
                 <div class="au-o-grid__item au-u-1-2 au-u-1-1@large">
                   <div class="au-u-padding-left-tiny au-u-padding-right-tiny">
                     <div class="au-u-margin-bottom-small">
-                      <AuLabel>Type document</AuLabel>
+                      <AuLabel>Categorie dossier</AuLabel>
                       <Filter::DecisionTypeSelect @value={{@filter.decisionTypes}}
                                                   @onSelectionChange={{this.selectDecisionTypes}} />
                     </div>
 
                     <div class="au-u-margin-bottom-small">
                       {{#if this.regulationTypeIsSelected}}
-                        <AuLabel>Type reglement of verordening</AuLabel>
+                        <AuLabel>Subcategorie: Type reglement of verordening</AuLabel>
                         <Filter::RegulationTypeSelect @value={{@filter.regulationTypes}}
                                                       @onSelectionChange={{fn @setFilter 'regulationTypes'}} />
                       {{/if}}
                     </div>
+
+                    <hr class="au-c-hr">
 
                     <div class="au-u-margin-bottom-small">
                       <Filter::DateRange @label="Periode verstuurd" @fromValue={{@filter.sentDateFrom}}
@@ -107,9 +116,10 @@
                                          @onChangeFromValue={{fn @setFilter 'sessionDateFrom'}} @onChangeToValue={{fn @setFilter 'sessionDateTo'}} />
                     </div>
 
+
                     <hr class="au-c-hr">
 
-                    <AuHeading @level="3" @skin="5" class="au-u-margin-bottom-small">Belastingsdienst</AuHeading>
+                    <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-small">Subcategorie: Belasting of retributie</AuHeading>
                     <div class="au-u-margin-bottom-small">
                       <AuLabel>MAR-code</AuLabel>
                       <Filter::ChartOfAccountSelect @value={{@filter.chartOfAccounts}}
