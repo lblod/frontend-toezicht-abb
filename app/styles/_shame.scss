@@ -336,3 +336,23 @@
     opacity: 1
   }
 }
+
+/* ==================================
+  #IE 11 appuniversum fixes
+  @TODO: update in appuniversum
+  ================================== */
+
+.au-c-alert__content {
+  display: block;
+}
+
+div:focus,
+span:focus,
+table:focus,
+td:focus {
+  outline: 0 !important;
+}
+
+.checkbox + .au-c-label {
+  display: inline-block;
+}
