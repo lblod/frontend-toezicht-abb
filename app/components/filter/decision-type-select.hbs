@@ -1,6 +1,5 @@
 <div class="ember-power-select--small" {{did-update this.updateSelectedValue @value}}>
   <PowerSelectMultiple
-          @placeholder="Besluitenlijst, jaarrekening, ..."
           @search={{perform this.search}}
           @searchField={{"label"}}
           @searchPlaceholder="Typ om te zoeken..."
@@ -12,4 +11,6 @@
           @allowClear={{true}} as |besluitType|>
     {{besluitType.label}}
   </PowerSelectMultiple>
+  <AuHelpText>vb. Specifiek besluiten: Reglementen en verordeningen, belasting of retributie, ...</AuHelpText>
+  <AuHelpText>vb. Agenda, besluitenlijst of notulen</AuHelpText>
 </div>

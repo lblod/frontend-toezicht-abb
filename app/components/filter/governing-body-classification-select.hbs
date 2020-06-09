@@ -1,6 +1,5 @@
 <div class="ember-power-select--small" {{did-update this.updateSelectedValue @value}}>
   <PowerSelectMultiple
-          @placeholder="Burgemeester, Gemeenteraad, ..."
           @search={{perform this.search}}
           @searchField={{"label"}}
           @searchPlaceholder="Type om te zoeken..."
@@ -12,4 +11,5 @@
           @allowClear={{true}} as |classificatie|>
     {{classificatie.label}}
   </PowerSelectMultiple>
+  <AuHelpText>vb. Burgemeester of gemeenteraad</AuHelpText>
 </div>

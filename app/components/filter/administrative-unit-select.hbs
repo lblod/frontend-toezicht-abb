@@ -1,6 +1,5 @@
 <div class="ember-power-select--small" {{did-update this.updateSelectedValue @value}}>
   <PowerSelectMultiple
-          @placeholder="Berchem, Hasselt, Gent, ..."
           @search={{perform this.search}}
           @searchField="naam"
           @searchPlaceholder="Typ om te zoeken..."
@@ -12,4 +11,5 @@
           @allowClear={{true}} as |bestuurseenheid|>
     {{bestuurseenheid.naam}} ({{bestuurseenheid.classificatie.label}})
   </PowerSelectMultiple>
+  <AuHelpText>vb. Berchem, Hasselt of Gent</AuHelpText>
 </div>
