@@ -24,11 +24,6 @@ module.exports = function(environment) {
     moment: {
       allowEmpty: true
     },
-    'vo-webuniversum': {
-      version: '2.8.3',
-      header: '//widgets.vlaanderen.be/widget/live/3bb08030ceda4f0a9ce6af70fd4cf1cd',
-      footer: '//widgets.vlaanderen.be/widget/live/9b531b3ce5b343b99f4e36eb3600f25f'
-    },
     torii: {
       disableRedirectInitializer: true,
       providers: {
@@ -40,6 +35,13 @@ module.exports = function(environment) {
           logoutUrl: 'https://authenticatie-ti.vlaanderen.be/op/v1/logout'
         }
       }
+    },
+    browserUpdate: {
+      vs: {i:11,f:-3,e:-3,s:-3,c:-3},
+      style: 'corner',
+      l: 'nl',
+      shift_page_down: false,
+      test: true
     }
   };
 
