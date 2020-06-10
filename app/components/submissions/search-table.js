@@ -59,7 +59,7 @@ export default class SubmissionsSearchTableComponent extends Component {
   @restartableTask
   * search() {
     yield timeout(500);
-    yield this.args.setFilter(this.args.filter.search, 'search');
+    yield this.args.onFilterChange();
   }
 
 
