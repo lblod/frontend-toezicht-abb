@@ -40,8 +40,7 @@ module.exports = function(environment) {
       required: {e:-3, f:-3,s:-3,c:-3},
       style: 'corner',
       l: 'nl',
-      shift_page_down: false,
-      test: true
+      shift_page_down: false
     }
   };
 
