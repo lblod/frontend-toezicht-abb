@@ -15,6 +15,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
   filterParams = [
     'bestuurseenheidIds',
     'classificatieIds',
+    'governingBodyClassificationIds',
     'marCodeIds',
     'provincieIds',
     'besluitTypeIds',
@@ -39,6 +40,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
     // filter params
     bestuurseenheidIds: {refreshModel: true},
     classificatieIds: {refreshModel: true},
+    governingBodyClassificationIds: {refreshModel: true},
     marCodeIds: {refreshModel: true},
     provincieIds: {refreshModel: true},
     besluitTypeIds: {refreshModel: true},
@@ -89,8 +91,12 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
     if (params.bestuurseenheidIds)
       query['filter[organization][:id:]'] = params.bestuurseenheidIds;
 
-    if (params.classificatieIds)
+    if (params.classificatieIds) {
       query['filter[organization][classificatie][:id:]'] = params.classificatieIds;
+      if(params.governingBodyClassificationIds) {
+        query['filter[form-data][passed-by][is-tijdsspecialisatie-van][classificatie][:id:]'] = params.governingBodyClassificationIds;
+      }
+    }
 
     if (params.marCodeIds)
       query['filter[form-data][chart-of-account][:id:]'] = params.marCodeIds;

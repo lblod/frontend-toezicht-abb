@@ -34,8 +34,15 @@
       </div>
       <div class="col--4-12 col--6-12--m col--6-12--s">
         <label class="label--subtle form__label">Type bestuur</label>
-        <Filter::AdministrativeUnitClassificationSelect @value={{@filter.classificatieIds}} @onSelectionChange={{fn
-                this.setFilter 'classificatieIds'}} />
+        <Filter::AdministrativeUnitClassificationSelect @value={{@filter.classificatieIds}}
+                                                        @onSelectionChange={{this.selectAdministrativeUnitClassifications}} />
+
+        {{#if @filter.classificatieIds}}
+          <label class="label--subtle form__label">Type Bestuursorgaan</label>
+          <Filter::GoverningBodyClassificationSelect @filter={{@filter.governingBodyClassificationIds}}
+                                                     @onSelectionChange={{fn this.setFilter
+                                                                             'governingBodyClassificationIds'}} />
+        {{/if}}
 
         <label class="label--subtle form__label">Type document</label>
         <Filter::DecisionTypeSelect @value={{@filter.besluitTypeIds}} @onSelectionChange={{this.selectBesluitTypes}} />
@@ -43,16 +50,21 @@
         {{#if this.regulationTypeIsSelected}}
           <label class="label--subtle form__label">Type reglement of verordening</label>
           <Filter::RegulationTypeSelect @value={{@filter.regulationTypeIds}} @onSelectionChange={{fn this.setFilter
-                                                                                                    'regulationTypeIds'}} />
+                                                                                                     'regulationTypeIds'}} />
         {{/if}}
       </div>
       <div class="col--4-12 col--1-1--m col--1-1--s">
         <div class="grid">
           <div class="col--1-1 col--6-12--m">
-            <Filter::DateRange @label="Periode verstuurd" @fromValue={{@filter.sentDateFrom}} @toValue={{@filter.sentDateTo}} @onChangeFromValue={{fn this.setFilter 'sentDateFrom'}} @onChangeToValue={{fn this.setFilter 'sentDateTo'}} />
+            <Filter::DateRange @label="Periode verstuurd" @fromValue={{@filter.sentDateFrom}}
+                               @toValue={{@filter.sentDateTo}} @onChangeFromValue={{fn this.setFilter 'sentDateFrom'}}
+                               @onChangeToValue={{fn this.setFilter 'sentDateTo'}} />
           </div>
           <div class="col--1-1 col--6-12--m">
-            <Filter::DateRange @label="Periode zitting / besluit" @defaultFromDate={{this.lastMonth}} @fromValue={{@filter.sessionDateFrom}} @toValue={{@filter.sessionDateTo}} @onChangeFromValue={{fn this.setFilter 'sessionDateFrom'}} @onChangeToValue={{fn this.setFilter 'sessionDateTo'}} />
+            <Filter::DateRange @label="Periode zitting / besluit" @defaultFromDate={{this.lastMonth}}
+                               @fromValue={{@filter.sessionDateFrom}} @toValue={{@filter.sessionDateTo}}
+                               @onChangeFromValue={{fn this.setFilter 'sessionDateFrom'}} @onChangeToValue={{fn
+                    this.setFilter 'sessionDateTo'}} />
           </div>
         </div>
       </div>
