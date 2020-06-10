@@ -40,7 +40,7 @@
                       <AuLabel>Zoek in inhoud dossier</AuLabel>
                       <AuInput
                               @width={{"block"}}
-                              @value={{@filter.search}}
+                              @value={{this._freeTextSearch}}
                               {{on "input" (perform this.search)}}/>
                       <div class="au-c-tooltip-container">
                         <button class="au-c-button au-c-button--tertiary au-c-button--tooltip" aria-labelledby="zoekresultaten-meer-informatie">

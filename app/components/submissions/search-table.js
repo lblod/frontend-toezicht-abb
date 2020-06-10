@@ -13,9 +13,17 @@ import {TREAT_STATUS} from "../../models/submission-review-status";
 export default class SubmissionsSearchTableComponent extends Component {
 
   @tracked decisionTypes = []
+  @tracked _freeTextSearch;
 
   constructor() {
     super(...arguments);
+
+    // This should only be set once.
+    // After intial set, this component should remain master over what data gets displayed in
+    // search box. Else you have race conditions, and flickering behaviour for user.
+    if(!this._freeTextSearch){
+      this._freeTextSearch = this.args.filter.search;
+    }
     this.loadData.perform();
   }
 
@@ -57,9 +65,10 @@ export default class SubmissionsSearchTableComponent extends Component {
   }
 
   @restartableTask
-  * search() {
+  *search() {
     yield timeout(500);
-    yield this.args.setFilter(this.args.filter.search, 'search');
+    this.args.filter.search = this._freeTextSearch;
+    this.args.onFilterChange();
   }
 
 
