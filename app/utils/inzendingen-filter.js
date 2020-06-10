@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 export default class InzendingenFilter {
   @tracked bestuurseenheidIds
   @tracked classificatieIds
+  @tracked governingBodyClassificationIds
   @tracked marCodeIds
   @tracked provincieIds
   @tracked besluitTypeIds
@@ -26,6 +27,7 @@ export default class InzendingenFilter {
     return [
       'bestuurseenheidIds',
       'classificatieIds',
+      'governingBodyClassificationIds',
       'marCodeIds',
       'provincieIds',
       'besluitTypeIds',

@@ -86,6 +86,17 @@ export default class SubmissionRegularTableComponent extends Component {
   }
 
   @action
+  selectAdministrativeUnitClassifications(units) {
+    if (units && units.length <= 0) {
+      this.filter.governingBodyClassificationIds = null;
+      this.filter.classificatieIds = null;
+      this.args.onFilterChange(this.filter);
+    } else {
+      this.setFilter('classificatieIds', units);
+    }
+  }
+
+  @action
   resetFilters() {
     this.filter.reset();
     this.besluitTypes = [];
