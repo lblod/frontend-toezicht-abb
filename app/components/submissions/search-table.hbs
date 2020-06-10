@@ -78,7 +78,7 @@
                     <div class="au-u-margin-bottom-small">
                       {{#if @filter.administrativeUnitClassifications}}
                         <AuLabel>Type Bestuursorgaan</AuLabel>
-                        <Filter::GoverningBodyClassificationSelect @filter={{@filter.governingBodyClassifications}}
+                        <Filter::GoverningBodyClassificationSelect @value={{@filter.governingBodyClassifications}}
                                                                    @onSelectionChange={{fn @setFilter 'governingBodyClassifications'}} />
                       {{/if}}
                     </div>
