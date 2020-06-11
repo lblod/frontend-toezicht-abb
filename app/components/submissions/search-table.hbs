@@ -4,7 +4,7 @@
   <div class="au-u-padding-small au-u-border-bottom">
     <div class="au-o-grid au-o-grid--flush">
       <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium">
-        <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny">Toezicht ABB - Beleidsmedewerkers</AuHeading>
+        <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny">Toezicht ABB</AuHeading>
       </div>
       <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium">
         <AuAlert @alertIcon="alert-triangle" @alertTitle="Deze pagina is gebouwd voor demo doeleinden en bevat geen recente data."  @alertskin={{"warning"}} @alertsize={{"small"}} class="au-u-margin-none" />
@@ -105,14 +105,14 @@
                     <hr class="au-c-hr">
 
                     <div class="au-u-margin-bottom-small">
-                      <Filter::DateRange @label="Periode verstuurd" @fromValue={{@filter.sentDateFrom}}
-                                         @toValue={{@filter.sentDateTo}} @onChangeFromValue={{fn @setFilter 'sentDateFrom'}}
-                                         @onChangeToValue={{fn @setFilter 'sentDateTo'}} />
-                    </div>
-                    <div class="au-u-margin-bottom-small">
                       <Filter::DateRange @label="Periode zitting / besluit" @defaultFromDate={{this.lastMonth}}
                                          @fromValue={{@filter.sessionDateFrom}} @toValue={{@filter.sessionDateTo}}
                                          @onChangeFromValue={{fn @setFilter 'sessionDateFrom'}} @onChangeToValue={{fn @setFilter 'sessionDateTo'}} />
+                    </div>
+                    <div class="au-u-margin-bottom-small">
+                      <Filter::DateRange @label="Periode verstuurd" @fromValue={{@filter.sentDateFrom}}
+                                         @toValue={{@filter.sentDateTo}} @onChangeFromValue={{fn @setFilter 'sentDateFrom'}}
+                                         @onChangeToValue={{fn @setFilter 'sentDateTo'}} />
                     </div>
 
 
@@ -172,12 +172,12 @@
                             @currentSorting={{@sort}}
                             @class="au-u-visible-medium-up"/>
                 {{/unless}}
-                <ThSortable @label="Type document"
+                <ThSortable @label="Categorie dossier"
                             @field="decisionType"
                             @currentSorting={{@sort}}
                             style="max-width: 250px;"/>
                 {{#unless @displaySubset}}
-                  <ThSortable @label="Zitting / besluit"
+                  <ThSortable @label="Periode zitting / besluit"
                               @field="sessionDatetime"
                               @currentSorting={{@sort}}
                               @class="au-u-visible-medium-up"/>
