@@ -2,6 +2,7 @@ import fetch from 'fetch';
 import ArrayProxy from '@ember/array/proxy';
 import { A } from '@ember/array';
 import camelCase from 'lodash.camelcase';
+import {timeout} from 'ember-concurrency';
 
 const getPaginationMetadata = function(pageNumber, size, total) {
   const pagination = {};
@@ -27,6 +28,7 @@ const getPaginationMetadata = function(pageNumber, size, total) {
 };
 
 async function muSearch(basePath, page, size, sort, filter, dataMapping) {
+  // await timeout(500);
   let endpoint = `${basePath}/search?page[size]=${size}&page[number]=${page}`;
 
   for (let field in filter) {

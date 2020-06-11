@@ -6,13 +6,12 @@ import {typeOf} from '@ember/utils';
 export default class SearchSubmissionsController extends Controller {
   @service router
 
-  searchString = "";
   page = 0;
   size = 20;
 
   get hasActiveChildRoute() {
     return this.router.currentRouteName.startsWith('search.submissions')
-      && this.router.currentRouteName != 'search.submissions.index';
+      && this.router.currentRouteName !== 'search.submissions.index';
   }
 
   @action

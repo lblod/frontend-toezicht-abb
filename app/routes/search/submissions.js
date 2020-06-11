@@ -41,7 +41,7 @@ export default class SearchSubmissionsRoute extends Route {
     this.lastParams = new Snapshot();
   }
 
-  model(params) {
+  async model(params) {
     this.filter = new SubmissionFilter(params);
     this.lastParams.stageLive(params);
     const query = {};
@@ -62,19 +62,19 @@ export default class SearchSubmissionsRoute extends Route {
       query["documentTypeUUID"] = params.decisionTypes;
       if (params.regulationTypes) query["regulationTypeUUID"] = params.regulationTypes;
     }
-    if( params.sessionDateFrom ) query[":gte:sessionDatetime"] = params.sessionDateFrom;
-    if( params.sessionDateTo ) query[":lte:sessionDatetime"] = params.sessionDateTo;
-    if( params.sentDateFrom ) query[":gte:sentDate"] = params.sentDateFrom;
-    if( params.sentDateTo ) query[":lte:sentDate"] = params.sentDateTo;
-    if( params.dateOfEntryIntoForceFrom ) query[":gte:dateOfEntryIntoForce"] = params.dateOfEntryIntoForceFrom;
-    if( params.dateOfEntryIntoForceTo ) query[":lte:dateOfEntryIntoForce"] = params.dateOfEntryIntoForceTo;
-    if( params.dateNoLongerInForceFrom ) query[":gte:dateNoLongerInForce"] = params.dateNoLongerInForceFrom;
-    if( params.dateNoLongerInForceTo ) query[":lte:dateNoLongerInForce"] = params.dateNoLongerInForceTo;
-    if( params.status ) query["statusUUID"] = params.status;
+    if (params.sessionDateFrom) query[":gte:sessionDatetime"] = params.sessionDateFrom;
+    if (params.sessionDateTo) query[":lte:sessionDatetime"] = params.sessionDateTo;
+    if (params.sentDateFrom) query[":gte:sentDate"] = params.sentDateFrom;
+    if (params.sentDateTo) query[":lte:sentDate"] = params.sentDateTo;
+    if (params.dateOfEntryIntoForceFrom) query[":gte:dateOfEntryIntoForce"] = params.dateOfEntryIntoForceFrom;
+    if (params.dateOfEntryIntoForceTo) query[":lte:dateOfEntryIntoForce"] = params.dateOfEntryIntoForceTo;
+    if (params.dateNoLongerInForceFrom) query[":gte:dateNoLongerInForce"] = params.dateNoLongerInForceFrom;
+    if (params.dateNoLongerInForceTo) query[":lte:dateNoLongerInForce"] = params.dateNoLongerInForceTo;
+    if (params.status) query["statusUUID"] = params.status;
 
     this.lastParams.commit();
 
-    return search('/search/submissions', params.page, params.size, params.sort, query, function (item) {
+    return await search('/search/submissions', params.page, params.size, params.sort, query, function (item) {
       item.attributes.id = item.id;
       return item.attributes;
     });
@@ -85,7 +85,9 @@ export default class SearchSubmissionsRoute extends Route {
 
     if (controller.page !== this.lastParams.committed.page)
       controller.set('page', this.lastParams.committed.page);
-    controller.set('filter', this.filter);
+
+    if (controller.filter !== this.filter)
+      controller.set('filter', this.filter);
   }
 
   @action
