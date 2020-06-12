@@ -46,12 +46,12 @@ export default class SubmissionsReviewComponent extends Component {
   @action
   async save() {
     await this.args.model.save();
-    this.router.transitionTo(this.args.onCloseRoute);
+    this.args.onClose();
   }
 
   @action
   async cancel() {
     await this.args.model.rollbackAttributes();
-    this.router.transitionTo(this.args.onCloseRoute);
+    this.args.onClose();
   }
 }

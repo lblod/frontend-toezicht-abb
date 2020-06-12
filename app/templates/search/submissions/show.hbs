@@ -34,7 +34,7 @@
         <Submissions::Review
                 @model={{await this.model.review}}
                 @status={{await this.model.review.status}}
-                @onCloseRoute={{'search.submissions.index'}}
+                @onClose={{this.onCloseComponent}}
                 @readonly={{true}}/>
       {{else}}
         <div class="button-group u-spacer--tiny">

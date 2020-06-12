@@ -37,7 +37,7 @@
       <Submissions::Review
               @model={{await this.model.review}}
               @status={{await this.model.review.status}}
-              @onCloseRoute={{'supervision.submissions.index'}} />
+              @onClose={{this.onCloseComponent}} />
     {{else}}
       <div class="button-group u-spacer--tiny">
         <LinkTo @route="supervision.submissions.index" class="button button--narrow button--alt">Sluit venster</LinkTo>
