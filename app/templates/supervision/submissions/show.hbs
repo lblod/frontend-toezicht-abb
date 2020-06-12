@@ -3,7 +3,7 @@
     <div class="grid">
       <div class="col--9-12 u-wide-on-print">
         <Submissions::StatusPill @status={{this.model.review.status}} class="u-spacer--tiny"/>
-        <h2 class="h3">Bekijk melding</h2>
+        <h2 class="h3">Melding voor {{this.model.organization.fullName}}</h2>
       </div>
       <div class="col--3-12 u-align-right u-hide-on-print">
         <LinkTo @route='supervision.submissions.index' class="link--icon--close">

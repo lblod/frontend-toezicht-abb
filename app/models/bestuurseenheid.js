@@ -8,4 +8,8 @@ export default class Bestuurseenheid extends Model {
   @belongsTo('werkingsgebied', { inverse: null }) provincie;
   @belongsTo('bestuurseenheid-classificatie-code', { inverse: null }) classificatie;
   @hasMany('bestuursorgaan', { inverse: null }) bestuursorganen;
+
+  get fullName() {
+    return `${this.classificatie.get('label')} ${this.naam}`.trim();
+  }
 }
