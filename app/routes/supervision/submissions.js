@@ -75,7 +75,9 @@ export default class SupervisionSubmissionsRoute extends Route.extend(DataTableR
       query['include'] = [
         'form-data.types',
         'form-data.chart-of-account',
-      ];
+        'organization.classificatie',
+        'organization.provincie',
+      ].join(',');
       query['filter[form-data][types][:uri:]'] = VLABEL_TYPE;
       query['filter[form-data][chart-of-account][id]'] = VLABEL_CHART_OF_ACCOUNTS.join(',');
     } else {
