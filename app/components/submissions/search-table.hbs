@@ -2,12 +2,15 @@
 {{!-- template-lint-disable no-inline-styles  --}}
 <div class="container-flex--contain">
   <div class="au-u-padding-small au-u-border-bottom">
+    <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">Toezicht ABB</AuHeading>
     <div class="au-o-grid au-o-grid--flush">
       <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium">
-        <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny">Toezicht ABB</AuHeading>
-      </div>
-      <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium">
         <AuAlert @alertIcon="info-circle" @alertTitle="De gegevens van deze pagina lopen maximaal één dag achter op de huidige stand van zaken."  @alertskin={{"info"}} @alertsize={{"small"}} class="au-u-margin-none" />
+      </div>
+        <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium au-u-text-right">
+        <a href="/filters-table/table-config" type="button" class="au-c-button au-c-button--tertiary">
+          <AuIcon @icon="settings" @alignment="left" /> Pas overzicht kolommen aan
+        </a> {{!--       FOR DEV: This should be a button that shows a modal! Thanks   --}}
       </div>
     </div>
   </div>
