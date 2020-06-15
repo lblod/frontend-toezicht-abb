@@ -365,3 +365,13 @@ td:focus {
 .checkbox--disabled .checkbox__toggle+span {
   background-color: $au-gray-300;
 }
+
+
+/* ==================================
+  Fix checkbox layout
+  ================================== */
+
+.au-c-checkbox + .au-c-label {
+  display: inline-block;
+  vertical-align: top;
+}
