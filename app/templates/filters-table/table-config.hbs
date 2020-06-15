@@ -1,0 +1,165 @@
+<div>
+  <span class="au-c-modal-backdrop is-visible" aria-hidden="true"></span>
+  <div class="au-c-modal au-c-modal--fullscreen is-visible" tabindex="-1" role="document">
+    <div class="au-c-modal__header">
+      <div>
+        <p class="au-c-modal__prefix">
+        </p>
+        <h1 class="au-c-modal__title" tabindex="-1">
+          Pas overzicht van zoekresultaten aan
+        </h1>
+      </div>
+{{!--       <button type="button" {{on "click" this.closeModal}} class="au-c-modal__close">
+        Venster sluiten
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--right au-c-icon--large">
+          <g class="cross">
+            <path fill-rule="evenodd" d="M12 13.414l-5.293 5.293-1.414-1.414L10.586 12 5.293 6.707l1.414-1.414L12 10.586l5.293-5.293 1.414 1.414L13.414 12l5.293 5.293-1.414 1.414L12 13.414z" class="Vector" clip-rule="evenodd"/>
+          </g>
+        </svg>
+      </button> --}}
+      <a href="/search/submissions" type="button" {{on "click" this.closeModal}} class="au-c-modal__close">
+        Venster sluiten
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--right au-c-icon--large">
+          <g class="cross">
+            <path fill-rule="evenodd" d="M12 13.414l-5.293 5.293-1.414-1.414L10.586 12 5.293 6.707l1.414-1.414L12 10.586l5.293-5.293 1.414 1.414L13.414 12l5.293 5.293-1.414 1.414L12 13.414z" class="Vector" clip-rule="evenodd"/>
+          </g>
+        </svg>
+      </a>
+      {{!--       FOR DEV: This should be a button! Thanks   --}}
+    </div>
+    <div class="au-c-modal__body">
+      <div class="au-c-modal__content">
+        <form class="au-c-form">
+          <fieldset class="au-c-form__fieldset">
+
+            <div class="au-o-grid">
+              <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium au-u-1-3@large">
+                <AuHeading @level="2" @skin="5" class="au-u-margin-bottom-small">Filters</AuHeading>
+
+                <div class="au-c-form__row au-u-margin-bottom-tiny">
+                  <div class="au-c-checkbox-wrapper">
+                    <input class="au-c-checkbox" type="checkbox" checked name="" id="bestuurseenheid">
+                    <label class="au-c-label" for="bestuurseenheid">
+                      Bestuurseenheid
+                      <br>(vb. Berchem, Hasselt of Gent)
+                    </label>
+                  </div>
+                </div>
+
+                <div class="au-c-form__row au-u-margin-bottom-tiny">
+                  <div class="au-c-checkbox-wrapper">
+                    <input class="au-c-checkbox" type="checkbox" checked name="" id="provincie">
+                    <label class="au-c-label" for="provincie">
+                      Provincie
+                      <br>
+                      (vb. Antwerpen of Oost-Vlaanderen)
+                    </label>
+                  </div>
+                </div>
+
+                <div class="au-c-form__row au-u-margin-bottom-tiny">
+                  <div class="au-c-checkbox-wrapper">
+                    <input class="au-c-checkbox" type="checkbox" checked name="" id="bestuur">
+                    <label class="au-c-label" for="bestuur">
+                      Type bestuur
+                      <br>
+                      (vb. OCMW of gemeente)
+                    </label>
+                  </div>
+                </div>
+
+                <div class="au-c-form__row au-u-margin-bottom-tiny">
+                  <div class="au-c-checkbox-wrapper">
+                    <input class="au-c-checkbox" type="checkbox" checked name="" id="categorie">
+                    <label class="au-c-label" for="categorie">Categorie dossier</label>
+                  </div>
+                </div>
+                <br>
+
+                <div class="au-c-form__row au-u-margin-bottom-tiny">
+                  <div class="au-c-checkbox-wrapper">
+                    <input class="au-c-checkbox" type="checkbox" checked name="" id="periode-zitting-besluit">
+                    <label class="au-c-label" for="periode-zitting-besluit">Periode zitting / besluit</label>
+                  </div>
+                </div>
+
+                <div class="au-c-form__row au-u-margin-bottom-tiny">
+                  <div class="au-c-checkbox-wrapper">
+                    <input class="au-c-checkbox" type="checkbox" checked name="" id="periode-verstuurd">
+                    <label class="au-c-label" for="periode-verstuurd">Periode verstuurd</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium au-u-1-3@large">
+                <AuHeading @level="2" @skin="5" class="au-u-margin-bottom-small">Subcategorieën</AuHeading>
+
+                <div class="au-c-form__row au-u-margin-bottom-tiny">
+                  <div class="au-c-checkbox-wrapper">
+                    <input class="au-c-checkbox" type="checkbox" checked name="" id="marcode">
+                    <label class="au-c-label" for="marcode">MAR-code</label>
+                  </div>
+                </div>
+
+                <div class="au-c-form__row au-u-margin-bottom-tiny">
+                  <div class="au-c-checkbox-wrapper">
+                    <input class="au-c-checkbox" type="checkbox" checked name="" id="belasting-geldt-van">
+                    <label class="au-c-label" for="belasting-geldt-van">Belasting geldt vanaf</label>
+                  </div>
+                </div>
+
+                <div class="au-c-form__row au-u-margin-bottom-tiny">
+                  <div class="au-c-checkbox-wrapper">
+                    <input class="au-c-checkbox" type="checkbox" checked name="" id="belasting-geldt-tot">
+                    <label class="au-c-label" for="belasting-geldt-tot">Belasting geldt tot</label>
+                  </div>
+                </div>
+
+                <br>
+                <AuHeading @level="2" @skin="5" class="au-u-margin-bottom-small">Locatiesecretariaat</AuHeading>
+
+                <div class="au-c-form__row au-u-margin-bottom-tiny">
+                  <div class="au-c-checkbox-wrapper">
+                    <input class="au-c-checkbox" type="checkbox" checked name="" id="status">
+                    <label class="au-c-label" for="status">
+                      Status 
+                      <br>
+                      (te behandelen, afgehandeld)
+                    </label>
+                  </div>
+                </div>
+
+                <p class="au-u-margin-top">
+                  Kies niet meer dan 7 kolommen om het overzichtelijk te houden.
+                  <br>
+                  Kolommen verbergen zich automatisch afhankelijk van uw schermgrootte, en wanneer u een dossier bekijkt.
+                </p>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="au-c-modal__footer">
+      <div class="au-c-toolbar">
+        <div class="au-c-toolbar__group">
+          <AuButtonGroup>
+            <AuButton>
+              Bewaar kolommen van zoekresulaten
+            </AuButton>
+            <AuButton @skin="secondary">
+              Annuleer
+            </AuButton>
+          </AuButtonGroup>
+        </div>
+        <div class="au-c-toolbar__group">
+          <AuButton @skin="tertiary" @alert="true">
+            Herstel kolommen naar standaard instellingen
+          </AuButton>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{outlet}}

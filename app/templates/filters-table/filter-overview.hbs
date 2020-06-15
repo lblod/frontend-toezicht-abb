@@ -1,0 +1,41 @@
+<div>
+  <span class="au-c-modal-backdrop is-visible" aria-hidden="true"></span>
+  <div class="au-c-modal au-c-modal--fullscreen is-visible" tabindex="-1" role="document">
+    <div class="au-c-modal__header">
+      <div>
+        <p class="au-c-modal__prefix">
+        </p>
+        <h1 class="au-c-modal__title" tabindex="-1">
+          Bewaarde zoekopdrachten
+        </h1>
+      </div>
+{{!--       <button type="button" {{on "click" this.closeModal}} class="au-c-modal__close">
+        Venster sluiten
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--right au-c-icon--large">
+          <g class="cross">
+            <path fill-rule="evenodd" d="M12 13.414l-5.293 5.293-1.414-1.414L10.586 12 5.293 6.707l1.414-1.414L12 10.586l5.293-5.293 1.414 1.414L13.414 12l5.293 5.293-1.414 1.414L12 13.414z" class="Vector" clip-rule="evenodd"/>
+          </g>
+        </svg>
+      </button> --}}
+      <a href="/search/submissions" type="button" {{on "click" this.closeModal}} class="au-c-modal__close">
+        Venster sluiten
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--right au-c-icon--large">
+          <g class="cross">
+            <path fill-rule="evenodd" d="M12 13.414l-5.293 5.293-1.414-1.414L10.586 12 5.293 6.707l1.414-1.414L12 10.586l5.293-5.293 1.414 1.414L13.414 12l5.293 5.293-1.414 1.414L12 13.414z" class="Vector" clip-rule="evenodd"/>
+          </g>
+        </svg>
+      </a>
+      {{!--       FOR DEV: This should be a button! Thanks   --}}
+    </div>
+    <div class="au-c-modal__body">
+
+    </div>
+    <div class="au-c-modal__footer">
+      <AuButton @skin="secondary">
+        Annuleer
+      </AuButton>
+    </div>
+  </div>
+</div>
+
+{{outlet}}

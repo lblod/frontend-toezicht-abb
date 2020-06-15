@@ -35,4 +35,9 @@ Router.map(function() {
   });
 
   this.route('mock-login');
+
+  this.route('filters-table', function() {
+    this.route('filter-overview');
+    this.route('table-config');
+  });
 });
