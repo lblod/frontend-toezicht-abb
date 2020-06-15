@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import {tracked} from "@glimmer/tracking";
 
 import {action} from '@ember/object';
+import {inject as service} from '@ember/service';
 
 import {timeout} from 'ember-concurrency';
 import {task, restartableTask} from "ember-concurrency-decorators";
@@ -11,6 +12,7 @@ import {DECISION_TYPE} from "../../models/concept-scheme";
 import {TREAT_STATUS} from "../../models/submission-review-status";
 
 export default class SubmissionsSearchTableComponent extends Component {
+  @service store
 
   @tracked decisionTypes = []
   @tracked _freeTextSearch;
