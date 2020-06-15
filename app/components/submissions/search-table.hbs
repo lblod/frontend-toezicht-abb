@@ -156,6 +156,7 @@
                      @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
             <t.content as |c|>
               <c.header>
+              {{!-- For devs! When creating a new table for filters, please make sure colums stay configurable. We need control over responsive displays and width. --}}
                 {{#unless @displaySubset}}
                   <ThSortable @label="Provincie"
                               @field="province"
@@ -227,21 +228,16 @@
               <tr>
                 <td colspan="8">
                   <AuAlert @alertIcon="alert-triangle" @alertTitle="Zoekresultaten zijn onvolledig"  @alertskin={{"warning"}} @alertsize={{"small"}}>
-                    <br>
                     <p>Zorg dat u door gebruik van filters, en niet enkel inhoudelijke zoekopdrachten, het volledige plaatje ziet.</p>
                     <br>
                     <p>
-                      <strong>Zoeken in foto's van besluiten kan niet</strong>
-                      <br>
-                      Enkel webpagina's en PDFs zijn leesbaar. De inhoud van afbeeldingen wordt dus niet mee opgenomen in zoekresultaten.
+                      <strong>Zoeken in foto's van besluiten kan niet</strong>, dat kan enkel in webpagina's en leesbare PDFs.
                     </p>
                     <br>
                     <p>
-                      <strong>Filters</strong>
+                      <strong>Gebruik de filters onder de zoekfunctie om resultaten dubbel te checken</strong>
                       <br>
-                      Indien u op zoek bent naar besluiten van, bijvoorbeeld, de stad Brugge, of een jaarrekening, gebruik filters.
-                      <br>
-                      Met de zoekfunctie <strong>Zoek in inhoud dossier</strong> geven termen zoals "Brugge", "Jaarrekening" of "Provincie" niets weer als de informatie niet in de inhoud van de leesbare webpagina of PDF staat.
+                      Met de zoekfunctie <em>Zoek in inhoud dossier</em> geven termen zoals "Brugge", "Jaarrekening" of "Provincie" niets weer als de informatie niet in de inhoud van de leesbare webpagina of PDF staat.
                     </p>
                   </AuAlert>
                 </td>
