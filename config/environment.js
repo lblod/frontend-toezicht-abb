@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'frontend-toezicht-abb',
     environment,
@@ -37,7 +37,7 @@ module.exports = function(environment) {
       }
     },
     browserUpdate: {
-      required: {e:-3, f:-3,s:-3,c:-3},
+      vs: {i:11,f:-3,o:-3,s:-3,c:-3},
       style: 'corner',
       l: 'nl',
       shift_page_down: false

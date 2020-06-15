@@ -39,7 +39,7 @@
 
         {{#if @filter.classificatieIds}}
           <label class="label--subtle form__label">Type Bestuursorgaan</label>
-          <Filter::GoverningBodyClassificationSelect @value={{@filter.governingBodyClassificationIds}}
+          <Filter::GoverningBodyClassificationSelect @filter={{@filter.governingBodyClassificationIds}}
                                                      @onSelectionChange={{fn this.setFilter
                                                                              'governingBodyClassificationIds'}} />
         {{/if}}
