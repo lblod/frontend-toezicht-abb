@@ -243,23 +243,25 @@
                   <LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo>
                 </td>
               </c.body>
-              <tr>
-                <td colspan="8">
-                  <AuAlert @alertIcon="alert-triangle" @alertTitle="Zoekresultaten zijn onvolledig"  @alertskin={{"warning"}} @alertsize={{"small"}}>
-                    <p>Zorg dat u door gebruik van filters, en niet enkel inhoudelijke zoekopdrachten, het volledige plaatje ziet.</p>
-                    <br>
-                    <p>
-                      <strong>Zoeken in foto's van besluiten kan niet</strong>, dat kan enkel in webpagina's en leesbare PDFs.
-                    </p>
-                    <br>
-                    <p>
-                      <strong>Gebruik de filters onder de zoekfunctie om resultaten dubbel te checken</strong>
+              {{#if this.hasAskedForFreeTextSearch}}
+                <tr>
+                  <td colspan="8">
+                    <AuAlert @alertIcon="alert-triangle" @alertTitle="Zoekresultaten zijn onvolledig"  @alertskin={{"warning"}} @alertsize={{"small"}}>
+                      <p>Zorg dat u door gebruik van filters, en niet enkel inhoudelijke zoekopdrachten, het volledige plaatje ziet.</p>
                       <br>
-                      Met de zoekfunctie <em>Zoek in inhoud dossier</em> geven termen zoals "Brugge", "Jaarrekening" of "Provincie" niets weer als de informatie niet in de inhoud van de leesbare webpagina of PDF staat.
-                    </p>
-                  </AuAlert>
-                </td>
-              </tr>
+                      <p>
+                        <strong>Zoeken in foto's van besluiten kan niet</strong>, dat kan enkel in webpagina's en leesbare PDFs.
+                      </p>
+                      <br>
+                      <p>
+                        <strong>Gebruik de filters onder de zoekfunctie om resultaten dubbel te checken</strong>
+                        <br>
+                        Met de zoekfunctie <em>Zoek in inhoud dossier</em> geven termen zoals "Brugge", "Jaarrekening" of "Provincie" niets weer als de informatie niet in de inhoud van de leesbare webpagina of PDF staat.
+                      </p>
+                    </AuAlert>
+                  </td>
+                </tr>
+              {{/if}}
             </t.content>
           </DataTable>
         </div>
