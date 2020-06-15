@@ -33,7 +33,6 @@ Router.map(function() {
   this.route('route-not-found', {
     path: '/*wildcard'
   });
-
   this.route('mock-login');
   this.route('filters-table', function() {
     this.route('filter-overview');
