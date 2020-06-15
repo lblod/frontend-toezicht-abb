@@ -224,6 +224,28 @@
                   <LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo>
                 </td>
               </c.body>
+              <tr>
+                <td colspan="8">
+                  <AuAlert @alertIcon="alert-triangle" @alertTitle="Zoekresultaten zijn onvolledig"  @alertskin={{"warning"}} @alertsize={{"small"}}>
+                    <br>
+                    <p>Zorg dat u door gebruik van filters, en niet enkel inhoudelijke zoekopdrachten, het volledige plaatje ziet.</p>
+                    <br>
+                    <p>
+                      <strong>Zoeken in foto's van besluiten kan niet</strong>
+                      <br>
+                      Enkel webpagina's en PDFs zijn leesbaar. De inhoud van afbeeldingen wordt dus niet mee opgenomen in zoekresultaten.
+                    </p>
+                    <br>
+                    <p>
+                      <strong>Filters</strong>
+                      <br>
+                      Indien u op zoek bent naar besluiten van, bijvoorbeeld, de stad Brugge, of een jaarrekening, gebruik filters.
+                      <br>
+                      Met de zoekfunctie <strong>Zoek in inhoud dossier</strong> geven termen zoals "Brugge", "Jaarrekening" of "Provincie" niets weer als de informatie niet in de inhoud van de leesbare webpagina of PDF staat.
+                    </p>
+                  </AuAlert>
+                </td>
+              </tr>
             </t.content>
           </DataTable>
         </div>
