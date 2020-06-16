@@ -29,92 +29,86 @@
     </div>
     <div class="au-c-modal__body">
 
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Naam&nbsp;filterset</th>
+            <th>Beschrijving</th>
+            <th>Datum&nbsp;aangemaakt</th>
+            <th style="width:45rem;">
+              <p class="au-u-text-right">
+                <a href="/filters-table/filter-save" class="au-c-button">
+                  Maak nieuwe filterset
+                </a>
 
+              {{!--       FOR DEV:
+              - Only show this row when there are no saved filter sets
+              - These should be buttons! Thanks
 
+                <AuButton>
+                  Maak nieuwe filterset
+                </AuButton> --}}
+              </p>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="4">
+              <p class="au-u-text-center">
+                Geen bewaarde filtersets.
+                <a href="/filters-table/filter-save" class="au-c-button au-c-button--tertiary">
+                  Maak nieuwe filterset
+                </a>
+              </p>
 
-<table class="data-table">
-  <thead>
-    <tr>
-      <th>Naam&nbsp;filterset</th>
-      <th>Beschrijving</th>
-      <th>Datum&nbsp;aangemaakt</th>
-      <th style="width:45rem;">
-        <p class="au-u-text-right">
-          <a href="/filters-table/filter-save" class="au-c-button">
-            Maak nieuwe filterset
-          </a>
+              {{!--       FOR DEV:
+              - Only show this row when there are no saved filter sets
+              - These should be buttons! Thanks
 
-        {{!--       FOR DEV:
-        - Only show this row when there are no saved filter sets
-        - These should be buttons! Thanks
+              <AuButton @skin="tertiary">
+                Maak nieuwe filterset
+              </AuButton> --}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Rechtspositieregeling met details over een bepaald bestuur
+            </td>
+            <td>
+              Informatie over de filters die gekozen werden, al dan niet automatisch gegenereerd
+            </td>
+            <td>
+              11/06/2020
+            </td>
+            <td>
+              <AuButtonGroup class="au-u-text-right">
+                <a href="/search/submissions" class="au-c-button">
+                  Laad filterset
+                </a>
+                <a href="/filters-table/filter-save" class="au-c-button au-c-button--secondary">
+                  Bewerk
+                </a>
+                <AuButton @skin="tertiary" @alert="true">
+                  Verwijder
+                </AuButton>
 
-          <AuButton>
-            Maak nieuwe filterset
-          </AuButton> --}}
-        </p>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td colspan="4">
-        <p class="au-u-text-center">
-          Geen bewaarde filtersets.
-          <a href="/filters-table/filter-save" class="au-c-button au-c-button--tertiary">
-            Maak nieuwe filterset
-          </a>
-        </p>
+                {{!--       FOR DEV: These should be buttons! Thanks
 
-        {{!--       FOR DEV:
-        - Only show this row when there are no saved filter sets
-        - These should be buttons! Thanks
-
-        <AuButton @skin="tertiary">
-          Maak nieuwe filterset
-        </AuButton> --}}
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Rechtspositieregeling met details over een bepaald bestuur
-      </td>
-      <td>
-        Informatie over de filters die gekozen werden, al dan niet automatisch gegenereerd
-      </td>
-      <td>
-        11/06/2020
-      </td>
-      <td>
-        <AuButtonGroup class="au-u-text-right">
-          <a href="/search/submissions" class="au-c-button">
-            Laad filterset
-          </a>
-          <a href="/filters-table/filter-save" class="au-c-button au-c-button--secondary">
-            Bewerk
-          </a>
-          <AuButton @skin="tertiary" @alert="true">
-            Verwijder
-          </AuButton>
-
-          {{!--       FOR DEV: These should be buttons! Thanks
-
-          <AuButton>
-            Laad filterset
-          </AuButton>
-          <AuButton @skin="secondary">
-            Bewerk
-          </AuButton>
-          <AuButton @skin="tertiary" @alert="true">
-            Verwijder
-          </AuButton> --}}
-        </AuButtonGroup>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-
-
+                <AuButton>
+                  Laad filterset
+                </AuButton>
+                <AuButton @skin="secondary">
+                  Bewerk
+                </AuButton>
+                <AuButton @skin="tertiary" @alert="true">
+                  Verwijder
+                </AuButton> --}}
+              </AuButtonGroup>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
     </div>
     <div class="au-c-modal__footer">
