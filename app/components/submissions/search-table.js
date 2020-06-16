@@ -18,7 +18,7 @@ export default class SubmissionsSearchTableComponent extends Component {
   @tracked _freeTextSearch;
 
   get hasAskedForFreeTextSearch(){
-    return this._freeTextSearch.length;
+    return this._freeTextSearch && this._freeTextSearch.length;
   }
 
   constructor() {
