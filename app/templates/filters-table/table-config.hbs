@@ -67,6 +67,7 @@
                     </label>
                   </div>
                 </div>
+                <br>
 
                 <div class="au-c-form__row au-u-margin-bottom-tiny">
                   <div class="au-c-checkbox-wrapper">
@@ -74,7 +75,6 @@
                     <label class="au-c-label" for="categorie">Categorie dossier</label>
                   </div>
                 </div>
-                <br>
 
                 <div class="au-c-form__row au-u-margin-bottom-tiny">
                   <div class="au-c-checkbox-wrapper">
@@ -96,21 +96,21 @@
 
                 <div class="au-c-form__row au-u-margin-bottom-tiny">
                   <div class="au-c-checkbox-wrapper">
-                    <input class="au-c-checkbox" type="checkbox" checked name="" id="marcode">
+                    <input class="au-c-checkbox" type="checkbox" name="" id="marcode">
                     <label class="au-c-label" for="marcode">MAR-code</label>
                   </div>
                 </div>
 
                 <div class="au-c-form__row au-u-margin-bottom-tiny">
                   <div class="au-c-checkbox-wrapper">
-                    <input class="au-c-checkbox" type="checkbox" checked name="" id="belasting-geldt-van">
+                    <input class="au-c-checkbox" type="checkbox" name="" id="belasting-geldt-van">
                     <label class="au-c-label" for="belasting-geldt-van">Belasting geldt vanaf</label>
                   </div>
                 </div>
 
                 <div class="au-c-form__row au-u-margin-bottom-tiny">
                   <div class="au-c-checkbox-wrapper">
-                    <input class="au-c-checkbox" type="checkbox" checked name="" id="belasting-geldt-tot">
+                    <input class="au-c-checkbox" type="checkbox" name="" id="belasting-geldt-tot">
                     <label class="au-c-label" for="belasting-geldt-tot">Belasting geldt tot</label>
                   </div>
                 </div>
@@ -144,12 +144,22 @@
       <div class="au-c-toolbar">
         <div class="au-c-toolbar__group">
           <AuButtonGroup>
+            <a href="/search/submissions" class="au-c-button">
+              Bewaar kolommen van zoekresulaten
+            </a>
+            <a href="/search/submissions" class="au-c-button au-c-button--secondary">
+              Annuleer
+            </a>
+
+            {{!--       FOR DEV: These should be buttons! Thanks
+
             <AuButton>
               Bewaar kolommen van zoekresulaten
             </AuButton>
             <AuButton @skin="secondary">
               Annuleer
-            </AuButton>
+            </AuButton> --}}
+
           </AuButtonGroup>
         </div>
         <div class="au-c-toolbar__group">
