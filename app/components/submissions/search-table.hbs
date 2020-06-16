@@ -2,13 +2,15 @@
 {{!-- template-lint-disable no-inline-styles  --}}
 <div class="container-flex--contain">
   <div class="au-u-padding-small au-u-border-bottom">
-    <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">Toezicht ABB</AuHeading>
     <div class="au-o-grid au-o-grid--flush">
-      <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium">
+      <div class="au-o-grid__item au-u-1-1 au-u-1-4@medium">
+          <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">Toezicht ABB</AuHeading>
+      </div>
+      <div class="au-o-grid__item au-u-1-1 au-u-2-4@medium">
         <AuAlert @alertIcon="info-circle" @alertTitle="De gegevens van deze pagina lopen maximaal één dag achter op de huidige stand van zaken."  @alertskin={{"info"}} @alertsize={{"small"}} class="au-u-margin-none" />
       </div>
-        <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium au-u-text-right">
-        <a href="/filters-table/table-config" type="button" class="au-c-button au-c-button--tertiary">
+      <div class="au-o-grid__item au-u-1-1 au-u-1-4@medium au-u-text-right">
+        <a href="/filters-table/table-config" type="button" class="au-c-button au-c-button--tertiary au-u-margin-top-tiny">
           <AuIcon @icon="settings" @alignment="left" /> Pas overzicht kolommen aan
         </a> {{!--       FOR DEV: This should be a button that shows a modal! Thanks   --}}
       </div>
@@ -19,9 +21,9 @@
     <div class="au-c-main-container">
       <div class="au-c-main-container__sidebar">
         <div class="au-c-sidebar">
-          <div class="au-c-sidebar__header">
+          <div class="au-c-sidebar__content">
 
-            <div class="au-c-sidebar__content">
+            <div class="au-c-sidebar__header">
 
               <div class="au-o-grid au-o-grid--flush">
                 <div class="au-o-grid__item au-u-1-2">
@@ -148,6 +150,19 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="au-c-sidebar__footer">
+            <a href="/filters-table/filter-save" class="au-c-button au-c-button--tertiary">
+              <AuIcon @icon="plus-text" @alignment="left" /> Bewaar filterset
+            </a>
+            <a href="/filters-table/filter-overview" class="au-c-button au-c-button--tertiary">
+              <AuIcon @icon="export" @alignment="left" /> Laad filterset
+            </a>
+            {{!--       FOR DEV: These should be buttons that show modals! Thanks
+
+            <AuButton @skin="tertiary">
+              <AuIcon @icon="export" @alignment="left" /> Laad zoekopdracht
+            </AuButton> --}}
           </div>
         </div>
       </div>
