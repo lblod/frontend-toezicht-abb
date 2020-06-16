@@ -39,5 +39,6 @@ Router.map(function() {
   this.route('filters-table', function() {
     this.route('filter-overview');
     this.route('table-config');
+    this.route('filter-save');
   });
 });

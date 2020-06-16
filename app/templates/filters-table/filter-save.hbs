@@ -1,0 +1,169 @@
+<div>
+  <span class="au-c-modal-backdrop is-visible" aria-hidden="true"></span>
+  <div class="au-c-modal au-c-modal--fullscreen is-visible" tabindex="-1" role="document">
+    <div class="au-c-modal__header">
+      <div>
+        <p class="au-c-modal__prefix">
+        </p>
+        <h1 class="au-c-modal__title" tabindex="-1">
+          Bewaar filtersets
+        </h1>
+      </div>
+{{!--       <button type="button" {{on "click" this.closeModal}} class="au-c-modal__close">
+        Venster sluiten
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--right au-c-icon--large">
+          <g class="cross">
+            <path fill-rule="evenodd" d="M12 13.414l-5.293 5.293-1.414-1.414L10.586 12 5.293 6.707l1.414-1.414L12 10.586l5.293-5.293 1.414 1.414L13.414 12l5.293 5.293-1.414 1.414L12 13.414z" class="Vector" clip-rule="evenodd"/>
+          </g>
+        </svg>
+      </button> --}}
+      <a href="/search/submissions" type="button" {{on "click" this.closeModal}} class="au-c-modal__close">
+        Venster sluiten
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--right au-c-icon--large">
+          <g class="cross">
+            <path fill-rule="evenodd" d="M12 13.414l-5.293 5.293-1.414-1.414L10.586 12 5.293 6.707l1.414-1.414L12 10.586l5.293-5.293 1.414 1.414L13.414 12l5.293 5.293-1.414 1.414L12 13.414z" class="Vector" clip-rule="evenodd"/>
+          </g>
+        </svg>
+      </a>
+      {{!--       FOR DEV: This should be a button! Thanks   --}}
+    </div>
+    <div class="au-c-modal__body">
+
+      <div class="au-u-margin-bottom">
+        <AuLabel>Naam filterset</AuLabel>
+        <AuInput />
+      </div>
+      <div class="au-u-margin-bottom">
+        <AuLabel>Beschrijving filterset</AuLabel>
+        <AuTextarea rows="4" cols="50" />
+      </div>
+
+      <hr class="au-c-hr">
+
+      <div class="au-o-grid">
+        <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium au-u-1-3@large">
+          <div class="au-u-padding-left-tiny au-u-padding-right-tiny">
+
+            <div class="au-u-margin-bottom">
+              <AuLabel>Zoek in inhoud dossier</AuLabel>
+              <AuInput
+                @width={{"block"}}
+                @value={{this._freeTextSearch}}
+                {{on "input" (perform this.search)}}/>
+            </div>
+
+            <div class="au-u-margin-bottom-small">
+              <div class="checkbox--switch__wrapper">
+                <WuSwitch @label="Toon enkel te behandelen dossiers" />
+              </div>
+            </div>
+
+            <div class="au-u-margin-bottom-small">
+              <AuLabel>Bestuurseenheid</AuLabel>
+              <Filter::AdministrativeUnitSelect @value={{@filter.administrativeUnites}}
+                                                @onSelectionChange={{fn @setFilter 'administrativeUnites'}}/>
+            </div>
+            <div class="au-u-margin-bottom-small">
+              <AuLabel>Provincie</AuLabel>
+              <Filter::ProvinceSelect @value={{@filter.provinces}}
+                                      @onSelectionChange={{fn @setFilter 'provinces'}} />
+            </div>
+            <div class="au-u-margin-bottom-small">
+              <AuLabel>Type bestuur</AuLabel>
+              <Filter::AdministrativeUnitClassificationSelect @value={{@filter.administrativeUnitClassifications}}
+                                                              @onSelectionChange={{this.selectAdministrativeUnitClassifications}} />
+            </div>
+            <div class="au-u-margin-bottom-small">
+              {{#if @filter.administrativeUnitClassifications}}
+                <AuLabel>Type Bestuursorgaan</AuLabel>
+                <Filter::GoverningBodyClassificationSelect @value={{@filter.governingBodyClassifications}}
+                                                           @onSelectionChange={{fn @setFilter 'governingBodyClassifications'}} />
+              {{/if}}
+            </div>
+
+          </div>
+        </div>
+
+        <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium au-u-1-3@large">
+          <div class="au-u-padding-left-tiny au-u-padding-right-tiny">
+            <div class="au-u-margin-bottom-small">
+              <AuLabel>Categorie dossier</AuLabel>
+              <Filter::DecisionTypeSelect @value={{@filter.decisionTypes}}
+                                          @onSelectionChange={{this.selectDecisionTypes}} />
+            </div>
+
+            <div class="au-u-margin-bottom-small">
+              <Filter::DateRange @label="Periode zitting / besluit" @defaultFromDate={{this.lastMonth}}
+                                 @fromValue={{@filter.sessionDateFrom}} @toValue={{@filter.sessionDateTo}}
+                                 @onChangeFromValue={{fn @setFilter 'sessionDateFrom'}} @onChangeToValue={{fn @setFilter 'sessionDateTo'}} />
+            </div>
+            <div class="au-u-margin-bottom-small">
+              <Filter::DateRange @label="Periode verstuurd" @fromValue={{@filter.sentDateFrom}}
+                                 @toValue={{@filter.sentDateTo}} @onChangeFromValue={{fn @setFilter 'sentDateFrom'}}
+                                 @onChangeToValue={{fn @setFilter 'sentDateTo'}} />
+            </div>
+
+          </div>
+        </div>
+
+        <div class="au-o-grid__item au-u-1-1 au-u-1-2@medium au-u-1-3@large">
+          <div class="au-u-padding-left-tiny au-u-padding-right-tiny">
+            <div class="au-u-margin-bottom-small">
+              <AuLabel>Subcategorie: Type reglement of verordening</AuLabel>
+              <Filter::RegulationTypeSelect @value={{@filter.regulationTypes}}
+                                            @onSelectionChange={{fn @setFilter 'regulationTypes'}} />
+            </div>
+
+            <hr class="au-c-hr">
+
+            <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-small">Subcategorie: Belasting of retributie</AuHeading>
+            <div class="au-u-margin-bottom-small">
+              <AuLabel>MAR-code</AuLabel>
+              <Filter::ChartOfAccountSelect @value={{@filter.chartOfAccounts}}
+                                            @onSelectionChange={{fn @setFilter 'chartOfAccounts'}} />
+            </div>
+            <div class="au-u-margin-bottom-small">
+              <Filter::DateRange @label="Belasting geldt vanaf"
+                                 @defaultToDate={{this.nextYear}}
+                                 @fromValue={{@filter.dateOfEntryIntoForceFrom}}
+                                 @toValue={{@filter.dateOfEntryIntoForceTo}}
+                                 @onChangeFromValue={{fn @setFilter 'dateOfEntryIntoForceFrom'}}
+                                 @onChangeToValue={{fn @setFilter 'dateOfEntryIntoForceTo'}} />
+            </div>
+            <div class="au-u-margin-bottom-small">
+              <Filter::DateRange @label="Belasting geldt tot"
+                                 @defaultToDate={{this.nextYear}}
+                                 @fromValue={{@filter.dateNoLongerInForceFrom}}
+                                 @toValue={{@filter.dateNoLongerInForceTo}}
+                                 @onChangeFromValue={{fn @setFilter 'dateNoLongerInForceFrom'}}
+                                 @onChangeToValue={{fn @setFilter 'dateNoLongerInForceTo'}} />
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="au-c-modal__footer">
+      <AuButtonGroup>
+        <a href="/filters-table/filter-overview" class="au-c-button">
+          Bewaar filterset
+        </a>
+        <a href="/search/submissions" class="au-c-button au-c-button--secondary">
+          Annuleer
+        </a>
+
+        {{!--       FOR DEV: These should be buttons! Thanks
+
+        <AuButton>
+          Bewaar filterset
+        </AuButton>
+        <AuButton @skin="secondary">
+          Annuleer
+        </AuButton> --}}
+      </AuButtonGroup>
+    </div>
+  </div>
+</div>
+
+{{outlet}}
