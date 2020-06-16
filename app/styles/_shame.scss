@@ -358,7 +358,6 @@ td:focus {
 }
 
 
-
 /* ==================================
   Fix checkbox disabled state in alert
   ================================== */
@@ -374,4 +373,38 @@ td:focus {
 .au-c-checkbox + .au-c-label {
   display: inline-block;
   vertical-align: top;
+}
+
+
+/* ==================================
+  Fix scrolling for sidebar
+  ================================== */
+
+.au-c-sidebar {
+  overflow: hidden;
+}
+
+.au-c-sidebar__content {
+  flex-grow: 2;
+  overflow: auto;
+}
+
+.au-c-sidebar__footer {
+  border-top: 1px solid $au-gray-300;
+  flex-grow: 1;
+}
+
+
+/* ==================================
+  Remove when mockups are gone
+  ================================== */
+
+.data-table tbody a.au-c-button,
+a.au-c-button {
+  text-decoration: none;
+
+  &:visited:not(.au-c-button--secondary):not(.au-c-button--tertiary) {
+    background-color: $au-blue-700;
+    color: $white;
+  }
 }
