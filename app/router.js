@@ -40,8 +40,4 @@ Router.map(function() {
     this.route('filter-save');
   });
   this.route('help');
-  this.route('filters-table', function() {
-    this.route('filter-overview');
-    this.route('table-config');
-  });
 });
