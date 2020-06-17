@@ -35,4 +35,5 @@ Router.map(function() {
   });
 
   this.route('mock-login');
+  this.route('help');
 });

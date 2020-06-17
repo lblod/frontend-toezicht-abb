@@ -1,14 +1,22 @@
 <div class="container">
-  <AuMainHeader @brandLink="https://www.vlaanderen.be/nl" @homeRoute="index" @appTitle="Toezicht ABB" @contactRoute="contact">
-    {{#if session.isAuthenticated}}
-      <AcmidmLogout @tagName="button" class="au-c-button au-c-button--tertiary" role="menuitem">
-        <AuIcon @icon="logout" @alignment="left" /> Afmelden
-      </AcmidmLogout>
-    {{else}}
-      <AcmidmLogin role="menuitem" @styles="au-c-button au-c-button--tertiary">
-        <AuIcon @icon="login" @alignment="left" />Aanmelden
-      </AcmidmLogin>
-    {{/if}}
+  <AuMainHeader @homeRoute="index" @appTitle="Toezicht ABB">
+    <li class="au-c-list-horizontal__item">
+      <AuLink @linkRoute="help" @skin="secondary">
+        <AuIcon @icon="question-circle" @alignment="left" />
+        Help
+      </AuLink>
+    </li>
+    <li class="au-c-list-horizontal__item">
+      {{#if session.isAuthenticated}}
+        <AcmidmLogout @tagName="button" class="au-c-button au-c-button--tertiary" role="menuitem">
+          <AuIcon @icon="logout" @alignment="left" /> Afmelden
+        </AcmidmLogout>
+      {{else}}
+        <AcmidmLogin role="menuitem" @styles="au-c-button au-c-button--tertiary">
+          <AuIcon @icon="login" @alignment="left" />Aanmelden
+        </AcmidmLogin>
+      {{/if}}
+    </li>
   </AuMainHeader>
 
   <div class="container-flex--contain">
