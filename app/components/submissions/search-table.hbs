@@ -19,12 +19,10 @@
       <div class="au-c-main-container__sidebar">
         <div class="au-c-sidebar">
           <div class="au-c-sidebar__content">
-
             <div class="au-c-sidebar__header">
 
               <div class="au-o-grid au-o-grid--flush">
                 <div class="au-o-grid__item au-u-1-2 au-u-1-1@large">
-
                   <AuHeading @level="2" class="au-u-hidden-visually">Zoek</AuHeading>
 
                   <div class="au-u-margin-bottom-small">
@@ -81,7 +79,6 @@
                 </div>
 
                 <div class="au-o-grid__item au-u-1-2 au-u-1-1@large">
-
                   <div class="au-u-margin-bottom-small">
                     <AuLabel>Categorie dossier</AuLabel>
                     <Filter::DecisionTypeSelect @value={{@filter.decisionTypes}}
@@ -111,7 +108,6 @@
 
 
                   <hr class="au-c-hr">
-
                   <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-small">Subcategorie: Belasting of retributie</AuHeading>
                   <div class="au-u-margin-bottom-small">
                     <AuLabel>MAR-code</AuLabel>
@@ -134,7 +130,6 @@
                                        @onChangeFromValue={{fn @setFilter 'dateNoLongerInForceFrom'}}
                                        @onChangeToValue={{fn @setFilter 'dateNoLongerInForceTo'}} />
                   </div>
-
                 </div>
               </div>
             </div>
