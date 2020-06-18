@@ -21,127 +21,124 @@
             <div class="au-c-sidebar__content">
 
               <div class="au-o-grid au-o-grid--flush">
-                <div class="au-o-grid__item au-u-1-2">
-                  <AuHeading @level="2" @skin="3" class="au-u-margin-top-tiny au-u-margin-bottom">Filter dossiers</AuHeading>
-                </div>
-                <div class="au-o-grid__item au-u-1-2 au-u-text-right">
-                  <WuButton @onClick={{this.resetFilters}}
-                            class="au-c-button au-c-button--secondary">
-                    <AuIcon @icon="cross" @alignment="left" /> Reset filters
-                  </WuButton>
-                </div>
-              </div>
-
-              <div class="au-o-grid au-o-grid--flush">
                 <div class="au-o-grid__item au-u-1-2 au-u-1-1@large">
-                  <div class="au-u-padding-left-tiny au-u-padding-right-tiny">
 
-                    <div class="au-u-margin-bottom">
-                      <AuLabel>Zoek in inhoud dossier</AuLabel>
-                      <AuInput
-                              @width={{"block"}}
-                              @value={{this._freeTextSearch}}
-                              {{on "input" (perform this.search)}}/>
-                      <div class="au-c-tooltip-container">
-                        <button class="au-c-button au-c-button--tertiary au-c-button--tooltip" aria-labelledby="zoekresultaten-meer-informatie">
-                          <AuIcon @icon="info-circle" @alignment="left" /> Zoekresultaten kunnen onvolledig zijn
-                        </button>
-                        <div role="tooltip" id="zoekresultaten-meer-informatie">Webpagina's en leesbare PDF's zijn doorzoekbaar &mdash; ingescande PDF's of afbeeldingen niet.</div>
-                      </div>
-                    </div>
+                  <AuHeading @level="2" @skin="3" class="au-u-margin-bottom-small">Zoek</AuHeading>
 
-                    <div class="au-u-margin-bottom-small">
-                      <div class="checkbox--switch__wrapper">
-                        <WuSwitch @label="Toon enkel te behandelen dossiers"
-                                  @checked={{this.isStatusFilterEnabled}}
-                                  @onClick={{this.setToTreatStatus}} />
-                      </div>
-                    </div>
-
-                    <hr class="au-c-hr">
-
-                    <div class="au-u-margin-bottom-small">
-                      <AuLabel>Bestuurseenheid</AuLabel>
-                      <Filter::AdministrativeUnitSelect @value={{@filter.administrativeUnites}}
-                                                        @onSelectionChange={{fn @setFilter 'administrativeUnites'}}/>
-                    </div>
-                    <div class="au-u-margin-bottom-small">
-                      <AuLabel>Provincie</AuLabel>
-                      <Filter::ProvinceSelect @value={{@filter.provinces}}
-                                              @onSelectionChange={{fn @setFilter 'provinces'}} />
-                    </div>
-                    <div class="au-u-margin-bottom-small">
-                      <AuLabel>Type bestuur</AuLabel>
-                      <Filter::AdministrativeUnitClassificationSelect @value={{@filter.administrativeUnitClassifications}}
-                                                                      @onSelectionChange={{this.selectAdministrativeUnitClassifications}} />
-                    </div>
-                    <div class="au-u-margin-bottom-small">
-                      {{#if @filter.administrativeUnitClassifications}}
-                        <AuLabel>Type Bestuursorgaan</AuLabel>
-                        <Filter::GoverningBodyClassificationSelect @value={{@filter.governingBodyClassifications}}
-                                                                   @onSelectionChange={{fn @setFilter 'governingBodyClassifications'}} />
-                      {{/if}}
-                    </div>
-                    <hr class="au-c-hr">
+                  <div class="au-u-margin-bottom-small">
+                    <AuLabel>Zoek in inhoud dossier</AuLabel>
+                    <AuInput
+                            @width={{"block"}}
+                            @value={{this._freeTextSearch}}
+                            {{on "input" (perform this.search)}}
+                            class="au-u-margin-bottom-tiny"/>
+                    <a href="/help#help-zoekresultaten" class="au-c-button au-c-button--tertiary au-u-padding-none" target="_blank" rel="noopener noreferrer">
+                      <AuIcon @icon="info-circle" @alignment="left" /> Zoekresultaten zijn onvolledig
+                    </a>
                   </div>
+
+                  <hr class="au-c-hr">
+
+                  <div class="au-o-grid au-o-grid--flush">
+                    <div class="au-o-grid__item au-u-1-2">
+                      <AuHeading @level="2" @skin="3" class="au-u-margin-bottom-small">Filter</AuHeading>
+                    </div>
+                    <div class="au-o-grid__item au-u-1-2 au-u-text-right">
+                      <WuButton @onClick={{this.resetFilters}}
+                                class="au-c-button au-c-button--secondary">
+                        <AuIcon @icon="cross" @alignment="left" /> Reset filters
+                      </WuButton>
+                    </div>
+                  </div>
+
+                  <div class="au-u-margin-bottom-small">
+                    <AuLabel>Bestuurseenheid</AuLabel>
+                    <Filter::AdministrativeUnitSelect @value={{@filter.administrativeUnites}}
+                                                      @onSelectionChange={{fn @setFilter 'administrativeUnites'}}/>
+                  </div>
+                  <div class="au-u-margin-bottom-small">
+                    <AuLabel>Provincie</AuLabel>
+                    <Filter::ProvinceSelect @value={{@filter.provinces}}
+                                            @onSelectionChange={{fn @setFilter 'provinces'}} />
+                  </div>
+                  <div class="au-u-margin-bottom-small">
+                    <AuLabel>Type bestuur</AuLabel>
+                    <Filter::AdministrativeUnitClassificationSelect @value={{@filter.administrativeUnitClassifications}}
+                                                                    @onSelectionChange={{this.selectAdministrativeUnitClassifications}} />
+                  </div>
+                  <div class="au-u-margin-bottom-small">
+                    {{#if @filter.administrativeUnitClassifications}}
+                      <AuLabel>Type Bestuursorgaan</AuLabel>
+                      <Filter::GoverningBodyClassificationSelect @value={{@filter.governingBodyClassifications}}
+                                                                 @onSelectionChange={{fn @setFilter 'governingBodyClassifications'}} />
+                    {{/if}}
+                  </div>
+                  <hr class="au-c-hr">
                 </div>
 
                 <div class="au-o-grid__item au-u-1-2 au-u-1-1@large">
-                  <div class="au-u-padding-left-tiny au-u-padding-right-tiny">
-                    <div class="au-u-margin-bottom-small">
-                      <AuLabel>Categorie dossier</AuLabel>
-                      <Filter::DecisionTypeSelect @value={{@filter.decisionTypes}}
-                                                  @onSelectionChange={{this.selectDecisionTypes}} />
-                    </div>
 
-                    <div class="au-u-margin-bottom-small">
-                      {{#if this.regulationTypeIsSelected}}
-                        <AuLabel>Subcategorie: Type reglement of verordening</AuLabel>
-                        <Filter::RegulationTypeSelect @value={{@filter.regulationTypes}}
-                                                      @onSelectionChange={{fn @setFilter 'regulationTypes'}} />
-                      {{/if}}
+                  <div class="au-u-margin-bottom au-u-margin-top-tiny">
+                    <div class="checkbox--switch__wrapper">
+                      <WuSwitch @label="Toon enkel te behandelen dossiers"
+                                @checked={{this.isStatusFilterEnabled}}
+                                @onClick={{this.setToTreatStatus}} />
                     </div>
-
-                    <hr class="au-c-hr">
-
-                    <div class="au-u-margin-bottom-small">
-                      <Filter::DateRange @label="Periode zitting / besluit" @defaultFromDate={{this.lastMonth}}
-                                         @fromValue={{@filter.sessionDateFrom}} @toValue={{@filter.sessionDateTo}}
-                                         @onChangeFromValue={{fn @setFilter 'sessionDateFrom'}} @onChangeToValue={{fn @setFilter 'sessionDateTo'}} />
-                    </div>
-                    <div class="au-u-margin-bottom-small">
-                      <Filter::DateRange @label="Periode verstuurd" @fromValue={{@filter.sentDateFrom}}
-                                         @toValue={{@filter.sentDateTo}} @onChangeFromValue={{fn @setFilter 'sentDateFrom'}}
-                                         @onChangeToValue={{fn @setFilter 'sentDateTo'}} />
-                    </div>
-
-
-                    <hr class="au-c-hr">
-
-                    <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-small">Subcategorie: Belasting of retributie</AuHeading>
-                    <div class="au-u-margin-bottom-small">
-                      <AuLabel>MAR-code</AuLabel>
-                      <Filter::ChartOfAccountSelect @value={{@filter.chartOfAccounts}}
-                                                    @onSelectionChange={{fn @setFilter 'chartOfAccounts'}} />
-                    </div>
-                    <div class="au-u-margin-bottom-small">
-                      <Filter::DateRange @label="Belasting geldt vanaf"
-                                         @defaultToDate={{this.nextYear}}
-                                         @fromValue={{@filter.dateOfEntryIntoForceFrom}}
-                                         @toValue={{@filter.dateOfEntryIntoForceTo}}
-                                         @onChangeFromValue={{fn @setFilter 'dateOfEntryIntoForceFrom'}}
-                                         @onChangeToValue={{fn @setFilter 'dateOfEntryIntoForceTo'}} />
-                    </div>
-                    <div class="au-u-margin-bottom-small">
-                      <Filter::DateRange @label="Belasting geldt tot"
-                                         @defaultToDate={{this.nextYear}}
-                                         @fromValue={{@filter.dateNoLongerInForceFrom}}
-                                         @toValue={{@filter.dateNoLongerInForceTo}}
-                                         @onChangeFromValue={{fn @setFilter 'dateNoLongerInForceFrom'}}
-                                         @onChangeToValue={{fn @setFilter 'dateNoLongerInForceTo'}} />
-                    </div>
-
                   </div>
+
+                  <div class="au-u-margin-bottom-small">
+                    <AuLabel>Categorie dossier</AuLabel>
+                    <Filter::DecisionTypeSelect @value={{@filter.decisionTypes}}
+                                                @onSelectionChange={{this.selectDecisionTypes}} />
+                  </div>
+
+                  <div class="au-u-margin-bottom-small">
+                    {{#if this.regulationTypeIsSelected}}
+                      <AuLabel>Subcategorie: Type reglement of verordening</AuLabel>
+                      <Filter::RegulationTypeSelect @value={{@filter.regulationTypes}}
+                                                    @onSelectionChange={{fn @setFilter 'regulationTypes'}} />
+                    {{/if}}
+                  </div>
+
+                  <hr class="au-c-hr">
+
+                  <div class="au-u-margin-bottom-small">
+                    <Filter::DateRange @label="Periode zitting / besluit" @defaultFromDate={{this.lastMonth}}
+                                       @fromValue={{@filter.sessionDateFrom}} @toValue={{@filter.sessionDateTo}}
+                                       @onChangeFromValue={{fn @setFilter 'sessionDateFrom'}} @onChangeToValue={{fn @setFilter 'sessionDateTo'}} />
+                  </div>
+                  <div class="au-u-margin-bottom-small">
+                    <Filter::DateRange @label="Periode verstuurd" @fromValue={{@filter.sentDateFrom}}
+                                       @toValue={{@filter.sentDateTo}} @onChangeFromValue={{fn @setFilter 'sentDateFrom'}}
+                                       @onChangeToValue={{fn @setFilter 'sentDateTo'}} />
+                  </div>
+
+
+                  <hr class="au-c-hr">
+
+                  <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-small">Subcategorie: Belasting of retributie</AuHeading>
+                  <div class="au-u-margin-bottom-small">
+                    <AuLabel>MAR-code</AuLabel>
+                    <Filter::ChartOfAccountSelect @value={{@filter.chartOfAccounts}}
+                                                  @onSelectionChange={{fn @setFilter 'chartOfAccounts'}} />
+                  </div>
+                  <div class="au-u-margin-bottom-small">
+                    <Filter::DateRange @label="Belasting geldt vanaf"
+                                       @defaultToDate={{this.nextYear}}
+                                       @fromValue={{@filter.dateOfEntryIntoForceFrom}}
+                                       @toValue={{@filter.dateOfEntryIntoForceTo}}
+                                       @onChangeFromValue={{fn @setFilter 'dateOfEntryIntoForceFrom'}}
+                                       @onChangeToValue={{fn @setFilter 'dateOfEntryIntoForceTo'}} />
+                  </div>
+                  <div class="au-u-margin-bottom-small">
+                    <Filter::DateRange @label="Belasting geldt tot"
+                                       @defaultToDate={{this.nextYear}}
+                                       @fromValue={{@filter.dateNoLongerInForceFrom}}
+                                       @toValue={{@filter.dateNoLongerInForceTo}}
+                                       @onChangeFromValue={{fn @setFilter 'dateNoLongerInForceFrom'}}
+                                       @onChangeToValue={{fn @setFilter 'dateNoLongerInForceTo'}} />
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -229,17 +226,7 @@
                 <tr>
                   <td colspan="8">
                     <AuAlert @alertIcon="alert-triangle" @alertTitle="Zoekresultaten zijn onvolledig"  @alertskin={{"warning"}} @alertsize={{"small"}}>
-                      <p>Zorg dat u door gebruik van filters, en niet enkel inhoudelijke zoekopdrachten, het volledige plaatje ziet.</p>
-                      <br>
-                      <p>
-                        <strong>Zoeken in foto's van besluiten kan niet</strong>, dat kan enkel in webpagina's en leesbare PDFs.
-                      </p>
-                      <br>
-                      <p>
-                        <strong>Gebruik de filters onder de zoekfunctie om resultaten dubbel te checken</strong>
-                        <br>
-                        Met de zoekfunctie <em>Zoek in inhoud dossier</em> geven termen zoals "Brugge", "Jaarrekening" of "Provincie" niets weer als de informatie niet in de inhoud van de leesbare webpagina of PDF staat.
-                      </p>
+                      <p>Gebruik niet enkel de zoekfunctie om dossiers te doorzoeken &mdash; deze resultaten zijn beperkt. Maak gebruik van filters, zonder een zoekopdracht, om het volledige plaatje te zien. <a href="/help#help-zoekresultaten" target="_blank" rel="noopener noreferrer">Lees meer informatie over zoekresultaten</a>.</p>
                     </AuAlert>
                   </td>
                 </tr>
