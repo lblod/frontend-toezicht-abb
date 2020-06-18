@@ -358,10 +358,17 @@ td:focus {
 }
 
 
-
 /* ==================================
   Fix checkbox disabled state in alert
   ================================== */
 .checkbox--disabled .checkbox__toggle+span {
   background-color: $au-gray-300;
+}
+
+/* ==================================
+  Make sure long names in MARcode get broken off
+  ================================== */
+
+.ember-power-select-option {
+  word-wrap : break-word;
 }
