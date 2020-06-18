@@ -353,10 +353,6 @@ td:focus {
   outline: 0 !important;
 }
 
-.checkbox + .au-c-label {
-  display: inline-block;
-}
-
 
 /* ==================================
   Fix checkbox disabled state in alert
@@ -372,6 +368,10 @@ td:focus {
 .au-c-checkbox + .au-c-label {
   display: inline-block;
   vertical-align: top;
+}
+
+.checkbox + .au-c-label {
+  display: inline-block;
 }
 
 
