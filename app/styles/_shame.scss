@@ -409,14 +409,6 @@ a.au-c-button {
 }
 
 /* ==================================
-  Make sure long names in MARcode get broken off
-  ================================== */
-
-.ember-power-select-option {
-  word-wrap : break-word;
-}
-
-/* ==================================
   Fix checkbox layout
   ================================== */
 
@@ -457,4 +449,12 @@ a.au-c-button {
     background-color: $au-blue-700;
     color: $white;
   }
+}
+
+/* ==================================
+  Make sure long names in MARcode get broken off
+  ================================== */
+
+.ember-power-select-option {
+  word-wrap : break-word;
 }
