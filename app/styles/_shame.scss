@@ -365,7 +365,6 @@ td:focus {
   background-color: $au-gray-300;
 }
 
-
 /* ==================================
   Fix checkbox layout
   ================================== */
@@ -407,4 +406,12 @@ a.au-c-button {
     background-color: $au-blue-700;
     color: $white;
   }
+}
+
+/* ==================================
+  Make sure long names in MARcode get broken off
+  ================================== */
+
+.ember-power-select-option {
+  word-wrap : break-word;
 }
