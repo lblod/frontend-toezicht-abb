@@ -428,3 +428,11 @@ a.au-c-button {
 .ember-power-select-option {
   word-wrap : break-word;
 }
+
+/* ==================================
+  Make sure long names in MARcode get broken off
+  ================================== */
+
+.ember-power-select-option {
+  word-wrap : break-word;
+}

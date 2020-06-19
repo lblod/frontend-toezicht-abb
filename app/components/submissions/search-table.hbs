@@ -24,7 +24,6 @@
               <div class="au-o-grid au-o-grid--flush">
                 <div class="au-o-grid__item au-u-1-2 au-u-1-1@large">
                   <AuHeading @level="2" class="au-u-hidden-visually">Zoek</AuHeading>
-
                   <div class="au-u-margin-bottom-small">
                     <AuLabel>Zoek in inhoud dossier</AuLabel>
                     <AuInput
@@ -45,7 +44,6 @@
                     </div>
 
                   </div>
-
                   <hr class="au-c-hr">
 
                   <div class="au-o-grid au-o-grid--flush">
@@ -80,6 +78,15 @@
                 </div>
 
                 <div class="au-o-grid__item au-u-1-2 au-u-1-1@large">
+
+                  <div class="au-u-margin-bottom au-u-margin-top-tiny">
+                    <div class="checkbox--switch__wrapper">
+                      <WuSwitch @label="Toon enkel te behandelen dossiers"
+                                @checked={{this.isStatusFilterEnabled}}
+                                @onClick={{this.setToTreatStatus}} />
+                    </div>
+                  </div>
+
                   <div class="au-u-margin-bottom-small">
                     <AuLabel>Categorie dossier</AuLabel>
                     <Filter::DecisionTypeSelect @value={{@filter.decisionTypes}}
@@ -109,6 +116,7 @@
 
 
                   <hr class="au-c-hr">
+
                   <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-small">Subcategorie: Belasting of retributie</AuHeading>
                   <div class="au-u-margin-bottom-small">
                     <AuLabel>MAR-code</AuLabel>
