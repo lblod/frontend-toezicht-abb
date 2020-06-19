@@ -35,4 +35,10 @@ Router.map(function() {
   });
 
   this.route('mock-login');
+
+  this.route('user', function() {
+    this.route('search-queries', function() {
+      this.route('new');
+    });
+  });
 });

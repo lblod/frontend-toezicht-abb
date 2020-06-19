@@ -1,0 +1,13 @@
+<div>
+  {{#if this.loadData.isRunning}}
+    <span>Aan het laden...</span>
+  {{else}}
+    <SubmissionForm
+            @form={{this.form}}
+            @graphs={{this.graphs}}
+            @sourceNode={{this.sourceNode}}
+            @formStore={{this.formStore}}
+            @show={{false}}
+            @forceShowErrors={{false}} />
+  {{/if}}
+</div>
