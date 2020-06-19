@@ -415,3 +415,12 @@ a.au-c-button {
 .ember-power-select-option {
   word-wrap : break-word;
 }
+
+/* ==================================
+  Fix checkbox layout
+  ================================== */
+
+.au-c-checkbox + .au-c-label {
+  display: inline-block;
+  vertical-align: top;
+}
