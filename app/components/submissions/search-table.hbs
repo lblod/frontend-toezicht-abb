@@ -3,11 +3,8 @@
 <div class="container-flex--contain">
   <div class="au-u-padding-small au-u-border-bottom">
     <div class="au-o-grid au-o-grid--flush">
-      <div class="au-o-grid__item au-u-1-1 au-u-1-4@medium">
+      <div class="au-o-grid__item au-u-1-1 au-u-3-4@medium">
           <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">Toezicht ABB</AuHeading>
-      </div>
-      <div class="au-o-grid__item au-u-1-1 au-u-2-4@medium">
-        <AuAlert @alertIcon="info-circle" @alertTitle="De gegevens van deze pagina lopen maximaal één dag achter op de huidige stand van zaken."  @alertskin={{"info"}} @alertsize={{"small"}} class="au-u-margin-none" />
       </div>
       <div class="au-o-grid__item au-u-1-1 au-u-1-4@medium au-u-text-right">
         <a href="/filters-table/table-config" type="button" class="au-c-button au-c-button--tertiary au-u-margin-top-tiny">
@@ -28,7 +25,7 @@
               <div class="au-o-grid au-o-grid--flush">
                 <div class="au-o-grid__item au-u-1-2 au-u-1-1@large">
 
-                  <AuHeading @level="2" @skin="3" class="au-u-margin-bottom-small">Zoek</AuHeading>
+                  <AuHeading @level="2" class="au-u-hidden-visually">Zoek</AuHeading>
 
                   <div class="au-u-margin-bottom-small">
                     <AuLabel>Zoek in inhoud dossier</AuLabel>
@@ -37,22 +34,24 @@
                             @value={{this._freeTextSearch}}
                             {{on "input" (perform this.search)}}
                             class="au-u-margin-bottom-tiny"/>
-                    <a href="/help#help-zoekresultaten" class="au-c-button au-c-button--tertiary au-u-padding-none" target="_blank" rel="noopener noreferrer">
-                      <AuIcon @icon="info-circle" @alignment="left" /> Zoekresultaten zijn onvolledig
+                    <a href="/help#help-zoekresultaten" class="au-c-link" target="_blank" rel="noopener noreferrer">
+                      <AuIcon @icon="info-circle" @alignment="left" /> Waarom zijn mijn zoekresultaten onvolledig?
                     </a>
+                  </div>
+
+                  <div class="au-u-margin-bottom au-u-margin-top-tiny">
+                    <div class="checkbox--switch__wrapper">
+                      <WuSwitch @label="Toon enkel te behandelen dossiers"
+                                @checked={{this.isStatusFilterEnabled}}
+                                @onClick={{this.setToTreatStatus}} />
+                    </div>
                   </div>
 
                   <hr class="au-c-hr">
 
                   <div class="au-o-grid au-o-grid--flush">
                     <div class="au-o-grid__item au-u-1-2">
-                      <AuHeading @level="2" @skin="3" class="au-u-margin-bottom-small">Filter</AuHeading>
-                    </div>
-                    <div class="au-o-grid__item au-u-1-2 au-u-text-right">
-                      <WuButton @onClick={{this.resetFilters}}
-                                class="au-c-button au-c-button--secondary">
-                        <AuIcon @icon="cross" @alignment="left" /> Reset filters
-                      </WuButton>
+                      <AuHeading @level="2" class="au-u-hidden-visually">Filter</AuHeading>
                     </div>
                   </div>
 
@@ -82,14 +81,6 @@
                 </div>
 
                 <div class="au-o-grid__item au-u-1-2 au-u-1-1@large">
-
-                  <div class="au-u-margin-bottom au-u-margin-top-tiny">
-                    <div class="checkbox--switch__wrapper">
-                      <WuSwitch @label="Toon enkel te behandelen dossiers"
-                                @checked={{this.isStatusFilterEnabled}}
-                                @onClick={{this.setToTreatStatus}} />
-                    </div>
-                  </div>
 
                   <div class="au-u-margin-bottom-small">
                     <AuLabel>Categorie dossier</AuLabel>
@@ -148,13 +139,23 @@
               </div>
             </div>
           </div>
-          <div class="au-c-sidebar__footer">
-            <a href="/filters-table/filter-save" class="au-c-button au-c-button--tertiary">
-              <AuIcon @icon="plus-text" @alignment="left" /> Bewaar filterset
-            </a>
-            <a href="/filters-table/filter-overview" class="au-c-button au-c-button--tertiary">
-              <AuIcon @icon="export" @alignment="left" /> Laad filterset
-            </a>
+          <div class="au-c-sidebar__footer au-u-padding-small">
+            {{!-- <AuHeading level="2" skin="6">Filter acties</AuHeading> --}}
+            <AuToolbar @size="medium">
+              <AuToolbarGroup>
+                <a href="/filters-table/filter-overview" class="au-c-button au-c-button--tertiary">
+                  <AuIcon @icon="export" @alignment="left" /> Laad filters
+                </a>
+                <a href="/filters-table/filter-save" class="au-c-button au-c-button--tertiary au-u-margin-left-tiny">
+                  <AuIcon @icon="plus-text" @alignment="left" /> Bewaar filters
+                </a>
+              </AuToolbarGroup>
+              <AuToolbarGroup>
+                <AuButton @skin="tertiary" @alert="true" {{ on "click" this.resetFilters }}>
+                  <AuIcon @icon="redo" @alignment="left" /> Reset
+                </AuButton>
+              </AuToolbarGroup>
+            </AuToolbar>
             {{!--       FOR DEV: These should be buttons that show modals! Thanks
 
             <AuButton @skin="tertiary">
@@ -240,15 +241,17 @@
                   <LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo>
                 </td>
               </c.body>
-              {{#if this.hasAskedForFreeTextSearch}}
-                <tr>
-                  <td colspan="8">
+              <tr>
+                <td colspan="8">
+                  {{#if this.hasAskedForFreeTextSearch}}
                     <AuAlert @alertIcon="alert-triangle" @alertTitle="Zoekresultaten zijn onvolledig"  @alertskin={{"warning"}} @alertsize={{"small"}}>
                       <p>Gebruik niet enkel de zoekfunctie om dossiers te doorzoeken &mdash; deze resultaten zijn beperkt. Maak gebruik van filters, zonder een zoekopdracht, om het volledige plaatje te zien. <a href="/help#help-zoekresultaten" target="_blank" rel="noopener noreferrer">Lees meer informatie over zoekresultaten</a>.</p>
                     </AuAlert>
-                  </td>
-                </tr>
-              {{/if}}
+                  {{/if}}
+
+                  <AuAlert @alertIcon="info-circle" @alertTitle="De dossiers in deze tabel lopen maximaal één dag achter op de huidige stand van zaken."  @alertskin={{"info"}} @alertsize={{"small"}} class="au-u-margin-none" />
+                </td>
+              </tr>
             </t.content>
           </DataTable>
         </div>
