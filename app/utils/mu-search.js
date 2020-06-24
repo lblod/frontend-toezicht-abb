@@ -2,7 +2,6 @@ import fetch from 'fetch';
 import ArrayProxy from '@ember/array/proxy';
 import { A } from '@ember/array';
 import camelCase from 'lodash.camelcase';
-import {timeout} from 'ember-concurrency';
 
 const getPaginationMetadata = function(pageNumber, size, total) {
   const pagination = {};

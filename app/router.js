@@ -39,6 +39,7 @@ Router.map(function() {
   this.route('user', function() {
     this.route('search-queries', function() {
       this.route('new');
+      this.route('edit', { path: '/:id' });
     });
   });
 });

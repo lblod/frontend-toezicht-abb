@@ -18,8 +18,9 @@ export default class CurrentSessionService extends Service {
   }
 
   // this contains a promise
+  // TODO CONVERT BACK
   get user() {
-    return this.makePropertyPromise.perform('_user');
+    return this._user;
   }
 
   // this contains a promise
