@@ -6,6 +6,7 @@ export default class Gebruiker extends Model {
 
   @hasMany('account', { inverse: null}) account;
   @hasMany('bestuurseenheid') bestuurseenheden;
+  @hasMany('search-query') searchQueries;
 
   get group() {
     return this.get('bestuurseenheden.firstObject');
