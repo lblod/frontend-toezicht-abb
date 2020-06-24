@@ -27,13 +27,20 @@ export default class SearchQueriesFormComponent extends Component {
   }
 
   @task
-  *loadData() {
+  * loadData() {
+    const query = this.args.query;
 
     let response = yield fetch(`/search-query-forms/${UUID}`);
     const form = yield response.text();
 
     response = yield fetch(`/search-query-forms/${UUID}/meta`);
     const meta = yield response.text();
+
+    response = yield fetch(`/search-queries/${query.id}`, {
+      method: 'GET',
+      headers: {'Accept': 'text/turtle'}
+    });
+    const source = yield response.text();
 
     // Prepare data in forking store
     const formStore = new ForkingStore();
@@ -45,11 +52,23 @@ export default class SearchQueriesFormComponent extends Component {
     yield formStore.parse(meta, metaGraph, "text/turtle");
 
     const sourceGraph = new rdflib.NamedNode(`http://data.lblod.info/sourcegraph`);
-    yield formStore.parse("", sourceGraph, "text/turtle");
+    yield formStore.parse(source, sourceGraph, "text/turtle");
 
     this.formStore = formStore;
     this.graphs = {formGraph, sourceGraph, metaGraph};
     this.form = formStore.any(undefined, RDF("type"), FORM("Form"), formGraph);
-    this.sourceNode = new rdflib.NamedNode("http://data.lblod.info/search-query");
+    this.sourceNode = new rdflib.NamedNode(query.uri);
+  }
+
+  @task
+  * save() {
+    const query = this.args.query;
+    const source = this.formStore.serializeDataMergedGraph(this.graphs.sourceGraph, "text/turtle");
+    yield fetch(`/search-queries/${query.id}`, {
+      method: 'PUT',
+      body: source,
+      headers: {'Content-type': 'text/turtle'}
+    });
+    // TODO redirect to overview?
   }
 }
