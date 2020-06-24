@@ -36,6 +36,7 @@
         </td>
         <td>
           <LinkTo @route="user.search-queries.edit" @model={{row.id}}>Bewerk</LinkTo>
+          <a type="button" {{on "click" (perform this.delete row.id)}}>Verwijder</a>
         </td>
       </c.body>
     </t.content>
