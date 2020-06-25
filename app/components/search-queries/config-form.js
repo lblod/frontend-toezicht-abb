@@ -12,7 +12,7 @@ const FORM = new rdflib.Namespace("http://lblod.data.gift/vocabularies/forms/");
 
 const UUID = 'ebd65df9-5566-47c2-859a-ceff562881ab';
 
-export default class SearchQueriesFormComponent extends Component {
+export default class SearchQueriesConfigFormComponent extends Component {
   @service store
   @service router
 
