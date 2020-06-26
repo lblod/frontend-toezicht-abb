@@ -1,5 +1,5 @@
 <header class="au-u-padding-top au-u-padding-bottom au-u-padding-left-large au-u-padding-right u-border--light--bottom">
-  <h1 class="au-u-h2 au-u-margin-bottom">Zoekopdrachten: Bewaar</h1>
+  <h1 class="au-u-h2 au-u-margin-bottom">Bewaar zoekopdracht</h1>
 </header>
 <div class="container-flex--scroll">
   <div class="au-u-padding-top-large au-u-padding-left-large au-u-padding-right au-u-padding-bottom-large">
@@ -23,7 +23,7 @@
 <AuToolbar @border="top" @size="large" class="au-u-padding-left-large">
   <AuToolbarGroup>
       <AuButton @loading={{if this.save.isRunning "true"}}
-        {{on "click" (perform this.save)}}>Bewaar</AuButton>
+        {{on "click" (perform this.save)}}>Bewaar zoekopdracht</AuButton>
       <AuLink @linkRoute="user.search-queries.index" @skin="secondary">Annuleer</AuLink>
   </AuToolbarGroup>
 </AuToolbar>

@@ -1,14 +1,5 @@
-
 <div class="au-u-padding-top-large au-u-padding-left au-u-padding-right">
-  <div class="au-o-grid">
-    <div class="au-o-grid__item au-u-1-2@medium">
-      <h1 class="au-u-h1 au-u-margin-bottom">Zoekopdrachten: overzicht</h1>
-    </div>
-    <div class="au-o-grid__item au-u-1-2@medium au-u-text-right">
-      <LinkTo @route="user.search-queries.new" class="au-c-button" type="button">Maak een nieuwe zoekopdracht aan</LinkTo>
-    </div>
-  </div>
-
+  <h1 class="au-u-h1 au-u-margin-bottom">Bewaarde zoekopdrachten</h1>
   <DataTable
           @content={{this.model}}
           @isLoading={{this.isLoadingModel}}
@@ -22,7 +13,10 @@
         <th>Naam</th>
         <th>Beschrijving</th>
         <th>Datum Aangemaakt</th>
-        <th>Acties</th>
+        <th>
+          <LinkTo @route="user.search-queries.new" class="button button--narrow" type="button">Maak een nieuwe zoekopdracht
+          </LinkTo>
+        </th>
       </c.header>
       <c.body as |row|>
         <td>
@@ -35,8 +29,12 @@
           {{moment-format row.created 'DD-MM-YYYY'}}
         </td>
         <td>
-          <LinkTo @route="user.search-queries.edit" @model={{row.id}}>Bewerk</LinkTo>
-          <a type="button" {{on "click" (perform this.delete row.id)}}>Verwijder</a>
+          <div class="button-group">
+            <LinkTo  class="button button--narrow button--alt" type="button" @route="user.search-queries.edit" @model={{row.id}}>
+              Bewerk
+            </LinkTo>
+            <a class="button button--link button--narrow button--alt button--alt--warning" type="button" {{on "click" (perform this.delete row.id)}}>Verwijder</a>
+          </div>
         </td>
       </c.body>
     </t.content>
