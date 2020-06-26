@@ -35,6 +35,7 @@ Router.map(function() {
   });
 
   this.route('mock-login');
+  this.route('help');
 
   this.route('user', function() {
     this.route('search-queries', function() {

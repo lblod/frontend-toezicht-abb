@@ -358,10 +358,35 @@ td:focus {
 }
 
 
-
 /* ==================================
   Fix checkbox disabled state in alert
   ================================== */
 .checkbox--disabled .checkbox__toggle+span {
   background-color: $au-gray-300;
+}
+
+/* ==================================
+  Make sure long names in MARcode get broken off
+  ================================== */
+
+.ember-power-select-option {
+  word-wrap : break-word;
+}
+
+/* ==================================
+  Fix scrolling for sidebar
+  ================================== */
+
+.au-c-sidebar {
+  overflow: hidden;
+}
+
+.au-c-sidebar__content {
+  flex-grow: 2;
+  overflow: auto;
+}
+
+.au-c-sidebar__footer {
+  border-top: 1px solid $au-gray-300;
+  flex-grow: 1;
 }

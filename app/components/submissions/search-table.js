@@ -17,6 +17,10 @@ export default class SubmissionsSearchTableComponent extends Component {
   @tracked decisionTypes = []
   @tracked _freeTextSearch;
 
+  get hasAskedForFreeTextSearch(){
+    return this._freeTextSearch && this._freeTextSearch.length;
+  }
+
   constructor() {
     super(...arguments);
 
