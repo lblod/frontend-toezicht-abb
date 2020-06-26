@@ -18,9 +18,8 @@ export default class CurrentSessionService extends Service {
   }
 
   // this contains a promise
-  // TODO CONVERT BACK
   get user() {
-    return this._user;
+    return this.makePropertyPromise.perform('_user');
   }
 
   // this contains a promise
@@ -63,6 +62,6 @@ export default class CurrentSessionService extends Service {
   @task
   *makePropertyPromise (property) {
     yield waitForProperty(this, property);
-    return this.property;
+    return this.get(property);
   }
 }
