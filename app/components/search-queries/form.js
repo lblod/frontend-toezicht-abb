@@ -6,7 +6,7 @@ import rdflib from 'browser-rdflib';
 import fetch from 'node-fetch';
 import {ForkingStore} from '@lblod/ember-submission-form-fields';
 import {task} from 'ember-concurrency-decorators';
-import { v4 as uuid } from 'uuid';
+import {v4 as uuid} from 'uuid';
 
 const RDF = new rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
 const FORM = new rdflib.Namespace("http://lblod.data.gift/vocabularies/forms/");
@@ -19,7 +19,11 @@ export default class SearchQueriesFormComponent extends Component {
 
   @tracked form
   @tracked formStore
-  @tracked graphs
+  @tracked graphs = {
+    formGraph:  new rdflib.NamedNode("http://data.lblod.info/form"),
+    metaGraph:  new rdflib.NamedNode("http://data.lblod.info/metagraph"),
+    sourceGraph:  new rdflib.NamedNode(`http://data.lblod.info/sourcegraph`)
+  }
   @tracked sourceNode
 
   constructor(options, owner, args) {
@@ -33,43 +37,10 @@ export default class SearchQueriesFormComponent extends Component {
 
   @task
   * loadData(options) {
-    let query = this.args.query;
-
-    // NOTE: if no query model was supplied, we assume this is a TEMP search-query being used to filter
-    if(!query) {
-      query = this.store.createRecord('search-query', {
-        uri: `${SOURCE_BASE}${uuid()}`
-      });
-    }
-
-    let response = yield fetch(`/search-query-forms/${options.form.uuid}`);
-    const form = yield response.text();
-
-    response = yield fetch(`/search-query-forms/${options.form.uuid}/meta`);
-    const meta = yield response.text();
-
-    response = yield fetch(`/search-queries/${query.id}`, {
-      method: 'GET',
-      headers: {'Accept': 'text/turtle'}
-    });
-    const source = yield response.text();
-
-    // Prepare data in forking store
-    const formStore = new ForkingStore();
-
-    const formGraph = new rdflib.NamedNode("http://data.lblod.info/form");
-    yield formStore.parse(form, formGraph, "text/turtle");
-
-    const metaGraph = new rdflib.NamedNode("http://data.lblod.info/metagraph");
-    yield formStore.parse(meta, metaGraph, "text/turtle");
-
-    const sourceGraph = new rdflib.NamedNode(`http://data.lblod.info/sourcegraph`);
-    yield formStore.parse(source, sourceGraph, "text/turtle");
-
-    this.formStore = formStore;
-    this.graphs = {formGraph, sourceGraph, metaGraph};
-    this.form = formStore.any(undefined, RDF("type"), FORM("Form"), formGraph);
-    this.sourceNode = new rdflib.NamedNode(query.uri);
+    this.formStore = new ForkingStore();
+    yield this.loadForm(options.form.uuid);
+    yield this.loadMeta(options.form.uuid);
+    yield this.loadSource();
 
     // TODO can this be done better
     // if(options.form.observer) {
@@ -78,5 +49,35 @@ export default class SearchQueriesFormComponent extends Component {
   }
 
 
+  async loadForm(uuid) {
+    let response = await fetch(`/search-query-forms/${uuid}`);
+    const ttl = await response.text();
+    await this.formStore.parse(ttl, this.graphs.formGraph, "text/turtle");
+    this.form = this.formStore.any(undefined, RDF("type"), FORM("Form"), this.graphs.formGraph);
+  }
+  async loadMeta(uuid) {
+    let response = await fetch(`/search-query-forms/${uuid}/meta`);
+    const ttl = await response.text();
+    await this.formStore.parse(ttl, this.graphs.metaGraph, "text/turtle");
+  }
+
+  async loadSource(){
+    let query = this.args.query;
+
+    // NOTE: if no query model was supplied, we assume this is a TEMP search-query being used to filter
+    if (!query) {
+      query = this.store.createRecord('search-query', {
+        uri: `${SOURCE_BASE}${uuid()}`
+      });
+    }
+
+    let response = await fetch(`/search-queries/${query.id}`, {
+      method: 'GET',
+      headers: {'Accept': 'text/turtle'}
+    });
+    const ttl = await response.text();
+    await this.formStore.parse(ttl, this.graphs.sourceGraph, "text/turtle");
+    this.sourceNode = new rdflib.NamedNode(query.uri);
+  }
 
 }
