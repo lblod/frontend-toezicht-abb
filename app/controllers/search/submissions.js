@@ -28,5 +28,4 @@ export default class SearchSubmissionsController extends Controller {
   updateQueryParams() {
     this.filter.keys.forEach(key => this.set(key, this.filter[key]));
   }
-
 }

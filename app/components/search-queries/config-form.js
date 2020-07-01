@@ -7,7 +7,9 @@ const UUID = 'ebd65df9-5566-47c2-859a-ceff562881ab'
 
 export default class SearchQueriesConfigFormComponent extends SearchQueriesFormComponent {
 
-  formUUID = UUID;
+  constructor(owner, args) {
+    super({form: {uuid: UUID}}, owner, args);
+  }
 
   @task
   * save() {

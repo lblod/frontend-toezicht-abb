@@ -12,7 +12,10 @@
   <div class="container-flex--contain">
     <div class="au-c-main-container">
       <div class="au-c-main-container__sidebar">
-        <SearchQueries::FilterForm/>
+        <SearchQueries::FilterForm
+                @filter={{@filter}}
+                @setFilter={{@setFilter}}
+                @onFilterChange={{@onFilterChange}}/>
       </div>
 
       <div class="au-c-main-container__content">

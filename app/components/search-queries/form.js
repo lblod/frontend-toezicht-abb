@@ -27,6 +27,10 @@ export default class SearchQueriesFormComponent extends Component {
     this.loadData.perform(options);
   }
 
+  willDestroy() {
+    this.formStore.observers = {};
+  }
+
   @task
   * loadData(options) {
     let query = this.args.query;
@@ -66,5 +70,13 @@ export default class SearchQueriesFormComponent extends Component {
     this.graphs = {formGraph, sourceGraph, metaGraph};
     this.form = formStore.any(undefined, RDF("type"), FORM("Form"), formGraph);
     this.sourceNode = new rdflib.NamedNode(query.uri);
+
+    // TODO can this be done better
+    // if(options.form.observer) {
+    //   this.formStore.registerObserver(options.form.observer, options.form.uuid);
+    // }
   }
+
+
+
 }

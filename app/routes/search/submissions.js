@@ -70,6 +70,7 @@ export default class SearchSubmissionsRoute extends Route {
     if (params.dateOfEntryIntoForceTo) query[":lte:dateOfEntryIntoForce"] = params.dateOfEntryIntoForceTo;
     if (params.dateNoLongerInForceFrom) query[":gte:dateNoLongerInForce"] = params.dateNoLongerInForceFrom;
     if (params.dateNoLongerInForceTo) query[":lte:dateNoLongerInForce"] = params.dateNoLongerInForceTo;
+    // TODO convert true - false value to the correct UUID (or maybe URI)
     if (params.status) query["statusUUID"] = params.status;
 
     this.lastParams.commit();

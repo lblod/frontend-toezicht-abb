@@ -12,6 +12,7 @@ export default class SubmissionFilter {
   @tracked sentDateFrom
   @tracked sentDateTo
   @tracked search
+  // TODO: create getter for this to return an UUID based on true or false
   @tracked status
   @tracked governingBodyClassifications
   @tracked dateOfEntryIntoForceFrom
