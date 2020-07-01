@@ -28,7 +28,7 @@ export default class SearchQueriesFormComponent extends Component {
 
   constructor(options, owner, args) {
     super(owner, args);
-    this.loadData.perform(options);
+    this.init.perform(options);
   }
 
   willDestroy() {
@@ -36,16 +36,20 @@ export default class SearchQueriesFormComponent extends Component {
   }
 
   @task
-  * loadData(options) {
-    this.formStore = new ForkingStore();
-    yield this.loadForm(options.form.uuid);
-    yield this.loadMeta(options.form.uuid);
-    yield this.loadSource();
+  * init(options) {
+    yield this.loadData(options);
 
     // TODO can this be done better
     // if(options.form.observer) {
     //   this.formStore.registerObserver(options.form.observer, options.form.uuid);
     // }
+  }
+
+  async loadData(options) {
+    this.formStore = new ForkingStore();
+    await this.loadForm(options.form.uuid);
+    await this.loadMeta(options.form.uuid);
+    await this.loadSource();
   }
 
 
