@@ -5,7 +5,8 @@ import Route from '@ember/routing/route';
 import search from '../../utils/mu-search';
 import Snapshot from '../../utils/snapshot';
 import SubmissionFilter from "../../utils/submission-filters";
-import {tracked} from "@glimmer/tracking";
+import {tracked} from "@glimmer/tracking"
+import {TREAT_STATUS} from "../../models/submission-review-status";
 
 export default class SearchSubmissionsRoute extends Route {
   @service currentSession;
@@ -70,8 +71,7 @@ export default class SearchSubmissionsRoute extends Route {
     if (params.dateOfEntryIntoForceTo) query[":lte:dateOfEntryIntoForce"] = params.dateOfEntryIntoForceTo;
     if (params.dateNoLongerInForceFrom) query[":gte:dateNoLongerInForce"] = params.dateNoLongerInForceFrom;
     if (params.dateNoLongerInForceTo) query[":lte:dateNoLongerInForce"] = params.dateNoLongerInForceTo;
-    // TODO convert true - false value to the correct UUID (or maybe URI)
-    if (params.status) query["statusUUID"] = params.status;
+    if (params.status) query["statusUUID"] = TREAT_STATUS;
 
     this.lastParams.commit();
 
