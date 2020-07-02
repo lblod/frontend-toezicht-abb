@@ -56,7 +56,6 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     return !!pattern.test(str);
   }
 
-  // TODO for now just clear everything, but maybe in the future reset to the loaded query?
   @action
   resetFilters() {
     const deletes = this.formStore.match(undefined, undefined, undefined, this.graphs.sourceGraph);
