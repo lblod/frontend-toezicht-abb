@@ -51,11 +51,16 @@ export default class CurrentSessionService extends Service {
       this.canReadVlabel = this.canAccess('ABBDatabankToezicht-DatabankToezichtVLABEL');
       this.canRead = this.canAccess('ABBDatabankToezicht-DatabankToezichtLezer') || this.canAccess('ABBDatabankToezicht-DatabankToezichtEditeur');
       this.canWrite = this.canAccess('ABBDatabankToezicht-DatabankToezichtEditeur');
+      this.readOnly = this.readOnly();
     }
   }
 
   canAccess(role) {
     return this._roles.includes(role);
+  }
+
+  readOnly(){
+    return this.canAccess('ABBDatabankToezicht-DatabankToezichtLezer') && this._roles.length === 1;
   }
 
   // constructs a task which resolves in the promise
