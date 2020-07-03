@@ -7,7 +7,7 @@ export default class SupervisionRoute extends Route.extend(AuthenticatedRouteMix
   @service currentSession;
 
   beforeModel( transition ){
-    if (this.currentSession.readOnly) {
+    if (!(this.currentSession.canWrite || this.currentSession.canReadVlabel)) {
       const target = transition.targetName;
       const showSearchRoute = 'search.submissions.show';
       // Only redirect specifically to what you know exits. Else juste move away from these routes
