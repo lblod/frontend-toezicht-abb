@@ -59,6 +59,7 @@ export default class SearchQueriesFormComponent extends Component {
     await this.formStore.parse(ttl, this.graphs.formGraph, "text/turtle");
     this.form = this.formStore.any(undefined, RDF("type"), FORM("Form"), this.graphs.formGraph);
   }
+
   async loadMeta(uuid) {
     let response = await fetch(`/search-query-forms/${uuid}/meta`);
     const ttl = await response.text();

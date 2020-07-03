@@ -1,6 +1,7 @@
 import SearchQueriesFormComponent from "./form";
 import rdflib from 'browser-rdflib';
 import { action } from '@ember/object';
+import {tracked} from '@glimmer/tracking';
 
 const UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c'
 
@@ -8,6 +9,8 @@ const SH = new rdflib.Namespace("http://www.w3.org/ns/shacl#");
 const SEARCH = new rdflib.Namespace("http://redpencil.data.gift/vocabularies/search-queries/");
 
 export default class SearchQueriesConfigFormComponent extends SearchQueriesFormComponent {
+
+  @tracked refreshing = false;
 
   constructor(owner, args) {
     super({form: {uuid: UUID}}, owner, args);
@@ -60,7 +63,11 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
 
   @action
   resetFilters() {
+    this.refreshing = true;
     const deletes = this.formStore.match(undefined, undefined, undefined, this.graphs.sourceGraph);
     this.formStore.removeStatements(deletes);
+    setTimeout(()=>{
+      this.refreshing = false;
+    },1);
   }
 }

@@ -6,13 +6,13 @@
           {{#if this.init.isRunning}}
             <span>Aan het laden...</span>
           {{else}}
-            <SqConfigForm
-                    @form={{this.form}}
-                    @graphs={{this.graphs}}
-                    @sourceNode={{this.sourceNode}}
-                    @formStore={{this.formStore}}
-                    @show={{false}}
-                    @forceShowErrors={{false}} />
+              <SqConfigForm
+                      @form={{this.form}}
+                      @graphs={{this.graphs}}
+                      @sourceNode={{this.sourceNode}}
+                      @formStore={{this.formStore}}
+                      @show={{this.refreshing}}
+                      @forceShowErrors={{false}} />
           {{/if}}
         </div>
       </div>
@@ -22,7 +22,8 @@
     <AuToolbar @size="small">
       <AuToolbarGroup>
         <AuButton @skin="tertiary" @alert="true" {{ on "click" this.resetFilters }}>
-          <AuIcon @icon="redo" @alignment="left" /> Reset filters
+          <AuIcon @icon="redo" @alignment="left"/>
+          Reset filters
         </AuButton>
       </AuToolbarGroup>
     </AuToolbar>
