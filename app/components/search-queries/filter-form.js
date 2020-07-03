@@ -29,7 +29,9 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
       const values = this.formStore.match(t.subject, t.predicate, undefined, this.graphs.sourceGraph).map(t => t.object.value);
       const field = this.formStore.any(undefined, SH('path'), t.predicate, this.graphs.formGraph);
       const key = this.formStore.any(field, SEARCH('key'), undefined, this.graphs.formGraph);
-      this.args.filter[key.value] = values.join(',');
+      if(key) {
+        this.args.filter[key.value] = values.join(',');
+      }
     });
   }
 
