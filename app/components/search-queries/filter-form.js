@@ -24,6 +24,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
       this.updateFilters([...inserts, ...deletes]);
       this.args.onFilterChange();
     }, UUID);
+    this.args.onFilterChange();
   }
 
   updateFilters(triples) {
@@ -33,7 +34,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
       const field = this.formStore.any(undefined, SH('path'), t.predicate, this.graphs.formGraph);
       const key = this.formStore.any(field, SEARCH('key'), undefined, this.graphs.formGraph);
       if(key) {
-        this.args.filter[key.value] = values.join(',');
+        this.args.filter[key.value] = values ? values.join(',') : null;
       }
     });
   }

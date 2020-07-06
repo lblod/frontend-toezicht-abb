@@ -30,6 +30,7 @@ export default class SearchSubmissionsRoute extends Route {
     dateNoLongerInForceTo: {refreshModel: true},
     status: {refreshModel: true},
     governingBodyClassifications: {refreshModel: true},
+    searchQuery: {refreshModel: true},
     page: {refreshModel: true},
     size: {refreshModel: true},
     sort: {refreshModel: true}
@@ -75,10 +76,19 @@ export default class SearchSubmissionsRoute extends Route {
 
     this.lastParams.commit();
 
-    return await search('/search/submissions', params.page, params.size, params.sort, query, function (item) {
-      item.attributes.id = item.id;
-      return item.attributes;
-    });
+    return {
+      query: params.searchQuery ? await this.store.findRecord('search-query', params.searchQuery) : null,
+      submissions: await search(
+        '/search/submissions',
+        params.page,
+        params.size,
+        params.sort,
+        query,
+        function (item) {
+          item.attributes.id = item.id;
+          return item.attributes;
+        })
+    }
   }
 
   setupController(controller) {

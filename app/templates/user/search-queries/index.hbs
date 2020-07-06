@@ -30,6 +30,9 @@
         </td>
         <td>
           <div class="button-group">
+            <LinkTo  class="button button--narrow" type="button" @route="search.submissions" @query={{hash searchQuery=row.id}}>
+              Laad in
+            </LinkTo>
             <LinkTo  class="button button--narrow button--alt" type="button" @route="user.search-queries.edit" @model={{row.id}}>
               Bewerk
             </LinkTo>
