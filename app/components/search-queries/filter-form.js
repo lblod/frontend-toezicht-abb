@@ -3,10 +3,10 @@ import rdflib from 'browser-rdflib';
 import { action } from '@ember/object';
 import {tracked} from '@glimmer/tracking';
 
-const UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c'
+export const UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c'
 
-const SH = new rdflib.Namespace("http://www.w3.org/ns/shacl#");
-const SEARCH = new rdflib.Namespace("http://redpencil.data.gift/vocabularies/search-queries/");
+export const SH = new rdflib.Namespace("http://www.w3.org/ns/shacl#");
+export const SEARCH = new rdflib.Namespace("http://redpencil.data.gift/vocabularies/search-queries/");
 
 export default class SearchQueriesConfigFormComponent extends SearchQueriesFormComponent {
 
@@ -19,7 +19,11 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
   async loadData(options) {
     await super.loadData(options);
     this.loadFilters();
-    this.updateFilters(this.formStore.match(this.sourceNode, undefined, undefined, this.graphs.sourceGraph));
+    // NOTE: this could be useful in the future, but for now we assume the filter-form never receives a search-query.
+    //       So, no need to update the query-parameters to represent the received search-query.
+
+    // `this.updateFilters(this.formStore.match(this.sourceNode, undefined, undefined, this.graphs.sourceGraph));`
+
     this.formStore.registerObserver(({inserts = [], deletes = []}) => {
       this.updateFilters([...inserts, ...deletes]);
       this.args.onFilterChange();
@@ -27,6 +31,11 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     this.args.onFilterChange();
   }
 
+  /**
+   * Will update the query-parameters based on the given triples.
+   *
+   * @param triples
+   */
   updateFilters(triples) {
     triples.forEach(t => {
       // NOTE: we need to retrieve the value because on deletion we get the deleted value, not the actual new value
@@ -39,6 +48,9 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     });
   }
 
+  /**
+   * Will populate the form-store with the given query-parameters.
+   */
   loadFilters() {
     this.args.filter.keys.forEach(key => {
       const field = this.formStore.any(undefined, SEARCH('key'), key, this.graphs.formGraph);
@@ -52,6 +64,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     });
   }
 
+  // TODO simplify
   validURL(str) {
     var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
@@ -62,6 +75,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     return !!pattern.test(str);
   }
 
+  // TODO improve as this is a little hackish
   @action
   resetFilters() {
     this.refreshing = true;

@@ -23,6 +23,9 @@ Router.map(function() {
   this.route('search', function() {
     this.route('submissions', function() {
       this.route('show', { path: '/:id' });
+      this.route('search-queries', function() {
+        this.route('select', { path: '/:id' });
+      });
     });
   });
   this.route('legaal', function() {
