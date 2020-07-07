@@ -20,6 +20,5 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
       body: source,
       headers: {'Content-type': 'text/turtle'}
     });
-    // TODO redirect to overview?
   }
 }

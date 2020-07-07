@@ -12,17 +12,19 @@ const RDF = new rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
 const FORM = new rdflib.Namespace("http://lblod.data.gift/vocabularies/forms/");
 
 const SOURCE_BASE = 'http://lblod.data.gift/vocabularies/search-queries-toezicht/';
+export const TEMP_SOURCE_NODE = 'http://frontend-toezicht-abb/temp-source-node'
 
 export default class SearchQueriesFormComponent extends Component {
   @service store
   @service router
+  @service currentSession
 
   @tracked form
   @tracked formStore
   @tracked graphs = {
-    formGraph:  new rdflib.NamedNode("http://data.lblod.info/form"),
-    metaGraph:  new rdflib.NamedNode("http://data.lblod.info/metagraph"),
-    sourceGraph:  new rdflib.NamedNode(`http://data.lblod.info/sourcegraph`)
+    formGraph: new rdflib.NamedNode("http://data.lblod.info/form"),
+    metaGraph: new rdflib.NamedNode("http://data.lblod.info/metagraph"),
+    sourceGraph: new rdflib.NamedNode(`http://data.lblod.info/sourcegraph`)
   }
   @tracked sourceNode
 
@@ -31,25 +33,20 @@ export default class SearchQueriesFormComponent extends Component {
     this.init.perform(options);
   }
 
-  willDestroy() {
+  async willDestroy() {
     this.formStore.observers = {};
   }
 
   @task
   * init(options) {
     yield this.loadData(options);
-
-    // TODO can this be done better
-    // if(options.form.observer) {
-    //   this.formStore.registerObserver(options.form.observer, options.form.uuid);
-    // }
   }
 
   async loadData(options) {
     this.formStore = new ForkingStore();
     await this.loadForm(options.form.uuid);
     await this.loadMeta(options.form.uuid);
-    await this.loadSource();
+    await this.loadSource(this.args.query);
   }
 
 
@@ -66,23 +63,18 @@ export default class SearchQueriesFormComponent extends Component {
     await this.formStore.parse(ttl, this.graphs.metaGraph, "text/turtle");
   }
 
-  async loadSource(){
-    let query = this.args.query;
-
-    // NOTE: if no query model was supplied, we assume this is a TEMP search-query being used to filter
-    if (!query) {
-      query = this.store.createRecord('search-query', {
-        uri: `${SOURCE_BASE}${uuid()}`
+  async loadSource(query) {
+    if (query) {
+      let response = await fetch(`/search-queries/${query.id}`, {
+        method: 'GET',
+        headers: {'Accept': 'text/turtle'}
       });
+      const ttl = await response.text();
+      await this.formStore.parse(ttl, this.graphs.sourceGraph, "text/turtle");
+      this.sourceNode = this.sourceNode = new rdflib.NamedNode(query.uri);
+    } else {
+      // NOTE: if no query model was supplied, we assume this is a TEMP search-query being used to filter
+      this.sourceNode = this.sourceNode = new rdflib.NamedNode(TEMP_SOURCE_NODE);
     }
-
-    let response = await fetch(`/search-queries/${query.id}`, {
-      method: 'GET',
-      headers: {'Accept': 'text/turtle'}
-    });
-    const ttl = await response.text();
-    await this.formStore.parse(ttl, this.graphs.sourceGraph, "text/turtle");
-    this.sourceNode = new rdflib.NamedNode(query.uri);
   }
-
 }

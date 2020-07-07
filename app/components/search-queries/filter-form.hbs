@@ -6,21 +6,29 @@
           {{#if this.init.isRunning}}
             <span>Aan het laden...</span>
           {{else}}
-              <SqConfigForm
-                      @form={{this.form}}
-                      @graphs={{this.graphs}}
-                      @sourceNode={{this.sourceNode}}
-                      @formStore={{this.formStore}}
-                      @show={{this.refreshing}}
-                      @forceShowErrors={{false}} />
+            <SqConfigForm
+                    @form={{this.form}}
+                    @graphs={{this.graphs}}
+                    @sourceNode={{this.sourceNode}}
+                    @formStore={{this.formStore}}
+                    @show={{this.refreshing}}
+                    @forceShowErrors={{false}} />
           {{/if}}
         </div>
       </div>
     </div>
   </div>
   <div class="au-c-sidebar__footer au-u-padding-none"> {{!-- TODO: turn into sticky action bar --}}
-    <AuToolbar @size="small">
+    <AuToolbar @size="large">
       <AuToolbarGroup>
+        <AuButton @skin="tertiary" {{ on "click" this.loadFilters }}>
+          <AuIcon @icon="export" @alignment="left"/>
+          Laad filters
+        </AuButton>
+        <AuButton @skin="tertiary" {{ on "click" (perform this.saveFilter) }}>
+          <AuIcon @icon="plus-text" @alignment="left"/>
+          Bewaar filter
+        </AuButton>
         <AuButton @skin="tertiary" @alert="true" {{ on "click" this.resetFilters }}>
           <AuIcon @icon="redo" @alignment="left"/>
           Reset filters
