@@ -34,7 +34,7 @@ export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
       if (values && values.length) {
         query.queryParams[key.object.value] = values.map(v => v.object.value).join(',');
       } else{
-        // NOTE explicitly set value to prevent "sticky" query-params
+        // NOTE: explicitly set value to prevent "sticky" query-params
         query.queryParams[key.object.value] = null;
       }
     });

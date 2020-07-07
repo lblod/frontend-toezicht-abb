@@ -52,16 +52,16 @@ export default class SearchSubmissionsRoute extends Route {
     }
 
     query[`:sqs:data`] = isEmpty(params.search) ? "*" : params.search;
-    if (params.administrativeUnites) query["administrativeUnitUUID"] = params.administrativeUnites;
+    if (params.administrativeUnites) query["administrativeUnitURI"] = params.administrativeUnites;
     if (params.administrativeUnitClassifications) {
-      query["administrativeUnitClassificationUUID"] = params.administrativeUnitClassifications;
-      if (params.governingBodyClassifications) query["governingBodyClassificationUUID"] = params.governingBodyClassifications;
+      query["administrativeUnitClassificationURI"] = params.administrativeUnitClassifications;
+      if (params.governingBodyClassifications) query["governingBodyClassificationURI"] = params.governingBodyClassifications;
     }
-    if (params.chartOfAccounts) query[":terms:chartOfAccountUUID"] = params.chartOfAccounts;
-    if (params.provinces) query["provinceUUID"] = params.provinces;
+    if (params.chartOfAccounts) query[":terms:chartOfAccountURI"] = params.chartOfAccounts;
+    if (params.provinces) query["provinceURI"] = params.provinces;
     if (params.decisionTypes) {
-      query["documentTypeUUID"] = params.decisionTypes;
-      if (params.regulationTypes) query["regulationTypeUUID"] = params.regulationTypes;
+      query["documentTypeURI"] = params.decisionTypes;
+      if (params.regulationTypes) query["regulationTypeURI"] = params.regulationTypes;
     }
     if (params.sessionDateFrom) query[":gte:sessionDatetime"] = params.sessionDateFrom;
     if (params.sessionDateTo) query[":lte:sessionDatetime"] = params.sessionDateTo;
