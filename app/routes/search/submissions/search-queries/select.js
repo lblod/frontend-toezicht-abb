@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import fetch from "node-fetch";
 import rdflib from "browser-rdflib";
 import {ForkingStore} from "@lblod/ember-submission-form-fields";
-import {SEARCH, SH, UUID} from "../../../../components/search-queries/filter-form";
+import {SEARCH, SH, FILTER_FORM_UUID} from "../../../../components/search-queries/filter-form";
 
 const GRAPHS = {
   formGraph: new rdflib.NamedNode("http://data.lblod.info/form"),
@@ -42,7 +42,7 @@ export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
   }
 
   async loadForm(store) {
-    let response = await fetch(`/search-query-forms/${UUID}`);
+    let response = await fetch(`/search-query-forms/${FILTER_FORM_UUID}`);
     const ttl = await response.text();
     await store.parse(ttl, GRAPHS.formGraph, "text/turtle");
   }

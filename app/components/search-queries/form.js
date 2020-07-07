@@ -6,13 +6,9 @@ import rdflib from 'browser-rdflib';
 import fetch from 'node-fetch';
 import {ForkingStore} from '@lblod/ember-submission-form-fields';
 import {task} from 'ember-concurrency-decorators';
-import {v4 as uuid} from 'uuid';
 
 const RDF = new rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
 const FORM = new rdflib.Namespace("http://lblod.data.gift/vocabularies/forms/");
-
-const SOURCE_BASE = 'http://lblod.data.gift/vocabularies/search-queries-toezicht/';
-export const TEMP_SOURCE_NODE = 'http://frontend-toezicht-abb/temp-source-node'
 
 export default class SearchQueriesFormComponent extends Component {
   @service store
@@ -28,9 +24,9 @@ export default class SearchQueriesFormComponent extends Component {
   }
   @tracked sourceNode
 
-  constructor(options, owner, args) {
+  constructor(form, owner, args) {
     super(owner, args);
-    this.init.perform(options);
+    this.init.perform(form);
   }
 
   async willDestroy() {
@@ -38,15 +34,14 @@ export default class SearchQueriesFormComponent extends Component {
   }
 
   @task
-  * init(options) {
-    yield this.loadData(options);
+  * init(form) {
+    yield this.loadData(form);
   }
 
-  async loadData(options) {
+  async loadData(form) {
     this.formStore = new ForkingStore();
-    await this.loadForm(options.form.uuid);
-    await this.loadMeta(options.form.uuid);
-    await this.loadSource(this.args.query);
+    await this.loadForm(form);
+    await this.loadMeta(form);
   }
 
 
@@ -64,17 +59,20 @@ export default class SearchQueriesFormComponent extends Component {
   }
 
   async loadSource(query) {
-    if (query) {
-      let response = await fetch(`/search-queries/${query.id}`, {
-        method: 'GET',
-        headers: {'Accept': 'text/turtle'}
-      });
-      const ttl = await response.text();
-      await this.formStore.parse(ttl, this.graphs.sourceGraph, "text/turtle");
-      this.sourceNode = this.sourceNode = new rdflib.NamedNode(query.uri);
-    } else {
-      // NOTE: if no query model was supplied, we assume this is a TEMP search-query being used to filter
-      this.sourceNode = this.sourceNode = new rdflib.NamedNode(TEMP_SOURCE_NODE);
-    }
+    let response = await fetch(`/search-queries/${query.id}`, {
+      method: 'GET',
+      headers: {'Accept': 'text/turtle'}
+    });
+    const ttl = await response.text();
+    await this.formStore.parse(ttl, this.graphs.sourceGraph, "text/turtle");
+    this.sourceNode = new rdflib.NamedNode(query.uri);
+  }
+
+  async saveSource(query) {
+    await fetch(`/search-queries/${query.id}`, {
+      method: 'PUT',
+      body: this.formStore.serializeDataMergedGraph(this.graphs.sourceGraph, "text/turtle"),
+      headers: {'Content-type': 'text/turtle'}
+    });
   }
 }
