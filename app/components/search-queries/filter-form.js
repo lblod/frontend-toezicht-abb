@@ -4,7 +4,6 @@ import {action} from '@ember/object';
 import {tracked} from '@glimmer/tracking';
 import {inject as service} from '@ember/service';
 import {task} from "ember-concurrency-decorators";
-import fetch from "node-fetch";
 
 export const FILTER_FORM_UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c'
 
@@ -32,6 +31,10 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     this.args.onFilterChange();
   }
 
+  async willDestroy() {
+    this.formStore.deregisterObserver(FILTER_FORM_UUID);
+  }
+
   // USER ACTIONS
 
   @action
@@ -57,6 +60,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
       .map(t => {t.subject = this.sourceNode; return t});
 
     if(updated.length) {
+      // NOTE: for some reason removeMatches() does not call the observers (pretty ok with that in this use case)
       this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined, this.graphs.sourceGraph);
       this.formStore.addAll(updated);
     }
@@ -72,11 +76,13 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
   // changing the "show" argument.
   @action
   resetFilters() {
-    this.refreshing = true;
-    this.formStore.removeMatches(undefined, undefined, undefined, this.graphs.sourceGraph);
-    setTimeout(() => {
-      this.refreshing = false;
-    }, 1);
+    // this.refreshing = true;
+    // // NOTE: for some reason removeMatches() does not call the observers (pretty ok with that in this use case)
+    // this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined, this.graphs.sourceGraph);
+    // this.updateQueryParams(this.formStore.match(undefined, undefined, undefined));
+    // setTimeout(() => {
+    //   this.refreshing = false;
+    // }, 1);
   }
 
   // INTERNAL LOGIC

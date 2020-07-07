@@ -29,10 +29,6 @@ export default class SearchQueriesFormComponent extends Component {
     this.init.perform(form);
   }
 
-  async willDestroy() {
-    this.formStore.observers = {};
-  }
-
   @task
   * init(form) {
     yield this.loadData(form);
