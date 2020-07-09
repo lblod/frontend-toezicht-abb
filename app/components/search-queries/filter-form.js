@@ -76,13 +76,13 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
   // changing the "show" argument.
   @action
   resetFilters() {
-    // this.refreshing = true;
-    // // NOTE: for some reason removeMatches() does not call the observers (pretty ok with that in this use case)
-    // this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined, this.graphs.sourceGraph);
-    // this.updateQueryParams(this.formStore.match(undefined, undefined, undefined));
-    // setTimeout(() => {
-    //   this.refreshing = false;
-    // }, 1);
+    this.refreshing = true;
+    this.args.filter.reset();
+    this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined, this.graphs.sourceGraph);
+    this.args.onFilterChange();
+    setTimeout(() => {
+      this.refreshing = false;
+    }, 1);
   }
 
   // INTERNAL LOGIC
