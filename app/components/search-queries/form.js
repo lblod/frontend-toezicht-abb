@@ -10,18 +10,22 @@ import {task} from 'ember-concurrency-decorators';
 const RDF = new rdflib.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
 const FORM = new rdflib.Namespace('http://lblod.data.gift/vocabularies/forms/');
 
+export const FORM_GRAPHS = {
+  formGraph: new rdflib.NamedNode('http://data.lblod.info/form'),
+  metaGraph: new rdflib.NamedNode('http://data.lblod.info/metagraph'),
+  sourceGraph: new rdflib.NamedNode(`http://data.lblod.info/sourcegraph`),
+};
+
 export default class SearchQueriesFormComponent extends Component {
+
+  graphs = FORM_GRAPHS;
+
   @service store;
   @service router;
   @service currentSession;
 
   @tracked form;
   @tracked formStore;
-  @tracked graphs = {
-    formGraph: new rdflib.NamedNode('http://data.lblod.info/form'),
-    metaGraph: new rdflib.NamedNode('http://data.lblod.info/metagraph'),
-    sourceGraph: new rdflib.NamedNode(`http://data.lblod.info/sourcegraph`),
-  };
   @tracked sourceNode;
 
   constructor(form, owner, args) {
@@ -43,15 +47,14 @@ export default class SearchQueriesFormComponent extends Component {
   async loadForm(uuid) {
     let response = await fetch(`/search-query-forms/${uuid}`);
     const ttl = await response.text();
-    await this.formStore.parse(ttl, this.graphs.formGraph, 'text/turtle');
-    this.form = this.formStore.any(undefined, RDF('type'), FORM('Form'),
-      this.graphs.formGraph);
+    await this.formStore.parse(ttl, FORM_GRAPHS.formGraph, 'text/turtle');
+    this.form = this.formStore.any(undefined, RDF('type'), FORM('Form'), FORM_GRAPHS.formGraph);
   }
 
   async loadMeta(uuid) {
     let response = await fetch(`/search-query-forms/${uuid}/meta`);
     const ttl = await response.text();
-    await this.formStore.parse(ttl, this.graphs.metaGraph, 'text/turtle');
+    await this.formStore.parse(ttl, FORM_GRAPHS.metaGraph, 'text/turtle');
   }
 
   async loadSource(query) {
@@ -60,14 +63,14 @@ export default class SearchQueriesFormComponent extends Component {
       headers: {'Accept': 'text/turtle'},
     });
     const ttl = await response.text();
-    await this.formStore.parse(ttl, this.graphs.sourceGraph, 'text/turtle');
+    await this.formStore.parse(ttl, FORM_GRAPHS.sourceGraph, 'text/turtle');
     this.sourceNode = new rdflib.NamedNode(query.uri);
   }
 
   async saveSource(query) {
     await fetch(`/search-queries/${query.id}`, {
       method: 'PUT',
-      body: this.formStore.serializeDataMergedGraph(this.graphs.sourceGraph,
+      body: this.formStore.serializeDataMergedGraph(FORM_GRAPHS.sourceGraph,
         'text/turtle'),
       headers: {'Content-type': 'text/turtle'},
     });

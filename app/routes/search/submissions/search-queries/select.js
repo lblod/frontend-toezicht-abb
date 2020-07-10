@@ -7,11 +7,7 @@ import {
   SH,
   FILTER_FORM_UUID,
 } from '../../../../components/search-queries/filter-form';
-
-const GRAPHS = {
-  formGraph: new rdflib.NamedNode('http://data.lblod.info/form'),
-  sourceGraph: new rdflib.NamedNode(`http://data.lblod.info/sourcegraph`),
-};
+import {FORM_GRAPHS} from '../../../../components/search-queries/form';
 
 export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
 
@@ -31,10 +27,10 @@ export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
     const sourceNode = new rdflib.NamedNode(searchQuery.uri);
     let query = {queryParams: {}};
 
-    const keys = store.match(undefined, SEARCH('key'), undefined, GRAPHS.formGraph);
+    const keys = store.match(undefined, SEARCH('key'), undefined, FORM_GRAPHS.formGraph);
     keys && keys.forEach(key => {
-      const path = store.any(key.subject, SH('path'), undefined, GRAPHS.formGraph);
-      const values = store.match(sourceNode, path, undefined, GRAPHS.sourceGraph);
+      const path = store.any(key.subject, SH('path'), undefined, FORM_GRAPHS.formGraph);
+      const values = store.match(sourceNode, path, undefined, FORM_GRAPHS.sourceGraph);
       if (values && values.length) {
         query.queryParams[key.object.value] = values.map(v => v.object.value).join(',');
       } else{
@@ -48,7 +44,7 @@ export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
   async loadForm(store) {
     let response = await fetch(`/search-query-forms/${FILTER_FORM_UUID}`);
     const ttl = await response.text();
-    await store.parse(ttl, GRAPHS.formGraph, 'text/turtle');
+    await store.parse(ttl, FORM_GRAPHS.formGraph, 'text/turtle');
   }
 
   async loadSource(store, query) {
@@ -57,6 +53,6 @@ export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
       headers: {'Accept': 'text/turtle'},
     });
     const ttl = await response.text();
-    await store.parse(ttl, GRAPHS.sourceGraph, 'text/turtle');
+    await store.parse(ttl, FORM_GRAPHS.sourceGraph, 'text/turtle');
   }
 }
