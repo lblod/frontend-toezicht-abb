@@ -22,8 +22,15 @@
 </div>
 <AuToolbar @border="top" @size="large" class="au-u-padding-left-large">
   <AuToolbarGroup>
-      <AuButton @loading={{if this.save.isRunning "true"}}
-        {{on "click" (perform this.save)}}>Bewaar zoekopdracht</AuButton>
-      <AuLink @linkRoute="user.search-queries.index" @skin="secondary">Annuleer</AuLink>
+    <AuButton @loading={{if this.save.isRunning "true"}}
+      {{on "click" (perform this.save)}}>Bewaar zoekopdracht
+    </AuButton>
+    <AuLink @linkRoute="user.search-queries.index" @skin="secondary">Annuleer</AuLink>
   </AuToolbarGroup>
+  <AuButton @loading={{if this.remove.isRunning "true"}}
+            @skin="tertiary" @alert="true"
+            {{ on "click" (perform this.remove) }}>
+    <AuIcon @icon="bin" @alignment="left"/>
+    Verwijder
+  </AuButton>
 </AuToolbar>

@@ -80,4 +80,10 @@ export default class SearchQueriesFormComponent extends Component {
       headers: {'Content-type': 'text/turtle'},
     });
   }
+
+  async removeSource(query) {
+    await fetch(`/search-queries/${query.id}`, {
+      method: 'DELETE',
+    });
+  }
 }

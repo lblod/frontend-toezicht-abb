@@ -18,5 +18,12 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
   @task
   * save() {
     yield this.saveSource(this.args.query);
+    this.router.transitionTo('user.search-queries')
+  }
+
+  @task
+  * remove() {
+    yield this.removeSource(this.args.query);
+    this.router.transitionTo('user.search-queries')
   }
 }
