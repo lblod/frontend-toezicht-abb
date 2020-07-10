@@ -1,16 +1,18 @@
-import SearchQueriesFormComponent from "./form";
+import SearchQueriesFormComponent from './form';
 import rdflib from 'browser-rdflib';
 import {action} from '@ember/object';
 import {tracked} from '@glimmer/tracking';
 import {inject as service} from '@ember/service';
-import {task} from "ember-concurrency-decorators";
+import {task} from 'ember-concurrency-decorators';
 
-export const FILTER_FORM_UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c'
+export const FILTER_FORM_UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c';
 
-const TEMP_SOURCE_NODE = new rdflib.NamedNode('http://frontend-toezicht-abb/temp-source-node')
+const TEMP_SOURCE_NODE = new rdflib.NamedNode(
+  'http://frontend-toezicht-abb/temp-source-node');
 
-export const SH = new rdflib.Namespace("http://www.w3.org/ns/shacl#");
-export const SEARCH = new rdflib.Namespace("http://redpencil.data.gift/vocabularies/search-queries/");
+export const SH = new rdflib.Namespace('http://www.w3.org/ns/shacl#');
+export const SEARCH = new rdflib.Namespace(
+  'http://redpencil.data.gift/vocabularies/search-queries/');
 
 export default class SearchQueriesConfigFormComponent extends SearchQueriesFormComponent {
 
@@ -39,7 +41,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
 
   @action
   loadFilters() {
-    this.router.transitionTo('user.search-queries')
+    this.router.transitionTo('user.search-queries');
   }
 
   @task
@@ -52,16 +54,19 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     yield user.save();
 
     // NOTE: we need to update the local source data in the store with the created search-query
-    yield this.loadSource(query)
+    yield this.loadSource(query);
 
     // NOTE: replace the temporary source-node with the uri of the saved query
-    const updated = this.formStore
-      .match(TEMP_SOURCE_NODE, undefined, undefined, this.graphs.sourceGraph)
-      .map(t => {t.subject = this.sourceNode; return t});
+    const updated = this.formStore.match(TEMP_SOURCE_NODE, undefined, undefined,
+      this.graphs.sourceGraph).map(t => {
+      t.subject = this.sourceNode;
+      return t;
+    });
 
-    if(updated.length) {
+    if (updated.length) {
       // NOTE: for some reason removeMatches() does not call the observers (pretty ok with that in this use case)
-      this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined, this.graphs.sourceGraph);
+      this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined,
+        this.graphs.sourceGraph);
       this.formStore.addAll(updated);
     }
 
@@ -78,7 +83,8 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
   resetFilters() {
     this.refreshing = true;
     this.args.filter.reset();
-    this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined, this.graphs.sourceGraph);
+    this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined,
+      this.graphs.sourceGraph);
     this.args.onFilterChange();
     setTimeout(() => {
       this.refreshing = false;
@@ -90,7 +96,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
   /**
    * Registers the necessary observer to allow the filter to work on change of the form-store.
    */
-  registerObserver(){
+  registerObserver() {
     this.formStore.registerObserver(({inserts = [], deletes = []}) => {
       this.updateQueryParams([...inserts, ...deletes]);
       this.args.onFilterChange();
@@ -102,14 +108,16 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
    */
   loadQueryParams() {
     this.args.filter.keys.forEach(key => {
-      const field = this.formStore.any(undefined, SEARCH('key'), key, this.graphs.formGraph);
-      const path = this.formStore.any(field, SH('path'), undefined, this.graphs.formGraph);
-      const values = this.args.filter[key] && this.args.filter[key].split(',')
+      const field = this.formStore.any(undefined, SEARCH('key'), key,
+        this.graphs.formGraph);
+      const path = this.formStore.any(field, SH('path'), undefined,
+        this.graphs.formGraph);
+      const values = this.args.filter[key] && this.args.filter[key].split(',');
       values && values.forEach(v => this.formStore.graph.add(
         this.sourceNode,
         path,
         this.validURL(v) ? new rdflib.NamedNode(v) : v,
-        this.graphs.sourceGraph))
+        this.graphs.sourceGraph));
     });
   }
 
@@ -121,9 +129,12 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
   updateQueryParams(triples) {
     triples.forEach(t => {
       // NOTE: we need to retrieve the value because on deletion we get the deleted value, not the actual new value
-      const values = this.formStore.match(t.subject, t.predicate, undefined, this.graphs.sourceGraph).map(t => t.object.value);
-      const field = this.formStore.any(undefined, SH('path'), t.predicate, this.graphs.formGraph);
-      const key = this.formStore.any(field, SEARCH('key'), undefined, this.graphs.formGraph);
+      const values = this.formStore.match(t.subject, t.predicate, undefined,
+        this.graphs.sourceGraph).map(t => t.object.value);
+      const field = this.formStore.any(undefined, SH('path'), t.predicate,
+        this.graphs.formGraph);
+      const key = this.formStore.any(field, SEARCH('key'), undefined,
+        this.graphs.formGraph);
       if (key) {
         this.args.filter[key.value] = values ? values.join(',') : null;
       }

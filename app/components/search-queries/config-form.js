@@ -1,8 +1,8 @@
-import SearchQueriesFormComponent from "./form";
+import SearchQueriesFormComponent from './form';
 
 import {task} from 'ember-concurrency-decorators';
 
-const CONFIG_FORM_UUID = 'ebd65df9-5566-47c2-859a-ceff562881ab'
+const CONFIG_FORM_UUID = 'ebd65df9-5566-47c2-859a-ceff562881ab';
 
 export default class SearchQueriesConfigFormComponent extends SearchQueriesFormComponent {
 
@@ -12,7 +12,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
 
   async loadData(form) {
     await super.loadData(form);
-    await this.loadSource(this.args.query)
+    await this.loadSource(this.args.query);
   }
 
   @task
