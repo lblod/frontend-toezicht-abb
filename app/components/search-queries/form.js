@@ -66,10 +66,10 @@ export default class SearchQueriesFormComponent extends Component {
   async loadSource(query) {
     let response = await fetch(`/search-queries/${query.id}`, {
       method: 'GET',
-      headers: {'Accept': 'application/n-triples'},
+      headers: {'Accept': 'text/turtle'},
     });
     const ttl = await response.text();
-    await this.formStore.parse(ttl, FORM_GRAPHS.sourceGraph, 'application/n-triples');
+    await this.formStore.parse(ttl, FORM_GRAPHS.sourceGraph, 'text/turtle');
     this.sourceNode = new rdflib.NamedNode(query.uri);
   }
 

@@ -2,7 +2,6 @@ import SearchQueriesFormComponent, {FORM_GRAPHS} from './form';
 import rdflib from 'browser-rdflib';
 import {action} from '@ember/object';
 import {tracked} from '@glimmer/tracking';
-import {inject as service} from '@ember/service';
 import {task} from 'ember-concurrency-decorators';
 
 export const FILTER_FORM_UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c';
@@ -13,9 +12,6 @@ export const SH = new rdflib.Namespace('http://www.w3.org/ns/shacl#');
 export const SEARCH = new rdflib.Namespace('http://redpencil.data.gift/vocabularies/search-queries/');
 
 export default class SearchQueriesConfigFormComponent extends SearchQueriesFormComponent {
-
-  @service router;
-  @service currentSession;
 
   @tracked refreshing = false;
 
