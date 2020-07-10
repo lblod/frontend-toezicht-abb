@@ -31,7 +31,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     this.args.onFilterChange();
   }
 
-  async willDestroy() {
+  willDestroy() {
     this.formStore.deregisterObserver(FILTER_FORM_UUID);
   }
 
