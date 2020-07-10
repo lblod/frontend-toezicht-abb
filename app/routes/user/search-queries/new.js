@@ -8,11 +8,10 @@ export default class UserSearchQueriesNewRoute extends Route {
   async model() {
     const user = await this.currentSession.user;
 
-    const query = this.store.createRecord('search-query', {});
+    const query = this.store.createRecord('search-query', {
+      user
+    });
     await query.save();
-
-    user.searchQueries.pushObject(query);
-    await user.save();
 
     return query;
   }

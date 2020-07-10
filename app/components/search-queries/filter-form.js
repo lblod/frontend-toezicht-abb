@@ -40,12 +40,11 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
 
   @task
   * saveFilter() {
-    const query = this.store.createRecord('search-query', {});
-    yield query.save();
-
     const user = yield this.currentSession.user;
-    user.searchQueries.pushObject(query);
-    yield user.save();
+    const query = this.store.createRecord('search-query', {
+      user
+    });
+    yield query.save();
 
     // NOTE: we need to update the local source data in the store with the created search-query
     yield this.loadSource(query);

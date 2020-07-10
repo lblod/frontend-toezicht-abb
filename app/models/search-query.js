@@ -1,4 +1,4 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, belongsTo } from '@ember-data/model';
 
 export default class SearchQueryModel extends Model {
   @attr() uri;
@@ -7,4 +7,6 @@ export default class SearchQueryModel extends Model {
   @attr('datetime', {
     defaultValue(){ return new Date();}
   }) created;
+
+  @belongsTo('gebruiker', { inverse: null}) user;
 }
