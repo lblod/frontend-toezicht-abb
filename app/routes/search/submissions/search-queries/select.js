@@ -42,7 +42,10 @@ export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
   }
 
   async loadForm(store) {
-    let response = await fetch(`/search-query-forms/${FILTER_FORM_UUID}`);
+    let response = await fetch(`/search-query-forms/${FILTER_FORM_UUID}`,{
+      method: 'GET',
+      headers: {'Accept': 'text/turtle'},
+    });
     const ttl = await response.text();
     await store.parse(ttl, FORM_GRAPHS.formGraph, 'text/turtle');
   }

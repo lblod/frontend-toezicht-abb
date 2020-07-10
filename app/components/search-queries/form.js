@@ -45,14 +45,20 @@ export default class SearchQueriesFormComponent extends Component {
   }
 
   async loadForm(uuid) {
-    let response = await fetch(`/search-query-forms/${uuid}`);
+    let response = await fetch(`/search-query-forms/${uuid}`,{
+      method: 'GET',
+      headers: {'Accept': 'text/turtle'},
+    });
     const ttl = await response.text();
     await this.formStore.parse(ttl, FORM_GRAPHS.formGraph, 'text/turtle');
     this.form = this.formStore.any(undefined, RDF('type'), FORM('Form'), FORM_GRAPHS.formGraph);
   }
 
   async loadMeta(uuid) {
-    let response = await fetch(`/search-query-forms/${uuid}/meta`);
+    let response = await fetch(`/search-query-forms/${uuid}/meta`,{
+      method: 'GET',
+      headers: {'Accept': 'application/n-triples'},
+    });
     const ttl = await response.text();
     await this.formStore.parse(ttl, FORM_GRAPHS.metaGraph, 'text/turtle');
   }
@@ -60,18 +66,17 @@ export default class SearchQueriesFormComponent extends Component {
   async loadSource(query) {
     let response = await fetch(`/search-queries/${query.id}`, {
       method: 'GET',
-      headers: {'Accept': 'text/turtle'},
+      headers: {'Accept': 'application/n-triples'},
     });
     const ttl = await response.text();
-    await this.formStore.parse(ttl, FORM_GRAPHS.sourceGraph, 'text/turtle');
+    await this.formStore.parse(ttl, FORM_GRAPHS.sourceGraph, 'application/n-triples');
     this.sourceNode = new rdflib.NamedNode(query.uri);
   }
 
   async saveSource(query) {
     await fetch(`/search-queries/${query.id}`, {
       method: 'PUT',
-      body: this.formStore.serializeDataMergedGraph(FORM_GRAPHS.sourceGraph,
-        'text/turtle'),
+      body: this.formStore.serializeDataMergedGraph(FORM_GRAPHS.sourceGraph, 'text/turtle'),
       headers: {'Content-type': 'text/turtle'},
     });
   }
