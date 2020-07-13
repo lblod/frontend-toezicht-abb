@@ -2,10 +2,15 @@ import Route from '@ember/routing/route';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import {inject as service} from '@ember/service';
 
-export default class UserSearchQueriesIndexRoute extends Route.extend(
-  DataTableRouteMixin) {
+export default class UserSearchQueriesIndexRoute extends Route.extend(DataTableRouteMixin) {
 
   @service currentSession;
+
+  queryParams = {
+    page: {refreshModel: true},
+    size: {refreshModel: true},
+    sort: {refreshModel: true}
+  }
 
   modelName = 'search-query';
 
