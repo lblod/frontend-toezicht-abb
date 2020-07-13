@@ -7,7 +7,7 @@ import { task } from 'ember-concurrency-decorators';
 export default class UserSearchQueriesIndexController extends Controller {
   page = 0;
   size = 10;
-  sort = 'created'
+  sort = '-created'
 
   @task
   *delete(id) {
