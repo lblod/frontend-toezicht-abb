@@ -22,8 +22,11 @@
 </div>
 <AuToolbar @border="top" @size="large" class="au-u-padding-left-large">
   <AuToolbarGroup>
-    <AuButton @loading={{if this.save.isRunning "true"}}
-      {{on "click" (perform this.save)}}>Bewaar zoekopdracht
+    <LinkTo  class="button button--narrow" type="button" @route="search.submissions.search-queries.select" @model={{@query.id}}>
+      Laad in
+    </LinkTo>
+    <AuButton @loading={{if this.save.isRunning "true"}} @skin="secondary"
+      {{on "click" (perform this.save)}}>Bewaar
     </AuButton>
     <AuLink @linkRoute="user.search-queries.index" @skin="secondary">Annuleer</AuLink>
   </AuToolbarGroup>

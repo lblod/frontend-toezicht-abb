@@ -11,7 +11,7 @@ const TEMP_SOURCE_NODE = new rdflib.NamedNode('http://frontend-toezicht-abb/temp
 export const SH = new rdflib.Namespace('http://www.w3.org/ns/shacl#');
 export const SEARCH = new rdflib.Namespace('http://redpencil.data.gift/vocabularies/search-queries/');
 
-export default class SearchQueriesConfigFormComponent extends SearchQueriesFormComponent {
+export default class SearchQueriesFilterFormComponent extends SearchQueriesFormComponent {
 
   @tracked refreshing = false;
 
@@ -30,7 +30,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
   willDestroy() {
     this.formStore.deregisterObserver(FILTER_FORM_UUID);
   }
-
+SearchQueriesConfig
   // USER ACTIONS
 
   @action
