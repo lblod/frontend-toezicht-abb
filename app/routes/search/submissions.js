@@ -39,7 +39,6 @@ export default class SearchSubmissionsRoute extends Route {
     this.lastParams = new Snapshot();
   }
 
-  // TODO make sure the page gets reset to 0 if the query-params changed
   async model(params) {
     this.filter = params;
     this.lastParams.stageLive(params);
@@ -49,7 +48,7 @@ export default class SearchSubmissionsRoute extends Route {
     }
 
     const query = {};
-    // TODO generate this based on form configuration
+    // TODO generate this based on form configuration?
     query[`:sqs:data`] = isEmpty(params.search) ? '*' : params.search;
     if (params.administrativeUnites) query[':terms:administrativeUnitURI'] = params.administrativeUnites;
     if (params.administrativeUnitClassifications) {
