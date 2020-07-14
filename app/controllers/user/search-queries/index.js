@@ -1,8 +1,7 @@
 import Controller from '@ember/controller';
 
-import fetch from 'node-fetch';
-
 import { task } from 'ember-concurrency-decorators';
+import {removeSourceData} from '../../../utils/rdf-form';
 
 export default class UserSearchQueriesIndexController extends Controller {
   page = 0;
@@ -11,9 +10,7 @@ export default class UserSearchQueriesIndexController extends Controller {
 
   @task
   *delete(id) {
-    yield fetch(`/search-queries/${id}`, {
-      method: 'DELETE',
-    });
+    yield removeSourceData(`/search-queries/${id}`)
     yield this.model.update();
   }
 }

@@ -1,5 +1,6 @@
 import rdflib from 'browser-rdflib';
 import fetch from 'node-fetch';
+import {TEMP_SOURCE_NODE} from '../components/search-queries/form';
 
 export const RDF = new rdflib.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
 export const FORM = new rdflib.Namespace('http://lblod.data.gift/vocabularies/forms/');
@@ -37,4 +38,18 @@ export async function retrieveSourceData(url, store) {
   });
   const ttl = await response.text();
   await store.parse(ttl, FORM_GRAPHS.sourceGraph, 'text/turtle');
+}
+
+export async function saveSourceData(url, store) {
+  await fetch(url, {
+    method: 'PUT',
+    body: store.serializeDataMergedGraph(FORM_GRAPHS.sourceGraph, 'text/turtle'),
+    headers: {'Content-type': 'text/turtle'},
+  });
+}
+
+export async function removeSourceData(url) {
+  await fetch(url, {
+    method: 'DELETE',
+  });
 }

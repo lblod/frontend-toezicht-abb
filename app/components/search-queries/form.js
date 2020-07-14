@@ -6,7 +6,15 @@ import rdflib from 'browser-rdflib';
 import fetch from 'node-fetch';
 import {ForkingStore} from '@lblod/ember-submission-form-fields';
 import {task} from 'ember-concurrency-decorators';
-import {FORM, FORM_GRAPHS, RDF, retrieveFormData, retrieveMetaData, retrieveSourceData} from '../../utils/rdf-form';
+import {
+  FORM,
+  FORM_GRAPHS,
+  RDF, removeSourceData,
+  retrieveFormData,
+  retrieveMetaData,
+  retrieveSourceData,
+  saveSourceData,
+} from '../../utils/rdf-form';
 
 export const TEMP_SOURCE_NODE = new rdflib.NamedNode('http://frontend-toezicht-abb/temp-source-node');
 
@@ -68,25 +76,16 @@ export default class SearchQueriesFormComponent extends Component {
     await this.retrieveSourceData(query);
 
     // NOTE: we need to update the source-node to the actual one
-    updated.forEach( t => t.subject = this.sourceNode);
+    updated.forEach(t => t.subject = this.sourceNode);
 
     if (updated.length) {
       this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined, FORM_GRAPHS.sourceGraph);
       this.formStore.addAll(updated);
     }
-
-    // TODO: generalise this function by placing it in the helper file
-    await fetch(`/search-queries/${query.id}`, {
-      method: 'PUT',
-      body: this.formStore.serializeDataMergedGraph(FORM_GRAPHS.sourceGraph, 'text/turtle'),
-      headers: {'Content-type': 'text/turtle'},
-    });
+    await saveSourceData(`/search-queries/${query.id}`, this.formStore);
   }
 
-  // TODO: generalise this function by placing it in the helper file
   async removeSourceData(query) {
-    await fetch(`/search-queries/${query.id}`, {
-      method: 'DELETE',
-    });
+    await removeSourceData(`/search-queries/${query.id}`)
   }
 }
