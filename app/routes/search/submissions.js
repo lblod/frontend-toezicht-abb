@@ -4,7 +4,6 @@ import {inject as service} from '@ember/service';
 import Route from '@ember/routing/route';
 import search from '../../utils/mu-search';
 import Snapshot from '../../utils/snapshot';
-import SubmissionFilter from '../../utils/submission-filters';
 import {tracked} from '@glimmer/tracking';
 import {TREAT_STATUS} from '../../models/submission-review-status';
 
