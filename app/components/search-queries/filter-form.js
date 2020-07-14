@@ -44,6 +44,7 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
   * resetFilters() {
     yield super.setupForm(FILTER_FORM_UUID);
     this.updateQueryParams();
+    this.registerObserver();
   }
 
   // INTERNAL LOGIC
