@@ -1,4 +1,4 @@
-import SearchQueriesFormComponent from './form';
+import SearchQueriesFormComponent, {TEMP_SOURCE_NODE} from './form';
 import rdflib from 'browser-rdflib';
 import {action} from '@ember/object';
 import {tracked} from '@glimmer/tracking';
@@ -6,8 +6,6 @@ import {task} from 'ember-concurrency-decorators';
 import {FORM_GRAPHS, SEARCH, SH} from '../../utils/rdf-form';
 
 export const FILTER_FORM_UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c';
-
-const TEMP_SOURCE_NODE = new rdflib.NamedNode('http://frontend-toezicht-abb/temp-source-node');
 
 export default class SearchQueriesFilterFormComponent extends SearchQueriesFormComponent {
 
@@ -17,9 +15,8 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
     super(FILTER_FORM_UUID, owner, args);
   }
 
-  async loadData(form) {
-    await super.loadData(form);
-    this.sourceNode = TEMP_SOURCE_NODE;
+  async setupForm(form) {
+    await super.setupForm(form);
     this.loadQueryParams();
     this.registerObserver();
     this.args.onFilterChange();
@@ -43,29 +40,13 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
     });
     yield query.save();
 
-    // NOTE: we need to update the local source data in the store with the created search-query
-    yield this.retrieveSourceData(query);
-
-    // NOTE: replace the temporary source-node with the uri of the saved query
-    const updated = this.formStore
-    .match(TEMP_SOURCE_NODE, undefined, undefined, FORM_GRAPHS.sourceGraph)
-    .map(t => {
-      t.subject = this.sourceNode;
-      return t;
-    });
-
-    if (updated.length) {
-      // NOTE: for some reason removeMatches() does not call the observers (pretty ok with that in this use case)
-      this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined, FORM_GRAPHS.sourceGraph);
-      this.formStore.addAll(updated);
-    }
-
-    yield this.saveSourceData(query);
+    yield this.updateSourceData(query);
 
     this.router.transitionTo('user.search-queries.edit', query);
   }
 
   // TODO improve as this is a little hackish
+  // TODO maybe rebuild this with a transition to?
   // NOTE: the problem here lies in that if an outsider makes changes in the store,
   // the field components are not aware of this. There for, for now, we force the form to rerender by temporarily
   // changing the "show" argument.

@@ -10,14 +10,14 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     super(CONFIG_FORM_UUID, owner, args);
   }
 
-  async loadData(form) {
-    await super.loadData(form);
+  async setupForm(form) {
+    await super.setupForm(form);
     await this.retrieveSourceData(this.args.query);
   }
 
   @task
   * save() {
-    yield this.saveSourceData(this.args.query);
+    yield this.updateSourceData(this.args.query);
     this.router.transitionTo('user.search-queries')
   }
 
