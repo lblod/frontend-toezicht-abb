@@ -32,7 +32,7 @@
                 <ThSortable @label="Bestuurseenheid"
                             @field="administrativeUnit"
                             @currentSorting={{@sort}}
-                            style="max-width: 250px;"/>
+                            style={{html-safe "max-width: 250px;"}}/>
                 {{#unless @displaySubset}}
                 <ThSortable @label="Type bestuur"
                             @field="administrativeUnitClassification"
@@ -42,7 +42,7 @@
                 <ThSortable @label="Categorie dossier"
                             @field="decisionType"
                             @currentSorting={{@sort}}
-                            style="max-width: 250px;"/>
+                            style={{html-safe "max-width: 250px;"}}/>
                 {{#unless @displaySubset}}
                   <ThSortable @label="Periode zitting / besluit"
                               @field="sessionDatetime"
@@ -62,7 +62,7 @@
                 {{#unless @displaySubset}}
                   <td class="au-u-visible-medium-up">{{row.province}}</td>
                 {{/unless}}
-                <td style="max-width: 250px;">{{row.administrativeUnit}}
+                <td style={{html-safe "max-width: 250px;"}}>{{row.administrativeUnit}}
                   {{#if @displaySubset}}
                     <p class="text-fade">{{row.administrativeUnitClassification}}</p>
                   {{else}}
@@ -72,7 +72,7 @@
                 {{#unless @displaySubset}}
                   <td class="au-u-visible-medium-up">{{row.administrativeUnitClassification}}</td>
                 {{/unless}}
-                <td style="max-width: 250px;">
+                <td style={{html-safe "max-width: 250px;"}}>
                   {{#if row.decisionType}}
                     <p>{{row.decisionType}}</p>
                   {{else}}

@@ -67,7 +67,7 @@ export async function removeSourceData(url) {
 export function formStoreToQueryParams(store, node) {
   let query = {queryParams: {}};
   // NOTE: retrieve all possible query-params
-  const keys = store.match(undefined, SEARCH('key'), undefined, FORM_GRAPHS.formGraph);
+  const keys = store.match(undefined, SEARCH('emberQueryParameterKey'), undefined, FORM_GRAPHS.formGraph);
   if (keys && keys.length) {
     for (let key of keys) {
       const path = store.any(key.subject, SH('path'), undefined, FORM_GRAPHS.formGraph);
@@ -87,7 +87,7 @@ export function formStoreToQueryParams(store, node) {
 export function queryParamsToFormStore(query, store, node) {
   const keys = Object.keys(query);
   for (let key of keys) {
-    const field = store.any(undefined, SEARCH('key'), key, FORM_GRAPHS.formGraph);
+    const field = store.any(undefined, SEARCH('emberQueryParameterKey'), key, FORM_GRAPHS.formGraph);
     if(field) {
       const path = store.any(field, SH('path'), undefined, FORM_GRAPHS.formGraph);
       const values = query[key] && query[key].split(',');

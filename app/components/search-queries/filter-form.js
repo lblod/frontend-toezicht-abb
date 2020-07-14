@@ -1,14 +1,11 @@
 import SearchQueriesFormComponent from './form';
 import {action} from '@ember/object';
-import {tracked} from '@glimmer/tracking';
 import {task} from 'ember-concurrency-decorators';
-import { formStoreToQueryParams, queryParamsToFormStore} from '../../utils/rdf-form';
+import {formStoreToQueryParams, queryParamsToFormStore} from '../../utils/rdf-form';
 
 export const FILTER_FORM_UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c';
 
 export default class SearchQueriesFilterFormComponent extends SearchQueriesFormComponent {
-
-  @tracked refreshing = false;
 
   constructor(owner, args) {
     super(FILTER_FORM_UUID, owner, args);
@@ -45,7 +42,7 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
   // changing the "show" argument.
   @task
   * resetFilters() {
-    yield  super.setupForm(FILTER_FORM_UUID);
+    yield super.setupForm(FILTER_FORM_UUID);
     this.updateQueryParams();
   }
 
@@ -69,6 +66,7 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
 
   updateQueryParams() {
     // TODO: maybe try improving this based on the received changes?
-    this.router.transitionTo(formStoreToQueryParams(this.formStore, this.sourceNode));
+    const query = formStoreToQueryParams(this.formStore, this.sourceNode);
+    this.router.transitionTo(query);
   }
 }

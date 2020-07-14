@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="au-c-sidebar__footer au-u-padding-none"> {{!-- TODO: turn into sticky action bar --}}
-    <AuToolbar @size="large">
+    <AuToolbar @size="normal" style={{html-safe "min-height: 45px;"}}>
       <AuToolbarGroup>
         <AuButton @skin="tertiary" {{ on "click" this.loadFilters }}>
           <AuIcon @icon="export" @alignment="left"/>

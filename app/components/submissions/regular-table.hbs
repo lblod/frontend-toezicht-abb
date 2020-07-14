@@ -112,10 +112,10 @@
       {{#unless @displaySubset}}
         <td class="u-visible--tablet-landscape-up">{{row.organization.provincie.naam}}</td>
       {{/unless}}
-      <td class="u-visible--tablet-portrait-up" style="max-width: 250px;">{{row.organization.naam}} <span
+      <td class="u-visible--tablet-portrait-up" style={{html-safe "max-width: 250px;"}}>{{row.organization.naam}} <span
               class="u-hidden--tablet-landscape-up text-fade"><br>{{row.organization.classificatie.label}}</span></td>
       <td class="u-visible--tablet-landscape-up">{{row.organization.classificatie.label}}</td>
-      <td style="max-width: 250px;">
+      <td style={{html-safe "max-width: 250px;"}}>
         {{#if row.formData.decisionType}}
           <p>{{row.formData.decisionType.label}}</p>
         {{else}}
