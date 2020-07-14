@@ -11,27 +11,25 @@ import {retrieveFormData, retrieveSourceData} from '../../../../utils/rdf-form';
 
 export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
 
-  // TODO: replace this by a transitionTo with the an already create from-store and source-node.
   async model(params) {
     const store = new ForkingStore();
-    const searchQuery = await this.store.findRecord('search-query', params.id);
+    const query = await this.store.findRecord('search-query', params.id);
     await retrieveFormData(`/search-query-forms/${FILTER_FORM_UUID}`, store);
-    await retrieveSourceData(`/search-queries/${searchQuery.id}`, store);
+    await retrieveSourceData(`/search-queries/${query.id}`, store);
     return {
       store,
-      searchQuery,
+      node: new rdflib.NamedNode(query.uri),
     };
   }
 
   afterModel(model) {
-    const {store, searchQuery} = model;
-    const sourceNode = new rdflib.NamedNode(searchQuery.uri);
+    const {store, node} = model;
     let query = {queryParams: {}};
 
     const keys = store.match(undefined, SEARCH('key'), undefined, FORM_GRAPHS.formGraph);
     keys && keys.forEach(key => {
       const path = store.any(key.subject, SH('path'), undefined, FORM_GRAPHS.formGraph);
-      const values = store.match(sourceNode, path, undefined, FORM_GRAPHS.sourceGraph);
+      const values = store.match(node, path, undefined, FORM_GRAPHS.sourceGraph);
       if (values && values.length) {
         query.queryParams[key.object.value] = values.map(v => v.object.value).join(',');
       } else{
