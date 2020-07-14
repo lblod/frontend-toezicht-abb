@@ -20,7 +20,7 @@ export async function retrieveFormData(url, store) {
     headers: {'Accept': 'text/turtle'},
   });
   const ttl = await response.text();
-  await store.parse(ttl, FORM_GRAPHS.formGraph, 'text/turtle');
+  store.parse(ttl, FORM_GRAPHS.formGraph, 'text/turtle');
 }
 
 export async function retrieveMetaData(url, store) {
@@ -29,7 +29,7 @@ export async function retrieveMetaData(url, store) {
     headers: {'Accept': 'application/n-triples'},
   });
   const ttl = await response.text();
-  await store.parse(ttl, FORM_GRAPHS.metaGraph, 'text/turtle');
+  store.parse(ttl, FORM_GRAPHS.metaGraph, 'text/turtle');
 }
 
 export async function retrieveSourceData(url, store) {
@@ -38,7 +38,7 @@ export async function retrieveSourceData(url, store) {
     headers: {'Accept': 'text/turtle'},
   });
   const ttl = await response.text();
-  await store.parse(ttl, FORM_GRAPHS.sourceGraph, 'text/turtle');
+  store.parse(ttl, FORM_GRAPHS.sourceGraph, 'text/turtle');
 }
 
 export async function saveSourceData(url, store) {
