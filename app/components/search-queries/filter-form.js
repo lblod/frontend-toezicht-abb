@@ -47,7 +47,7 @@ SearchQueriesConfig
     yield query.save();
 
     // NOTE: we need to update the local source data in the store with the created search-query
-    yield this.loadSource(query);
+    yield this.retrieveSourceData(query);
 
     // NOTE: replace the temporary source-node with the uri of the saved query
     const updated = this.formStore
@@ -63,7 +63,7 @@ SearchQueriesConfig
       this.formStore.addAll(updated);
     }
 
-    yield this.saveSource(query);
+    yield this.saveSourceData(query);
 
     this.router.transitionTo('user.search-queries.edit', query);
   }

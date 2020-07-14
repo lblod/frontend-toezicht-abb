@@ -12,18 +12,18 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
 
   async loadData(form) {
     await super.loadData(form);
-    await this.loadSource(this.args.query);
+    await this.retrieveSourceData(this.args.query);
   }
 
   @task
   * save() {
-    yield this.saveSource(this.args.query);
+    yield this.saveSourceData(this.args.query);
     this.router.transitionTo('user.search-queries')
   }
 
   @task
   * remove() {
-    yield this.removeSource(this.args.query);
+    yield this.removeSourceData(this.args.query);
     this.router.transitionTo('user.search-queries')
   }
 }

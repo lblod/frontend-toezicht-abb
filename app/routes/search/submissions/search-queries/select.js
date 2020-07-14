@@ -1,5 +1,4 @@
 import Route from '@ember/routing/route';
-import fetch from 'node-fetch';
 import rdflib from 'browser-rdflib';
 import {ForkingStore} from '@lblod/ember-submission-form-fields';
 import {
@@ -8,14 +7,16 @@ import {
   FILTER_FORM_UUID,
 } from '../../../../components/search-queries/filter-form';
 import {FORM_GRAPHS} from '../../../../components/search-queries/form';
+import {retrieveFormData, retrieveSourceData} from '../../../../utils/rdf-form';
 
 export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
 
+  // TODO: replace this by a transitionTo with the an already create from-store and source-node.
   async model(params) {
     const store = new ForkingStore();
     const searchQuery = await this.store.findRecord('search-query', params.id);
-    await this.loadForm(store);
-    await this.loadSource(store, searchQuery);
+    await retrieveFormData(`/search-query-forms/${FILTER_FORM_UUID}`, store);
+    await retrieveSourceData(`/search-queries/${searchQuery.id}`, store);
     return {
       store,
       searchQuery,
@@ -39,23 +40,5 @@ export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
       }
     });
     this.transitionTo('search.submissions', query);
-  }
-
-  async loadForm(store) {
-    let response = await fetch(`/search-query-forms/${FILTER_FORM_UUID}`,{
-      method: 'GET',
-      headers: {'Accept': 'text/turtle'},
-    });
-    const ttl = await response.text();
-    await store.parse(ttl, FORM_GRAPHS.formGraph, 'text/turtle');
-  }
-
-  async loadSource(store, query) {
-    let response = await fetch(`/search-queries/${query.id}`, {
-      method: 'GET',
-      headers: {'Accept': 'text/turtle'},
-    });
-    const ttl = await response.text();
-    await store.parse(ttl, FORM_GRAPHS.sourceGraph, 'text/turtle');
   }
 }
