@@ -24,7 +24,6 @@ export default class SearchQueriesFormComponent extends Component {
   @service router;
   @service currentSession;
 
-  @tracked form;
   @tracked formStore;
   @tracked sourceNode;
 
