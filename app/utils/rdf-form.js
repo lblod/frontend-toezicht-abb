@@ -83,12 +83,11 @@ export function formStoreToQueryParams(store, node) {
   return query;
 }
 
-// TODO
 export function queryParamsToFormStore(query, store, node) {
   const keys = Object.keys(query);
   for (let key of keys) {
     const field = store.any(undefined, SEARCH('emberQueryParameterKey'), key, FORM_GRAPHS.formGraph);
-    if(field) {
+    if (field) {
       const path = store.any(field, SH('path'), undefined, FORM_GRAPHS.formGraph);
       const values = query[key] && query[key].split(',');
       if (values && values.length) {

@@ -35,8 +35,6 @@ export default class SearchSubmissionsRoute extends Route {
     sort: {refreshModel: true},
   };
 
-  lastParams = null;
-
   constructor() {
     super(...arguments);
     this.lastParams = new Snapshot();
@@ -46,12 +44,12 @@ export default class SearchSubmissionsRoute extends Route {
   async model(params) {
     this.filter = params;
     this.lastParams.stageLive(params);
-    const query = {};
 
-    if (this.lastParams.anyFieldChanged(Object.keys(params))) {
+    if (this.lastParams.anyFieldChanged(Object.keys(params).filter(key => key !== 'page'))) {
       params.page = 0;
     }
 
+    const query = {};
     // TODO generate this based on form configuration
     query[`:sqs:data`] = isEmpty(params.search) ? '*' : params.search;
     if (params.administrativeUnites) query[':terms:administrativeUnitURI'] = params.administrativeUnites;
