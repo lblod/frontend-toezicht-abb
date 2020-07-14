@@ -15,9 +15,21 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     await this.retrieveSourceData(this.args.query);
   }
 
+  get isNewForm() {
+    return !this.args.query ;
+  }
+
   @task
   * save() {
-    yield this.updateSourceData(this.args.query);
+    let query = this.args.query;
+    if(!query) {
+      const user = yield this.currentSession.user;
+      query = this.store.createRecord('search-query', {
+        user
+      });
+      yield query.save();
+    }
+    yield this.updateSourceData(query);
     this.router.transitionTo('user.search-queries')
   }
 

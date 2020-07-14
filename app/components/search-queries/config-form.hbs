@@ -22,18 +22,23 @@
 </div>
 <AuToolbar @border="top" @size="large" class="au-u-padding-left-large">
   <AuToolbarGroup>
+    {{#unless this.isNewForm}}
     <LinkTo  class="button button--narrow" type="button" @route="search.submissions.search-queries.select" @model={{@query.id}}>
       Laad in
     </LinkTo>
-    <AuButton @loading={{if this.save.isRunning "true"}} @skin="secondary"
+    {{/unless}}
+    <AuButton @loading={{if this.save.isRunning "true"}}
+              @skin={{unless this.isNewForm "secondary" "primary"}}
       {{on "click" (perform this.save)}}>Bewaar
     </AuButton>
-    <AuLink @linkRoute="user.search-queries.index" @skin="secondary">Annuleer</AuLink>
+    <AuLink @linkRoute="user.search-queries.index" @skin="secondary">{{unless this.isNewForm 'Ga Terug' 'Annuleer'}}</AuLink>
   </AuToolbarGroup>
+  {{#unless this.isNewForm}}
   <AuButton @loading={{if this.remove.isRunning "true"}}
             @skin="tertiary" @alert="true"
             {{ on "click" (perform this.remove) }}>
     <AuIcon @icon="bin" @alignment="left"/>
     Verwijder
   </AuButton>
+  {{/unless}}
 </AuToolbar>
