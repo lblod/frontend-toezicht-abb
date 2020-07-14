@@ -44,6 +44,7 @@ export default class SearchSubmissionsRoute extends Route {
 
   // TODO make sure the page gets reset to 0 if the query-params changed
   async model(params) {
+    this.queryParams = params;
     this.filter = new SubmissionFilter(params);
     // this.lastParams.stageLive(params);
     const query = {};
@@ -95,8 +96,8 @@ export default class SearchSubmissionsRoute extends Route {
    //  if (controller.page !== this.lastParams.committed.page)
    //    controller.set('page', this.lastParams.committed.page);
 
-    if (controller.filter !== this.filter)
-      controller.set('filter', this.filter);
+    if (controller.queryParams !== this.queryParams)
+      controller.set('queryParams', this.queryParams);
   }
 
   @action

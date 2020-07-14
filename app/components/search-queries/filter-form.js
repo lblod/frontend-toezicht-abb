@@ -1,9 +1,8 @@
 import SearchQueriesFormComponent from './form';
-import rdflib from 'browser-rdflib';
 import {action} from '@ember/object';
 import {tracked} from '@glimmer/tracking';
 import {task} from 'ember-concurrency-decorators';
-import {FORM_GRAPHS, formStoreToQueryParams, SEARCH, SH} from '../../utils/rdf-form';
+import { formStoreToQueryParams, queryParamsToFormStore} from '../../utils/rdf-form';
 
 export const FILTER_FORM_UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c';
 
@@ -65,30 +64,11 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
    * Will populate the form-store with the given query-parameters.
    */
   loadQueryParams() {
-    this.args.filter.keys.forEach(key => {
-      const field = this.formStore.any(undefined, SEARCH('key'), key, FORM_GRAPHS.formGraph);
-      const path = this.formStore.any(field, SH('path'), undefined, FORM_GRAPHS.formGraph);
-      const values = this.args.filter[key] && this.args.filter[key].split(',');
-      values && values.forEach(v => this.formStore.graph.add(
-        this.sourceNode,
-        path,
-        this.validURL(v) ? new rdflib.NamedNode(v) : v, FORM_GRAPHS.sourceGraph));
-    });
+    queryParamsToFormStore(this.args.queryParams, this.formStore, this.sourceNode);
   }
 
   updateQueryParams() {
     // TODO: maybe try improving this based on the received changes?
     this.router.transitionTo(formStoreToQueryParams(this.formStore, this.sourceNode));
-  }
-
-  // TODO simplify
-  validURL(str) {
-    var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
-    return !!pattern.test(str);
   }
 }

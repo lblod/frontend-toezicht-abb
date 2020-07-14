@@ -15,7 +15,7 @@ export const FORM_GRAPHS = {
 // API CALLS
 
 export async function retrieveFormData(url, store) {
-  let response = await fetch(url,{
+  let response = await fetch(url, {
     method: 'GET',
     headers: {'Accept': 'text/turtle'},
   });
@@ -24,7 +24,7 @@ export async function retrieveFormData(url, store) {
 }
 
 export async function retrieveMetaData(url, store) {
-  let response = await fetch(url,{
+  let response = await fetch(url, {
     method: 'GET',
     headers: {'Accept': 'application/n-triples'},
   });
@@ -68,13 +68,13 @@ export function formStoreToQueryParams(store, node) {
   let query = {queryParams: {}};
   // NOTE: retrieve all possible query-params
   const keys = store.match(undefined, SEARCH('key'), undefined, FORM_GRAPHS.formGraph);
-  if(keys && keys.length) {
-    for(let key of keys) {
+  if (keys && keys.length) {
+    for (let key of keys) {
       const path = store.any(key.subject, SH('path'), undefined, FORM_GRAPHS.formGraph);
       const values = store.match(node, path, undefined, FORM_GRAPHS.sourceGraph);
       if (values && values.length) {
         query.queryParams[key.object.value] = values.map(v => v.object.value).join(',');
-      } else{
+      } else {
         // NOTE: explicitly set value to prevent "sticky" query-params
         query.queryParams[key.object.value] = null;
       }
@@ -84,14 +84,30 @@ export function formStoreToQueryParams(store, node) {
 }
 
 // TODO
-export function queryParamsToFormStore() {
-    this.args.filter.keys.forEach(key => {
-      const field = this.formStore.any(undefined, SEARCH('key'), key, FORM_GRAPHS.formGraph);
-      const path = this.formStore.any(field, SH('path'), undefined, FORM_GRAPHS.formGraph);
-      const values = this.args.filter[key] && this.args.filter[key].split(',');
-      values && values.forEach(v => this.formStore.graph.add(
-        this.sourceNode,
-        path,
-        this.validURL(v) ? new rdflib.NamedNode(v) : v, FORM_GRAPHS.sourceGraph));
-    });
+export function queryParamsToFormStore(query, store, node) {
+  const keys = Object.keys(query);
+  for (let key of keys) {
+    const field = store.any(undefined, SEARCH('key'), key, FORM_GRAPHS.formGraph);
+    if(field) {
+      const path = store.any(field, SH('path'), undefined, FORM_GRAPHS.formGraph);
+      const values = query[key] && query[key].split(',');
+      if (values && values.length) {
+        for (let value of values) {
+          const rdfv = validURL(value) ? new rdflib.NamedNode(value) : value;
+          store.graph.add(node, path, rdfv, FORM_GRAPHS.sourceGraph);
+        }
+      }
+    }
+  }
+}
+
+// TODO simplify
+function validURL(str) {
+  var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+    '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+  return !!pattern.test(str);
 }

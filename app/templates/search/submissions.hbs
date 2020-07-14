@@ -3,9 +3,7 @@
     <Submissions::SearchTable @class="container-flex--contain"
                               @model={{this.model}}
                               @isLoading={{this.isLoadingModel}}
-                              @filter={{this.filter}}
-                              @setFilter={{this.setFilter}}
-                              @onFilterChange={{this.updateQueryParams}}
+                              @queryParams={{this.queryParams}}
                               @sort={{this.sort}}
                               @page={{this.page}}
                               @size={{this.size}}
