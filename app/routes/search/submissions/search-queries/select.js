@@ -1,7 +1,11 @@
 import Route from '@ember/routing/route';
 import rdflib from 'browser-rdflib';
 import {ForkingStore} from '@lblod/ember-submission-form-fields';
-import {FORM_GRAPHS, retrieveFormData, retrieveSourceData, SEARCH, SH} from '../../../../utils/rdf-form';
+import {
+  formStoreToQueryParams,
+  retrieveFormData,
+  retrieveSourceData,
+} from '../../../../utils/rdf-form';
 import {FILTER_FORM_UUID} from '../../../../components/search-queries/filter-form';
 
 export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
@@ -19,19 +23,6 @@ export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
 
   afterModel(model) {
     const {store, node} = model;
-    let query = {queryParams: {}};
-
-    const keys = store.match(undefined, SEARCH('key'), undefined, FORM_GRAPHS.formGraph);
-    keys && keys.forEach(key => {
-      const path = store.any(key.subject, SH('path'), undefined, FORM_GRAPHS.formGraph);
-      const values = store.match(node, path, undefined, FORM_GRAPHS.sourceGraph);
-      if (values && values.length) {
-        query.queryParams[key.object.value] = values.map(v => v.object.value).join(',');
-      } else{
-        // NOTE: explicitly set value to prevent "sticky" query-params
-        query.queryParams[key.object.value] = null;
-      }
-    });
-    this.transitionTo('search.submissions', query);
+    this.transitionTo('search.submissions', formStoreToQueryParams(store, node));
   }
 }

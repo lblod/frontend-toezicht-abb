@@ -35,26 +35,28 @@ export default class SearchSubmissionsRoute extends Route {
     sort: {refreshModel: true}
   }
 
-  lastParams = null;
+  // lastParams = null;
 
   constructor() {
     super(...arguments);
-    this.lastParams = new Snapshot();
+    // this.lastParams = new Snapshot();
   }
 
+  // TODO make sure the page gets reset to 0 if the query-params changed
   async model(params) {
     this.filter = new SubmissionFilter(params);
-    this.lastParams.stageLive(params);
+    // this.lastParams.stageLive(params);
     const query = {};
 
-    if (this.lastParams.anyFieldChanged(this.filter.keys)) {
-      params.page = 0;
-    }
+    // if (this.lastParams.anyFieldChanged(this.filter.keys)) {
+    //   params.page = 0;
+    // }
 
+    // TODO generate this based on form configuration
     query[`:sqs:data`] = isEmpty(params.search) ? "*" : params.search;
     if (params.administrativeUnites) query[":terms:administrativeUnitURI"] = params.administrativeUnites;
     if (params.administrativeUnitClassifications) {
-      query["administrativeUnitClassificationURI"] = params.administrativeUnitClassifications;
+      query[":terms:administrativeUnitClassificationURI"] = params.administrativeUnitClassifications;
       if (params.governingBodyClassifications) query[":terms:governingBodyClassificationURI"] = params.governingBodyClassifications;
     }
     if (params.chartOfAccounts) query[":terms:chartOfAccountURI"] = params.chartOfAccounts;
@@ -73,7 +75,7 @@ export default class SearchSubmissionsRoute extends Route {
     if (params.dateNoLongerInForceTo) query[":lte:dateNoLongerInForce"] = params.dateNoLongerInForceTo;
     if (params.status) query[":term:statusURI"] = TREAT_STATUS;
 
-    this.lastParams.commit();
+    // this.lastParams.commit();
 
     return await search(
         '/search/submissions',
@@ -90,8 +92,8 @@ export default class SearchSubmissionsRoute extends Route {
   setupController(controller) {
     super.setupController(...arguments);
 
-    if (controller.page !== this.lastParams.committed.page)
-      controller.set('page', this.lastParams.committed.page);
+   //  if (controller.page !== this.lastParams.committed.page)
+   //    controller.set('page', this.lastParams.committed.page);
 
     if (controller.filter !== this.filter)
       controller.set('filter', this.filter);

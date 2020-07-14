@@ -1,9 +1,9 @@
-import SearchQueriesFormComponent, {TEMP_SOURCE_NODE} from './form';
+import SearchQueriesFormComponent from './form';
 import rdflib from 'browser-rdflib';
 import {action} from '@ember/object';
 import {tracked} from '@glimmer/tracking';
 import {task} from 'ember-concurrency-decorators';
-import {FORM_GRAPHS, SEARCH, SH} from '../../utils/rdf-form';
+import {FORM_GRAPHS, formStoreToQueryParams, SEARCH, SH} from '../../utils/rdf-form';
 
 export const FILTER_FORM_UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c';
 
@@ -19,12 +19,12 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
     await super.setupForm(form);
     this.loadQueryParams();
     this.registerObserver();
-    this.args.onFilterChange();
   }
 
   willDestroy() {
     this.formStore.deregisterObserver(FILTER_FORM_UUID);
   }
+
   // USER ACTIONS
 
   @action
@@ -35,30 +35,19 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
   @task
   * saveFilter() {
     const user = yield this.currentSession.user;
-    const query = this.store.createRecord('search-query', {
-      user
-    });
+    const query = this.store.createRecord('search-query', {user});
     yield query.save();
-
     yield this.updateSourceData(query);
-
     this.router.transitionTo('user.search-queries.edit', query);
   }
 
-  // TODO improve as this is a little hackish
-  // TODO maybe rebuild this with a transition to?
   // NOTE: the problem here lies in that if an outsider makes changes in the store,
   // the field components are not aware of this. There for, for now, we force the form to rerender by temporarily
   // changing the "show" argument.
-  @action
-  resetFilters() {
-    this.refreshing = true;
-    this.args.filter.reset();
-    this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined, FORM_GRAPHS.sourceGraph);
-    this.args.onFilterChange();
-    setTimeout(() => {
-      this.refreshing = false;
-    }, 1);
+  @task
+  * resetFilters() {
+    yield  super.setupForm(FILTER_FORM_UUID);
+    this.updateQueryParams();
   }
 
   // INTERNAL LOGIC
@@ -67,9 +56,8 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
    * Registers the necessary observer to allow the filter to work on change of the form-store.
    */
   registerObserver() {
-    this.formStore.registerObserver(({inserts = [], deletes = []}) => {
-      this.updateQueryParams([...inserts, ...deletes]);
-      this.args.onFilterChange();
+    this.formStore.registerObserver(() => {
+      this.updateQueryParams();
     }, FILTER_FORM_UUID);
   }
 
@@ -88,23 +76,9 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
     });
   }
 
-  /**
-   * Will update the query-parameters based on the given triples.
-   *
-   * @param triples
-   */
-  updateQueryParams(triples) {
-    triples.forEach(t => {
-      // NOTE: we need to retrieve the value because on deletion we get the deleted value, not the actual new value
-      const values = this.formStore
-      .match(t.subject, t.predicate, undefined, FORM_GRAPHS.sourceGraph)
-      .map(t => t.object.value);
-      const field = this.formStore.any(undefined, SH('path'), t.predicate, FORM_GRAPHS.formGraph);
-      const key = this.formStore.any(field, SEARCH('key'), undefined, FORM_GRAPHS.formGraph);
-      if (key) {
-        this.args.filter[key.value] = values ? values.join(',') : null;
-      }
-    });
+  updateQueryParams() {
+    // TODO: maybe try improving this based on the received changes?
+    this.router.transitionTo(formStoreToQueryParams(this.formStore, this.sourceNode));
   }
 
   // TODO simplify

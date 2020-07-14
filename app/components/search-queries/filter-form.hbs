@@ -11,7 +11,7 @@
                     @graphs={{this.graphs}}
                     @sourceNode={{this.sourceNode}}
                     @formStore={{this.formStore}}
-                    @show={{this.refreshing}}
+                    @show={{if this.resetFilters.isRunning true false}}
                     @forceShowErrors={{false}} />
           {{/if}}
         </div>
@@ -29,7 +29,7 @@
           <AuIcon @icon="plus-text" @alignment="left"/>
           Bewaar filter
         </AuButton>
-        <AuButton @skin="tertiary" @alert="true" {{ on "click" this.resetFilters }}>
+        <AuButton @skin="tertiary" @alert="true" {{ on "click" (perform this.resetFilters) }}>
           <AuIcon @icon="redo" @alignment="left"/>
           Reset filters
         </AuButton>

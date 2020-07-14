@@ -68,7 +68,6 @@ export default class SearchQueriesFormComponent extends Component {
   }
 
   async updateSourceData(query) {
-
     const updated = this.formStore.match(this.sourceNode, undefined, undefined, FORM_GRAPHS.sourceGraph);
 
     // NOTE: we need to make sure the local store is up-to-date with changes made on the remote
