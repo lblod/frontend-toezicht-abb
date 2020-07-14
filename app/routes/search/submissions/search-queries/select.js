@@ -1,13 +1,9 @@
 import Route from '@ember/routing/route';
 import rdflib from 'browser-rdflib';
 import {ForkingStore} from '@lblod/ember-submission-form-fields';
-import {
-  SEARCH,
-  SH,
-  FILTER_FORM_UUID,
-} from '../../../../components/search-queries/filter-form';
 import {FORM_GRAPHS} from '../../../../components/search-queries/form';
-import {retrieveFormData, retrieveSourceData} from '../../../../utils/rdf-form';
+import {retrieveFormData, retrieveSourceData, SEARCH, SH} from '../../../../utils/rdf-form';
+import {FILTER_FORM_UUID} from '../../../../components/search-queries/filter-form';
 
 export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
 

@@ -6,16 +6,7 @@ import rdflib from 'browser-rdflib';
 import fetch from 'node-fetch';
 import {ForkingStore} from '@lblod/ember-submission-form-fields';
 import {task} from 'ember-concurrency-decorators';
-import {retrieveFormData, retrieveMetaData, retrieveSourceData} from '../../utils/rdf-form';
-
-const RDF = new rdflib.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
-const FORM = new rdflib.Namespace('http://lblod.data.gift/vocabularies/forms/');
-
-export const FORM_GRAPHS = {
-  formGraph: new rdflib.NamedNode('http://data.lblod.info/form'),
-  metaGraph: new rdflib.NamedNode('http://data.lblod.info/metagraph'),
-  sourceGraph: new rdflib.NamedNode(`http://data.lblod.info/sourcegraph`),
-};
+import {FORM, FORM_GRAPHS, RDF, retrieveFormData, retrieveMetaData, retrieveSourceData} from '../../utils/rdf-form';
 
 export default class SearchQueriesFormComponent extends Component {
 

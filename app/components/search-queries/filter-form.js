@@ -1,15 +1,13 @@
-import SearchQueriesFormComponent, {FORM_GRAPHS} from './form';
+import SearchQueriesFormComponent from './form';
 import rdflib from 'browser-rdflib';
 import {action} from '@ember/object';
 import {tracked} from '@glimmer/tracking';
 import {task} from 'ember-concurrency-decorators';
+import {FORM_GRAPHS, SEARCH, SH} from '../../utils/rdf-form';
 
 export const FILTER_FORM_UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c';
 
 const TEMP_SOURCE_NODE = new rdflib.NamedNode('http://frontend-toezicht-abb/temp-source-node');
-
-export const SH = new rdflib.Namespace('http://www.w3.org/ns/shacl#');
-export const SEARCH = new rdflib.Namespace('http://redpencil.data.gift/vocabularies/search-queries/');
 
 export default class SearchQueriesFilterFormComponent extends SearchQueriesFormComponent {
 
@@ -30,7 +28,6 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
   willDestroy() {
     this.formStore.deregisterObserver(FILTER_FORM_UUID);
   }
-SearchQueriesConfig
   // USER ACTIONS
 
   @action

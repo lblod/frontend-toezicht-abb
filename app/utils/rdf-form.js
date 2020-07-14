@@ -1,6 +1,11 @@
 import rdflib from 'browser-rdflib';
 import fetch from 'node-fetch';
 
+export const RDF = new rdflib.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+export const FORM = new rdflib.Namespace('http://lblod.data.gift/vocabularies/forms/');
+export const SH = new rdflib.Namespace('http://www.w3.org/ns/shacl#');
+export const SEARCH = new rdflib.Namespace('http://redpencil.data.gift/vocabularies/search-queries/');
+
 export const FORM_GRAPHS = {
   formGraph: new rdflib.NamedNode('http://data.lblod.info/form'),
   metaGraph: new rdflib.NamedNode('http://data.lblod.info/metagraph'),
