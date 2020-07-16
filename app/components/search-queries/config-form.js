@@ -12,7 +12,9 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
 
   async setupForm(form) {
     await super.setupForm(form);
-    await this.retrieveSourceData(this.args.query);
+    if(!this.isNewForm) {
+      await this.retrieveSourceData(this.args.query);
+    }
   }
 
   get isNewForm() {
