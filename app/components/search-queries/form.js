@@ -1,15 +1,15 @@
 import Component from '@glimmer/component';
-import {inject as service} from '@ember/service';
-import {tracked} from '@glimmer/tracking';
+import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 import rdflib from 'browser-rdflib';
-import fetch from 'node-fetch';
-import {ForkingStore} from '@lblod/ember-submission-form-fields';
-import {task} from 'ember-concurrency-decorators';
+import { ForkingStore } from '@lblod/ember-submission-form-fields';
+import { task } from 'ember-concurrency-decorators';
 import {
   FORM,
   FORM_GRAPHS,
-  RDF, removeSourceData,
+  RDF,
+  removeSourceData,
   retrieveFormData,
   retrieveMetaData,
   retrieveSourceData,
@@ -46,18 +46,19 @@ export default class SearchQueriesFormComponent extends Component {
   }
 
   async setupForm(form) {
-    this.formStore = new ForkingStore();
+    const store = new ForkingStore();
     this.sourceNode = TEMP_SOURCE_NODE;
-    await this.retrieveFormData(form);
-    await this.retrieveMetaData(form);
+    await this.retrieveFormData(form, store);
+    await this.retrieveMetaData(form, store);
+    this.formStore = store;
   }
 
-  async retrieveFormData(uuid) {
-    await retrieveFormData(`/search-query-forms/${uuid}`, this.formStore);
+  async retrieveFormData(uuid, store) {
+    await retrieveFormData(`/search-query-forms/${uuid}`, store);
   }
 
-  async retrieveMetaData(uuid) {
-    await retrieveMetaData(`/search-query-forms/${uuid}/meta`, this.formStore);
+  async retrieveMetaData(uuid, store) {
+    await retrieveMetaData(`/search-query-forms/${uuid}/meta`, store);
   }
 
   async retrieveSourceData(query) {
@@ -84,6 +85,6 @@ export default class SearchQueriesFormComponent extends Component {
   }
 
   async removeSourceData(query) {
-    await removeSourceData(`/search-queries/${query.id}`)
+    await removeSourceData(`/search-queries/${query.id}`);
   }
 }

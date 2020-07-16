@@ -2,11 +2,10 @@
   <div class="au-c-sidebar__content">
     <div class="au-c-sidebar__header">
       <div class="au-o-grid au-o-grid--flush">
-        <div class="au-o-grid__item au-u-1-2 au-u-1-1@large">
           {{#if this.init.isRunning}}
             <span>Aan het laden...</span>
           {{else}}
-            <SqConfigForm
+            <RdfForm
                     @form={{this.form}}
                     @graphs={{this.graphs}}
                     @sourceNode={{this.sourceNode}}
@@ -14,7 +13,6 @@
                     @show={{if this.resetFilters.isRunning true false}}
                     @forceShowErrors={{false}} />
           {{/if}}
-        </div>
       </div>
     </div>
   </div>

@@ -5,7 +5,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin) {
   @service currentSession;
 
-  beforeModel(transition) {
+  beforeModel() {
     if (this.currentSession.canWrite || this.currentSession.canReadVlabel) {
       this.transitionTo('supervision.submissions');
     }
