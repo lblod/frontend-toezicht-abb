@@ -35,17 +35,20 @@ export async function retrieveMetaData(url, store) {
 export async function retrieveSourceData(url, store) {
   let response = await fetch(url, {
     method: 'GET',
-    headers: {'Accept': 'text/turtle'},
+    headers: {'Accept': 'application/n-triples'},
   });
   const ttl = await response.text();
   store.parse(ttl, FORM_GRAPHS.sourceGraph, 'text/turtle');
 }
 
 export async function saveSourceData(url, store) {
+  // NOTE: store.serializeDataMergedGraph() will always use format 'text/turtle', regardless of attempts to override this
+  // there for the function has been "copied" from the forking-store to add 'application/n-triples' as serialization format.
+  const body = rdflib.serialize(store.mergedGraph(FORM_GRAPHS.sourceGraph), store.graph, undefined, 'application/n-triples');
   await fetch(url, {
     method: 'PUT',
-    body: store.serializeDataMergedGraph(FORM_GRAPHS.sourceGraph, 'text/turtle'),
-    headers: {'Content-type': 'text/turtle'},
+    body,
+    headers: {'Content-type': 'application/n-triples'},
   });
 }
 

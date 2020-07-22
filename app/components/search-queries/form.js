@@ -78,7 +78,7 @@ export default class SearchQueriesFormComponent extends Component {
     updated.forEach(t => t.subject = this.sourceNode);
 
     if (updated.length) {
-      this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined, FORM_GRAPHS.sourceGraph);
+      this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined);
       this.formStore.addAll(updated);
     }
     await saveSourceData(`/search-queries/${query.id}`, this.formStore);
