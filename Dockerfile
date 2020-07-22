@@ -8,10 +8,8 @@ RUN npm install
 COPY . .
 RUN ember build -prod
 
-FROM semtech/ember-proxy-service:1.4.0
-
-ENV STATIC_FOLDERS_REGEX "^/(assets|font|files|@appuniversum)/"
+FROM semtech/static-file-service:0.1.0
 
 COPY ./proxy/torii-authorization.conf /config/torii-authorization.conf
 
-COPY --from=builder /app/dist /app
+COPY --from=builder /app/dist /data
