@@ -1,19 +1,18 @@
 <div class="au-c-sidebar">
   <div class="au-c-sidebar__content">
     <div class="au-c-sidebar__header">
-      <div class="au-o-grid au-o-grid--flush">
-          {{#if this.init.isRunning}}
-            <span>Aan het laden...</span>
-          {{else}}
-            <RdfForm
-                    @form={{this.form}}
-                    @graphs={{this.graphs}}
-                    @sourceNode={{this.sourceNode}}
-                    @formStore={{this.formStore}}
-                    @show={{if this.resetFilters.isRunning true false}}
-                    @forceShowErrors={{false}} />
-          {{/if}}
-      </div>
+      {{#if this.init.isRunning}}
+        <span>Aan het laden...</span>
+      {{else}}
+        <RdfForm
+                @groupClass="au-o-grid__item au-u-1-2 au-u-1-1@large"
+                @form={{this.form}}
+                @graphs={{this.graphs}}
+                @sourceNode={{this.sourceNode}}
+                @formStore={{this.formStore}}
+                @show={{if this.resetFilters.isRunning true false}}
+                @forceShowErrors={{false}} />
+      {{/if}}
     </div>
   </div>
   <div class="au-c-sidebar__footer au-u-padding-none"> {{!-- TODO: turn into sticky action bar --}}

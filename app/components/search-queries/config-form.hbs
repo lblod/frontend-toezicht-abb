@@ -3,42 +3,41 @@
 </header>
 <div class="container-flex--scroll">
   <div class="au-u-padding-top-large au-u-padding-left-large au-u-padding-right au-u-padding-bottom-large">
-    <div class="au-o-grid">
-      <div class="au-o-grid__item au-u-1-2@medium au-u-1-1">
-        {{#if this.init.isRunning}}
-          <span>Aan het laden...</span>
-        {{else}}
-          <RdfForm
-                  @form={{this.form}}
-                  @graphs={{this.graphs}}
-                  @sourceNode={{this.sourceNode}}
-                  @formStore={{this.formStore}}
-                  @show={{false}}
-                  @forceShowErrors={{false}} />
-        {{/if}}
-      </div>
-    </div>
+      {{#if this.init.isRunning}}
+        <span>Aan het laden...</span>
+      {{else}}
+        <RdfForm
+                groupClass="au-o-grid__item au-u-1-1 au-u-1-2@medium"
+                @form={{this.form}}
+                @graphs={{this.graphs}}
+                @sourceNode={{this.sourceNode}}
+                @formStore={{this.formStore}}
+                @show={{false}}
+                @forceShowErrors={{false}} />
+      {{/if}}
   </div>
 </div>
 <AuToolbar @border="top" @size="large" class="au-u-padding-left-large">
   <AuToolbarGroup>
-    {{#unless this.isNewForm}}
-    <LinkTo  class="button button--narrow" type="button" @route="search.submissions.search-queries.select" @model={{@query.id}}>
-      Laad in
-    </LinkTo>
-    {{/unless}}
     <AuButton @loading={{if this.save.isRunning "true"}}
-              @skin={{unless this.isNewForm "secondary" "primary"}}
+              @skin={{"primary"}}
       {{on "click" (perform this.save)}}>Bewaar
     </AuButton>
-    <AuLink @linkRoute="user.search-queries.index" @skin="secondary">{{unless this.isNewForm 'Ga Terug' 'Annuleer'}}</AuLink>
+    {{#unless this.isNewForm}}
+      <LinkTo class="button button--narrow button--alt" type="button" @route="search.submissions.search-queries.select"
+              @model={{@query.id}}>
+        Laad in
+      </LinkTo>
+    {{/unless}}
+    <AuLink @linkRoute="user.search-queries.index" @skin="secondary">{{unless this.isNewForm 'Ga Terug'
+                                                                              'Annuleer'}}</AuLink>
   </AuToolbarGroup>
   {{#unless this.isNewForm}}
-  <AuButton @loading={{if this.remove.isRunning "true"}}
-            @skin="tertiary" @alert="true"
-            {{ on "click" (perform this.remove) }}>
-    <AuIcon @icon="bin" @alignment="left"/>
-    Verwijder
-  </AuButton>
+    <AuButton @loading={{if this.remove.isRunning "true"}}
+              @skin="tertiary" @alert="true"
+      {{ on "click" (perform this.remove) }}>
+      <AuIcon @icon="bin" @alignment="left"/>
+      Verwijder
+    </AuButton>
   {{/unless}}
 </AuToolbar>
