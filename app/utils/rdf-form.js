@@ -1,5 +1,6 @@
 import rdflib from 'browser-rdflib';
 import fetch from 'node-fetch';
+import { validUri } from '@lblod/submission-form-helpers';
 
 export const RDF = new rdflib.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
 export const FORM = new rdflib.Namespace('http://lblod.data.gift/vocabularies/forms/');
@@ -95,7 +96,7 @@ export function queryParamsToFormStore(query, store, node) {
       const values = query[key] && query[key].split(',');
       if (values && values.length) {
         for (let value of values) {
-          const rdfv = validURL(value) ? new rdflib.NamedNode(value) : value;
+          const rdfv = validURI(value) ? new rdflib.NamedNode(value) : value;
           store.graph.add(node, path, rdfv, FORM_GRAPHS.sourceGraph);
         }
       }
@@ -103,13 +104,11 @@ export function queryParamsToFormStore(query, store, node) {
   }
 }
 
-// TODO simplify
-function validURL(str) {
-  var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-    '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
-  return !!pattern.test(str);
+/**
+ * Implementation copied over form `submission-form-helpers`
+ *
+ * @param uri
+ */
+function validURI(uri) {
+  return uri.match(/^(http|ftp)s?:\/\/[\w.-]+\.\w+(\/.*)?/);
 }
