@@ -3,18 +3,18 @@
 </header>
 <div class="container-flex--scroll">
   <div class="au-u-padding-top-large au-u-padding-left-large au-u-padding-right au-u-padding-bottom-large">
-      {{#if this.init.isRunning}}
-        <span>Aan het laden...</span>
-      {{else}}
-        <RdfForm
-                groupClass="au-o-grid__item au-u-1-1 au-u-1-2@medium"
-                @form={{this.form}}
-                @graphs={{this.graphs}}
-                @sourceNode={{this.sourceNode}}
-                @formStore={{this.formStore}}
-                @show={{false}}
-                @forceShowErrors={{false}} />
-      {{/if}}
+    {{#if this.init.isRunning}}
+      <span>Aan het laden...</span>
+    {{else}}
+      <RdfForm
+              groupClass="au-o-grid__item au-u-1-1 au-u-1-2@medium"
+              @form={{this.form}}
+              @graphs={{this.graphs}}
+              @sourceNode={{this.sourceNode}}
+              @formStore={{this.formStore}}
+              @show={{false}}
+              @forceShowErrors={{false}} />
+    {{/if}}
   </div>
 </div>
 <AuToolbar @border="top" @size="large" class="au-u-padding-left-large">

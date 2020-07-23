@@ -1,7 +1,7 @@
 import SearchQueriesFormComponent from './form';
-import {action} from '@ember/object';
-import {task} from 'ember-concurrency-decorators';
-import {formStoreToQueryParams, queryParamsToFormStore} from '../../utils/rdf-form';
+import { action } from '@ember/object';
+import { task } from 'ember-concurrency-decorators';
+import { formStoreToQueryParams, queryParamsToFormStore } from '../../utils/rdf-form';
 
 export const FILTER_FORM_UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c';
 
