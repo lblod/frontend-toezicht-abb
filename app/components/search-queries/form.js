@@ -82,6 +82,14 @@ export default class SearchQueriesFormComponent extends Component {
       this.formStore.addAll(updated);
     }
     await saveSourceData(`/search-queries/${query.id}`, this.formStore);
+
+    // The call
+    //  await saveSourceData(`/search-queries/${query.id}`, this.formStore);
+    // Is handled by another service. This generates delta that mu-cl-resource needs to process.
+    // But takes som time. Currently the easiest fix, is wait a little longer.
+    await new Promise(resolve => setTimeout(resolve, 1000)); //This sleeps a little before moving on.
+    // This will fail some time. A better solution would be to manually update ember-datastore.
+    // The ultimate solution is push updates
   }
 
   async removeSourceData(query) {

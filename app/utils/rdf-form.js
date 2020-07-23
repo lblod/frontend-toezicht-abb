@@ -44,7 +44,8 @@ export async function retrieveSourceData(url, store) {
 export async function saveSourceData(url, store) {
   // NOTE: store.serializeDataMergedGraph() will always use format 'text/turtle', regardless of attempts to override this
   // there for the function has been "copied" from the forking-store to add 'application/n-triples' as serialization format.
-  const body = rdflib.serialize(store.mergedGraph(FORM_GRAPHS.sourceGraph), store.graph, undefined, 'application/n-triples');
+  const body = rdflib.serialize(store.mergedGraph(FORM_GRAPHS.sourceGraph), store.graph, undefined,
+    'application/n-triples');
   await fetch(url, {
     method: 'PUT',
     body,
