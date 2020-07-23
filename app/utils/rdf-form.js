@@ -1,6 +1,5 @@
 import rdflib from 'browser-rdflib';
 import fetch from 'node-fetch';
-import { validUri } from '@lblod/submission-form-helpers';
 
 export const RDF = new rdflib.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
 export const FORM = new rdflib.Namespace('http://lblod.data.gift/vocabularies/forms/');
