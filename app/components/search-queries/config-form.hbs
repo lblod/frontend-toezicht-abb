@@ -1,6 +1,12 @@
-<header class="au-u-padding-top au-u-padding-bottom au-u-padding-left-large au-u-padding-right u-border--light--bottom">
-  <h1 class="au-u-h2 au-u-margin-bottom">Bewaar zoekopdracht</h1>
-</header>
+<div class="au-u-padding-small au-u-border-bottom">
+  <div class="au-o-grid au-o-grid--flush">
+    <div class="au-o-grid__item au-u-1-1 au-u-3-4@medium">
+      <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">
+        Toezicht ABB - {{ if this.isNewForm "Nieuwe" "Editeer"}} Zoekopdracht
+      </AuHeading>
+    </div>
+  </div>
+</div>
 <div class="container-flex--scroll">
   <div class="au-u-padding-top-large au-u-padding-left-large au-u-padding-right au-u-padding-bottom-large">
     {{#if this.init.isRunning}}

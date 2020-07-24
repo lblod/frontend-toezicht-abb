@@ -1,44 +1,60 @@
-<div class="au-u-padding-top-large au-u-padding-left au-u-padding-right">
-  <h1 class="au-u-h1 au-u-margin-bottom">Bewaarde zoekopdrachten</h1>
-  <DataTable
-          @content={{this.model}}
-          @isLoading={{this.isLoadingModel}}
-          @page={{this.page}}
-          @size={{this.size}}
-          @sort={{this.sort}}
-          as |t|>
-    <t.content as |c|>
-      <c.header>
-        <ThSortable @label="Naam" @field="label" @currentSorting={{this.sort}}/>
-        <th>Beschrijving</th>
-        <ThSortable @label="Datum Aangemaakt" @field="created" @currentSorting={{this.sort}}/>
-        <th>
-          <LinkTo @route="user.search-queries.new" class="button button--narrow" type="button">Maak een nieuwe zoekopdracht
-          </LinkTo>
-        </th>
-      </c.header>
-      <c.body as |row|>
-        <td>
-          {{row.label}}
-        </td>
-        <td>
-          {{row.comment}}
-        </td>
-        <td>
-          {{moment-format row.created 'DD-MM-YYYY'}}
-        </td>
-        <td>
-          <div class="button-group">
-            <LinkTo  class="button button--narrow" type="button" @route="search.submissions.search-queries.select" @model={{row.id}}>
-              Laad in
+<div class="container-flex--contain">
+  <div class="au-u-padding-small au-u-border-bottom">
+    <div class="au-o-grid au-o-grid--flush">
+      <div class="au-o-grid__item au-u-1-1 au-u-3-4@medium">
+        <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">Toezicht ABB - Bewaarde
+          zoekopdrachten
+        </AuHeading>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-flex--contain">
+    <DataTable
+            @content={{this.model}}
+            @isLoading={{this.isLoadingModel}}
+            @page={{this.page}}
+            @size={{this.size}}
+            @sort={{this.sort}}
+            as |t|>
+      <t.content as |c|>
+        <c.header>
+          <ThSortable @label="Naam" @field="label" @currentSorting={{this.sort}}/>
+          <th>Beschrijving</th>
+          <ThSortable @label="Datum Aangemaakt" @field="created" @currentSorting={{this.sort}}/>
+          <th>
+            <LinkTo @route="user.search-queries.new" class="button button--narrow" type="button">Maak een nieuwe
+              zoekopdracht
             </LinkTo>
-            <LinkTo  class="button button--narrow button--alt" type="button" @route="user.search-queries.edit" @model={{row.id}}>
-              Bewerk
-            </LinkTo>
-            <a class="button button--link button--narrow button--alt button--alt--warning" type="button" {{on "click" (perform this.delete row.id)}}>Verwijder</a>
-          </div>
-        </td>
-      </c.body>
-    </t.content>
-  </DataTable>
+          </th>
+        </c.header>
+        <c.body as |row|>
+          <td>
+            {{row.label}}
+          </td>
+          <td>
+            {{row.comment}}
+          </td>
+          <td>
+            {{moment-format row.created 'DD-MM-YYYY'}}
+          </td>
+          <td>
+            <div class="button-group">
+              <LinkTo class="button button--narrow" type="button" @route="search.submissions.search-queries.select"
+                      @model={{row.id}}>
+                Laad in
+              </LinkTo>
+              <LinkTo class="button button--narrow button--alt" type="button" @route="user.search-queries.edit"
+                      @model={{row.id}}>
+                Bewerk
+              </LinkTo>
+              <a class="button button--link button--narrow button--alt button--alt--warning" type="button" {{on
+                      "click" (perform this.delete row.id)}}>Verwijder</a>
+            </div>
+          </td>
+        </c.body>
+      </t.content>
+    </DataTable>
+  </div>
 </div>
+{{yield}}
