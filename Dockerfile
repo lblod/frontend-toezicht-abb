@@ -10,6 +10,4 @@ RUN ember build -prod
 
 FROM semtech/static-file-service:0.1.0
 
-COPY ./proxy/torii-authorization.conf /config/torii-authorization.conf
-
 COPY --from=builder /app/dist /data
