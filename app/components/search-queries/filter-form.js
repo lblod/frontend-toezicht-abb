@@ -30,11 +30,12 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
 
   @task
   * saveFilter() {
-    const user = yield this.currentSession.user;
-    const query = this.store.createRecord('search-query', {user});
-    yield query.save();
-    yield this.updateSourceData(query);
-    this.router.transitionTo('user.search-queries.edit', query);
+    // const user = yield this.currentSession.user;
+    // const query = this.store.createRecord('search-query', {user});
+    // yield query.save();
+    // yield this.updateSourceData(query);
+    // this.router.transitionTo('user.search-queries.edit', query);
+    yield this.router.transitionTo('user.search-queries.new', formStoreToQueryParams(this.formStore, this.sourceNode));
   }
 
   // NOTE: the problem here lies in that if an outsider makes changes in the store,
