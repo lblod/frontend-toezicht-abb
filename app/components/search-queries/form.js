@@ -14,7 +14,7 @@ import {
   retrieveMetaData,
   retrieveSourceData,
   saveSourceData,
-} from '../../utils/rdf-form';
+} from '../../utils/filter-form-helpers';
 
 export const TEMP_SOURCE_NODE = new rdflib.NamedNode('http://frontend-toezicht-abb/temp-source-node');
 

@@ -5,7 +5,7 @@ import {
   formStoreToQueryParams,
   retrieveFormData,
   retrieveSourceData,
-} from '../../../../utils/rdf-form';
+} from '../../../../utils/filter-form-helpers';
 import {FILTER_FORM_UUID} from '../../../../components/search-queries/filter-form';
 
 export default class SearchSubmissionSearchQueriesSelectRoute extends Route {

@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 
 import { task } from 'ember-concurrency-decorators';
-import {removeSourceData} from '../../../utils/rdf-form';
+import {removeSourceData} from '../../../utils/filter-form-helpers';
 
 export default class UserSearchQueriesIndexController extends Controller {
   page = 0;

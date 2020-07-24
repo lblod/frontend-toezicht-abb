@@ -61,6 +61,29 @@ export async function removeSourceData(url) {
 
 // FORM-DATA TO QUERY-PARAMS LOGIC
 
+// TODO generate this based on form-configuration?
+export function getQueryParams(options) {
+  return {
+    administrativeUnites: options,
+    administrativeUnitClassifications: options,
+    chartOfAccounts: options,
+    provinces: options,
+    decisionTypes: options,
+    regulationTypes: options,
+    sessionDateFrom: options,
+    sessionDateTo: options,
+    sentDateFrom: options,
+    sentDateTo: options,
+    search: options,
+    dateOfEntryIntoForceFrom: options,
+    dateOfEntryIntoForceTo: options,
+    dateNoLongerInForceFrom: options,
+    dateNoLongerInForceTo: options,
+    status: options,
+    governingBodyClassifications: options
+  };
+}
+
 /**
  * Converts the data within the store to an Ember query-param object.
  *

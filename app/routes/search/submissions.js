@@ -6,36 +6,21 @@ import search from '../../utils/mu-search';
 import Snapshot from '../../utils/snapshot';
 import {tracked} from '@glimmer/tracking';
 import {TREAT_STATUS} from '../../models/submission-review-status';
+import { getQueryParams } from '../../utils/filter-form-helpers';
 
 export default class SearchSubmissionsRoute extends Route {
   @service currentSession;
   @tracked filter;
 
-  queryParams = {
-    administrativeUnites: {refreshModel: true},
-    administrativeUnitClassifications: {refreshModel: true},
-    chartOfAccounts: {refreshModel: true},
-    provinces: {refreshModel: true},
-    decisionTypes: {refreshModel: true},
-    regulationTypes: {refreshModel: true},
-    sessionDateFrom: {refreshModel: true},
-    sessionDateTo: {refreshModel: true},
-    sentDateFrom: {refreshModel: true},
-    sentDateTo: {refreshModel: true},
-    search: {refreshModel: true},
-    dateOfEntryIntoForceFrom: {refreshModel: true},
-    dateOfEntryIntoForceTo: {refreshModel: true},
-    dateNoLongerInForceFrom: {refreshModel: true},
-    dateNoLongerInForceTo: {refreshModel: true},
-    status: {refreshModel: true},
-    governingBodyClassifications: {refreshModel: true},
-    page: {refreshModel: true},
-    size: {refreshModel: true},
-    sort: {refreshModel: true},
-  };
+  queryParams;
 
   constructor() {
     super(...arguments);
+    const options = {refreshModel: true}
+    this.queryParams = getQueryParams(options);
+    this.queryParams['page'] = options;
+    this.queryParams['size'] = options;
+    this.queryParams['sort'] = options;
     this.lastParams = new Snapshot();
   }
 
