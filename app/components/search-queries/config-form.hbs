@@ -25,7 +25,8 @@
 </div>
 <AuToolbar @border="top" @size="large" class="au-u-padding-left-large">
   <AuToolbarGroup>
-    <AuButton @loading={{if this.save.isRunning "true"}}
+    <AuButton @disabled={{if (or this.init.isRunning this.isFormEmpty) "true"}}
+              @loading={{if this.save.isRunning "true"}}
               @skin={{"primary"}}
       {{on "click" (perform this.save)}}>Bewaar
     </AuButton>
@@ -40,7 +41,8 @@
     </a>
   </AuToolbarGroup>
   {{#unless this.isNewForm}}
-    <AuButton @loading={{if this.remove.isRunning "true"}}
+    <AuButton @disabled={{if this.init.isRunning "true"}}
+              @loading={{if this.remove.isRunning "true"}}
               @skin="tertiary" @alert="true"
       {{ on "click" (perform this.remove) }}>
       <AuIcon @icon="bin" @alignment="left"/>
