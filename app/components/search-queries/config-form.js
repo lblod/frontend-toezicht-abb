@@ -2,6 +2,7 @@ import SearchQueriesFormComponent from './form';
 
 import { task } from 'ember-concurrency-decorators';
 import { queryParamsToFormStore } from '../../utils/filter-form-helpers';
+import { action } from '@ember/object';
 
 const CONFIG_FORM_UUID = 'ebd65df9-5566-47c2-859a-ceff562881ab';
 
@@ -18,7 +19,6 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     } else {
       await this.retrieveSourceData(this.args.query);
     }
-    this.loadQueryParams();
   }
 
   get isNewForm() {
@@ -50,6 +50,11 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
    */
   loadQueryParams() {
     queryParamsToFormStore(this.args.queryParams, this.formStore, this.sourceNode);
+  }
+
+  @action
+  back() {
+    this.router.location.history.back()
   }
 
 }

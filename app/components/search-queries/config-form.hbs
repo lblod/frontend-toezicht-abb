@@ -35,8 +35,9 @@
         Laad in
       </LinkTo>
     {{/unless}}
-    <AuLink @linkRoute="user.search-queries.index" @skin="secondary">{{unless this.isNewForm 'Ga Terug'
-                                                                              'Annuleer'}}</AuLink>
+    <a class="au-c-link au-c-link--secondary" {{ action 'back'}}>
+      {{unless this.isNewForm 'Ga Terug' 'Annuleer'}}
+    </a>
   </AuToolbarGroup>
   {{#unless this.isNewForm}}
     <AuButton @loading={{if this.remove.isRunning "true"}}
