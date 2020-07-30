@@ -1,16 +1,17 @@
-<div class="container-flex--contain">
-  <div class="au-u-padding-small au-u-border-bottom">
-    <div class="au-o-grid au-o-grid--flush">
-      <div class="au-o-grid__item au-u-1-1 au-u-3-4@medium">
-        <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">Toezicht ABB - Bewaarde
-          zoekopdrachten
-        </AuHeading>
+<div class="grid grid--collapse">
+  <div class="container-flex--contain">
+    <div class="au-u-padding-small au-u-border-bottom">
+      <div class="au-o-grid au-o-grid--flush">
+        <div class="au-o-grid__item au-u-1-1 au-u-3-4@medium">
+          <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">Toezicht ABB - Bewaarde
+            zoekopdrachten
+          </AuHeading>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="container-flex--contain">
     <DataTable
+            @class="container-flex--contain data-table"
             @content={{this.model}}
             @isLoading={{this.isLoadingModel}}
             @page={{this.page}}
@@ -57,4 +58,3 @@
     </DataTable>
   </div>
 </div>
-{{yield}}
