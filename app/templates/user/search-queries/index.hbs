@@ -1,23 +1,36 @@
 <div class="grid grid--collapse">
   <div class="container-flex--contain">
-    <div class="au-u-padding-small au-u-border-bottom">
-      <div class="au-o-grid au-o-grid--flush">
-        <div class="au-o-grid__item au-u-1-1 au-u-3-4@medium">
-          <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">
-            <LinkTo @route="search.submissions">Toezicht ABB</LinkTo> - Bewaarde zoekopdrachten
-          </AuHeading>
-        </div>
-      </div>
-    </div>
+    <AuToolbar @size="medium" @skin="tint" @border="bottom">
+      <AuToolbarGroup>
+        <ul class="au-c-list-horizontal">
+          <li class="au-c-list-horizontal__item">
+            <AuLink @linkRoute="search.submissions">
+              <AuIcon @icon="arrow-left" @alignment="left" />
+              Toezicht ABB
+            </AuLink>
+          </li>
+          <li class="au-c-list-horizontal__item">
+            <strong>Bewaarde zoekopdrachten</strong>
+          </li>
+        </ul>
+      </AuToolbarGroup>
+    </AuToolbar>
+    <AuToolbar @size="large">
+      <AuToolbarGroup>
+        <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">
+          Bewaarde zoekopdrachten
+        </AuHeading>
+      </AuToolbarGroup>
+    </AuToolbar>
 
     <DataTable
-            @class="container-flex--contain data-table"
-            @content={{this.model}}
-            @isLoading={{this.isLoadingModel}}
-            @page={{this.page}}
-            @size={{this.size}}
-            @sort={{this.sort}}
-            as |t|>
+          @class="container-flex--contain data-table"
+          @content={{this.model}}
+          @isLoading={{this.isLoadingModel}}
+          @page={{this.page}}
+          @size={{this.size}}
+          @sort={{this.sort}}
+          as |t|>
       <t.content as |c|>
         <c.header>
           <ThSortable @label="Naam" @field="label" @currentSorting={{this.sort}}/>
