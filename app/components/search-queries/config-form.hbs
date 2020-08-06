@@ -2,7 +2,7 @@
   <div class="au-o-grid au-o-grid--flush">
     <div class="au-o-grid__item au-u-1-1 au-u-3-4@medium">
       <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">
-        Toezicht ABB - {{ if this.isNewForm "Nieuwe" "Editeer"}} Zoekopdracht
+        Toezicht ABB - {{if this.isNewForm "Nieuwe" "Bewerk"}} zoekopdracht
       </AuHeading>
     </div>
   </div>
@@ -28,7 +28,8 @@
     <AuButton @disabled={{if (or this.init.isRunning this.isFormEmpty) "true"}}
               @loading={{if this.save.isRunning "true"}}
               @skin={{"primary"}}
-      {{on "click" (perform this.save)}}>Bewaar
+      {{on "click" (perform this.save)}}>
+      Bewaar
     </AuButton>
     {{#unless this.isNewForm}}
       <LinkTo class="button button--narrow button--alt" type="button" @route="search.submissions.search-queries.select"
@@ -36,9 +37,7 @@
         Laad in
       </LinkTo>
     {{/unless}}
-    <a class="au-c-link au-c-link--secondary" {{ action 'back'}}>
-      {{unless this.isNewForm 'Ga Terug' 'Annuleer'}}
-    </a>
+    <AuButton @skin="tertiary" {{on "click" this.back}}>Annuleer</AuButton>
   </AuToolbarGroup>
   {{#unless this.isNewForm}}
     <AuButton @disabled={{if this.init.isRunning "true"}}

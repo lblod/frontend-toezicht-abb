@@ -35,10 +35,10 @@
         <c.header>
           <ThSortable @label="Naam" @field="label" @currentSorting={{this.sort}}/>
           <th>Beschrijving</th>
-          <ThSortable @label="Datum Aangemaakt" @field="created" @currentSorting={{this.sort}}/>
+          <ThSortable @label="Aangemaakt op" @field="created" @currentSorting={{this.sort}}/>
           <th>
-            <LinkTo @route="user.search-queries.new" class="button button--narrow" type="button">Maak een nieuwe
-              zoekopdracht
+            <LinkTo @route="user.search-queries.new" class="button button--narrow" type="button">
+              Maak een nieuwe zoekopdracht
             </LinkTo>
           </th>
         </c.header>
