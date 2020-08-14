@@ -1,47 +1,57 @@
-<div class="col--5-12 col--12-12--m container-flex--contain u-border--light--left u-wide-on-print">
-  <div class="u-padding--trl--small u-border--light--bottom">
-    <div class="grid">
-      <div class="col--9-12 u-wide-on-print">
-        <Submissions::StatusPill @status={{this.model.review.status}} class="u-spacer--tiny"/>
-        <h2 class="h3">Melding voor {{this.model.organization.fullName}}</h2>
-      </div>
-      <div class="col--3-12 u-align-right u-hide-on-print">
-        <LinkTo @route='supervision.submissions.index' class="link--icon--close">
-          <span class="u-visually-hidden">Venster sluiten</span>
-        </LinkTo>
-      </div>
+<div class="au-o-grid__item au-u-1-1 au-u-2-5@medium u-wide-on-print">
+  <div class="au-c-body-container au-c-action-sidebar">
+    <div class="au-o-box au-c-action-sidebar__header" tabindex="0">
+      <AuToolbar class="au-c-toolbar--nowrap">
+        <AuToolbarGroup>
+          <div>
+            <p class="au-u-margin-bottom-xsmall">
+              <Submissions::StatusPill @status={{this.model.review.status}}/>
+            </p>
+            <AuHeading @level="2" @skin="3">Melding voor {{this.model.organization.fullName}}</AuHeading>
+          </div>
+        </AuToolbarGroup>
+        <AuToolbarGroup>
+          <div class="au-c-body-container">
+            <LinkTo @route='supervision.submissions.index' class="link--icon--close">
+              <span class="u-visually-hidden">Venster sluiten</span>
+            </LinkTo>
+          </div>
+        </AuToolbarGroup>
+      </AuToolbar>
     </div>
-  </div>
-  <div class="container-flex--scroll u-padding--round--small">
-    <div class="form__row">
-      <div class="grid u-spacer--tiny">
-        <div class="col--6-12">
-          <div class="description-data__label">Verstuurd door</div>
-          {{#if this.model.lastModifier.fullName}}
-            <div class="description-data__value">{{this.model.lastModifier.fullName}}</div>
-          {{else if this.model.task.created}}
-            <div class="description-data__value"><p>Automatisch aangemaakt bij publicatie</p></div>
-          {{/if}}
-        </div>
-        <div class="col--6-12">
-          <div class="description-data__label">Verstuurd op</div>
-          <div class="description-dparentIndexRouteata__value">{{moment-format this.model.sentDate 'DD-MM-YYYY'}}</div>
+    <div class="au-o-box au-c-body-container au-c-body-container--scroll">
+      <div class="au-u-margin-bottom">
+        <div class="au-o-grid">
+          <div class="au-o-grid__item au-u-1-2">
+            <AuLabel>Verstuurd door</AuLabel>
+            <p>
+              {{#if this.model.lastModifier.fullName}}
+                {{this.model.lastModifier.fullName}}
+              {{else if this.model.task.created}}
+                Automatisch aangemaakt bij publicatie
+              {{/if}}
+            </p>
+          </div>
+          <div class="au-o-grid__item au-u-1-2">
+            <AuLabel>Verstuurd op</AuLabel>
+            <p>{{moment-format this.model.sentDate 'DD-MM-YYYY'}}</p>
+          </div>
         </div>
       </div>
+      <Submissions::Form @submission={{this.model}}/>
     </div>
-    <div class="u-spacer"></div>
-    <Submissions::Form @submission={{this.model}}/>
-  </div>
-  <div class="u-padding--round--small u-border--light--top u-hide-on-print">
-    {{#if this.currentSession.canWrite}}
-      <Submissions::Review
-              @model={{await this.model.review}}
-              @status={{await this.model.review.status}}
-              @onClose={{this.onCloseComponent}} />
-    {{else}}
-      <div class="button-group u-spacer--tiny">
-        <LinkTo @route="supervision.submissions.index" class="button button--narrow button--alt">Sluit venster</LinkTo>
-      </div>
-    {{/if}}
+    <div class="u-padding--round--small u-border--light--top au-u-hide-on-print">
+      {{#if this.currentSession.canWrite}}
+        <Submissions::Review
+                @model={{await this.model.review}}
+                @status={{await this.model.review.status}}
+                @onClose={{this.onCloseComponent}} />
+      {{else}}
+        <div class="button-group u-spacer--tiny">
+          <LinkTo @route="supervision.submissions.index" class="au-c-button au-c-button--secondary">Sluit venster</LinkTo>
+        </div>
+      {{/if}}
+    </div>
   </div>
 </div>
+
