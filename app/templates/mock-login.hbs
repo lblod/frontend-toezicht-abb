@@ -1,63 +1,53 @@
-<div class="container-flex--scroll">
-  <div class="page">
-    <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="main-content">
-      <header class="content-header content-header--small content-header--half-image u-spacer--large">
-        <div class="content-header__wrapper">
-          <picture class="content-header__bg"><img sizes="50vw" src="/assets/images/inzendingen-header-1600.jpg" srcset="/assets/images/inzendingen-header-320.jpg 320w, /assets/images/inzendingen-header-1024.jpg 1024w, /assets/images/inzendingen-header-1600.jpg 1600w" role="none" alt="" title=""></picture>
-          <div class="layout layout--wide">
-            <div class="content-header__content">
-              <div class="content-header__logo-wrapper"><a href="#" class="content-header__entity-logo content-header__entity-logo--lowercase"><span class="content-header__entity-logo__prefix">Vlaanderen</span><span class="content-header__entity-logo__title">is lokaal bestuur</span></a></div>
-            </div>
-          </div>
-        </div>
-      </header>
+<div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="au-c-main-container__content au-c-main-container__content--scroll">
+  <AuContentHeader @titlePartOne="Vlaanderen" @titlePartTwo="is lokaal bestuur">
+    <img sizes="50vw" src="/assets/images/inzendingen-header-1600.jpg" srcset="/assets/images/inzendingen-header-320.jpg 320w, /assets/images/inzendingen-header-1024.jpg 1024w, /assets/images/inzendingen-header-1600.jpg 1600w" alt="Foto van een laptop met daarop het vlaanderen logo.">
+  </AuContentHeader>
 
-      <div class="col--9-12--s col--5-12--m col--6-12">
-        <div class="grid grid--align-right u-spacer--large">
-          <div class="col--1-1 col--10-12--m col--6-12--l">
-            <h2 class="h4 u-spacer">Kies een bestuurseenheid om mee in te loggen.</h2>
-            <input class="input-field input-field--block u-spacer--tiny js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{this.gemeente}} autofocus oninput={{perform this.updateSearch value='target.value'}}>
-            <MockLogin as |login|>
-              {{#if this.queryStore.isRunning}}
-                <div class="loader-wrapper">
-                  <div class="loader">
-                    <span class="u-visually-hidden">Aan het laden</span>
-                  </div>
-                </div>
-              {{else}}
-                {{#if login.errorMessage}}
-                  <WuAlert @title={{login.errorMessage}} @isWarning={{true}} />
-                {{/if}}
-                <login.each-account @accounts={{this.model}} as |account|>
-                  <WuInfoTile @class="u-spacer--tiny" as |i|>
-                    <i.content>
-                      {{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}
-                    </i.content>
-                  </WuInfoTile>
-                </login.each-account>
-                <NumberPagination @page={{this.page}} @size={{this.size}} @nbOfItems={{this.model.length}} @total={{this.model.meta.count}} @links={{this.model.meta.pagination}} />
-              {{/if}}
-            </MockLogin>
-          </div>
-        </div>
+  <section class="au-o-region-large">
+    <div class="au-o-layout au-o-layout--small">
+
+      <AuHeading @level="2" @skin="3">Kies een bestuurseenheid om mee in te loggen.</AuHeading>
+
+      <div class="au-o-region">
+        <MockLogin as |login|>
+          {{#if this.queryStore.isRunning}}
+            <AuLoader @size="small" />
+            <span class="au-u-hidden-visually">Aan het laden</span>
+          {{else}}
+            {{#if login.errorMessage}}
+              <AuAlert @alertIcon="info-circle" @alertTitle={{login.errorMessage}}  @alertskin={{"error"}}>{{login.errorMessage}}</AuAlert>
+            {{/if}}
+            {{!-- TODO: Transform to new appuniversum style --}}
+            <login.each-account @accounts={{this.model}} as |account|>
+              <WuInfoTile @class="u-spacer--tiny" as |i|>
+                <i.content>
+                  {{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}
+                </i.content>
+              </WuInfoTile>
+            </login.each-account>
+            <NumberPagination @page={{this.page}} @size={{this.size}} @nbOfItems={{this.model.length}} @total={{this.model.meta.count}} @links={{this.model.meta.pagination}} />
+          {{/if}}
+        </MockLogin>
       </div>
-    </div>
 
-    <AuMainFooter>
-      <AuHeading @level="3" @skin="4">
-        Toezicht ABB is een officiële website van de Vlaamse overheid
-      </AuHeading>
-      <AuContent @skin="small">
-        <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/agentschap-binnenlands-bestuur">Agentschap Binnenlands Bestuur</a></p>
-        <ul class="au-c-list-horizontal">
-          <li class="au-c-list-horizontal__item">
-            <AuLink @linkRoute="legaal.disclaimer" @skin="secondary">Disclaimer</AuLink>
-          </li>
-          <li class="au-c-list-horizontal__item">
-            <AuLink @linkRoute="legaal.cookieverklaring" @skin="secondary">Cookieverklaring</AuLink>
-          </li>
-        </ul>
-      </AuContent>
-    </AuMainFooter>
-  </div>
+    </div>
+  </section>
+
+  <AuMainFooter>
+    <AuHeading @level="3" @skin="4">
+      Toezicht ABB is een officiële website van de Vlaamse overheid
+    </AuHeading>
+    <AuContent @skin="small">
+      <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/agentschap-binnenlands-bestuur">Agentschap Binnenlands Bestuur</a></p>
+      <ul class="au-c-list-horizontal">
+        <li class="au-c-list-horizontal__item">
+          <AuLink @linkRoute="legaal.disclaimer" @skin="secondary">Disclaimer</AuLink>
+        </li>
+        <li class="au-c-list-horizontal__item">
+          <AuLink @linkRoute="legaal.cookieverklaring" @skin="secondary">Cookieverklaring</AuLink>
+        </li>
+      </ul>
+    </AuContent>
+  </AuMainFooter>
 </div>
+
