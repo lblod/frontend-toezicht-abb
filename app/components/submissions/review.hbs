@@ -1,7 +1,7 @@
 {{#if this.initStatuses.lastSuccessful}}
   <div class="alert alert--small alert--success u-spacer--tiny">
     <AuHeading @level="6" @skin="6" class="au-u-margin-bottom-tiny">Medewerkers locatiesecretariaat</AuHeading>
-    <label class="checkbox checkbox--block {{if @readonly "checkbox--disabled" }}" disabled={{@readonly}}>
+    <AuLabel class="checkbox checkbox--block {{if @readonly "checkbox--disabled" }}" disabled={{@readonly}}>
       <Input @type="checkbox"
              class="checkbox__toggle"
              @checked={{this.isHandled}}
@@ -9,13 +9,13 @@
              disabled={{@readonly}} />
       <span></span>
       Melding afgehandeld
-    </label>
+    </AuLabel>
     <div class="u-spacer--tiny"></div>
-    <label>Behandelaar <span class="text-fade">en eventueel extra informatie</span></label>
+    <AuLabel>Behandelaar <span class="text-fade">en eventueel extra informatie</span></AuLabel>
     <Input class="input-field input-field--block" @value={{@model.comment}} disabled={{@readonly}}/>
   </div>
-  <div class="button-group u-spacer--tiny">
-    <WuButton @onClick={{this.save}} @isNarrow={{true}} @disabled={{@readonly}}>Bewaar</WuButton>
-    <WuButton @onClick={{this.cancel}} @isNarrow={{true}} @isAlt={{true}}>Sluit venster</WuButton>
-  </div>
+  <AuButtonGroup>
+    <AuButton @disabled="@readonly" {{ on "click" this.save }}>Bewaar</AuButton>
+    <AuButton @skin="secondary" {{ on "click" this.cancel }}>Sluit venster</AuButton>
+  </AuButtonGroup>
 {{/if}}

@@ -1,138 +1,149 @@
-<div class="u-border--fat--bottom u-hide-on-print">
-  <div class="au-u-margin-left-small au-u-margin-right-small au-u-margin-top-small">
-
-    <div class="grid">
-      <div class="col--6-12 col--1-1--s">
-        <AuHeading @level="1" @skin="2" class="au-u-margin-bottom-small">Toezicht ABB - Locatiesecretariaat</AuHeading>
-      </div>
-      <div class="col--6-12 col--1-1--s u-align-right--tablet-portrait-up">
-        <WuButtonGroup>
-          <div class="u-display--inline-block u-padding--right--small">
+<div class="au-c-body-container">
+  <div class="au-o-box au-o-box--small au-u-hide-on-print">
+    <AuToolbar class="au-u-margin-bottom-small">
+      <AuToolbarGroup>
+        <AuHeading @level="1" @skin="2">Toezicht ABB - Locatiesecretariaat</AuHeading>
+      </AuToolbarGroup>
+      <AuToolbarGroup>
+        <AuButtonGroup>
+          <span>
             <div class="checkbox--switch__wrapper">
               <WuSwitch @label="Toon enkel te behandelen dossiers" @checked={{this.isStatusFilterEnabled}}
                         @onClick={{this.setToTreatStatus}} />
             </div>
-          </div>
-          <WuButton @onClick={{this.resetFilters}} @isDark={{true}} @isLink={{true}} @isNarrow={{true}}
-                    @class="u-spacer--bottom--none">
-            <i class="vi vi-cross vi-u-link button__icon" aria-hidden="true"></i> Herstel alle filters
-          </WuButton>
-        </WuButtonGroup>
-      </div>
-    </div>
-
+          </span>
+          <AuButton @disabled="@readonly" {{ on "click" this.resetFilters }} @skin="tertiary">
+            <AuIcon @icon="cross" @alignment="left" /> Herstel alle filters
+          </AuButton>
+        </AuButtonGroup>
+      </AuToolbarGroup>
+    </AuToolbar>
     <!-- FILTERS -->
-    <div class="grid">
-      <div class="col--4-12 col--6-12--m col--6-12--s">
-        <label class="label--subtle form__label">Bestuurseenheid</label>
-        <Filter::AdministrativeUnitSelect @value={{@filter.bestuurseenheidIds}} @onSelectionChange={{fn this.setFilter
-                                                                                                        'bestuurseenheidIds'}} />
+    <div class="au-o-grid au-o-grid--tiny">
+      <div class="au-o-grid__item au-u-1-1 au-u-1-2@xsmall au-u-1-3@medium">
+        <AuLabel>Bestuurseenheid</AuLabel>
+        <Filter::AdministrativeUnitSelect @value={{@filter.bestuurseenheidIds}}
+                                          @onSelectionChange={{fn this.setFilter 'bestuurseenheidIds'}} />
 
-        <label class="label--subtle form__label">Provincie</label>
-        <Filter::ProvinceSelect @value={{@filter.provincieIds}} @onSelectionChange={{fn this.setFilter
-                                                                                        'provincieIds'}} />
+        <AuLabel>Provincie</AuLabel>
+        <Filter::ProvinceSelect @value={{@filter.provincieIds}}
+                                @onSelectionChange={{fn this.setFilter 'provincieIds'}} />
       </div>
-      <div class="col--4-12 col--6-12--m col--6-12--s">
-        <div class="au-u-margin-bottom-small">
-          <label class="label--subtle form__label">Type bestuur</label>
+      <div class="au-o-grid__item au-u-1-1 au-u-1-2@xsmall au-u-1-3@medium">
+          <AuLabel>Type bestuur</AuLabel>
           <Filter::AdministrativeUnitClassificationSelect @value={{@filter.classificatieIds}}
                                                           @onSelectionChange={{this.selectAdministrativeUnitClassifications}} />
-        </div>
 
-        <div class="au-u-margin-bottom-small">
           {{#if @filter.classificatieIds}}
-            <label class="label--subtle form__label">Type Bestuursorgaan</label>
+            <AuLabel>Type Bestuursorgaan</AuLabel>
             <Filter::GoverningBodyClassificationSelect @value={{@filter.governingBodyClassificationIds}}
-                                                       @onSelectionChange={{fn this.setFilter
-                                                                               'governingBodyClassificationIds'}} />
+                                                       @onSelectionChange={{fn this.setFilter 'governingBodyClassificationIds'}} />
           {{/if}}
-        </div>
 
-        <div class="au-u-margin-bottom-small">
-          <label class="label--subtle form__label">Type document</label>
-          <Filter::DecisionTypeSelect @value={{@filter.besluitTypeIds}} @onSelectionChange={{this.selectBesluitTypes}} />
-        </div>
+          <AuLabel>Type document</AuLabel>
+          <Filter::DecisionTypeSelect @value={{@filter.besluitTypeIds}}
+                                      @onSelectionChange={{this.selectBesluitTypes}} />
 
-        <div class="au-u-margin-bottom-small">
           {{#if this.regulationTypeIsSelected}}
-            <label class="label--subtle form__label">Type reglement of verordening</label>
-            <Filter::RegulationTypeSelect @value={{@filter.regulationTypeIds}} @onSelectionChange={{fn this.setFilter
-                                                                                                       'regulationTypeIds'}} />
+            <AuLabel>Type reglement of verordening</AuLabel>
+            <Filter::RegulationTypeSelect @value={{@filter.regulationTypeIds}}
+                                          @onSelectionChange={{fn this.setFilter 'regulationTypeIds'}} />
           {{/if}}
-        </div>
       </div>
-      <div class="col--4-12 col--1-1--m col--1-1--s">
-        <div class="grid">
-          <div class="col--1-1 col--6-12--m">
+      <div class="au-o-grid__item au-u-1-1 au-u-1-3@medium">
+        <div class="au-o-grid au-o-grid--tiny">
+          <div class="au-o-grid__item au-u-1-2 au-u-1-1@medium">
             <div class="au-u-margin-bottom-small">
-              <Filter::DateRange @label="Periode verstuurd" @fromValue={{@filter.sentDateFrom}}
-                                 @toValue={{@filter.sentDateTo}} @onChangeFromValue={{fn this.setFilter 'sentDateFrom'}}
+              <Filter::DateRange @label="Periode verstuurd"
+                                 @fromValue={{@filter.sentDateFrom}}
+                                 @toValue={{@filter.sentDateTo}}
+                                 @onChangeFromValue={{fn this.setFilter 'sentDateFrom'}}
                                  @onChangeToValue={{fn this.setFilter 'sentDateTo'}} />
             </div>
           </div>
-          <div class="col--1-1 col--6-12--m">
+          <div class="au-o-grid__item au-u-1-2 au-u-1-1@medium">
             <div class="au-u-margin-bottom-small">
-              <Filter::DateRange @label="Periode zitting / besluit" @defaultFromDate={{this.lastMonth}}
-                                 @fromValue={{@filter.sessionDateFrom}} @toValue={{@filter.sessionDateTo}}
-                                 @onChangeFromValue={{fn this.setFilter 'sessionDateFrom'}} @onChangeToValue={{fn
-                      this.setFilter 'sessionDateTo'}} />
+              <Filter::DateRange @label="Periode zitting / besluit"
+                                 @defaultFromDate={{this.lastMonth}}
+                                 @fromValue={{@filter.sessionDateFrom}}
+                                 @toValue={{@filter.sessionDateTo}}
+                                 @onChangeFromValue={{fn this.setFilter 'sessionDateFrom'}}
+                                 @onChangeToValue={{fn this.setFilter 'sessionDateTo'}} />
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- TABLE -->
-<DataTable @content={{@model}} @isLoading={{@isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}}
-           @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
-  <t.content as |c|>
-    <c.header>
-      {{#unless @displaySubset}}
-        <ThSortable @label="Provincie" @field="organization.provincie.naam" @currentSorting={{@sort}}
-                    @class="u-visible--tablet-landscape-up"/>
-      {{/unless}}
-      <ThSortable @label="Bestuurseenheid" @field="organization" @currentSorting={{@sort}}
-                  @class="u-visible--tablet-landscape-up"/>
-      <ThSortable @label="Type bestuur" @field="organization.classificatie.label" @currentSorting={{@sort}}
-                  @class="u-visible--tablet-portrait-up"/>
-      <!-- TODO make this filterable -->
-      <ThSortable @field="formData.decisionType.label" @currentSorting={{@sort}} @label="Type document"/>
-      {{#unless @displaySubset}}
-        <ThSortable @label="Zitting / besluit" @field="formData.sessionStartedAtTime" @currentSorting={{@sort}}
-                    @class="u-visible--tablet-landscape-up"/>
-        <ThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{@sort}}
-                    @class="u-visible--tablet-landscape-up"/>
-      {{/unless}}
-      <ThSortable @label="Status" @field="review.status" @currentSorting={{@sort}} />
-      <th class="u-hide-on-print"><!-- Action links --></th>
-    </c.header>
-    <c.body as |row|>
-      {{#unless @displaySubset}}
-        <td class="u-visible--tablet-landscape-up">{{row.organization.provincie.naam}}</td>
-      {{/unless}}
-      <td class="u-visible--tablet-portrait-up" style={{html-safe "max-width: 250px;"}}>{{row.organization.naam}} <span
-              class="u-hidden--tablet-landscape-up text-fade"><br>{{row.organization.classificatie.label}}</span></td>
-      <td class="u-visible--tablet-landscape-up">{{row.organization.classificatie.label}}</td>
-      <td style={{html-safe "max-width: 250px;"}}>
-        {{#if row.formData.decisionType}}
-          <p>{{row.formData.decisionType.label}}</p>
-        {{else}}
-          <p class="text-fade">Geen type</p>
-        {{/if}}
-        <p class="text-fade">{{row.formData.regulationType.label}}</p>
-      </td>
-      {{#unless @displaySubset}}
-        <td class="u-visible--tablet-landscape-up">{{moment-format row.formData.sessionStartedAtTime 'DD-MM-YYYY'}}</td>
-        <td class="u-visible--tablet-landscape-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
-      {{/unless}}
-      <td>
-        <Submissions::StatusPill @status={{row.review.status}}/>
-      </td>
-      <td class="u-hide-on-print">
-        <LinkTo @route="supervision.submissions.show" @model={{row.id}}>Bekijk</LinkTo>
-      </td>
-    </c.body>
-  </t.content>
-</DataTable>
+  <div class="au-c-body-container">
+    <AuDataTable
+        @content={{@model}}
+        @isLoading={{this.isLoadingModel}}
+        @noDataMessage="Geen inzendingen gevonden"
+        @sort={{@sort}}
+        @page={{@page}}
+        @size={{@size}} as |t|>
+      <t.content as |c|>
+        <c.header>
+          {{#unless @displaySubset}}
+            <AuDataTableThSortable @label="Provincie" @field="organization.provincie.naam" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
+          {{/unless}}
+          <AuDataTableThSortable @label="Bestuurseenheid" @field="organization" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
+          <AuDataTableThSortable @label="Type bestuur" @field="organization.classificatie.label" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-until@small"/>
+          <AuDataTableThSortable @label="Type document" @field="ormData.decisionType.label" @currentSorting={{@sort}} @class="data-table__header-title"/>
+
+          {{#unless @displaySubset}}
+            <AuDataTableThSortable @label="Zitting / besluit" @field="formData.sessionStartedAtTime" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
+            <AuDataTableThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
+          {{/unless}}
+          <AuDataTableThSortable @label="Status" @field="review.status" @currentSorting={{@sort}} @class="data-table__header-title"/>
+          <th class="au-u-hide-on-print"></th>
+        </c.header>
+        <c.body as |row|>
+          {{#unless @displaySubset}}
+            <td class="au-u-visible-from@medium">{{row.organization.provincie.naam}}</td>
+          {{/unless}}
+          <td class="au-u-visible-until@small" style={{html-safe "max-width: 250px;"}}>
+            {{row.organization.naam}}
+            <br>
+            <AuHelpText class="au-u-hidden-from@medium text-fade">{{row.organization.classificatie.label}}</AuHelpText>
+          </td>
+          <td class="au-u-visible-from@medium">{{row.organization.classificatie.label}}</td>
+          <td style={{html-safe "max-width: 250px;"}}>
+            {{#if row.formData.decisionType}}
+              <p>{{row.formData.decisionType.label}}</p>
+            {{else}}
+              <AuHelpText>Geen type</AuHelpText>
+            {{/if}}
+            <AuHelpText>{{row.formData.regulationType.label}}</AuHelpText>
+          </td>
+          {{#unless @displaySubset}}
+            <td class="au-u-visible-from@medium">{{moment-format row.formData.sessionStartedAtTime 'DD-MM-YYYY'}}</td>
+            <td class="au-u-visible-from@medium">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
+          {{/unless}}
+          <td style={{html-safe "max-width:120px;"}}>
+            <Submissions::StatusPill @status={{row.review.status}}/>{{!--  <AuPill resource="{{capitalize row.status}}">{{capitalize row.status}}</AuPill> --}}
+          </td>
+          <td class="au-u-hide-on-print">
+            <LinkTo @route="supervision.submissions.show" @model={{row.id}}>Bekijk</LinkTo>
+          </td>
+        </c.body>
+        <tr>
+          <td colspan="8">
+            {{#if this.hasAskedForFreeTextSearch}}
+              <AuAlert @alertIcon="alert-triangle" @alertTitle="PDF’s die ingescand zijn als afbeelding verschijnen niet in de zoekopdracht. Deze zijn niet leesbaar."  @alertskin={{"warning"}} @alertsize={{"small"}}>
+                <p>Verder zoeken we momenteel niet op op synoniemen of lokale varianten. Bepaalde documenten zullen we niet vinden.</p>
+                <br>
+                <p><strong>Oplossing</strong></p>
+                <p>Gebruik niet enkel de zoekfunctie om dossiers te doorzoeken &mdash; deze resultaten zijn beperkt. Maak gebruik van filters, zonder een zoekopdracht, om het volledige plaatje te zien. <a href="/help#help-zoekresultaten" target="_blank" rel="noopener noreferrer">Lees meer informatie over zoekresultaten</a>.</p>
+              </AuAlert>
+            {{/if}}
+
+            <AuAlert @alertIcon="info-circle" @alertTitle="De dossiers in deze tabel lopen maximaal één dag achter op de huidige stand van zaken."  @alertskin={{"info"}} @alertsize={{"small"}} class="au-u-margin-none" />
+          </td>
+        </tr>
+      </t.content>
+    </AuDataTable>
+  </div>
+</div>
