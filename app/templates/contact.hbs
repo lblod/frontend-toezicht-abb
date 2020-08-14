@@ -1,38 +1,42 @@
-<div class="container-flex--scroll">
-  <section class="region">
-    <div class="layout layout--wide">
-      <h1 class="h1">Contact</h1>
-      <form class="u-spacer--large js-formvalidation-bound">
-        <div class="form__row">
-          <label class="form__label form__label--large form__label--block" for="select">Waar gaat uw bericht over?</label>
-          <WuRadioButton @label="Een functionaliteit, bug of probleem" @value="LoketLokaalBestuur@vlaanderen.be?subject=Functionaliteit of bug of probleem" @onChange={{fn (mut this.mailto)}} @isBlock={{true}} />
-          <WuRadioButton @label="Een inhoudelijke vraag" @value="LoketLokaalBestuur@vlaanderen.be?subject=Inhoudelijke vraag" @onChange={{fn (mut this.mailto)}} @isBlock={{true}} />
-          <div class="form__error" aria-describedby="radio-buttons"></div>
-        </div>
+<div class="au-c-main-container__content au-c-main-container__content--scroll">
+  <section class="au-o-region">
+    <div class="au-o-layout">
+      <AuHeading @level="1" @skin="1" class="au-u-margin-bottom">Contact</AuHeading>
+      <div class="au-o-region">
+        <form class="au-u-margin-bottom">
+          <AuLabel for="select">Waar gaat uw bericht over?</AuLabel>
 
-        {{#if this.mailto}}
-          <a href={{concat "mailto:" this.mailto}} class="button button--large">Bericht versturen</a>
-        {{else}}
-          <WuButton @label="Bericht versturen" @onClick={{null}} @size="large" @disabled={{true}} />
-        {{/if}}
-      </form>
-      <p class="u-spacer--large">Of neem rechtstreeks contact op via mail <a href="mailto:LoketLokaalBestuur@vlaanderen.be">LoketLokaalBestuur@vlaanderen.be</a>.</p>
+          {{!-- TODO: replace radio buttons with appuniversum radiobuttions --}}
+          <div class="au-o-region-small">
+            <WuRadioButton @label="Een functionaliteit, bug of probleem" @value="LoketLokaalBestuur@vlaanderen.be?subject=Functionaliteit of bug of probleem" @onChange={{fn (mut this.mailto)}} @isBlock={{true}} />
+            <WuRadioButton @label="Een inhoudelijke vraag" @value="LoketLokaalBestuur@vlaanderen.be?subject=Inhoudelijke vraag" @onChange={{fn (mut this.mailto)}} @isBlock={{true}} />
+          </div>
+
+          {{#if this.mailto}}
+            <a href={{concat "mailto:" this.mailto}} class="au-c-button au-c-button--large">Bericht versturen</a>
+          {{else}}
+            <AuButton @disabled="true" @size="large">Bericht versturen</AuButton>
+          {{/if}}
+        </form>
+
+        <p>Of neem rechtstreeks contact op via mail <a href="mailto:LoketLokaalBestuur@vlaanderen.be">LoketLokaalBestuur@vlaanderen.be</a>.</p>
+      </div>
     </div>
   </section>
+  <AuMainFooter>
+    <AuHeading @level="3" @skin="4">
+      Toezicht ABB is een officiële website van de Vlaamse overheid
+    </AuHeading>
+    <AuContent @skin="small">
+      <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/agentschap-binnenlands-bestuur">Agentschap Binnenlands Bestuur</a></p>
+      <ul class="au-c-list-horizontal">
+        <li class="au-c-list-horizontal__item">
+          <AuLink @linkRoute="legaal.disclaimer" @skin="secondary">Disclaimer</AuLink>
+        </li>
+        <li class="au-c-list-horizontal__item">
+          <AuLink @linkRoute="legaal.cookieverklaring" @skin="secondary">Cookieverklaring</AuLink>
+        </li>
+      </ul>
+    </AuContent>
+  </AuMainFooter>
 </div>
-<AuMainFooter>
-  <AuHeading @level="3" @skin="4">
-    Toezicht ABB is een officiële website van de Vlaamse overheid
-  </AuHeading>
-  <AuContent @skin="small">
-    <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/agentschap-binnenlands-bestuur">Agentschap Binnenlands Bestuur</a></p>
-    <ul class="au-c-list-horizontal">
-      <li class="au-c-list-horizontal__item">
-        <AuLink @linkRoute="legaal.disclaimer" @skin="secondary">Disclaimer</AuLink>
-      </li>
-      <li class="au-c-list-horizontal__item">
-        <AuLink @linkRoute="legaal.cookieverklaring" @skin="secondary">Cookieverklaring</AuLink>
-      </li>
-    </ul>
-  </AuContent>
-</AuMainFooter>
