@@ -1,125 +1,92 @@
-<div class="container-flex--scroll">
-  <section class="region">
-    <div class="layout layout--wide">
+<div class="au-c-main-container__content au-c-main-container__content--scroll">
+  <section class="au-o-region">
+    <div class="au-o-layout au-o-layout--small">
       <AuHeading @level="1" @skin="1" class="au-u-margin-bottom">Helppagina</AuHeading>
       <AuHeading @level="2" @skin="2" class="au-u-margin-bottom">Veelgestelde vragen</AuHeading>
 
-      <div class="au-o-grid au-o-grid--small au-u-margin-bottom-large">
-
-        <div class="au-o-grid__item">
-          <div id="#help-zoekresultaten" class="info-tile">
-            <div class="info-tile__header">
-              <div class="info-tile__badge__wrapper">
-                <div class="info-tile__header__icon badge badge--accent badge--m badge--icon">
-                  <AuIcon @icon="info-circle" @size="large" class="badge__icon" />
-                </div>
-              </div>
-              <div class="info-tile__header__wrapper">
-                <AuHeading @level="3" @skin="4">Waarom zijn mijn zoekresultaten onvolledig of leeg?</AuHeading>
-                <p>Zorg dat u door gebruik van filters het volledige plaatje ziet, en niet enkel gebruik maakt van inhoudelijke zoekopdrachten.</p>
-              </div>
-            </div>
+      <div class="au-o-flow au-u-margin-bottom-large">
+        <AuCard id="#help-zoekresultaten" @flex="true">
+          <AuBadge @icon="info-circle" @skin="brand" />
+          <AuContent @skin="small">
+            <AuHeading @level="2" @skin="4">
+              Waarom zijn mijn zoekresultaten onvolledig of leeg?
+            </AuHeading>
+            <p>Zorg dat u door gebruik van filters het volledige plaatje ziet, en niet enkel gebruik maakt van inhoudelijke zoekopdrachten.</p>
             <hr class="au-c-hr">
-            <div class="info-tile__content">
-              <div class="au-o-grid">
-                <div class="au-o-grid__item au-u-1-2@medium">
-                  <AuHeading @level="4" @skin="5" class="au-u-margin-bottom-small">
-                    PDF’s die ingescand zijn als afbeelding verschijnen niet in de zoekopdracht. Deze zijn niet leesbaar of doorzoekbaar.
-                  </AuHeading>
-                  <p class="au-u-margin-bottom-small">De functionaliteit "Zoek in inhoud dossier" doorzoekt de PDF's en webpagina's die lokale besturen doorsturen.</p>
-                  <p class="au-u-margin-bottom-small">Webpagina's en correct opgeslagen PDF's zijn leesbaar. <strong>Afbeeldingen, of een afbeelding in een PDF, zijn niet doorzoekbaar</strong> omdat ze niet leesbaar zijn door computers. Dit zorgt ervoor dat bepaalde dossiers niet getoond worden, die toch gerelateerd zijn aan uw zoekopdracht</p>
-                </div>
-                <div class="au-o-grid__item au-u-1-2@medium">
-                  <AuHeading @level="4" @skin="5" class="au-u-margin-bottom-small">
-                    Niet alle informatie zit in de inhoud van het dossier zelf.
-                  </AuHeading>
-                  <p class="au-u-margin-bottom-small">We zoeken momenteel niet op op synoniemen of lokale varianten. Bepaalde documenten zullen we niet vinden.</p>
-                  <p class="au-u-margin-bottom-small">De functionaliteit "Zoek in inhoud dossier" toont enkel resultaten die overeenkomen met informatie die te vinden is in een dossier. <strong>De zoekfunctionaliteit toont geen informatie over het bestuur of over het dossier zelf</strong> (zoals het type of de categorie).</p>
-                </div>
+            <div class="au-o-grid au-o-grid--small">
+              <div class="au-o-grid__item au-u-1-2@medium">
+                <AuHeading @level="4" @skin="5">
+                  PDF’s die ingescand zijn als afbeelding verschijnen niet in de zoekopdracht. Deze zijn niet leesbaar of doorzoekbaar.
+                </AuHeading>
+                <p>De functionaliteit "Zoek in inhoud dossier" doorzoekt de PDF's en webpagina's die lokale besturen doorsturen.</p>
+                <p>Webpagina's en correct opgeslagen PDF's zijn leesbaar. <strong>Afbeeldingen, of een afbeelding in een PDF, zijn niet doorzoekbaar</strong> omdat ze niet leesbaar zijn door computers. Dit zorgt ervoor dat bepaalde dossiers niet getoond worden, die toch gerelateerd zijn aan uw zoekopdracht</p>
+              </div>
+              <div class="au-o-grid__item au-u-1-2@medium">
+                <AuHeading @level="4" @skin="5">
+                  Niet alle informatie zit in de inhoud van het dossier zelf.
+                </AuHeading>
+                <p>We zoeken momenteel niet op op synoniemen of lokale varianten. Bepaalde documenten zullen we niet vinden.</p>
+                <p>De functionaliteit "Zoek in inhoud dossier" toont enkel resultaten die overeenkomen met informatie die te vinden is in een dossier. <strong>De zoekfunctionaliteit toont geen informatie over het bestuur of over het dossier zelf</strong> (zoals het type of de categorie).</p>
               </div>
             </div>
-          </div>
-        </div>
+          </AuContent>
+        </AuCard>
 
-        <div class="au-o-grid__item">
-          <div id="#help-zoekresultaten" class="info-tile">
-            <div class="info-tile__header">
-              <div class="info-tile__badge__wrapper">
-                <div class="info-tile__header__icon badge badge--accent badge--m badge--icon">
-                  <AuIcon @icon="info-circle" @size="large" class="badge__icon" />
-                </div>
-              </div>
-              <div class="info-tile__header__wrapper">
-                <AuHeading @level="3" @skin="4">Waarom werkt de zoekfunctie niet zoals ik had verwacht?</AuHeading>
-                <p>We werken er aan!</p>
-              </div>
-            </div>
+        <AuCard id="#help-zoekresultaten" @flex="true">
+          <AuBadge @icon="info-circle" @skin="brand" />
+          <AuContent @skin="small">
+            <AuHeading @level="2" @skin="4">
+              Waarom werkt de zoekfunctie niet zoals ik had verwacht?
+            </AuHeading>
+            <p>We werken er aan!</p>
             <hr class="au-c-hr">
-            <div class="info-tile__content">
-              <p class="au-u-margin-bottom-small">We willen de zoekfunctionaliteit samen met u verbeteren. We horen dus graag wat er niet werkt zoals verwacht! Neem gerust contact met ons op, zodat we een betere ervaring kunnen creëren.</p>
-            </div>
-          </div>
-        </div>
+            <p>We willen de zoekfunctionaliteit samen met u verbeteren. We horen dus graag wat er niet werkt zoals verwacht! Neem gerust contact met ons op, zodat we een betere ervaring kunnen creëren.</p>
+          </AuContent>
+        </AuCard>
 
-        <div class="au-o-grid__item">
-          <div id="#help-zoekresultaten" class="info-tile">
-            <div class="info-tile__header">
-              <div class="info-tile__badge__wrapper">
-                <div class="info-tile__header__icon badge badge--accent badge--m badge--icon">
-                  <AuIcon @icon="info-circle" @size="large" class="badge__icon" />
-                </div>
-              </div>
-              <div class="info-tile__header__wrapper">
-                <AuHeading @level="3" @skin="4">Hoe moet ik de filters gebruiken?</AuHeading>
-                <p>Gebruikers die niet bekend zijn met de Databank Toezicht moeten eerst even wennen aan de gehanteerde benamingen voor filters. We baseren ons hiervoor op de standaarden die gebruikt worden voor linked open data. We overlopen ze even:</p>
-              </div>
-            </div>
+        <AuCard id="#help-zoekresultaten" @flex="true">
+          <AuBadge @icon="info-circle" @skin="brand" />
+          <AuContent @skin="small">
+            <AuHeading @level="2" @skin="4">
+              Hoe moet ik de filters gebruiken?
+            </AuHeading>
+            <p>Gebruikers die niet bekend zijn met de Databank Toezicht moeten eerst even wennen aan de gehanteerde benamingen voor filters. We baseren ons hiervoor op de standaarden die gebruikt worden voor linked open data. We overlopen ze even:</p>
             <hr class="au-c-hr">
-            <div class="info-tile__content">
-              <ul class="bullet-list au-u-margin-bottom-small">
-                <li><strong>Bestuurseenheid</strong>: hier vind je een lijst van alle juridische entiteiten (zoals Gemeente Wingene of OCMW Gent). Je kan ook meerdere entiteiten selecteren. Deze filter gebruik je dus best als je wenst te zoeken op inzendingen van een specifiek bestuur.</li>
-                <li><strong>Provincie</strong>: hier kan je filteren op de 5 Vlaamse provincies. De maatschappelijke zetel van een bestuurseenheid bepaalt tot welke provincie het bestuur behoort.</li>
-                <li><strong>Type bestuur</strong>: hier geven we een categorisering aan alle lokale besturen op basis van hun vorm (bv. gemeente, OCMW, AGB,…).</li>
-                <li><strong>Type Bestuursorgaan</strong>: deze filter zie je pas als je een ‘type bestuur’ hebt ingevuld. Je kan hier kiezen uit verschillende organen binnen een bepaald bestuur (zoals gemeenteraad, algemene vergadering,…).</li>
-                <li><strong>Categorie dossier</strong>: hier vind je een lijst van alle meldingsplichtige of inzendingsplichtige stukken. Denk hierbij aan adviezen, besluiten of besluitenlijsten. Deze lijst is gebaseerd op de regelgeving.</li>
-                <li><strong>Periode zitting</strong>: hier kan je zoeken op de datum van de zitting waarop het besluit, advies,… genomen werd.</li>
-                <li><strong>Periode verstuurd</strong>: hier kan je zoeken op datum wanneer het bestuur het dossier heeft bezorgd.</li>
-                <li>Voor belastingsreglementen voorzien we nog extra filters zoals de lijst met MAR-codes en de periode waarbinnen een belasting geldig is.</li>
-              </ul>
-              <p class="au-u-margin-bottom-small">Let wel: in deze versie is er nog verband tussen het gebruik van verschillende filters. Dit wordt in een volgende versie uitgerold. Voorlopig kan je dus nog een combinatie maken van:</p>
-              <ul class="bullet-list au-u-margin-bottom-small">
-                <li>Type bestuur = gemeente</li>
-                <li>Type bestuursorgaan = provincieraad</li>
-              </ul>
-              <p>Uiteraard zal je in dit geval dus 0 resultaten zien, omdat deze combinatie onmogelijk kan voorvallen.</p>
-            </div>
-          </div>
-        </div>
+            <ul>
+              <li><strong>Bestuurseenheid</strong>: hier vind je een lijst van alle juridische entiteiten (zoals Gemeente Wingene of OCMW Gent). Je kan ook meerdere entiteiten selecteren. Deze filter gebruik je dus best als je wenst te zoeken op inzendingen van een specifiek bestuur.</li>
+              <li><strong>Provincie</strong>: hier kan je filteren op de 5 Vlaamse provincies. De maatschappelijke zetel van een bestuurseenheid bepaalt tot welke provincie het bestuur behoort.</li>
+              <li><strong>Type bestuur</strong>: hier geven we een categorisering aan alle lokale besturen op basis van hun vorm (bv. gemeente, OCMW, AGB,…).</li>
+              <li><strong>Type Bestuursorgaan</strong>: deze filter zie je pas als je een ‘type bestuur’ hebt ingevuld. Je kan hier kiezen uit verschillende organen binnen een bepaald bestuur (zoals gemeenteraad, algemene vergadering,…).</li>
+              <li><strong>Categorie dossier</strong>: hier vind je een lijst van alle meldingsplichtige of inzendingsplichtige stukken. Denk hierbij aan adviezen, besluiten of besluitenlijsten. Deze lijst is gebaseerd op de regelgeving.</li>
+              <li><strong>Periode zitting</strong>: hier kan je zoeken op de datum van de zitting waarop het besluit, advies,… genomen werd.</li>
+              <li><strong>Periode verstuurd</strong>: hier kan je zoeken op datum wanneer het bestuur het dossier heeft bezorgd.</li>
+              <li>Voor belastingsreglementen voorzien we nog extra filters zoals de lijst met MAR-codes en de periode waarbinnen een belasting geldig is.</li>
+            </ul>
+            <p>Let wel: in deze versie is er nog verband tussen het gebruik van verschillende filters. Dit wordt in een volgende versie uitgerold. Voorlopig kan je dus nog een combinatie maken van:</p>
+            <ul>
+              <li>Type bestuur = gemeente</li>
+              <li>Type bestuursorgaan = provincieraad</li>
+            </ul>
+            <p>Uiteraard zal je in dit geval dus 0 resultaten zien, omdat deze combinatie onmogelijk kan voorvallen.</p>
+          </AuContent>
+        </AuCard>
 
-        <div class="au-o-grid__item">
-          <div id="#help-zoekresultaten" class="info-tile">
-            <div class="info-tile__header">
-              <div class="info-tile__badge__wrapper">
-                <div class="info-tile__header__icon badge badge--accent badge--m badge--icon">
-                  <AuIcon @icon="info-circle" @size="large" class="badge__icon" />
-                </div>
-              </div>
-              <div class="info-tile__header__wrapper">
-                <AuHeading @level="3" @skin="4">Hoe werkt de zoekfunctie?</AuHeading>
-                <p>Bij het zoeken in dossiers kan je meerdere regels hanteren die jouw zoekresultaat kunnen finetunen:</p>
-              </div>
-            </div>
+        <AuCard id="#help-zoekresultaten" @flex="true">
+          <AuBadge @icon="info-circle" @skin="brand" />
+          <AuContent @skin="small">
+            <AuHeading @level="2" @skin="4">
+              Hoe werkt de zoekfunctie?
+            </AuHeading>
+            <p>Bij het zoeken in dossiers kan je meerdere regels hanteren die jouw zoekresultaat kunnen finetunen:</p>
             <hr class="au-c-hr">
-            <div class="info-tile__content">
-              <ul class="bullet-list au-u-margin-bottom-small">
-                <li>Gebruik een <strong>+</strong> als je wenst dat jouw zoekresultaat beide woorden bevat bv. regen + zonneschijn</li>
-                <li>Gebruik een <strong>|</strong> als je wenst dat jouw zoekresultaat minstens 1 van de woorden bevat bv. regen | zonneschijn</li>
-                <li>Door het gebruik van <strong>“"</strong> zorg je ervoor dat er gezocht wordt op een specifieke zin bv. “regen en zonneschijn”</li>
-              </ul>
-              <p class="au-u-margin-bottom-small">We willen stelselmatig het gebruik van regels in onze zoekfunctie uitbreiden en zullen dit via deze pagina bekend maken.</p>
-            </div>
-          </div>
-        </div>
+            <ul>
+              <li>Gebruik een <strong>+</strong> als je wenst dat jouw zoekresultaat beide woorden bevat bv. regen + zonneschijn</li>
+              <li>Gebruik een <strong>|</strong> als je wenst dat jouw zoekresultaat minstens 1 van de woorden bevat bv. regen | zonneschijn</li>
+              <li>Door het gebruik van <strong>“"</strong> zorg je ervoor dat er gezocht wordt op een specifieke zin bv. “regen en zonneschijn”</li>
+            </ul>
+            <p>We willen stelselmatig het gebruik van regels in onze zoekfunctie uitbreiden en zullen dit via deze pagina bekend maken.</p>
+          </AuContent>
+        </AuCard>
       </div>
 
       <AuHeading @level="2" @skin="2" class="au-u-margin-bottom">
@@ -144,20 +111,20 @@
       <p class="au-u-margin-bottom-large">Of neem rechtstreeks contact op via mail <a href="mailto:LoketLokaalBestuur@vlaanderen.be">LoketLokaalBestuur@vlaanderen.be</a>.</p>
     </div>
   </section>
+  <AuMainFooter>
+    <AuHeading @level="3" @skin="4">
+      Toezicht ABB is een officiële website van de Vlaamse overheid
+    </AuHeading>
+    <AuContent @skin="small">
+      <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/agentschap-binnenlands-bestuur">Agentschap Binnenlands Bestuur</a></p>
+      <ul class="au-c-list-horizontal">
+        <li class="au-c-list-horizontal__item">
+          <AuLink @linkRoute="legaal.disclaimer" @skin="secondary">Disclaimer</AuLink>
+        </li>
+        <li class="au-c-list-horizontal__item">
+          <AuLink @linkRoute="legaal.cookieverklaring" @skin="secondary">Cookieverklaring</AuLink>
+        </li>
+      </ul>
+    </AuContent>
+  </AuMainFooter>
 </div>
-<AuMainFooter>
-  <AuHeading @level="3" @skin="4">
-    Toezicht ABB is een officiële website van de Vlaamse overheid
-  </AuHeading>
-  <AuContent @skin="small">
-    <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/agentschap-binnenlands-bestuur">Agentschap Binnenlands Bestuur</a></p>
-    <ul class="au-c-list-horizontal">
-      <li class="au-c-list-horizontal__item">
-        <AuLink @linkRoute="legaal.disclaimer" @skin="secondary">Disclaimer</AuLink>
-      </li>
-      <li class="au-c-list-horizontal__item">
-        <AuLink @linkRoute="legaal.cookieverklaring" @skin="secondary">Cookieverklaring</AuLink>
-      </li>
-    </ul>
-  </AuContent>
-</AuMainFooter>
