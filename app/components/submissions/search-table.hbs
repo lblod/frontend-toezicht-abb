@@ -1,113 +1,89 @@
 {{!-- template-lint-disable no-html-comments  --}}
 {{!-- template-lint-disable no-inline-styles  --}}
-<div class="container-flex--contain">
-  <div class="au-u-padding-small au-u-border-bottom">
-    <div class="au-o-grid au-o-grid--flush">
-      <div class="au-o-grid__item au-u-1-1 au-u-3-4@medium">
-          <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">Toezicht ABB</AuHeading>
-      </div>
-    </div>
-  </div>
 
-  <div class="container-flex--contain">
-    <div class="au-c-main-container">
-      <div class="au-c-main-container__sidebar">
+<div class="au-c-body-container">
+  <div class="au-o-grid au-o-grid--flush au-o-grid--fixed">
+
+    <div class="au-o-grid__item {{if @displaySubset "au-1-1 au-u-2-5@medium au-u-2-6@large" "au-1-1 au-u-2-5@small au-u-1-4@medium"}}">
+      <div class="au-c-body-container">
         <SearchQueries::FilterForm @queryParams={{@queryParams}}/>
       </div>
+    </div>
+    <div class="au-o-grid__item {{if @displaySubset "au-1-1 au-u-3-5@medium au-u-4-6@large" "au-1-1 au-u-3-5@small au-u-3-4@medium"}}">
+      <div class="au-c-body-container">
+        <AuDataTable
+            @content={{@model}}
+            @isLoading={{this.isLoadingModel}}
+            @noDataMessage="Geen inzendingen gevonden"
+            @sort={{@sort}}
+            @page={{@page}}
+            @size={{@size}} as |t|>
+          <t.content as |c|>
+            <c.header>
+              {{#unless @displaySubset}}
+                <AuDataTableThSortable @label="Provincie" @field="province" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
+              {{/unless}}
+              <AuDataTableThSortable @label="Bestuurseenheid" @field="administrativeUnit" @currentSorting={{@sort}} @class="data-table__header-title"/>
+              {{#unless @displaySubset}}
+                <AuDataTableThSortable @label="Type bestuur" @field="administrativeUnitClassification" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
+              {{/unless}}
+              <AuDataTableThSortable @label="Categorie dossier" @field="decisionType" @currentSorting={{@sort}} @class="data-table__header-title"/>
+              {{#unless @displaySubset}}
+                <AuDataTableThSortable @label="Periode zitting / besluit" @field="sessionDatetime" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
+                <AuDataTableThSortable @label="Verstuurd" @field="sentDate" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
+              {{/unless}}
+              <AuDataTableThSortable @label="Status" @field="status" @currentSorting={{@sort}} @class="data-table__header-title"/>
+              <th class="au-u-hide-on-print"></th>
+            </c.header>
+            <c.body as |row|>
+              {{#unless @displaySubset}}
+                <td class="au-u-visible-from@medium">{{row.province}}</td>
+              {{/unless}}
+              <td style={{html-safe "max-width: 125px;"}}>{{row.administrativeUnit}}
+                {{#if @displaySubset}}
+                  <p class="text-fade">{{row.administrativeUnitClassification}}</p>
+                {{else}}
+                  <AuHelpText class="au-u-hidden-from@medium text-fade">{{row.administrativeUnitClassification}}</AuHelpText>
+                {{/if}}
+              </td>
+              {{#unless @displaySubset}}
+                <td class="au-u-visible-from@medium">{{row.administrativeUnitClassification}}</td>
+              {{/unless}}
+              <td style={{html-safe "max-width: 200px;"}}>
+                {{#if row.decisionType}}
+                  <p>{{row.decisionType}}</p>
+                {{else}}
+                  <AuHelpText>Geen type</AuHelpText>
+                {{/if}}
+                <AuHelpText>{{row.regulationType}}</AuHelpText>
+              </td>
+              {{#unless @displaySubset}}
+                <td class="au-u-visible-from@medium">{{moment-format row.sessionDatetime 'DD-MM-YYYY HH:mm'}}</td>
+                <td class="au-u-visible-from@medium">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
+              {{/unless}}
+              <td style={{html-safe "max-width:120px;"}}>
+                <AuPill resource="{{capitalize row.status}}">{{capitalize row.status}}</AuPill>
+              </td>
+              <td class="au-u-hide-on-print" style={{html-safe "width:70px;"}}>
+                <LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo>
+              </td>
+            </c.body>
+            <tr>
+              <td colspan="8">
+                {{#if this.hasAskedForFreeTextSearch}}
+                  <AuAlert @alertIcon="alert-triangle" @alertTitle="PDF’s die ingescand zijn als afbeelding verschijnen niet in de zoekopdracht. Deze zijn niet leesbaar."  @alertskin={{"warning"}} @alertsize={{"small"}}>
+                    <p>Verder zoeken we momenteel niet op op synoniemen of lokale varianten. Bepaalde documenten zullen we niet vinden.</p>
+                    <br>
+                    <p><strong>Oplossing</strong></p>
+                    <p>Gebruik niet enkel de zoekfunctie om dossiers te doorzoeken &mdash; deze resultaten zijn beperkt. Maak gebruik van filters, zonder een zoekopdracht, om het volledige plaatje te zien. <a href="/help#help-zoekresultaten" target="_blank" rel="noopener noreferrer">Lees meer informatie over zoekresultaten</a>.</p>
+                  </AuAlert>
+                {{/if}}
 
-      <div class="au-c-main-container__content">
-        <div class="container-flex--contain">
-
-          <DataTable @content={{@model}} @isLoading={{@isLoading}} @noDataMessage="Geen inzendingen gevonden" @sort={{@sort}}
-                     @page={{@page}} @size={{@size}} @class="container-flex--contain data-table" as |t|>
-            <t.content as |c|>
-              <c.header>
-              {{!-- For devs! When creating a new table for filters, please make sure colums stay configurable. We need control over responsive displays and width. --}}
-                {{#unless @displaySubset}}
-                  <ThSortable @label="Provincie"
-                              @field="province"
-                              @currentSorting={{@sort}}
-                              @class="au-u-visible-medium-up"/>
-                {{/unless}}
-                <ThSortable @label="Bestuurseenheid"
-                            @field="administrativeUnit"
-                            @currentSorting={{@sort}}
-                            style={{html-safe "max-width: 250px;"}}/>
-                {{#unless @displaySubset}}
-                <ThSortable @label="Type bestuur"
-                            @field="administrativeUnitClassification"
-                            @currentSorting={{@sort}}
-                            @class="au-u-visible-medium-up"/>
-                {{/unless}}
-                <ThSortable @label="Categorie dossier"
-                            @field="decisionType"
-                            @currentSorting={{@sort}}
-                            style={{html-safe "max-width: 250px;"}}/>
-                {{#unless @displaySubset}}
-                  <ThSortable @label="Periode zitting / besluit"
-                              @field="sessionDatetime"
-                              @currentSorting={{@sort}}
-                              @class="au-u-visible-medium-up"/>
-                  <ThSortable @label="Verstuurd"
-                              @field="sentDate"
-                              @currentSorting={{@sort}}
-                              @class="au-u-visible-medium-up"/>
-                {{/unless}}
-                <ThSortable @label="Status"
-                            @field="status"
-                            @currentSorting={{@sort}}/>
-                <th class="u-hide-on-print">{{!-- Action links --}}</th>
-              </c.header>
-              <c.body as |row|>
-                {{#unless @displaySubset}}
-                  <td class="au-u-visible-medium-up">{{row.province}}</td>
-                {{/unless}}
-                <td style={{html-safe "max-width: 250px;"}}>{{row.administrativeUnit}}
-                  {{#if @displaySubset}}
-                    <p class="text-fade">{{row.administrativeUnitClassification}}</p>
-                  {{else}}
-                    <p class="au-u-visible-medium-up text-fade">{{row.administrativeUnitClassification}}</p>
-                  {{/if}}
-                </td>
-                {{#unless @displaySubset}}
-                  <td class="au-u-visible-medium-up">{{row.administrativeUnitClassification}}</td>
-                {{/unless}}
-                <td style={{html-safe "max-width: 250px;"}}>
-                  {{#if row.decisionType}}
-                    <p>{{row.decisionType}}</p>
-                  {{else}}
-                    <p class="text-fade">Geen type</p>
-                  {{/if}}
-                  <p class="text-fade">{{row.regulationType}}</p>
-                </td>
-                {{#unless @displaySubset}}
-                  <td class="au-u-visible-medium-up">{{moment-format row.sessionDatetime 'DD-MM-YYYY HH:mm'}}</td>
-                  <td class="au-u-visible-medium-up">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
-                {{/unless}}
-                <td>
-                  <AuPill resource="{{capitalize row.status}}">{{capitalize row.status}}</AuPill>
-                </td>
-                <td class="u-hide-on-print">
-                  <LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo>
-                </td>
-              </c.body>
-              <tr>
-                <td colspan="8">
-                  {{#if this.hasAskedForFreeTextSearch}}
-                    <AuAlert @alertIcon="alert-triangle" @alertTitle="PDF’s die ingescand zijn als afbeelding verschijnen niet in de zoekopdracht. Deze zijn niet leesbaar."  @alertskin={{"warning"}} @alertsize={{"small"}}>
-                      <p>Verder zoeken we momenteel niet op op synoniemen of lokale varianten. Bepaalde documenten zullen we niet vinden.</p>
-                      <br>
-                      <p><strong>Oplossing</strong></p>
-                      <p>Gebruik niet enkel de zoekfunctie om dossiers te doorzoeken &mdash; deze resultaten zijn beperkt. Maak gebruik van filters, zonder een zoekopdracht, om het volledige plaatje te zien. <a href="/help#help-zoekresultaten" target="_blank" rel="noopener noreferrer">Lees meer informatie over zoekresultaten</a>.</p>
-                    </AuAlert>
-                  {{/if}}
-
-                  <AuAlert @alertIcon="info-circle" @alertTitle="De dossiers in deze tabel lopen maximaal één dag achter op de huidige stand van zaken."  @alertskin={{"info"}} @alertsize={{"small"}} class="au-u-margin-none" />
-                </td>
-              </tr>
-            </t.content>
-          </DataTable>
-        </div>
+                <AuAlert @alertIcon="info-circle" @alertTitle="De dossiers in deze tabel lopen maximaal één dag achter op de huidige stand van zaken."  @alertskin={{"info"}} @alertsize={{"small"}} class="au-u-margin-none" />
+              </td>
+            </tr>
+          </t.content>
+        </AuDataTable>
       </div>
     </div>
   </div>

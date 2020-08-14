@@ -1,13 +1,25 @@
-<div class="grid grid--collapse">
-  <div class="{{if this.hasActiveChildRoute "col--8-12 au-u-visible-medium-up" "col--1-1"}}">
-    <Submissions::SearchTable @class="container-flex--contain"
-                              @model={{this.model}}
-                              @isLoading={{this.isLoadingModel}}
-                              @queryParams={{this.filter}}
-                              @sort={{this.sort}}
-                              @page={{this.page}}
-                              @size={{this.size}}
-                              @displaySubset={{this.hasActiveChildRoute}}/>
+<div class="au-c-main-container__content au-c-main-container__content--scroll">
+  <div class="au-c-body-container">
+    <div id="content" class="au-c-body-container">
+      <div class="au-o-grid au-o-grid--flush au-o-grid--fixed">
+        <div class="au-o-grid__item {{if this.hasActiveChildRoute "au-u-4-6 au-u-visible-from@medium" "au-u-6-6"}}">
+          <div class="au-c-body-container">
+            <AuToolbar @size="small" @border="bottom">
+              <AuToolbarGroup>
+                <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">Toezicht ABB</AuHeading>
+              </AuToolbarGroup>
+            </AuToolbar>
+            <Submissions::SearchTable @model={{this.model}}
+                                      @isLoading={{this.isLoadingModel}}
+                                      @queryParams={{this.filter}}
+                                      @sort={{this.sort}}
+                                      @page={{this.page}}
+                                      @size={{this.size}}
+                                      @displaySubset={{this.hasActiveChildRoute}}/>
+          </div>
+        </div>
+        {{outlet}}
+      </div>
+    </div>
   </div>
-  {{outlet}}
 </div>
