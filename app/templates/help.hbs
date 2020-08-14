@@ -89,26 +89,29 @@
         </AuCard>
       </div>
 
-      <AuHeading @level="2" @skin="2" class="au-u-margin-bottom">
-        Geen antwoord op uw vraag?
-        <br>
-        Neem contact met ons op!
-      </AuHeading>
-      <form class="au-u-margin-bottom js-formvalidation-bound">
-        <div class="form__row">
-          <label class="au-c-label" for="select">Waar gaat uw bericht over?</label>
-          <WuRadioButton @label="Een functionaliteit, bug of probleem" @value="LoketLokaalBestuur@vlaanderen.be?subject=Functionaliteit of bug of probleem" @onChange={{fn (mut this.mailto)}} @isBlock={{true}} />
-          <WuRadioButton @label="Een inhoudelijke vraag" @value="LoketLokaalBestuur@vlaanderen.be?subject=Inhoudelijke vraag" @onChange={{fn (mut this.mailto)}} @isBlock={{true}} />
-          <div class="form__error" aria-describedby="radio-buttons"></div>
-        </div>
+      <div class="au-o-region">
+        <AuHeading @level="2" @skin="2" class="au-u-margin-bottom">
+          Geen antwoord op uw vraag?
+          <br>
+          Neem contact met ons op!
+        </AuHeading>
+        <form class="au-u-margin-bottom js-formvalidation-bound">
+          <AuLabel for="select">Waar gaat uw bericht over?</AuLabel>
 
-        {{#if this.mailto}}
-          <a href={{concat "mailto:" this.mailto}} class="au-c-button au-c-button--large">Bericht versturen</a>
-        {{else}}
-          <a href="#" class="au-c-button au-c-button--large">Bericht versturen</a>
-        {{/if}}
-      </form>
-      <p class="au-u-margin-bottom-large">Of neem rechtstreeks contact op via mail <a href="mailto:LoketLokaalBestuur@vlaanderen.be">LoketLokaalBestuur@vlaanderen.be</a>.</p>
+          <div class="au-o-region-small">
+            <WuRadioButton @label="Een functionaliteit, bug of probleem" @value="LoketLokaalBestuur@vlaanderen.be?subject=Functionaliteit of bug of probleem" @onChange={{fn (mut this.mailto)}} @isBlock={{true}} />
+            <WuRadioButton @label="Een inhoudelijke vraag" @value="LoketLokaalBestuur@vlaanderen.be?subject=Inhoudelijke vraag" @onChange={{fn (mut this.mailto)}} @isBlock={{true}} />
+          </div>
+
+          {{#if this.mailto}}
+            <a href={{concat "mailto:" this.mailto}} class="au-c-button au-c-button--large">Bericht versturen</a>
+          {{else}}
+            <AuButton @disabled="true" @size="large">Bericht versturen</AuButton>
+          {{/if}}
+        </form>
+
+        <p>Of neem rechtstreeks contact op via mail <a href="mailto:LoketLokaalBestuur@vlaanderen.be">LoketLokaalBestuur@vlaanderen.be</a>.</p>
+      </div>
     </div>
   </section>
   <AuMainFooter>
