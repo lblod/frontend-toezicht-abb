@@ -38,8 +38,7 @@
 // GENERIC
 @import "appuniversum/g-reset";
 @import "appuniversum/g-box-sizing";
-@import "appuniversum/g-font";
-
+// @import "appuniversum/g-font"; // (BREAKING CHANGE | CONFLICT IN FONT WEIGHTS)
 
 // ELEMENTS
 @import "appuniversum/e-page";
@@ -47,6 +46,7 @@
 
 // OBJECTS
 @import "appuniversum/o-box";
+@import "appuniversum/o-flow";
 @import "appuniversum/o-grid";
 @import "appuniversum/o-layout";
 @import "appuniversum/o-region";
@@ -66,34 +66,44 @@
 @import "ember-appuniversum/c-badge";
 @import "ember-appuniversum/c-brand";
 @import "ember-appuniversum/c-button";
+@import "ember-appuniversum/c-button-group";
+@import "ember-appuniversum/c-card";
+@import "ember-appuniversum/c-content";
+@import "ember-appuniversum/c-content-header";
+@import "ember-appuniversum/c-control";
+@import "ember-appuniversum/c-data-table";
+@import "ember-appuniversum/c-dropdown";
+@import "ember-appuniversum/c-form";
 @import "ember-appuniversum/c-heading";
 @import "ember-appuniversum/c-help-text";
+@import "ember-appuniversum/c-icon";
 @import "ember-appuniversum/c-input";
 @import "ember-appuniversum/c-label";
 @import "ember-appuniversum/c-link";
-@import "ember-appuniversum/c-icon";
 @import "ember-appuniversum/c-list-horizontal";
 @import "ember-appuniversum/c-list-navigation";
+@import "ember-appuniversum/c-loader";
+@import "ember-appuniversum/c-pagination";
 @import "ember-appuniversum/c-pill";
-@import "ember-appuniversum/c-dropdown";
 @import "ember-appuniversum/c-main-container";
 @import "ember-appuniversum/c-main-header";
 @import "ember-appuniversum/c-main-footer";
+@import "ember-appuniversum/c-modal";
 @import "ember-appuniversum/c-sidebar";
 @import "ember-appuniversum/c-textarea";
 @import "ember-appuniversum/c-toolbar";
 
 // // UTILITIES
 @import "appuniversum/u-align-text";
+@import "appuniversum/u-headings";
 @import "appuniversum/u-font-weights";
 @import "appuniversum/u-font-family";
-@import "appuniversum/u-headings";
-@import "appuniversum/u-hide";
-@import "appuniversum/u-print";
-@import "appuniversum/u-responsive-spacings";
-@import "appuniversum/u-spacings";
-@import "appuniversum/u-visible";
 @import "appuniversum/u-widths";
+@import "appuniversum/u-spacings";
+@import "appuniversum/u-responsive-spacings";
+@import "appuniversum/u-print";
+@import "appuniversum/u-hide";
+@import "appuniversum/u-visible";
 
 
 // TEMPORARY HACKS AND QUICKFIXES
