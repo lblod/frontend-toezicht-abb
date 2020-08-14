@@ -5,7 +5,7 @@
         <span>Aan het laden...</span>
       {{else}}
         <RdfForm
-                @groupClass="au-o-grid__item au-u-1-2 au-u-1-1@large"
+                @groupClass="au-o-grid__item au-u-1-2 au-u-1-1@small"
                 @form={{this.form}}
                 @graphs={{this.graphs}}
                 @sourceNode={{this.sourceNode}}
@@ -20,15 +20,15 @@
       <AuToolbarGroup>
         <AuButton @skin="tertiary" {{ on "click" this.loadFilters }}>
           <AuIcon @icon="export" @alignment="left"/>
-          Laad filters
+          Laad&nbsp;filters
         </AuButton>
         <AuButton @skin="tertiary" {{ on "click" (perform this.saveFilter) }}>
           <AuIcon @icon="plus-text" @alignment="left"/>
-          Bewaar filter
+          Bewaar&nbsp;<span class="au-u-visible-until@large">filters</span>
         </AuButton>
         <AuButton @skin="tertiary" @alert="true" {{ on "click" (perform this.resetFilters) }}>
           <AuIcon @icon="redo" @alignment="left"/>
-          Reset filters
+          Reset
         </AuButton>
       </AuToolbarGroup>
     </AuToolbar>

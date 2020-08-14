@@ -1,73 +1,94 @@
-<div class="grid grid--collapse">
-  <div class="container-flex--contain">
-    <AuToolbar @size="medium" @skin="tint" @border="bottom">
-      <AuToolbarGroup>
-        <ul class="au-c-list-horizontal">
-          <li class="au-c-list-horizontal__item">
-            <AuLink @linkRoute="search.submissions">
-              <AuIcon @icon="arrow-left" @alignment="left" />
-              Toezicht ABB
-            </AuLink>
-          </li>
-          <li class="au-c-list-horizontal__item">
-            <strong>Bewaarde zoekopdrachten</strong>
-          </li>
-        </ul>
-      </AuToolbarGroup>
-    </AuToolbar>
-    <AuToolbar @size="large">
-      <AuToolbarGroup>
-        <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">
-          Bewaarde zoekopdrachten
-        </AuHeading>
-      </AuToolbarGroup>
-    </AuToolbar>
+{{!-- TODO: Turn this into a modal when the button is seperated from the modal --}}
+<div class="au-c-body-container">
+  <AuToolbar @size="medium" @skin="tint" @border="bottom">
+    <AuToolbarGroup>
+      <ul class="au-c-list-horizontal">
+        <li class="au-c-list-horizontal__item">
+          <AuLink @linkRoute="search.submissions">
+            <AuIcon @icon="arrow-left" @alignment="left" />
+            Toezicht ABB
+          </AuLink>
+        </li>
+        <li class="au-c-list-horizontal__item">
+          <strong>Bewaarde zoekopdrachten</strong>
+        </li>
+      </ul>
+    </AuToolbarGroup>
+  </AuToolbar>
 
-    <DataTable
-          @class="container-flex--contain data-table"
-          @content={{this.model}}
-          @isLoading={{this.isLoadingModel}}
-          @page={{this.page}}
-          @size={{this.size}}
-          @sort={{this.sort}}
-          as |t|>
-      <t.content as |c|>
-        <c.header>
-          <ThSortable @label="Naam" @field="label" @currentSorting={{this.sort}}/>
-          <th>Beschrijving</th>
-          <ThSortable @label="Aangemaakt op" @field="created" @currentSorting={{this.sort}}/>
-          <th>
-            <LinkTo @route="user.search-queries.new" class="button button--narrow" type="button">
-              Maak een nieuwe zoekopdracht
-            </LinkTo>
-          </th>
-        </c.header>
-        <c.body as |row|>
-          <td>
-            {{row.label}}
-          </td>
-          <td>
+  <AuToolbar @size="large">
+    <AuToolbarGroup>
+      <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">
+        Bewaarde zoekopdrachten
+      </AuHeading>
+    </AuToolbarGroup>
+    <AuToolbarGroup>
+      <AuButtonGroup>
+        <LinkTo @route="user.search-queries.new" class="au-c-button" type="button">
+          Maak nieuwe zoekopdracht
+        </LinkTo>
+        <AuLink @linkRoute="search.submissions" class="au-c-button au-c-button--secondary" type="button">
+          Terug naar toezicht
+        </AuLink>
+      </AuButtonGroup>
+    </AuToolbarGroup>
+  </AuToolbar>
+
+  <AuDataTable
+      @content={{this.model}}
+      @isLoading={{this.isLoadingModel}}
+      @noDataMessage="Geen zoekopdrachten gevonden. Maak een nieuwe zoekopdracht aan."
+      @sort={{this.sort}}
+      @page={{this.page}}
+      @size={{this.size}} as |t|>
+    <t.content as |c|>
+      <c.header>
+        <AuDataTableThSortable @label="Naam" @field="label" @currentSorting={{this.sort}} @class="data-table__header-title"/>
+        <th>Beschrijving</th>
+        <AuDataTableThSortable @label="Aangemaakt op" @field="created" @currentSorting={{this.sort}} @class="data-table__header-title"/>
+        <th class="au-u-hide-on-print">
+        </th>
+      </c.header>
+      <c.body as |row|>
+        <td>
+          {{row.label}}
+        </td>
+        <td>
+          {{#if row.comment}}
             {{row.comment}}
-          </td>
-          <td>
-            {{moment-format row.created 'DD-MM-YYYY'}}
-          </td>
-          <td>
-            <div class="button-group">
-              <LinkTo class="button button--narrow" type="button" @route="search.submissions.search-queries.select"
-                      @model={{row.id}}>
-                Laad in
+          {{else}}
+            <AuHelpText>Geen beschrijving opgegeven</AuHelpText>
+          {{/if}}
+        </td>
+        <td>
+          {{moment-format row.created 'DD-MM-YYYY'}}
+        </td>
+        <td>
+          <AuButtonGroup>
+            {{!-- TODO: Figure out why this button does not work with AuLink and linkRoute --}}
+            <LinkTo class="au-c-button" type="button" @route="search.submissions.search-queries.select"
+                    @model={{row.id}}>
+              Laad in
+            </LinkTo>
+            <LinkTo class="au-c-button au-c-button--secondary" type="button" @route="user.search-queries.edit"
+                    @model={{row.id}}>
+              Bewerk
+            </LinkTo>
+            <AuButton @skin="tertiary" @alert="true" {{on "click" (perform this.delete row.id)}}>Verwijder</AuButton>
+          </AuButtonGroup>
+        </td>
+{{!--         TODO: add add button when the table is empty
+        <tr>
+          <td class="au-u-text-center" colspan="4">
+            <div class="au-o-region">
+              <p class="au-u-margin-bottom-small">Geen zoekopdrachten gevonden.</p>
+              <LinkTo @route="user.search-queries.new" class="au-c-button" type="button">
+                Maak nieuwe zoekopdracht
               </LinkTo>
-              <LinkTo class="button button--narrow button--alt" type="button" @route="user.search-queries.edit"
-                      @model={{row.id}}>
-                Bewerk
-              </LinkTo>
-              <a class="button button--link button--narrow button--alt button--alt--warning" type="button" {{on
-                      "click" (perform this.delete row.id)}}>Verwijder</a>
             </div>
           </td>
-        </c.body>
-      </t.content>
-    </DataTable>
-  </div>
+        </tr> --}}
+      </c.body>
+    </t.content>
+  </AuDataTable>
 </div>
