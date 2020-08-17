@@ -1,24 +1,22 @@
 <div class="au-o-grid__item au-u-1-1 au-u-2-6@medium u-wide-on-print">
   <div class="au-c-body-container au-c-action-sidebar">
-    <div class="au-o-box au-c-action-sidebar__header" tabindex="0">
-      <AuToolbar class="au-c-toolbar--nowrap">
-        <AuToolbarGroup>
-          <div>
-            <p class="au-u-margin-bottom-xsmall">
-              <Submissions::StatusPill @status={{this.model.review.status}}/>
-            </p>
-            <AuHeading @level="2" @skin="3">Melding {{this.model.organization.fullName}}</AuHeading>
-          </div>
-        </AuToolbarGroup>
-        <AuToolbarGroup>
-          <div class="au-c-body-container">
-            <LinkTo @route='search.submissions.index' class="link--icon--close">
-              <span class="u-visually-hidden">Venster sluiten</span>
-            </LinkTo>
-          </div>
-        </AuToolbarGroup>
-      </AuToolbar>
-    </div>
+    <AuToolbar @border="bottom" @size="large" class="au-c-toolbar--nowrap" tabindex="0">
+      <AuToolbarGroup>
+        <div>
+          <p class="au-u-margin-bottom-xsmall">
+            <Submissions::StatusPill @status={{this.model.review.status}}/>
+          </p>
+          <AuHeading @level="2" @skin="3">Melding {{this.model.organization.fullName}}</AuHeading>
+        </div>
+      </AuToolbarGroup>
+      <AuToolbarGroup>
+        <div class="au-c-body-container">
+          <LinkTo @route='search.submissions.index' class="link--icon--close">
+            <span class="u-visually-hidden">Venster sluiten</span>
+          </LinkTo>
+        </div>
+      </AuToolbarGroup>
+    </AuToolbar>
     <div class="au-o-box au-c-body-container au-c-body-container--scroll">
       <div class="au-u-margin-bottom">
         <div class="au-o-grid">
@@ -34,18 +32,20 @@
         <Submissions::Form @submission={{this.model}}/>
       </div>
     </div>
-    <div class="au-o-box au-c-action-sidebar__footer au-u-hide-on-print">
-      {{#if this.currentSession.canWrite}}
-        <Submissions::Review
-                @model={{await this.model.review}}
-                @status={{await this.model.review.status}}
-                @onClose={{this.onCloseComponent}}
-                @readonly={{true}}/>
-      {{else}}
-        <AuButtonGroup>
-          <LinkTo @route="search.submissions.index" class="au-c-button au-c-button--secondary">Sluit venster</LinkTo>
-        </AuButtonGroup>
-      {{/if}}
-    </div>
+    <AuToolbar @border="top" @size="large" class="au-u-hide-on-print">
+      <AuToolbarGroup>
+        {{#if this.currentSession.canWrite}}
+          <Submissions::Review
+                  @model={{await this.model.review}}
+                  @status={{await this.model.review.status}}
+                  @onClose={{this.onCloseComponent}}
+                  @readonly={{true}}/>
+        {{else}}
+          <AuButtonGroup>
+            <LinkTo @route="search.submissions.index" class="au-c-button au-c-button--secondary">Sluit venster</LinkTo>
+          </AuButtonGroup>
+        {{/if}}
+      </AuToolbarGroup>
+    </AuToolbar>
   </div>
 </div>
