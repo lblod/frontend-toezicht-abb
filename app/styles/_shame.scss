@@ -245,19 +245,9 @@ td:focus {
   border-top: .1rem solid $au-sidebar-border;
 }
 
-
-
-
-
-
-
 /* ==========================================================================
   Manage responsiveness
   ========================================================================== */
-
-.au-c-main-container {
-  height: calc(100vh - 4.2rem);
-}
 
 .au-c-main-container__content.au-c-main-container__content--scroll {
   @include mq($until: small) {
