@@ -10,25 +10,25 @@
 
 /* Style power select sizes */
 
-.ember-power-select-multiple-option {
+.ember-power-select-multiple-option { // make sure long names appear fully
   align-items: normal;
   white-space: normal;
   height: auto;
   min-height: $au-unit;
 }
 
-.ember-power-select-multiple-remove-btn {
+.ember-power-select-multiple-remove-btn { // make sure the remove button also fills the entire space vertically
   height: auto;
 }
 
-.ember-power-select--small .ember-power-select-trigger.ember-power-select-multiple-trigger {
+.ember-power-select--small .ember-power-select-trigger.ember-power-select-multiple-trigger { // limit the mutli-select
   max-height: 6rem;
   overflow: auto;
 }
 
-/* Date range; fix webuniversum */
+/* Date range; fix in appuniversum */
 
-.date-range__group {
+.date-range__group { // make sure it fits in the topbar
   width: 100%;
   float: none;
   margin: $au-unit-small 0;
@@ -44,7 +44,7 @@
 
 /* Date range; todo appuniversum*/
 
-.au-c-button.au-c-button--active {
+.au-c-button.au-c-button--active { // todo: create "active" buttons
   background-color: $au-gray-200;
 }
 
