@@ -8,24 +8,6 @@
   Form fixes
  ========================================================================== */
 
-/* Style power select sizes */
-
-.ember-power-select-multiple-option { // make sure long names appear fully
-  align-items: normal;
-  white-space: normal;
-  height: auto;
-  min-height: $au-unit;
-}
-
-.ember-power-select-multiple-remove-btn { // make sure the remove button also fills the entire space vertically
-  height: auto;
-}
-
-.ember-power-select--small .ember-power-select-trigger.ember-power-select-multiple-trigger { // limit the mutli-select
-  max-height: 6rem;
-  overflow: auto;
-}
-
 /* Date range; fix in appuniversum */
 
 .date-range__group { // make sure it fits in the topbar
@@ -42,35 +24,9 @@
   width: 4rem;
 }
 
-/* Date range; todo appuniversum*/
-
-.au-c-button.au-c-button--active { // todo: create "active" buttons
-  background-color: $au-gray-200;
-}
-
-.au-c-button-group.au-c-button-group--inline > .au-c-button {
-  margin-top: 0;
-  margin-right: -1px;
-  float: left;
-}
-
-/* Fix checkbox disabled state in alert  TODO: Fix in appuniversum? */
-
-.checkbox--disabled .checkbox__toggle+span {
-  background-color: $au-gray-300;
-}
-
 /* ==========================================================================
-  utilities
+  Utilities
  ========================================================================== */
-
-/* todo: Fix in colapse-elapse component and tile */
-
-.au-c-hr {
-  margin: $au-unit 0;
-  border: none;
-  border-bottom: 1px solid $au-gray-300;
-}
 
 // Fix ACMIDM login alerts/loading in header
 // @TODO: rework ACMIDM components to work with appuniversum classes
@@ -95,55 +51,6 @@
   }
 }
 
-/* ==========================================================================
-  Tooltips
-  TODO rework and put in ember-appuniversum
-  ========================================================================== */
-
-.au-c-tooltip-container {
-  position: relative;
-}
-
-[role="tooltip"] {
-  margin-top: $au-unit-small;
-  position: absolute;
-  display: none;
-  transition: opacity $au-transition;
-  color: $au-gray-700;
-  background-color: $au-gray-200;
-  padding: $au-unit-tiny $au-unit-small;
-  border-radius: .3rem;
-  z-index: 3;
-  max-width: $au-unit * 10;
-  opacity: 0;
-  box-shadow: .5rem .5rem .5rem $au-gray-100;
-
-  &:after {
-    content: " ";
-    position: absolute;
-    top: -.5rem;
-    left: $au-unit-small;
-    width: 0;
-    height: 0;
-    border-left: .5rem solid transparent;
-    border-right: .5rem solid transparent;
-    border-bottom: .5rem solid $au-gray-200;
-  }
-}
-
-.au-c-button.au-c-button--tooltip {
-  position: relative;
-  padding: $au-unit-tiny 0 0;
-  color: $au-gray-700;
-  border-bottom: 1px dotted $au-gray-700;
-
-  &:hover + [role="tooltip"],
-  &:focus + [role="tooltip"] {
-    display: block;
-    opacity: 1
-  }
-}
-
 /* ==================================
   #IE 11 appuniversum fixes
   @TODO: update in appuniversum
@@ -151,111 +58,21 @@
 
 .au-c-alert__content {
   display: block;
-}
-
-div:focus,
-span:focus,
-table:focus,
-td:focus {
-  outline: 0 !important;
-}
+} // ask Dieter if test checked out
 
 .checkbox + .au-c-label {
   display: inline-block;
-}
-
-/* ==================================
-  Scrollable sidebar footer on medium sizes and up
-  TODO: rework and port to ember-appuniversum
-  ================================== */
-
-@include mq($from: small) {
-  .au-c-sidebar {
-    overflow: hidden;
-  }
-
-  .au-c-sidebar__content {
-    flex-grow: 2;
-    overflow: auto;
-  }
-
-  .au-c-sidebar__footer {
-    border-top: 1px solid $au-gray-300;
-    flex-grow: 1;
-  }
-}
-
-/* ==========================================================================
-  Adapt data-table to toezicht layout; more compact
-  TODO: create au-c-data-table--compact version
-  ========================================================================== */
-
-  .au-c-data-table__table {
-    min-width: 50rem;
-  }
-
-  .au-c-data-table__table th:first-child,
-  .au-c-data-table__table td:first-child {
-    padding-left: 1rem;
-  }
-
-  .au-c-data-table__table th,
-  .au-c-data-table__table td {
-    padding: 0.6rem 0.5rem 0.6rem 1rem;
-  }
-
-.au-c-main-container__content + .au-c-main-container__sidebar {
-  border-left: 1px solid $au-sidebar-border;
-}
-
-/* ==================================
-  #BODY CONTAINER
-  Handle scroll in application details
-  TODO create in ember-appuniversum
-  ================================== */
-
-// Body container draft component
-.au-c-body-container {
-  height: 100%;
-  display: flex;
-  overflow: hidden;
-  flex-direction: column;
-  position: relative;
-  flex-grow: 1;
-}
-
-.au-c-body-container--scroll {
-  overflow: auto;
-}
-
-/* ==========================================================================
-  #ACTION SIDEBAR
-  TODO create in ember-appuniversum
-  ========================================================================== */
-
-.au-c-action-sidebar {
-  border-left: .1rem solid $au-sidebar-border;
-}
-
-.au-c-action-sidebar__header {
-  border-bottom: .1rem solid $au-sidebar-border;
-}
-
-.au-c-action-sidebar__footer {
-  border-top: .1rem solid $au-sidebar-border;
-}
+} // ask Dieter if test checked out
 
 /* ==========================================================================
   Manage responsiveness
+  // make into an accordion
   ========================================================================== */
 
 .au-c-main-container__content.au-c-main-container__content--scroll {
-  @include mq($until: small) {
-    height: auto;
+  height: calc(100vh - 4.2rem); // make sure scrolling happens as anticipated on medium sizes
 
-    .au-c-body-container,
-    .au-c-data-table__wrapper,
-    .au-o-grid--flush,
+  @include mq($until: small) { // make sure you can scroll through everything in firefox on small sizes
     .au-o-grid--fixed,
     .au-o-grid--fixed > .au-o-grid__item {
       height: auto;
@@ -263,7 +80,7 @@ td:focus {
     }
   }
 
-  @include mq($from: small) {
+  @include mq($from: small) { // make sure grid looks good when stacked, too much spacing
 
     .au-c-sidebar .au-o-grid--small > .au-o-grid__item:first-child {
       padding-bottom: 0
@@ -274,20 +91,4 @@ td:focus {
     }
 
   }
-}
-
-
-/* ==========================================================================
-  #TOOLBAR
-  Fix wrapping for sidebars and overflowing titles
-  TODO create .au-c-toolbar--nowrap in ember-appuniversum
- ========================================================================== */
-
-.au-c-toolbar--nowrap {
-  flex-wrap: nowrap;
-  align-items: normal;
-}
-
-.au-c-toolbar__group > * + * {
-  margin-left: 0.5rem;
 }
