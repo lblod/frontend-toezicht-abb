@@ -1,4 +1,4 @@
-<div class="au-c-main-container__content au-c-main-container__content--scroll">
+<div class="au-c-main-container__content au-c-main-container__content--scroll" id="content">
   <section class="au-o-region-large">
     <div class="au-o-layout au-o-layout--small">
       {{outlet}}
@@ -16,6 +16,9 @@
         </li>
         <li class="au-c-list-horizontal__item">
           <AuLink @linkRoute="legaal.cookieverklaring" @skin="secondary">Cookieverklaring</AuLink>
+        </li>
+        <li class="au-c-list-horizontal__item">
+          <AuLink @linkRoute="legaal.toegankelijkheidsverklaring" @skin="secondary">Toegankelijkheidsverklaring</AuLink>
         </li>
       </ul>
     </AuContent>
