@@ -15,7 +15,7 @@
       {{/if}}
     </div>
   </div>
-  <div class="au-c-sidebar__footer au-u-padding-none"> {{!-- TODO: turn into sticky action bar --}}
+  <div class="au-c-sidebar__footer au-c-sidebar__footer--border-top au-u-padding-none">
     <AuToolbar @size="normal" style={{html-safe "min-height: 45px;"}}>
       <AuToolbarGroup>
         <AuButton @skin="tertiary" {{ on "click" this.loadFilters }}>
@@ -24,7 +24,7 @@
         </AuButton>
         <AuButton @skin="tertiary" {{ on "click" (perform this.saveFilter) }}>
           <AuIcon @icon="plus-text" @alignment="left"/>
-          Bewaar&nbsp;<span class="au-u-visible-until@large">filters</span>
+          Bewaar&nbsp;<span class="au-u-visible-from@large">filters</span>
         </AuButton>
         <AuButton @skin="tertiary" @alert="true" {{ on "click" (perform this.resetFilters) }}>
           <AuIcon @icon="redo" @alignment="left"/>
