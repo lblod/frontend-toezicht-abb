@@ -1,11 +1,10 @@
 <div class="js-accordion js-accordion--open" {{did-update this.updateSelectedValues @fromValue @toValue}}>
   <AuLabel>{{@label}}</AuLabel>
-
-  <AuButtonGroup class="au-c-button-group--inline">
+  <AuButtonGroup @inline="true">
     <AuButton {{ on "click" this.resetFilter }}
-        class="{{if (not this.isFilterEnabled) "au-c-button--active" }}" @skin="secondary">Alle meldingen</AuButton>
+        class="{{if (not this.isFilterEnabled) "is-active" }}" @skin="secondary">Alle meldingen</AuButton>
     <AuButton {{ on "click" this.initRangeFilter }}
-        class="{{if this.isFilterEnabled "au-c-button--active" }}" @skin="secondary">Specifieke periode</AuButton>
+        class="{{if this.isFilterEnabled "is-active" }}" @skin="secondary">Specifieke periode</AuButton>
   </AuButtonGroup>
 
   {{!-- TODO: Port daterange and accordion to appuniversum --}}
