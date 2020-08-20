@@ -58,11 +58,18 @@
 
 .au-c-alert__content {
   display: block;
-} // ask Dieter if test checked out
+}
+
+div:focus,
+span:focus,
+table:focus,
+td:focus {
+  outline: 0 !important;
+}
 
 .checkbox + .au-c-label {
   display: inline-block;
-} // ask Dieter if test checked out
+}
 
 /* ==========================================================================
   Manage responsiveness
