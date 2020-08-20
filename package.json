@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@appuniversum/appuniversum": "^0.0.13",
-    "@appuniversum/ember-appuniversum": "0.0.25",
+    "@appuniversum/ember-appuniversum": "0.0.27",
     "@ember/optional-features": "^1.3.0",
     "@ember/render-modifiers": "^1.0.2",
     "@glimmer/component": "^1.0.0",
@@ -38,6 +38,7 @@
     "broccoli-asset-rev": "^3.0.0",
     "browser-rdflib": "^1.1.0",
     "ember-auto-import": "^1.5.3",
+    "ember-auto-focus": "^2.0.4",
     "ember-awesome-macros": "^5.0.0",
     "ember-browser-update": "^0.1.0",
     "ember-classic-decorator": "^1.0.7",
