@@ -31,6 +31,7 @@ Router.map(function() {
   this.route('legaal', function() {
     this.route('cookieverklaring');
     this.route('disclaimer');
+    this.route('toegankelijkheidsverklaring');
   });
   this.route('contact');
   this.route('route-not-found', {
