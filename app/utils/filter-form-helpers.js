@@ -6,6 +6,8 @@ export const FORM = new rdflib.Namespace('http://lblod.data.gift/vocabularies/fo
 export const SH = new rdflib.Namespace('http://www.w3.org/ns/shacl#');
 export const SEARCH = new rdflib.Namespace('http://redpencil.data.gift/vocabularies/search-queries/');
 
+export const TEMP_SOURCE_NODE = new rdflib.NamedNode('http://frontend-toezicht-abb/temp-source-node');
+
 export const FORM_GRAPHS = {
   formGraph: new rdflib.NamedNode('http://data.lblod.info/form'),
   metaGraph: new rdflib.NamedNode('http://data.lblod.info/metagraph'),
@@ -32,13 +34,24 @@ export async function retrieveMetaData(url, store) {
   store.parse(ttl, FORM_GRAPHS.metaGraph, 'text/turtle');
 }
 
-export async function retrieveSourceData(url, store) {
+export async function retrieveSourceData(uri, url, store) {
+  const sourceNode = new rdflib.NamedNode(uri);
+
+  // NOTE: update everything that exists in the source-graph to the given URI
+  const existing = store.match(undefined, undefined, undefined, FORM_GRAPHS.sourceGraph);
+  store.removeStatements(existing);
+
+  const updated = updateSourceNodeOfTriples(existing, sourceNode);
+  store.addAll(updated);
+
   let response = await fetch(url, {
     method: 'GET',
     headers: {'Accept': 'application/n-triples'},
   });
   const ttl = await response.text();
   store.parse(ttl, FORM_GRAPHS.sourceGraph, 'text/turtle');
+
+  return sourceNode;
 }
 
 export async function saveSourceData(url, store) {
@@ -80,7 +93,7 @@ export function getQueryParams(options) {
     dateNoLongerInForceFrom: options,
     dateNoLongerInForceTo: options,
     status: options,
-    governingBodyClassifications: options
+    governingBodyClassifications: options,
   };
 }
 
@@ -134,4 +147,16 @@ export function queryParamsToFormStore(query, store, node) {
  */
 function validURI(uri) {
   return uri.match(/^(http|ftp)s?:\/\/[\w.-]+\.\w+(\/.*)?/);
+}
+
+
+// HELPERS
+
+export function updateSourceNodeOfTriples(triples, to) {
+  const updated = [];
+  for (let triple of triples) {
+    triple.subject = to;
+    updated.push(triple);
+  }
+  return updated;
 }

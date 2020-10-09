@@ -2,7 +2,6 @@ import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
-import rdflib from 'browser-rdflib';
 import { ForkingStore } from '@lblod/ember-submission-form-fields';
 import { task } from 'ember-concurrency-decorators';
 import {
@@ -14,9 +13,8 @@ import {
   retrieveMetaData,
   retrieveSourceData,
   saveSourceData,
+  TEMP_SOURCE_NODE,
 } from '../../utils/filter-form-helpers';
-
-export const TEMP_SOURCE_NODE = new rdflib.NamedNode('http://frontend-toezicht-abb/temp-source-node');
 
 export default class SearchQueriesFormComponent extends Component {
 
@@ -62,25 +60,25 @@ export default class SearchQueriesFormComponent extends Component {
   }
 
   async retrieveSourceData(query) {
-    await retrieveSourceData(`/search-queries/${query.id}`, this.formStore);
-    // NOTE: if source was retrieved we need to set the source-node to this data.
-    this.sourceNode = new rdflib.NamedNode(query.uri);
+    this.sourceNode = await retrieveSourceData(query.uri, `/search-queries/${query.id}`, this.formStore);
   }
 
-  async updateSourceData(query) {
-    const updated = this.formStore.match(this.sourceNode, undefined, undefined, FORM_GRAPHS.sourceGraph);
+  // TODO redo (to prone for errors)
+  async saveSourceData(query) {
+    // NOTE: if no query is provided, we create a new one
+    //  as`this.retrieveSourceData(query)` expects one.
+    if (!query) {
+      const user = await this.currentSession.user;
+      query = this.store.createRecord('search-query', {
+        user,
+      });
+      await query.save();
+    }
 
-    // NOTE: we need to make sure the local store is up-to-date with changes made on the remote
-    // WARNING! this updates the source-node
+    // NOTE: update local source-data and source-node
     await this.retrieveSourceData(query);
 
-    // NOTE: we need to update the source-node to the actual one
-    updated.forEach(t => t.subject = this.sourceNode);
-
-    if (updated.length) {
-      this.formStore.removeMatches(TEMP_SOURCE_NODE, undefined, undefined);
-      this.formStore.addAll(updated);
-    }
+    // NOTE: save the source-data
     await saveSourceData(`/search-queries/${query.id}`, this.formStore);
 
     // The call
@@ -96,3 +94,4 @@ export default class SearchQueriesFormComponent extends Component {
     await removeSourceData(`/search-queries/${query.id}`);
   }
 }
+

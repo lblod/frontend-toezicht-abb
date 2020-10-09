@@ -10,12 +10,19 @@ const CONFIG_FORM_UUID = 'ebd65df9-5566-47c2-859a-ceff562881ab';
 
 export default class SearchQueriesConfigFormComponent extends SearchQueriesFormComponent {
 
-  @tracked
-  isFormEmpty;
+  @tracked isFormEmpty;
+
+  @tracked error;
 
   constructor(owner, args) {
     super(CONFIG_FORM_UUID, owner, args);
   }
+
+  get isNewForm() {
+    return !this.args.query;
+  }
+
+  // Setup and destroy
 
   async setupForm(form) {
     await super.setupForm(form);
@@ -31,30 +38,30 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     this.formStore.deregisterObserver(FILTER_FORM_UUID);
   }
 
-  get isNewForm() {
-    return !this.args.query;
-  }
-
   // External logic (user input)
 
   @task
   * save() {
-    let query = this.args.query;
-    if (!query) {
-      const user = yield this.currentSession.user;
-      query = this.store.createRecord('search-query', {
-        user,
-      });
-      yield query.save();
+    try {
+      yield this.saveSourceData(this.args.query);
+      this.router.transitionTo('user.search-queries');
+    } catch (e) {
+      this.error = e;
+      // eslint-disable-next-line no-console
+      console.error(e.stack);
     }
-    yield this.updateSourceData(query);
-    this.router.transitionTo('user.search-queries');
   }
 
   @task
   * remove() {
-    yield this.removeSourceData(this.args.query);
-    this.router.transitionTo('user.search-queries');
+    try {
+      yield this.removeSourceData(this.args.query);
+      this.router.transitionTo('user.search-queries');
+    } catch (e) {
+      this.error = e;
+      // eslint-disable-next-line no-console
+      console.error(e.stack);
+    }
   }
 
   @action
@@ -77,7 +84,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
   registerObserver() {
     this.updateIsEmptyForm();
     this.formStore.registerObserver(() => {
-        this.updateIsEmptyForm();
+      this.updateIsEmptyForm();
     }, FILTER_FORM_UUID);
   }
 
