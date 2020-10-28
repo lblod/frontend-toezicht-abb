@@ -41,6 +41,7 @@ export default class SearchSubmissionsRoute extends Route {
       if (params.governingBodyClassifications) query[':terms:governingBodyClassificationURI'] = params.governingBodyClassifications;
     }
     if (params.chartOfAccounts) query[':terms:chartOfAccountURI'] = params.chartOfAccounts;
+    if (params.taxType) query[':terms:taxTypeURI'] = params.taxType;
     if (params.provinces) query[':terms:provinceURI'] = params.provinces;
     if (params.decisionTypes) {
       query[':terms:documentTypeURI'] = params.decisionTypes;
