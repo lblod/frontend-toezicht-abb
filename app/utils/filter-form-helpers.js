@@ -94,6 +94,7 @@ export function getQueryParams(options) {
     dateNoLongerInForceTo: options,
     status: options,
     governingBodyClassifications: options,
+    taxType: options
   };
 }
 
