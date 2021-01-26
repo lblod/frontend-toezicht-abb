@@ -91,7 +91,7 @@
           {{/unless}}
           <AuDataTableThSortable @label="Bestuurseenheid" @field="organization" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
           <AuDataTableThSortable @label="Type bestuur" @field="organization.classificatie.label" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-until@small"/>
-          <AuDataTableThSortable @label="Type document" @field="ormData.decisionType.label" @currentSorting={{@sort}} @class="data-table__header-title"/>
+          <AuDataTableThSortable @label="Type document" @field="formData.decisionType.label" @currentSorting={{@sort}} @class="data-table__header-title"/>
 
           {{#unless @displaySubset}}
             <AuDataTableThSortable @label="Zitting / besluit" @field="formData.sessionStartedAtTime" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
