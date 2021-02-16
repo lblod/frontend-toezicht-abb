@@ -1,6 +1,6 @@
 {
   "name": "frontend-toezicht-abb",
-  "version": "0.24.2",
+  "version": "0.24.4",
   "private": true,
   "description": "Frontend of the Toezicht ABB application",
   "repository": {
@@ -31,7 +31,7 @@
     "@glimmer/tracking": "^1.0.0",
     "@lblod/ember-acmidm-login": "^1.0.0",
     "@lblod/ember-mock-login": "^0.4.8",
-    "@lblod/ember-submission-form-fields": "^0.9.3",
+    "@lblod/ember-submission-form-fields": "^0.9.4",
     "@lblod/ember-vo-mu-file-upload": "^0.6.0",
     "@lblod/ember-vo-webuniversum": "^0.22.1",
     "@lblod/ember-vo-webuniversum-data-table": "^0.2.17",
