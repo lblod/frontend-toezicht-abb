@@ -15,7 +15,7 @@
       <Input class="input-field input-field--block" @value={{@model.comment}} disabled={{@readonly}}/>
     </AuAlert>
     <AuButtonGroup>
-      <AuButton @disabled="@readonly" {{ on "click" this.save }}>Bewaar</AuButton>
+      <AuButton @disabled={{@readonly}} {{ on "click" this.save }}>Bewaar</AuButton>
       <AuButton @skin="secondary" {{ on "click" this.cancel }}>Sluit venster</AuButton>
     </AuButtonGroup>
   </div>
