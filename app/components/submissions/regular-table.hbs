@@ -12,7 +12,7 @@
                         @onClick={{this.setToTreatStatus}} />
             </div>
           </span>
-          <AuButton @disabled="@readonly" {{ on "click" this.resetFilters }} @skin="tertiary">
+          <AuButton {{on "click" this.resetFilters}} @skin="tertiary">
             <AuIcon @icon="cross" @alignment="left" /> Herstel alle filters
           </AuButton>
         </AuButtonGroup>
