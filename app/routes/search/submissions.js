@@ -24,13 +24,21 @@ export default class SearchSubmissionsRoute extends Route {
     this.lastParams = new Snapshot();
   }
 
+  beforeModel(transition) {
+    // Reset the page number if any of the query parameters has changed.
+    let params = transition.to.queryParams;
+    this.lastParams.stageLive(params);
+    if (
+      this.lastParams.hasBase &&
+      this.lastParams.anyFieldChanged(Object.keys(params).filter(key => key !== 'page'))
+    ) {
+      this.transitionTo({ queryParams: { page: undefined } });
+    }
+    this.lastParams.commit();
+  }
+
   async model(params) {
     this.filter = params;
-    this.lastParams.stageLive(params);
-
-    if (this.lastParams.anyFieldChanged(Object.keys(params).filter(key => key !== 'page'))) {
-      params.page = 0;
-    }
 
     const query = {};
     // TODO generate this based on form configuration?
@@ -56,8 +64,6 @@ export default class SearchSubmissionsRoute extends Route {
     if (params.dateNoLongerInForceFrom) query[':gte:dateNoLongerInForce'] = params.dateNoLongerInForceFrom;
     if (params.dateNoLongerInForceTo) query[':lte:dateNoLongerInForce'] = params.dateNoLongerInForceTo;
     if (params.status) query[':term:statusURI'] = TREAT_STATUS;
-
-    this.lastParams.commit();
 
     return await search(
       '/search/submissions',
