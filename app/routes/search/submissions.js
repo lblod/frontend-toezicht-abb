@@ -28,7 +28,7 @@ export default class SearchSubmissionsRoute extends Route {
     this.filter = params;
     this.lastParams.stageLive(params);
 
-    if (this.lastParams.anyFieldChanged(Object.keys(params).filter(key => key !== 'page'))) {
+    if (this.lastParams.hasBase && this.lastParams.anyFieldChanged(Object.keys(params).filter(key => key !== 'page'))) {
       params.page = 0;
     }
 
