@@ -68,6 +68,18 @@
                 <LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo>
               </td>
             </c.body>
+            <tr>
+            <td colspan="8">
+              <AuAlert @alertIcon="alert-triangle" @alertTitle="PDF’s die ingescand zijn als afbeelding verschijnen niet in de zoekopdracht. Deze zijn niet leesbaar."  @alertskin={{"warning"}} @alertsize={{"small"}}>
+                <p>Verder zoeken we momenteel niet op op synoniemen of lokale varianten. Bepaalde documenten zullen we niet vinden.</p>
+                <br>
+                <p><strong>Oplossing</strong></p>
+                <p>Gebruik niet enkel de zoekfunctie om dossiers te doorzoeken &mdash; deze resultaten zijn beperkt. Maak gebruik van filters, zonder een zoekopdracht, om het volledige plaatje te zien. <a href="/help#help-zoekresultaten" target="_blank" rel="noopener noreferrer">Lees meer informatie over zoekresultaten</a>.</p>
+              </AuAlert>
+
+              <AuAlert @alertIcon="info-circle" @alertTitle="De dossiers in deze tabel lopen maximaal één dag achter op de huidige stand van zaken."  @alertskin={{"info"}} @alertsize={{"small"}} class="au-u-margin-none" />
+            </td>
+          </tr>
           </t.content>
         </AuDataTable>
       </div>
