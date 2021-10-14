@@ -38,7 +38,7 @@ async function muSearch(basePath, page, size, sort, filter, dataMapping) {
       let isDesc = (sort) => sort.charAt(0) === '-';
       endpoint += `&sort[${isDesc(sort) ? camelCase(sort.substr(1)) : camelCase(sort)}]=${isDesc(sort) ? 'desc' : 'asc'}`;
   }
-  const { count, data } = await (await fetch(endpoint)).json();
+  const { count, data } = await (await fetch(encodeURI(endpoint))).json();
   const pagination = getPaginationMetadata(page, size, count);
   const entries = A(data.map(dataMapping));
 
