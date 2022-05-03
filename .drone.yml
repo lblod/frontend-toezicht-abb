@@ -1,0 +1,117 @@
+---
+kind: pipeline
+type: docker
+name: test
+steps:
+- name: install
+  image: danlynn/ember-cli:4.2.0-node_16.14
+  commands:
+  - npm install
+- name: lint:js
+  image: danlynn/ember-cli:4.2.0-node_16.14
+  failure: ignore
+  commands:
+  - npm run lint:js
+- name: lint:hbs
+  image: danlynn/ember-cli:4.2.0-node_16.14
+  failure: ignore
+  commands:
+  - npm run lint:hbs
+- name: lint:dependencies
+  image: danlynn/ember-cli:4.2.0-node_16.14
+  failure: ignore
+  commands:
+  - ember dependency-lint
+- name: test
+  image: danlynn/ember-cli:4.2.0-node_16.14
+  failure: ignore
+  commands:
+  - npm run test:ember
+
+---
+kind: pipeline
+type: docker
+name: build-dry-run
+steps:
+- name: build-dry-run
+  image: plugins/docker
+  settings:
+    repo: ${DRONE_REPO}
+    dry_run: true
+    purge: true
+trigger:
+  event:
+    - pull_request
+
+---
+kind: pipeline
+type: docker
+name: push-latest-build
+steps:
+- name: push-latest-build
+  image: plugins/docker
+  settings:
+    repo: ${DRONE_REPO}
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    purge: true
+trigger:
+  branch:
+    - development
+  event:
+    exclude:
+      - pull_request
+
+---
+kind: pipeline
+type: docker
+name: release
+steps:
+- name: push-tagged-build
+  image: plugins/docker
+  settings:
+    repo: ${DRONE_REPO}
+    tags: ${DRONE_TAG##v}
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    purge: true
+trigger:
+  event:
+    - tag
+
+---
+kind: pipeline
+type: docker
+name: release-prod
+steps:
+- name: push-tagged-build
+  image: plugins/docker
+  settings:
+    dockerfile: Dockerfile.prod
+    repo: ${DRONE_REPO}
+    tags: ${DRONE_TAG##v}-prod
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    purge: true
+trigger:
+  event:
+    - tag
+---
+kind: secret
+name: docker_username
+data: PQSQeoF4fJuDoawKd2GHalgBZ+PKmXDJWUTFv74xNw+AzcE=
+---
+kind: secret
+name: docker_password
+data: pB4tBpJ/w4hFx0iMydorLcSJfUNz3sbSjiGwXsT2oONZX5v4H5sCrDYxy60sgceJyMgWT8j0RkhKcA7/nyOwOQ==
+---
+kind: signature
+hmac: 5d0e4f0197fb2f49449a118daa65aed255c1d76df47b6e3b5f560be1b7788815
+
+...
