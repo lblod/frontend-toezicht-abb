@@ -99,3 +99,19 @@ td:focus {
 
   }
 }
+
+// "InfiniteSelect" component (this component should be made more generic and moved somewhere reusable)
+.infinite-select-options {
+  // Copied from ember-appuniversum: https://github.com/appuniversum/ember-appuniversum/blob/09fbccfa34190ab9552f42572d783d35e6925ad6/app/styles/ember-appuniversum/_p-ember-power-select.scss#L421-L424
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  @if unitless($ember-power-select-line-height) {
+    max-height: #{$ember-power-select-number-of-visible-options * $ember-power-select-line-height}em;
+  } @else {
+    max-height: $ember-power-select-number-of-visible-options * $ember-power-select-line-height;
+  }
+
+  .ember-power-select-options {
+    max-height: none;
+  }
+}
