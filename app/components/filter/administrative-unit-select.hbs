@@ -8,6 +8,13 @@
           @loadingMessage="Aan het laden..."
           @selected={{this.selected}}
           @onChange={{this.changeSelected}}
+          @optionsComponent={{component
+            "infinite-select/options"
+            canLoadMore=this.searchData.canLoadMoreSearchResults
+            loadMore=(perform this.loadMoreSearchResults)
+            isLoadingMore=this.loadMoreSearchResults.isRunning
+          }}
+          @registerAPI={{this.registerAPI}}
           @allowClear={{true}} as |bestuurseenheid|>
     {{bestuurseenheid.naam}} ({{bestuurseenheid.classificatie.label}})
   </PowerSelectMultiple>
