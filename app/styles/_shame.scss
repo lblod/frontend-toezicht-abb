@@ -4,71 +4,13 @@
    Some parts will be reused, but most of them will not.
    ========================================================================== */
 
-/* ==========================================================================
-  Form fixes
- ========================================================================== */
-
-/* Date range; fix in appuniversum */
-
-.date-range__group { // make sure it fits in the topbar
-  width: 100%;
-  float: none;
-  margin: $au-unit-small 0;
-}
-
-.date-range__group+.date-range__group {
-  margin-left: 0;
-}
-
-.date-range__label {
-  width: 4rem;
-}
-
-/* ==========================================================================
-  Utilities
- ========================================================================== */
-
-// Fix ACMIDM login alerts/loading in header
-// @TODO: rework ACMIDM components to work with appuniversum classes
-.au-c-main-header__actions .alert {
+// Fix ACMIDM login alerts in header
+// @TODO: remove this once we update to ember-acmidm v2
+.au-c-main-header__actions .au-c-alert {
   position: absolute;
-  right: $au-unit-small;
+  right: $au-unit-small + $au-unit-tiny;
   max-width: 480px;
   top: $au-unit-large + $au-unit-tiny;
-}
-
-// Position ACMIDM login loader
-.au-c-main-header__actions .u-padding--round--small {
-  position: absolute;
-  right: 0;
-  max-width: 480px;
-  top: $au-unit-large - $au-unit-tiny/2;
-  padding: 0;
-  background-color: $au-white;
-
-  .loader-wrapper {
-    padding: 0;
-  }
-}
-
-/* ==================================
-  #IE 11 appuniversum fixes
-  @TODO: update in appuniversum
-  ================================== */
-
-.au-c-alert__content {
-  display: block;
-}
-
-div:focus,
-span:focus,
-table:focus,
-td:focus {
-  outline: 0 !important;
-}
-
-.checkbox + .au-c-label {
-  display: inline-block;
 }
 
 /* ==========================================================================
