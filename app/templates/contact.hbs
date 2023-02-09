@@ -4,18 +4,30 @@
       <AuHeading @level="1" @skin="1" class="au-u-margin-bottom">Contact</AuHeading>
       <div class="au-o-region">
         <form class="au-u-margin-bottom">
-          <AuLabel for="select">Waar gaat uw bericht over?</AuLabel>
-
-          {{!-- TODO: replace radio buttons with appuniversum radiobuttions --}}
-          <div class="au-o-region-small">
-            <WuRadioButton @label="Een functionaliteit, bug of probleem" @value="LoketLokaalBestuur@vlaanderen.be?subject=Functionaliteit of bug of probleem" @onChange={{fn (mut this.mailto)}} @isBlock={{true}} />
-            <WuRadioButton @label="Een inhoudelijke vraag" @value="LoketLokaalBestuur@vlaanderen.be?subject=Inhoudelijke vraag" @onChange={{fn (mut this.mailto)}} @isBlock={{true}} />
-          </div>
+          <AuFieldset class="au-u-margin-bottom" as |f|>
+            <f.legend @skin="h6">
+              Waar gaat uw bericht over?
+            </f.legend>
+            <f.content>
+              <AuControlRadio
+                @label="Een functionaliteit, bug of probleem"
+                @value="LoketLokaalBestuur@vlaanderen.be?subject=Functionaliteit of bug of probleem"
+                @name="contact-subject"
+                @onChange={{fn (mut this.mailto)}}
+              />
+              <AuControlRadio
+                @label="Een inhoudelijke vraag"
+                @value="LoketLokaalBestuur@vlaanderen.be?subject=Inhoudelijke vraag"
+                @name="contact-subject"
+                @onChange={{fn (mut this.mailto)}}
+              />
+            </f.content>
+          </AuFieldset>
 
           {{#if this.mailto}}
-            <a href={{concat "mailto:" this.mailto}} class="au-c-button au-c-button--large">Bericht versturen</a>
+            <AuLinkExternal @skin="button" href={{concat "mailto:" this.mailto}}>Bericht versturen</AuLinkExternal>
           {{else}}
-            <AuButton @disabled="true" @size="large">Bericht versturen</AuButton>
+            <AuButton @disabled="true">Bericht versturen</AuButton>
           {{/if}}
         </form>
 
