@@ -11,9 +11,7 @@
         <AuIcon @icon="logout" @alignment="left" /> Afmelden
       </AcmidmLogout>
     {{else}}
-      <AcmidmLogin role="menuitem" @styles="au-c-button au-c-button--tertiary">
-        <AuIcon @icon="login" @alignment="left" />Aanmelden
-      </AcmidmLogin>
+      <LoginButton @isCompact={{true}} />
     {{/if}}
   </li>
 </AuMainHeader>

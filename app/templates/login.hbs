@@ -1,6 +1,6 @@
 <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="au-c-main-container__content au-c-main-container__content--scroll">
   <AuContentHeader @titlePartOne="Vlaanderen" @titlePartTwo="is lokaal bestuur">
-    <img sizes="50vw" src="/assets/images/inzendingen-header-1600.jpg" srcset="/assets/images/inzendingen-header-320.jpg 320w, /assets/images/inzendingen-header-1024.jpg 1024w, /assets/images/inzendingen-header-1600.jpg 1600w" alt="Foto van een laptop met daarop het vlaanderen logo.">
+    <img sizes="50vw" src="/assets/images/inzendingen-header-1600.jpg" srcset="/assets/images/inzendingen-header-320.jpg 320w, /assets/images/inzendingen-header-1024.jpg 1024w, /assets/images/inzendingen-header-1600.jpg 1600w" alt="" role="presentation">
   </AuContentHeader>
 
   <section class="au-o-region-large">
@@ -11,9 +11,7 @@
             <AuHeading @level="1" @skin="1">Toezicht ABB</AuHeading>
           </AuToolbarGroup>
           <AuToolbarGroup>
-            <AcmidmLogin role="menuitem" @styles="au-c-button">
-              <AuIcon @icon="login" @alignment="left" />Aanmelden
-            </AcmidmLogin>
+            <LoginButton />
           </AuToolbarGroup>
         </AuToolbar>
         <p>Dit is de interne besluitendatabank voor medewerkers van het Agentschap Binnenlands Bestuur. Via deze databank zijn alle besluiten terug te vinden die door de lokale besturen gemeld of ingezonden werden via het Loket voor Lokale Besturen. Meer info over dit loket vind je op volgende pagina: <a href="https://mijnabb.be/ondersteuning/module-toezicht" rel="noopener noreferrer" target="_blank">https://mijnabb.be/ondersteuning/module-toezicht</a></p>

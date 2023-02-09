@@ -8,8 +8,8 @@
         <AuButtonGroup>
           <span>
             <div class="checkbox--switch__wrapper">
-              <WuSwitch @label="Toon enkel te behandelen dossiers" @checked={{this.isStatusFilterEnabled}}
-                        @onClick={{this.setToTreatStatus}} />
+              <AuToggleSwitch @label="Toon enkel te behandelen dossiers" @checked={{this.isStatusFilterEnabled}}
+                        @onChange={{this.setToTreatStatus}} />
             </div>
           </span>
           <AuButton {{on "click" this.resetFilters}} @skin="tertiary">

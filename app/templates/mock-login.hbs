@@ -1,6 +1,6 @@
 <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="au-c-main-container__content au-c-main-container__content--scroll">
   <AuContentHeader @titlePartOne="Vlaanderen" @titlePartTwo="is lokaal bestuur">
-    <img sizes="50vw" src="/assets/images/inzendingen-header-1600.jpg" srcset="/assets/images/inzendingen-header-320.jpg 320w, /assets/images/inzendingen-header-1024.jpg 1024w, /assets/images/inzendingen-header-1600.jpg 1600w" alt="Foto van een laptop met daarop het vlaanderen logo.">
+    <img sizes="50vw" src="/assets/images/inzendingen-header-1600.jpg" srcset="/assets/images/inzendingen-header-320.jpg 320w, /assets/images/inzendingen-header-1024.jpg 1024w, /assets/images/inzendingen-header-1600.jpg 1600w" alt="" role="presentation">
   </AuContentHeader>
 
   <section class="au-o-region-large">
@@ -17,14 +17,18 @@
             {{#if login.errorMessage}}
               <AuAlert @alertIcon="info-circle" @alertTitle={{login.errorMessage}}  @alertskin={{"error"}}>{{login.errorMessage}}</AuAlert>
             {{/if}}
-            {{!-- TODO: Transform to new appuniversum style --}}
-            <login.each-account @accounts={{this.model}} as |account|>
-              <WuInfoTile @class="u-spacer--tiny" as |i|>
-                <i.content>
-                  {{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}
-                </i.content>
-              </WuInfoTile>
-            </login.each-account>
+            {{#each this.model as |account|}}
+              <AuButton
+                @skin="secondary"
+                @width="block"
+                @size="large"
+                class="au-u-flex au-u-flex--row au-u-flex--start au-u-margin-bottom-small au-c-card" {{! TODO: find a better solution for the border styling which now requires the au-c-card class}}
+                type="button"
+                {{on "click" (fn login.login account.id account.gebruiker.group.id)}}
+              >
+                {{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}
+              </AuButton>
+            {{/each}}
             <NumberPagination @page={{this.page}} @size={{this.size}} @nbOfItems={{this.model.length}} @total={{this.model.meta.count}} @links={{this.model.meta.pagination}} />
           {{/if}}
         </MockLogin>

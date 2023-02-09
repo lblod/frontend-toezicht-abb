@@ -1,4 +1,5 @@
 import { action } from '@ember/object';
+import { guidFor } from '@ember/object/internals';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import moment from 'moment';
@@ -6,6 +7,7 @@ import moment from 'moment';
 export default class FilterDateRangeComponent extends Component {
   @tracked fromValue = null;  // ISO string
   @tracked toValue = null;  // ISO string
+  inputId = guidFor(this);
 
   get fromDate() {
     if (this._fromDate) {
