@@ -1,25 +1,51 @@
-<div class="js-accordion js-accordion--open" {{did-update this.updateSelectedValues @fromValue @toValue}}>
-  <AuLabel>{{@label}}</AuLabel>
-  <AuButtonGroup @inline="true">
-    <AuButton {{ on "click" this.resetFilter }}
-        class="{{if (not this.isFilterEnabled) "is-active" }}" @skin="secondary">Alle meldingen</AuButton>
-    <AuButton {{ on "click" this.initRangeFilter }}
-        class="{{if this.isFilterEnabled "is-active" }}" @skin="secondary">Specifieke periode</AuButton>
+<fieldset {{did-update this.updateSelectedValues @fromValue @toValue}}>
+  <legend class="au-c-label">{{@label}}</legend>
+  <AuButtonGroup @inline={{true}}>
+    <AuButton
+      @skin="secondary"
+      class={{unless this.isFilterEnabled "is-active"}}
+      {{on "click" this.resetFilter}}
+    >
+      Alle meldingen
+    </AuButton>
+    <AuButton
+      @skin="secondary"
+      class={{if this.isFilterEnabled "is-active"}}
+      {{on "click" this.initRangeFilter}}
+    >
+      Specifieke periode
+    </AuButton>
   </AuButtonGroup>
 
-  {{!-- TODO: Port daterange and accordion to appuniversum --}}
   {{#if this.isFilterEnabled}}
-    <div class="accordion__content">
-      <WuDateRange
-              @fromValue={{this.fromDate}}
-              @toValue={{this.toDate}}
-              @onChangeFromValue={{fn this.updateDate "fromDate"}}
-              @onChangeToValue={{fn this.updateDate "toDate"}}
-              @fromMinDate="01.01.2012"
-              @fromMaxDate="01.01.2050"
-              @toMinDate="01.01.2012"
-              @toMaxDate="01.01.2050"
-      />
+    <div class="au-u-margin-top-small">
+      <div class="au-o-grid au-o-grid--tiny">
+        <div class="au-o-grid__item au-u-1-5">
+          <AuLabel for="{{this.inputId}}-date-from" @inline={{true}}>Van</AuLabel>
+        </div>
+        <div class="au-o-grid__item au-u-4-5">
+          <AuDatePicker
+            @id="{{this.inputId}}-date-from"
+            @value={{this.fromDate}}
+            @onChange={{fn this.updateDate "fromDate"}}
+            @min="2012-01-01"
+            @max="2049-12-31"
+          />
+        </div>
+
+        <div class="au-o-grid__item au-u-1-5">
+          <AuLabel for="{{this.inputIdTo}}-date-until" @inline={{true}}>Tot</AuLabel>
+        </div>
+        <div class="au-o-grid__item au-u-4-5">
+          <AuDatePicker
+            @id="{{this.inputIdTo}}-date-until"
+            @value={{this.toDate}}
+            @onChange={{fn this.updateDate "toDate"}}
+            @min="2012-01-01"
+            @max="2049-12-31"
+          />
+        </div>
+      </div>
     </div>
   {{/if}}
-</div>
+</fieldset>
