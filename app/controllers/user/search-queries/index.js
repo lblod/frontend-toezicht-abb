@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 
-import { task } from 'ember-concurrency-decorators';
+import { task } from 'ember-concurrency';
 import {removeSourceData} from '../../../utils/filter-form-helpers';
 
 export default class UserSearchQueriesIndexController extends Controller {

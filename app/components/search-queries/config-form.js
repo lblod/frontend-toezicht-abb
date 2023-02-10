@@ -1,6 +1,5 @@
 import SearchQueriesFormComponent from './form';
-
-import { task } from 'ember-concurrency-decorators';
+import { task } from 'ember-concurrency';
 import { queryParamsToFormStore } from '../../utils/filter-form-helpers';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';

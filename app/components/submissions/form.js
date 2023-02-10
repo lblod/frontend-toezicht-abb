@@ -6,7 +6,7 @@ import { tracked } from '@glimmer/tracking';
 import rdflib from 'browser-rdflib';
 import fetch from 'fetch';
 import {ForkingStore} from '@lblod/ember-submission-form-fields';
-import {task} from 'ember-concurrency-decorators';
+import {task} from 'ember-concurrency';
 
 const RDF = new rdflib.Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#");
 const FORM = new rdflib.Namespace("http://lblod.data.gift/vocabularies/forms/");

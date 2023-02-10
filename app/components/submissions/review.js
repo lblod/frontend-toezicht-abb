@@ -1,7 +1,7 @@
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
-import { task } from 'ember-concurrency-decorators';
+import { task } from 'ember-concurrency';
 import {TREATED_STATUS, TREAT_STATUS} from "../../models/submission-review-status";
 
 export default class SubmissionsReviewComponent extends Component {

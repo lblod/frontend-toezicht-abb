@@ -2,8 +2,7 @@ import {action} from '@ember/object';
 import {inject as service} from '@ember/service';
 import Component from '@glimmer/component';
 import {tracked} from '@glimmer/tracking';
-import {timeout} from 'ember-concurrency';
-import {dropTask, task, restartableTask} from 'ember-concurrency-decorators';
+import {dropTask, task, timeout, restartableTask} from 'ember-concurrency';
 
 export default class FilterAdministrativeUnitSelectComponent extends Component {
   @service store
