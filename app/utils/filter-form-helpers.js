@@ -1,5 +1,5 @@
 import rdflib from 'browser-rdflib';
-import fetch from 'node-fetch';
+import fetch from 'fetch';
 
 export const RDF = new rdflib.Namespace(
   'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
