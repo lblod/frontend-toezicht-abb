@@ -28,8 +28,8 @@ export default class Snapshot {
   fieldChanged(field) {
     if (!this.hasBase || !this.hasStaging) {
       return (
-        this.baseOrEmpty.hasOwnProperty(field) ||
-        this.futureOrEmpty.hasOwnProperty(field)
+        Object.prototype.hasOwnProperty.call(this.baseOrEmpty, field) ||
+        Object.prototype.hasOwnProperty.call(this.futureOrEmpty, field)
       );
     } else {
       return this.base[field] != this.future[field];

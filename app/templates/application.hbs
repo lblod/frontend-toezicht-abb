@@ -6,7 +6,7 @@
     </AuLink>
   </li>
   <li class="au-c-list-horizontal__item">
-    {{#if session.isAuthenticated}}
+    {{#if this.session.isAuthenticated}}
       <AcmidmLogout @tagName="button" class="au-c-button au-c-button--tertiary" role="menuitem">
         <AuIcon @icon="logout" @alignment="left" /> Afmelden
       </AcmidmLogout>

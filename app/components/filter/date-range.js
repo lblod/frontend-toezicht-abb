@@ -21,7 +21,7 @@ export default class FilterDateRangeComponent extends Component {
   }
 
   set fromDate(value) {
-    return (this._fromDate = value);
+    this._fromDate = value;
   }
 
   get toDate() {
@@ -36,7 +36,7 @@ export default class FilterDateRangeComponent extends Component {
   }
 
   set toDate(value) {
-    return (this._toValue = value);
+    this._toValue = value;
   }
 
   get isFilterEnabled() {

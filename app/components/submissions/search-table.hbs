@@ -1,6 +1,3 @@
-{{!-- template-lint-disable no-html-comments  --}}
-{{!-- template-lint-disable no-inline-styles  --}}
-
 <div class="au-c-body-container">
   <div class="au-o-grid au-o-grid--flush au-o-grid--fixed">
 
@@ -13,7 +10,7 @@
       <div class="au-c-body-container">
         <AuDataTable
             @content={{@model}}
-            @isLoading={{this.isLoadingModel}}
+            @isLoading={{@isLoadingModel}}
             @noDataMessage="Geen inzendingen gevonden"
             @sort={{@sort}}
             @page={{@page}}

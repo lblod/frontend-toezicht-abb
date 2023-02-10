@@ -24,7 +24,9 @@ export default class SupervisionSubmissionsController extends Controller {
   @action
   updateQueryParams(filter) {
     if (filter) {
-      filter.keys.forEach((key) => this.set(key, filter[key]));
+      let queryParams = {};
+      filter.keys.forEach((key) => (queryParams[key] = filter[key]));
+      this.router.transitionTo({ queryParams });
     }
   }
 }
