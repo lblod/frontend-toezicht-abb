@@ -41,7 +41,6 @@
     "browser-rdflib": "^1.1.0",
     "ember-auto-focus": "^2.0.4",
     "ember-auto-import": "^2.6.0",
-    "ember-browser-update": "^0.1.0",
     "ember-cli": "~3.28.6",
     "ember-cli-app-version": "^5.0.0",
     "ember-cli-babel": "^7.26.10",
