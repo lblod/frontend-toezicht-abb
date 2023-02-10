@@ -9,7 +9,6 @@ import {TREAT_STATUS} from '../../models/submission-review-status';
 import { getQueryParams } from '../../utils/filter-form-helpers';
 
 export default class SearchSubmissionsRoute extends Route {
-  @service currentSession;
   @tracked filter;
 
   queryParams;
