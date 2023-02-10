@@ -1,8 +1,6 @@
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
 
 export default class ApplicationAdapter extends JSONAPIAdapter {
-  namespace = 'api/1';
-
   // TODO: ajax is a private method, so we should find a different solution
   // Based on: https://github.com/lblod/frontend-gelinkt-notuleren/blob/b237330ac000e5b4a6cbf80639d416bf66c51f01/app/adapters/application.js
   async ajax(url, method) {
@@ -28,5 +26,5 @@ async function retryOnError(ajax, ajaxArgs, retryCount = 0) {
 }
 
 function sleep(time) {
-  return new Promise((resolve) => later(this, () => resolve(true), time));
+  return new Promise((resolve) => setTimeout(() => resolve(true), time));
 }
