@@ -88,7 +88,6 @@
     "qunit-dom": "^1.6.0",
     "release-it": "^15.5.0",
     "sass": "^1.23.7",
-    "uuid": "^7.0.3",
     "webpack": "^5.75.0"
   },
   "dependencyRemovalNotes": {
