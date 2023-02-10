@@ -61,7 +61,6 @@
     "ember-cli-terser": "^4.0.2",
     "ember-concurrency": "^2.3.7",
     "ember-data": "~3.28.6",
-    "ember-export-application-global": "^2.0.1",
     "ember-fetch": "^8.1.1",
     "ember-load-initializers": "^2.1.2",
     "ember-maybe-import-regenerator": "^0.1.6",
