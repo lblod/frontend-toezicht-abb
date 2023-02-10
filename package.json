@@ -26,6 +26,12 @@
     "test": "npm-run-all lint test:*",
     "test:ember": "ember test"
   },
+  "overrides": {
+    "ember-cli-babel": "$ember-cli-babel"
+  },
+  "overridesNotes": {
+    "ember-cli-babel": "torii and ember-cli-deploy-ssh-index bring in ember-cli-babel v6 which triggers the build warning"
+  },
   "devDependencies": {
     "@appuniversum/ember-appuniversum": "^1.0.0",
     "@ember/optional-features": "^2.0.0",
