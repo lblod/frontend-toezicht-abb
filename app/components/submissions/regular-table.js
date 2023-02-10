@@ -47,6 +47,12 @@ export default class SubmissionRegularTableComponent extends Component {
   get isStatusFilterEnabled() {
     return this.filter.statusUri != null;
   }
+  set isStatusFilterEnabled(value) {
+    // TODO: remove this setter once AuToggleSwitch isn't 2-way bound anymore,
+    // without this clicking the toggle triggers an exception since getters can't be modified.
+    // This setter has no meaning because the status is correctly updated by the setToTreatStatus
+    this._blackhole = value;
+  }
 
   @action
   setFilter(key, value) {
@@ -56,10 +62,10 @@ export default class SubmissionRegularTableComponent extends Component {
   }
 
   @action
-  setToTreatStatus(event) {
+  setToTreatStatus(isChecked) {
     this.filter.statusUri = null;
 
-    if (event.target.checked) {
+    if (isChecked) {
       this.filter.statusUri = TREAT_STATUS;
     }
 
