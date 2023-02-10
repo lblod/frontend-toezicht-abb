@@ -17,7 +17,6 @@ import {
 } from '../../utils/filter-form-helpers';
 
 export default class SearchQueriesFormComponent extends Component {
-
   @service store;
   @service router;
   @service currentSession;
@@ -35,11 +34,16 @@ export default class SearchQueriesFormComponent extends Component {
   }
 
   get form() {
-    return this.formStore.any(undefined, RDF('type'), FORM('Form'), FORM_GRAPHS.formGraph);
+    return this.formStore.any(
+      undefined,
+      RDF('type'),
+      FORM('Form'),
+      FORM_GRAPHS.formGraph
+    );
   }
 
   @task
-  * init(form) {
+  *init(form) {
     yield this.setupForm(form);
   }
 
@@ -60,7 +64,11 @@ export default class SearchQueriesFormComponent extends Component {
   }
 
   async retrieveSourceData(query) {
-    this.sourceNode = await retrieveSourceData(query.uri, `/search-queries/${query.id}`, this.formStore);
+    this.sourceNode = await retrieveSourceData(
+      query.uri,
+      `/search-queries/${query.id}`,
+      this.formStore
+    );
   }
 
   // TODO redo (to prone for errors)
@@ -85,7 +93,7 @@ export default class SearchQueriesFormComponent extends Component {
     //  await saveSourceData(`/search-queries/${query.id}`, this.formStore);
     // Is handled by another service. This generates delta that mu-cl-resource needs to process.
     // But takes som time. Currently the easiest fix, is wait a little longer.
-    await new Promise(resolve => setTimeout(resolve, 1000)); //This sleeps a little before moving on.
+    await new Promise((resolve) => setTimeout(resolve, 1000)); //This sleeps a little before moving on.
     // This will fail some time. A better solution would be to manually update ember-datastore.
     // The ultimate solution is push updates
   }
@@ -94,4 +102,3 @@ export default class SearchQueriesFormComponent extends Component {
     await removeSourceData(`/search-queries/${query.id}`);
   }
 }
-

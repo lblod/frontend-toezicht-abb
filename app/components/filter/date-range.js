@@ -5,8 +5,8 @@ import { tracked } from '@glimmer/tracking';
 import moment from 'moment';
 
 export default class FilterDateRangeComponent extends Component {
-  @tracked fromValue = null;  // ISO string
-  @tracked toValue = null;  // ISO string
+  @tracked fromValue = null; // ISO string
+  @tracked toValue = null; // ISO string
   inputId = guidFor(this);
 
   get fromDate() {
@@ -15,13 +15,13 @@ export default class FilterDateRangeComponent extends Component {
     }
     try {
       return new Date(Date.parse(this.fromValue));
-    } catch(e) {
+    } catch (e) {
       return null;
     }
   }
 
   set fromDate(value) {
-    return this._fromDate = value;
+    return (this._fromDate = value);
   }
 
   get toDate() {
@@ -30,13 +30,13 @@ export default class FilterDateRangeComponent extends Component {
     }
     try {
       return new Date(Date.parse(this.toValue));
-    } catch(e) {
+    } catch (e) {
       return null;
     }
   }
 
   set toDate(value) {
-    return this._toValue = value;
+    return (this._toValue = value);
   }
 
   get isFilterEnabled() {

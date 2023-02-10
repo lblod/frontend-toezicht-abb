@@ -9,7 +9,7 @@ export default class UserSearchQueriesNewRoute extends Route {
 
   constructor() {
     super(...arguments);
-    this.queryParams = getQueryParams({refreshModel: false});
+    this.queryParams = getQueryParams({ refreshModel: false });
   }
 
   async model(params) {
@@ -25,8 +25,8 @@ export default class UserSearchQueriesNewRoute extends Route {
 
   resetController(controller, isExiting) {
     if (isExiting) {
-     // NOTE: To make sure the new form does not have "sticky" query-params
-      const keys = Object.keys( controller.filter);
+      // NOTE: To make sure the new form does not have "sticky" query-params
+      const keys = Object.keys(controller.filter);
       for (let key of keys) {
         controller.set(key, null);
       }

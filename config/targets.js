@@ -3,7 +3,7 @@
 const browsers = [
   'last 3 Chrome versions',
   'last 3 Firefox versions',
-  'last 3 Safari versions'
+  'last 3 Safari versions',
 ];
 
 // Ember's browser support policy is changing, and IE11 support will end in

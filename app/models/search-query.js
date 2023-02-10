@@ -5,8 +5,11 @@ export default class SearchQueryModel extends Model {
   @attr() label;
   @attr() comment;
   @attr('datetime', {
-    defaultValue(){ return new Date();}
-  }) created;
+    defaultValue() {
+      return new Date();
+    },
+  })
+  created;
 
-  @belongsTo('gebruiker', { inverse: null}) user;
+  @belongsTo('gebruiker', { inverse: null }) user;
 }

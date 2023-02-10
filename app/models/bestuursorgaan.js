@@ -7,7 +7,8 @@ export default class Bestuursorgaan extends Model {
   @attr('date') bindingEinde;
 
   @belongsTo('bestuurseenheid', { inverse: null }) bestuurseenheid;
-  @belongsTo('bestuursorgaan-classificatie-code', { inverse: null }) classificatie;
+  @belongsTo('bestuursorgaan-classificatie-code', { inverse: null })
+  classificatie;
   @belongsTo('bestuursorgaan', { inverse: null }) isTijdsspecialisatieVan;
   @hasMany('bestuursorgaan', { inverse: null }) heeftTijdsspecialisaties;
 }

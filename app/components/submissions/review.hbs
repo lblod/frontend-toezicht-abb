@@ -5,9 +5,7 @@
       <label class="au-c-control au-c-control--checkbox">
         <Input @type="checkbox"
                class="au-c-control__input"
-               @checked={{this.isHandled}}
-               @change={{this.toggleIsHandled}}
-               disabled={{@readonly}} />
+               @checked={{this.isHandled}} disabled={{@readonly}} {{on "change" this.toggleIsHandled}} />
         <span class="au-c-control__indicator"></span>
         Melding afgehandeld
       </label>

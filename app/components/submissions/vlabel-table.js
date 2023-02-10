@@ -7,9 +7,9 @@ import InzendingenFilter from '../../utils/inzendingen-filter';
 import { typeOf } from '@ember/utils';
 
 export default class SubmissionsVlabelTableComponent extends Component {
-  @service store
+  @service store;
 
-  @tracked filter
+  @tracked filter;
 
   constructor() {
     super(...arguments);
@@ -26,10 +26,8 @@ export default class SubmissionsVlabelTableComponent extends Component {
 
   @action
   setFilter(key, value) {
-    if (typeOf(value) == 'array')
-      this.filter[key] = value.join(',');
-    else
-      this.filter[key] = value;
+    if (typeOf(value) == 'array') this.filter[key] = value.join(',');
+    else this.filter[key] = value;
     this.args.onFilterChange(this.filter);
   }
 

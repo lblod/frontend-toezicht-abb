@@ -6,7 +6,8 @@ export default class Bestuurseenheid extends Model {
 
   @belongsTo('werkingsgebied', { inverse: null }) werkingsgebied;
   @belongsTo('werkingsgebied', { inverse: null }) provincie;
-  @belongsTo('bestuurseenheid-classificatie-code', { inverse: null }) classificatie;
+  @belongsTo('bestuurseenheid-classificatie-code', { inverse: null })
+  classificatie;
   @hasMany('bestuursorgaan', { inverse: null }) bestuursorganen;
 
   get fullName() {

@@ -1,15 +1,15 @@
-import {action} from '@ember/object';
-import {inject as service} from '@ember/service';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
-import {tracked} from '@glimmer/tracking';
+import { tracked } from '@glimmer/tracking';
 import { timeout, task, restartableTask } from 'ember-concurrency';
-import {ADMINISTRATIVE_CLASSIFICATION} from "../../models/concept-scheme";
+import { ADMINISTRATIVE_CLASSIFICATION } from '../../models/concept-scheme';
 
 export default class AdministrativeUnitClassificationSelectComponent extends Component {
-  @service store
+  @service store;
 
-  @tracked selected = null
-  @tracked options
+  @tracked selected = null;
+  @tracked options;
 
   constructor() {
     super(...arguments);
@@ -17,14 +17,14 @@ export default class AdministrativeUnitClassificationSelectComponent extends Com
   }
 
   @task
-  * loadData() {
+  *loadData() {
     const options = yield this.store.query('concept', {
       filter: {
-        "concept-schemes": {
-          ":uri:": ADMINISTRATIVE_CLASSIFICATION
-        }
+        'concept-schemes': {
+          ':uri:': ADMINISTRATIVE_CLASSIFICATION,
+        },
       },
-      sort: 'label'
+      sort: 'label',
     });
     this.options = options;
 
@@ -32,36 +32,36 @@ export default class AdministrativeUnitClassificationSelectComponent extends Com
   }
 
   @restartableTask
-  * search(term) {
+  *search(term) {
     yield timeout(600);
     return this.store.query('concept', {
       filter: {
         label: term,
-        "concept-schemes": {
-          ":uri:": ADMINISTRATIVE_CLASSIFICATION
-        }
-      }
+        'concept-schemes': {
+          ':uri:': ADMINISTRATIVE_CLASSIFICATION,
+        },
+      },
     });
   }
 
   @action
   changeSelected(selected) {
     this.selected = selected;
-    this.args.onSelectionChange(selected && selected.map(d => d.get('id')));
+    this.args.onSelectionChange(selected && selected.map((d) => d.get('id')));
   }
 
   @action
   async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-        this.selected = await this.store.query('concept', {
-          filter: {
-            id: this.args.value,
-            "concept-schemes": {
-              ":uri:": ADMINISTRATIVE_CLASSIFICATION
-            }
+      this.selected = await this.store.query('concept', {
+        filter: {
+          id: this.args.value,
+          'concept-schemes': {
+            ':uri:': ADMINISTRATIVE_CLASSIFICATION,
           },
-          page: {size: this.args.value.split(',').length}
-        });
+        },
+        page: { size: this.args.value.split(',').length },
+      });
     } else if (!this.args.value) {
       this.selected = null;
     }

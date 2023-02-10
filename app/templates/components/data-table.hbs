@@ -1,5 +1,5 @@
 <div data-table class="container-flex--scroll">
-  {{#if hasBlock}}
+  {{#if (has-block)}}
     {{yield (hash
         content=(component "data-table-content" content=@content noDataMessage=this.noDataMessage enableSelection=this.enableSelection enableLineNumbers=this.enableLineNumbers onClickRow=(optional @onClickRow) data-table=this class="container-flex--scroll")
       )

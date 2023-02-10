@@ -1,7 +1,6 @@
 import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class Werkingsgebied extends Model {
-
   @attr() uri;
   @attr() naam;
   @attr() niveau;

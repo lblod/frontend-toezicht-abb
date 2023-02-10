@@ -3,10 +3,10 @@ import Model, { attr, hasMany } from '@ember-data/model';
 export default class Gebruiker extends Model {
   @attr uri;
 
-  @attr()voornaam;
+  @attr() voornaam;
   @attr() achternaam;
 
-  @hasMany('account', { inverse: null}) account;
+  @hasMany('account', { inverse: null }) account;
   @hasMany('bestuurseenheid') bestuurseenheden;
   @hasMany('search-query') searchQueries;
 
