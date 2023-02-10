@@ -48,12 +48,6 @@ export default class SubmissionRegularTableComponent extends Component {
     return this.filter.statusUri != null;
   }
 
-  set isStatusFilterEnabled(value) {
-    // TODO remove-function once WuSwitch isn't 2-way bounded anymore
-    // This setter has no meaning because the status is correctly updated by the setToTreatStatus
-    return (this._blackhole = value);
-  }
-
   @action
   setFilter(key, value) {
     if (typeOf(value) == 'array') this.filter[key] = value.join(',');

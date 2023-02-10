@@ -11,7 +11,7 @@ export default class Gebruiker extends Model {
   @hasMany('search-query') searchQueries;
 
   get group() {
-    return this.get('bestuurseenheden.firstObject');
+    return this.hasMany('bestuurseenheden').value().firstObject;
   }
 
   get fullName() {

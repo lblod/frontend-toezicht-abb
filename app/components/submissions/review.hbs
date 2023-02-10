@@ -9,8 +9,8 @@
         <span class="au-c-control__indicator"></span>
         Melding afgehandeld
       </label>
-      <AuLabel>Behandelaar <span class="text-fade">en eventueel extra informatie</span></AuLabel>
-      <Input class="input-field input-field--block" @value={{@model.comment}} disabled={{@readonly}}/>
+      <AuLabel for="behandelaar">Behandelaar <span class="au-u-muted au-u-light au-u-italic">en eventueel extra informatie</span></AuLabel>
+      <Input id="behandelaar" class="input-field input-field--block" @value={{@model.comment}} disabled={{@readonly}}/>
     </AuAlert>
     <AuButtonGroup>
       <AuButton @disabled={{@readonly}} {{ on "click" this.save }}>Bewaar</AuButton>

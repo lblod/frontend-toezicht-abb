@@ -26,7 +26,7 @@
           </div>
           <div class="au-o-grid__item au-u-1-2">
             <AuLabel>Verstuurd op</AuLabel>
-            <p>{{moment-format model.sentDate 'DD-MM-YYYY'}}</p>
+            <p>{{moment-format this.model.sentDate 'DD-MM-YYYY'}}</p>
           </div>
         </div>
         <Submissions::Form @submission={{this.model}}/>
