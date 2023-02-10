@@ -1,6 +1,5 @@
 import Controller from '@ember/controller';
-import { timeout } from 'ember-concurrency';
-import { restartableTask, task } from 'ember-concurrency-decorators';
+import { task, timeout, restartableTask } from 'ember-concurrency';
 
 export default class MockLoginController extends Controller {
   constructor() {

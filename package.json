@@ -64,7 +64,6 @@
     "ember-cli-update": "^0.47.1",
     "ember-composable-helpers": "^3.1.1",
     "ember-concurrency": "^2.3.7",
-    "ember-concurrency-decorators": "^1.0.0",
     "ember-data": "~3.28.6",
     "ember-decorators": "^6.1.1",
     "ember-export-application-global": "^2.0.1",

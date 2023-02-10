@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 import { ForkingStore } from '@lblod/ember-submission-form-fields';
-import { task } from 'ember-concurrency-decorators';
+import { task } from 'ember-concurrency';
 import {
   FORM,
   FORM_GRAPHS,

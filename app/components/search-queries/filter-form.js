@@ -1,6 +1,6 @@
 import SearchQueriesFormComponent from './form';
 import { action } from '@ember/object';
-import { task } from 'ember-concurrency-decorators';
+import { task } from 'ember-concurrency';
 import { formStoreToQueryParams, queryParamsToFormStore } from '../../utils/filter-form-helpers';
 
 export const FILTER_FORM_UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c';
