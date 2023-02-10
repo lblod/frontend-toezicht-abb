@@ -68,7 +68,7 @@ export default class SearchQueriesFormComponent extends Component {
     // NOTE: if no query is provided, we create a new one
     //  as`this.retrieveSourceData(query)` expects one.
     if (!query) {
-      const user = await this.currentSession.user;
+      const user = this.currentSession.user;
       query = this.store.createRecord('search-query', {
         user,
       });

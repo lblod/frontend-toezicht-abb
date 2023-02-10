@@ -40,7 +40,11 @@ export default class ApplicationRoute extends Route.extend(ApplicationRouteMixin
     window.location.replace(logoutUrl);
   }
 
-  _loadCurrentSession() {
-    return this.currentSession.load().catch(() => this.session.invalidate());
+  async _loadCurrentSession() {
+    try {
+      await this.currentSession.load();
+    } catch (error) {
+      this.session.invalidate();
+    }
   }
 }
