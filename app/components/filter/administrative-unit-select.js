@@ -1,14 +1,14 @@
-import {action} from '@ember/object';
-import {inject as service} from '@ember/service';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
-import {tracked} from '@glimmer/tracking';
-import {dropTask, task, timeout, restartableTask} from 'ember-concurrency';
+import { tracked } from '@glimmer/tracking';
+import { dropTask, task, timeout, restartableTask } from 'ember-concurrency';
 
 export default class FilterAdministrativeUnitSelectComponent extends Component {
-  @service store
+  @service store;
 
-  @tracked selected = null
-  @tracked preloadedOptions
+  @tracked selected = null;
+  @tracked preloadedOptions;
   @tracked searchData;
 
   constructor() {
@@ -25,10 +25,10 @@ export default class FilterAdministrativeUnitSelectComponent extends Component {
   }
 
   @task
-  * loadData() {
+  *loadData() {
     const options = yield this.store.query('bestuurseenheid', {
       sort: 'naam',
-      include: ['classificatie']
+      include: ['classificatie'],
     });
     this.preloadedOptions = options;
 
@@ -55,7 +55,7 @@ export default class FilterAdministrativeUnitSelectComponent extends Component {
     if (this.isSearching) {
       let results = yield this.fetchAdministrativeUnits({
         filter: this.searchData.searchTerm,
-        "page[number]": ++this.searchData.currentPage,
+        'page[number]': ++this.searchData.currentPage,
       });
 
       this.searchData.addSearchResults(results.toArray());
@@ -65,16 +65,16 @@ export default class FilterAdministrativeUnitSelectComponent extends Component {
   @action
   changeSelected(selected) {
     this.selected = selected;
-    this.args.onSelectionChange(selected && selected.map(d => d.get('id')));
+    this.args.onSelectionChange(selected && selected.map((d) => d.get('id')));
   }
 
   @action
   async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-        this.selected = await this.store.query('bestuurseenheid', {
-          filter: {id: this.args.value},
-          page: {size: this.args.value.split(',').length}
-        });
+      this.selected = await this.store.query('bestuurseenheid', {
+        filter: { id: this.args.value },
+        page: { size: this.args.value.split(',').length },
+      });
     } else if (!this.args.value) {
       this.selected = null;
     }
@@ -91,9 +91,9 @@ export default class FilterAdministrativeUnitSelectComponent extends Component {
 
   async fetchAdministrativeUnits(searchQuery = {}) {
     return this.store.query('bestuurseenheid', {
-      sort: "naam",
-      include: "classificatie",
-      "page[number]": 0,
+      sort: 'naam',
+      include: 'classificatie',
+      'page[number]': 0,
       ...searchQuery,
     });
   }

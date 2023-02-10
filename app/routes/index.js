@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import {inject as service} from '@ember/service';
+import { inject as service } from '@ember/service';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin) {
@@ -8,8 +8,7 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin) {
   beforeModel() {
     if (this.currentSession.canWrite || this.currentSession.canReadVlabel) {
       this.transitionTo('supervision.submissions');
-    }
-    else {
+    } else {
       this.transitionTo('search.submissions');
     }
     super.beforeModel(...arguments);

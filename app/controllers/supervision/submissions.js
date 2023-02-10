@@ -11,8 +11,10 @@ export default class SupervisionSubmissionsController extends Controller {
   sort = '-sent-date';
 
   get hasActiveChildRoute() {
-      return this.router.currentRouteName.startsWith('supervision.submissions')
-        && this.router.currentRouteName !== 'supervision.submissions.index';
+    return (
+      this.router.currentRouteName.startsWith('supervision.submissions') &&
+      this.router.currentRouteName !== 'supervision.submissions.index'
+    );
   }
 
   get canReadVlabel() {
@@ -22,7 +24,7 @@ export default class SupervisionSubmissionsController extends Controller {
   @action
   updateQueryParams(filter) {
     if (filter) {
-      filter.keys.forEach(key => this.set(key, filter[key]));
+      filter.keys.forEach((key) => this.set(key, filter[key]));
     }
   }
 }

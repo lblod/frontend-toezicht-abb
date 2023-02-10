@@ -1,26 +1,26 @@
 import { tracked } from '@glimmer/tracking';
 
 export default class InzendingenFilter {
-  @tracked bestuurseenheidIds
-  @tracked classificatieIds
-  @tracked governingBodyClassificationIds
-  @tracked marCodeIds
-  @tracked provincieIds
-  @tracked besluitTypeIds
-  @tracked regulationTypeIds
-  @tracked sessionDateFrom
-  @tracked sessionDateTo
-  @tracked sentDateFrom
-  @tracked sentDateTo
-  @tracked statusUri
-  @tracked dateOfEntryIntoForceFrom
-  @tracked dateOfEntryIntoForceTo
-  @tracked endDateFrom
-  @tracked endDateTo
+  @tracked bestuurseenheidIds;
+  @tracked classificatieIds;
+  @tracked governingBodyClassificationIds;
+  @tracked marCodeIds;
+  @tracked provincieIds;
+  @tracked besluitTypeIds;
+  @tracked regulationTypeIds;
+  @tracked sessionDateFrom;
+  @tracked sessionDateTo;
+  @tracked sentDateFrom;
+  @tracked sentDateTo;
+  @tracked statusUri;
+  @tracked dateOfEntryIntoForceFrom;
+  @tracked dateOfEntryIntoForceTo;
+  @tracked endDateFrom;
+  @tracked endDateTo;
 
   constructor(params) {
     const keys = Object.keys(params);
-    keys.forEach(key => this[key] = params[key]);
+    keys.forEach((key) => (this[key] = params[key]));
   }
 
   get keys() {
@@ -40,11 +40,11 @@ export default class InzendingenFilter {
       'dateOfEntryIntoForceFrom',
       'dateOfEntryIntoForceTo',
       'endDateFrom',
-      'endDateTo'
+      'endDateTo',
     ];
   }
 
   reset() {
-    this.keys.forEach(key => this[key] = null);
+    this.keys.forEach((key) => (this[key] = null));
   }
 }

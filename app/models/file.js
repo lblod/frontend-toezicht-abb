@@ -5,7 +5,7 @@ export default class File extends Model {
   @attr() filename;
   @attr() format;
   @attr() size;
-  @attr('string', {defaultValue: 'n/a'}) extension;
+  @attr('string', { defaultValue: 'n/a' }) extension;
   @attr('datetime') created;
 
   get humanReadableSize() {

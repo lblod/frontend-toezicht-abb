@@ -1,12 +1,14 @@
 import SearchQueriesFormComponent from './form';
 import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
-import { formStoreToQueryParams, queryParamsToFormStore } from '../../utils/filter-form-helpers';
+import {
+  formStoreToQueryParams,
+  queryParamsToFormStore,
+} from '../../utils/filter-form-helpers';
 
 export const FILTER_FORM_UUID = 'e025a601-b50b-4abd-a6de-d0c3b619795c';
 
 export default class SearchQueriesFilterFormComponent extends SearchQueriesFormComponent {
-
   constructor(owner, args) {
     super(FILTER_FORM_UUID, owner, args);
   }
@@ -29,15 +31,18 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
   }
 
   @task
-  * saveFilter() {
-    yield this.router.transitionTo('user.search-queries.new', formStoreToQueryParams(this.formStore, this.sourceNode));
+  *saveFilter() {
+    yield this.router.transitionTo(
+      'user.search-queries.new',
+      formStoreToQueryParams(this.formStore, this.sourceNode)
+    );
   }
 
   // NOTE: the problem here lies in that if an outsider makes changes in the store,
   // the field components are not aware of this. There for, for now, we force the form to rerender by temporarily
   // changing the "show" argument.
   @task
-  * resetFilters() {
+  *resetFilters() {
     yield super.setupForm(FILTER_FORM_UUID);
     this.updateQueryParams();
     this.registerObserver();
@@ -58,7 +63,11 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
    * Will populate the form-store with the given query-parameters.
    */
   loadQueryParams() {
-    queryParamsToFormStore(this.args.queryParams, this.formStore, this.sourceNode);
+    queryParamsToFormStore(
+      this.args.queryParams,
+      this.formStore,
+      this.sourceNode
+    );
   }
 
   updateQueryParams() {

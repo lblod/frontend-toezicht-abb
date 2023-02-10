@@ -8,7 +8,6 @@ import { FILTER_FORM_UUID } from './filter-form';
 const CONFIG_FORM_UUID = 'ebd65df9-5566-47c2-859a-ceff562881ab';
 
 export default class SearchQueriesConfigFormComponent extends SearchQueriesFormComponent {
-
   @tracked isFormEmpty;
 
   @tracked error;
@@ -40,7 +39,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
   // External logic (user input)
 
   @task
-  * save() {
+  *save() {
     try {
       yield this.saveSourceData(this.args.query);
       this.router.transitionTo('user.search-queries');
@@ -52,7 +51,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
   }
 
   @task
-  * remove() {
+  *remove() {
     try {
       yield this.removeSourceData(this.args.query);
       this.router.transitionTo('user.search-queries');
@@ -74,7 +73,11 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
    * Will populate the form-store with the given query-parameters.
    */
   loadQueryParams() {
-    queryParamsToFormStore(this.args.queryParams, this.formStore, this.sourceNode);
+    queryParamsToFormStore(
+      this.args.queryParams,
+      this.formStore,
+      this.sourceNode
+    );
   }
 
   /**
@@ -88,10 +91,14 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
   }
 
   updateIsEmptyForm() {
-    this.isFormEmpty = !(this.formStore && this.formStore.match(
-      this.sourceNode,
-      undefined,
-      undefined,
-      this.graphs.sourceGraph).length);
+    this.isFormEmpty = !(
+      this.formStore &&
+      this.formStore.match(
+        this.sourceNode,
+        undefined,
+        undefined,
+        this.graphs.sourceGraph
+      ).length
+    );
   }
 }

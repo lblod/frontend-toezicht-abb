@@ -4,7 +4,9 @@ import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mi
 import ENV from 'frontend-toezicht-abb/config/environment';
 import { getOwner } from '@ember/application';
 
-export default class ApplicationRoute extends Route.extend(ApplicationRouteMixin) {
+export default class ApplicationRoute extends Route.extend(
+  ApplicationRouteMixin
+) {
   @service currentSession;
 
   beforeModel() {

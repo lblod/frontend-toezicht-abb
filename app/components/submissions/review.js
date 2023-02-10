@@ -2,7 +2,10 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { task } from 'ember-concurrency';
-import {TREATED_STATUS, TREAT_STATUS} from "../../models/submission-review-status";
+import {
+  TREATED_STATUS,
+  TREAT_STATUS,
+} from '../../models/submission-review-status';
 
 export default class SubmissionsReviewComponent extends Component {
   @service router;
@@ -20,15 +23,30 @@ export default class SubmissionsReviewComponent extends Component {
   }
 
   @task
-  *initStatuses () {
+  *initStatuses() {
     let statuses = this.store.peekAll('submission-review-status');
-    let teBehandelenStatus = statuses.find(status => status.uri === TREAT_STATUS);
-    let afgehandeldStatus = statuses.find(status => status.uri === TREATED_STATUS);
+    let teBehandelenStatus = statuses.find(
+      (status) => status.uri === TREAT_STATUS
+    );
+    let afgehandeldStatus = statuses.find(
+      (status) => status.uri === TREATED_STATUS
+    );
 
-    if (!teBehandelenStatus || !teBehandelenStatus.id || !afgehandeldStatus || !afgehandeldStatus.id) {
-      statuses = yield this.store.findAll('submission-review-status', { reload: true });
-      teBehandelenStatus = statuses.find(status => status.uri === TREAT_STATUS);
-      afgehandeldStatus = statuses.find(status => status.uri ===TREATED_STATUS);
+    if (
+      !teBehandelenStatus ||
+      !teBehandelenStatus.id ||
+      !afgehandeldStatus ||
+      !afgehandeldStatus.id
+    ) {
+      statuses = yield this.store.findAll('submission-review-status', {
+        reload: true,
+      });
+      teBehandelenStatus = statuses.find(
+        (status) => status.uri === TREAT_STATUS
+      );
+      afgehandeldStatus = statuses.find(
+        (status) => status.uri === TREATED_STATUS
+      );
     }
 
     this.teBehandelenStatus = teBehandelenStatus;
@@ -37,10 +55,8 @@ export default class SubmissionsReviewComponent extends Component {
 
   @action
   toggleIsHandled() {
-    if (this.isHandled)
-      this.args.model.status = this.teBehandelenStatus;
-    else
-      this.args.model.status = this.afgehandeldStatus;
+    if (this.isHandled) this.args.model.status = this.teBehandelenStatus;
+    else this.args.model.status = this.afgehandeldStatus;
   }
 
   @action

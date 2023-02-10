@@ -1,12 +1,20 @@
 import rdflib from 'browser-rdflib';
 import fetch from 'node-fetch';
 
-export const RDF = new rdflib.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
-export const FORM = new rdflib.Namespace('http://lblod.data.gift/vocabularies/forms/');
+export const RDF = new rdflib.Namespace(
+  'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+);
+export const FORM = new rdflib.Namespace(
+  'http://lblod.data.gift/vocabularies/forms/'
+);
 export const SH = new rdflib.Namespace('http://www.w3.org/ns/shacl#');
-export const SEARCH = new rdflib.Namespace('http://redpencil.data.gift/vocabularies/search-queries/');
+export const SEARCH = new rdflib.Namespace(
+  'http://redpencil.data.gift/vocabularies/search-queries/'
+);
 
-export const TEMP_SOURCE_NODE = new rdflib.NamedNode('http://frontend-toezicht-abb/temp-source-node');
+export const TEMP_SOURCE_NODE = new rdflib.NamedNode(
+  'http://frontend-toezicht-abb/temp-source-node'
+);
 
 export const FORM_GRAPHS = {
   formGraph: new rdflib.NamedNode('http://data.lblod.info/form'),
@@ -19,7 +27,7 @@ export const FORM_GRAPHS = {
 export async function retrieveFormData(url, store) {
   let response = await fetch(url, {
     method: 'GET',
-    headers: {'Accept': 'text/turtle'},
+    headers: { Accept: 'text/turtle' },
   });
   const ttl = await response.text();
   store.parse(ttl, FORM_GRAPHS.formGraph, 'text/turtle');
@@ -28,7 +36,7 @@ export async function retrieveFormData(url, store) {
 export async function retrieveMetaData(url, store) {
   let response = await fetch(url, {
     method: 'GET',
-    headers: {'Accept': 'application/n-triples'},
+    headers: { Accept: 'application/n-triples' },
   });
   const ttl = await response.text();
   store.parse(ttl, FORM_GRAPHS.metaGraph, 'text/turtle');
@@ -38,7 +46,12 @@ export async function retrieveSourceData(uri, url, store) {
   const sourceNode = new rdflib.NamedNode(uri);
 
   // NOTE: update everything that exists in the source-graph to the given URI
-  const existing = store.match(undefined, undefined, undefined, FORM_GRAPHS.sourceGraph);
+  const existing = store.match(
+    undefined,
+    undefined,
+    undefined,
+    FORM_GRAPHS.sourceGraph
+  );
   store.removeStatements(existing);
 
   const updated = updateSourceNodeOfTriples(existing, sourceNode);
@@ -46,7 +59,7 @@ export async function retrieveSourceData(uri, url, store) {
 
   let response = await fetch(url, {
     method: 'GET',
-    headers: {'Accept': 'application/n-triples'},
+    headers: { Accept: 'application/n-triples' },
   });
   const ttl = await response.text();
   store.parse(ttl, FORM_GRAPHS.sourceGraph, 'text/turtle');
@@ -57,12 +70,16 @@ export async function retrieveSourceData(uri, url, store) {
 export async function saveSourceData(url, store) {
   // NOTE: store.serializeDataMergedGraph() will always use format 'text/turtle', regardless of attempts to override this
   // there for the function has been "copied" from the forking-store to add 'application/n-triples' as serialization format.
-  const body = rdflib.serialize(store.mergedGraph(FORM_GRAPHS.sourceGraph), store.graph, undefined,
-    'application/n-triples');
+  const body = rdflib.serialize(
+    store.mergedGraph(FORM_GRAPHS.sourceGraph),
+    store.graph,
+    undefined,
+    'application/n-triples'
+  );
   await fetch(url, {
     method: 'PUT',
     body,
-    headers: {'Content-type': 'application/n-triples'},
+    headers: { 'Content-type': 'application/n-triples' },
   });
 }
 
@@ -94,7 +111,7 @@ export function getQueryParams(options) {
     dateNoLongerInForceTo: options,
     status: options,
     governingBodyClassifications: options,
-    taxType: options
+    taxType: options,
   };
 }
 
@@ -106,15 +123,32 @@ export function getQueryParams(options) {
  * @returns {{queryParams: {}}}
  */
 export function formStoreToQueryParams(store, node) {
-  let query = {queryParams: {}};
+  let query = { queryParams: {} };
   // NOTE: retrieve all possible query-params
-  const keys = store.match(undefined, SEARCH('emberQueryParameterKey'), undefined, FORM_GRAPHS.formGraph);
+  const keys = store.match(
+    undefined,
+    SEARCH('emberQueryParameterKey'),
+    undefined,
+    FORM_GRAPHS.formGraph
+  );
   if (keys && keys.length) {
     for (let key of keys) {
-      const path = store.any(key.subject, SH('path'), undefined, FORM_GRAPHS.formGraph);
-      const values = store.match(node, path, undefined, FORM_GRAPHS.sourceGraph);
+      const path = store.any(
+        key.subject,
+        SH('path'),
+        undefined,
+        FORM_GRAPHS.formGraph
+      );
+      const values = store.match(
+        node,
+        path,
+        undefined,
+        FORM_GRAPHS.sourceGraph
+      );
       if (values && values.length) {
-        query.queryParams[key.object.value] = values.map(v => v.object.value).join(',');
+        query.queryParams[key.object.value] = values
+          .map((v) => v.object.value)
+          .join(',');
       } else {
         // NOTE: explicitly set value to prevent "sticky" query-params
         query.queryParams[key.object.value] = null;
@@ -127,9 +161,19 @@ export function formStoreToQueryParams(store, node) {
 export function queryParamsToFormStore(query, store, node) {
   const keys = Object.keys(query);
   for (let key of keys) {
-    const field = store.any(undefined, SEARCH('emberQueryParameterKey'), key, FORM_GRAPHS.formGraph);
+    const field = store.any(
+      undefined,
+      SEARCH('emberQueryParameterKey'),
+      key,
+      FORM_GRAPHS.formGraph
+    );
     if (field) {
-      const path = store.any(field, SH('path'), undefined, FORM_GRAPHS.formGraph);
+      const path = store.any(
+        field,
+        SH('path'),
+        undefined,
+        FORM_GRAPHS.formGraph
+      );
       const values = query[key] && query[key].split(',');
       if (values && values.length) {
         for (let value of values) {
@@ -149,7 +193,6 @@ export function queryParamsToFormStore(query, store, node) {
 function validURI(uri) {
   return uri.match(/^(http|ftp)s?:\/\/[\w.-]+\.\w+(\/.*)?/);
 }
-
 
 // HELPERS
 

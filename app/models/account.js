@@ -4,5 +4,5 @@ export default class Account extends Model {
   @attr() voId;
   @attr() provider;
 
-  @belongsTo('gebruiker', { inverse: null}) gebruiker;
+  @belongsTo('gebruiker', { inverse: null }) gebruiker;
 }

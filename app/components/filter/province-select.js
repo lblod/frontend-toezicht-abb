@@ -1,14 +1,14 @@
-import {action} from '@ember/object';
-import {inject as service} from '@ember/service';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
-import {tracked} from '@glimmer/tracking';
-import {task, timeout, restartableTask } from 'ember-concurrency';
+import { tracked } from '@glimmer/tracking';
+import { task, timeout, restartableTask } from 'ember-concurrency';
 
 export default class FilterProvinceSelectComponent extends Component {
-  @service store
+  @service store;
 
-  @tracked selected = null
-  @tracked options
+  @tracked selected = null;
+  @tracked options;
 
   constructor() {
     super(...arguments);
@@ -16,12 +16,12 @@ export default class FilterProvinceSelectComponent extends Component {
   }
 
   @task
-  * loadData() {
+  *loadData() {
     const options = yield this.store.query('werkingsgebied', {
       filter: {
-        niveau: 'provincie'
+        niveau: 'provincie',
       },
-      sort: 'naam'
+      sort: 'naam',
     });
     this.options = options;
 
@@ -29,30 +29,28 @@ export default class FilterProvinceSelectComponent extends Component {
   }
 
   @restartableTask
-  * search(term) {
+  *search(term) {
     yield timeout(600);
     return this.store.query('werkingsgebied', {
       filter: {
         niveau: 'provincie',
-        naam: term
-      }
+        naam: term,
+      },
     });
   }
-
-
 
   @action
   changeSelected(selected) {
     this.selected = selected;
-    this.args.onSelectionChange(selected && selected.map(d => d.get('id')));
+    this.args.onSelectionChange(selected && selected.map((d) => d.get('id')));
   }
 
   @action
   async updateSelectedValue() {
     if (this.args.value && !this.selected) {
       this.selected = await this.store.query('werkingsgebied', {
-        filter: {id: this.args.value},
-        page: {size: this.args.value.split(',').length}
+        filter: { id: this.args.value },
+        page: { size: this.args.value.split(',').length },
       });
     } else if (!this.args.value) {
       this.selected = null;
