@@ -4,9 +4,10 @@ import { action } from '@ember/object';
 
 export default class SupervisionSubmissionsShowController extends Controller {
   @service currentSession;
+  @service router;
 
   @action
   onCloseComponent() {
-    this.transitionToRoute('supervision.submissions.index');
+    this.router.transitionTo('supervision.submissions.index');
   }
 }
