@@ -12,6 +12,7 @@ export default class SupervisionSubmissionsRoute extends Route.extend(
   DataTableRouteMixin
 ) {
   @service currentSession;
+  @service store;
 
   modelName = 'submission';
 

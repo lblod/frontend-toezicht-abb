@@ -4,9 +4,10 @@ import { action } from '@ember/object';
 
 export default class SearchSubmissionsShowController extends Controller {
   @service currentSession;
+  @service router;
 
   @action
   onCloseComponent() {
-    this.transitionToRoute('search.submissions.index');
+    this.router.transitionTo('search.submissions.index');
   }
 }

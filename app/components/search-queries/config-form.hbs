@@ -1,5 +1,5 @@
-<AuToolbar @size="medium" @skin="tint" @border="bottom">
-  <AuToolbarGroup>
+<AuToolbar @size="medium" @skin="tint" @border="bottom" as |Group|>
+  <Group>
     <ul class="au-c-list-horizontal">
       <li class="au-c-list-horizontal__item">
         <AuLink @route="search.submissions" class="au-c-button au-c-button--tertiary" type="button">
@@ -14,15 +14,15 @@
         <strong>Toezicht ABB - {{if this.isNewForm "Nieuwe" "Bewerk"}} zoekopdracht</strong>
       </li>
     </ul>
-  </AuToolbarGroup>
+  </Group>
 </AuToolbar>
 
-<AuToolbar @size="large" @border="bottom">
-  <AuToolbarGroup>
+<AuToolbar @size="large" @border="bottom" as |Group|>
+  <Group>
     <AuHeading @level="1" @skin="2">
       {{if this.isNewForm "Nieuwe" "Bewerk"}} zoekopdracht
     </AuHeading>
-  </AuToolbarGroup>
+  </Group>
 </AuToolbar>
 
 <div class="au-c-main-container__content au-c-main-container__content--scroll">
@@ -32,10 +32,10 @@
       <span class="au-u-hidden-visually">Aan het laden</span>
     {{else}}
       {{#if this.error}}
-        <AuAlert @alertIcon="cross"
-                 @alertTitle="Oeps! Dit is genant ..."
-                 @alertskin={{"error"}}
-                 @closable="true"
+        <AuAlert @icon="cross"
+                 @title="Oeps! Dit is genant ..."
+                 @skin={{"error"}}
+                 @closable={{true}}
                  class="au-o-grid__item au-u-1-1 au-u-1-2@medium">
           <p>Er is iets onverwacht misgelopen tijdens het verwerken van uw zoekopdracht.</p>
           <p>Als dit probleem zich blijft voortdoen, twijfel er dan niet aan ondersteuning te contacteren.</p>
@@ -52,8 +52,8 @@
     {{/if}}
   </div>
 </div>
-<AuToolbar @size="large" @border="top">
-  <AuToolbarGroup>
+<AuToolbar @size="large" @border="top" as |Group|>
+  <Group>
     <AuButtonGroup>
       <AuButton @disabled={{if (or this.init.isRunning this.isFormEmpty) "true"}}
                 @loading={{if this.save.isRunning "true"}}
@@ -70,7 +70,7 @@
       {{/unless}}
       <AuButton @skin="tertiary" {{on "click" this.back}}>Annuleer</AuButton>
     </AuButtonGroup>
-  </AuToolbarGroup>
+  </Group>
   {{#unless this.isNewForm}}
     <AuButton @disabled={{if this.init.isRunning "true"}}
               @loading={{if this.remove.isRunning "true"}}

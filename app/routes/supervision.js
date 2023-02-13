@@ -5,6 +5,7 @@ import { getOwner } from '@ember/application';
 export default class SupervisionRoute extends Route {
   @service currentSession;
   @service session;
+  @service router;
 
   beforeModel(transition) {
     this.session.requireAuthentication(transition, 'login');
@@ -17,9 +18,9 @@ export default class SupervisionRoute extends Route {
         target == 'supervision.submissions.show' &&
         getOwner(this).lookup(`route:${showSearchRoute}`)
       ) {
-        this.transitionTo(showSearchRoute, transition.to.params.id);
+        this.router.transitionTo(showSearchRoute, transition.to.params.id);
       } else {
-        this.transitionTo('search');
+        this.router.transitionTo('search');
       }
     }
   }

@@ -1,7 +1,7 @@
 {{!-- TODO: Turn this into a modal when the button is seperated from the modal --}}
 <div class="au-c-body-container">
-  <AuToolbar @size="medium" @skin="tint" @border="bottom">
-    <AuToolbarGroup>
+  <AuToolbar @size="medium" @skin="tint" @border="bottom" as |Group|>
+    <Group>
       <ul class="au-c-list-horizontal">
         <li class="au-c-list-horizontal__item">
           <AuLink @route="search.submissions">
@@ -13,16 +13,16 @@
           <strong>Bewaarde zoekopdrachten</strong>
         </li>
       </ul>
-    </AuToolbarGroup>
+    </Group>
   </AuToolbar>
 
-  <AuToolbar @size="large">
-    <AuToolbarGroup>
+  <AuToolbar @size="large" as |Group|>
+    <Group>
       <AuHeading @level="1" @skin="2" class="au-u-margin-top-tiny au-u-margin-bottom-tiny">
         Bewaarde zoekopdrachten
       </AuHeading>
-    </AuToolbarGroup>
-    <AuToolbarGroup>
+    </Group>
+    <Group>
       <AuButtonGroup>
         <LinkTo @route="user.search-queries.new" class="au-c-button" type="button">
           Maak nieuwe zoekopdracht
@@ -31,7 +31,7 @@
           Terug naar toezicht
         </AuLink>
       </AuButtonGroup>
-    </AuToolbarGroup>
+    </Group>
   </AuToolbar>
 
   <AuDataTable

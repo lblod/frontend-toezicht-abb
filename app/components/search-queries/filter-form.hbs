@@ -16,8 +16,8 @@
     </div>
   </div>
   <div class="au-c-sidebar__footer au-c-sidebar__footer--border-top au-u-padding-none">
-    <AuToolbar @size="normal" style={{html-safe "min-height: 45px;"}}>
-      <AuToolbarGroup>
+    <AuToolbar @size="normal" style={{html-safe "min-height: 45px;"}} as |Group|>
+      <Group>
         <AuButton @skin="tertiary" {{ on "click" this.loadFilters }}>
           <AuIcon @icon="export" @alignment="left"/>
           Laad&nbsp;filters
@@ -30,7 +30,7 @@
           <AuIcon @icon="redo" @alignment="left"/>
           Reset
         </AuButton>
-      </AuToolbarGroup>
+      </Group>
     </AuToolbar>
   </div>
 </div>

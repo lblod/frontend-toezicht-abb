@@ -1,16 +1,16 @@
 <div class="au-c-body-container">
   <div class="au-o-box au-o-box--small au-u-hide-on-print">
-    <AuToolbar class="au-u-margin-bottom-small">
-      <AuToolbarGroup>
+    <AuToolbar class="au-u-margin-bottom-small" as |Group|>
+      <Group>
         <AuHeading @level="1" @skin="2">Toezicht ABB - Vlaamse Belastingsdienst</AuHeading>
-      </AuToolbarGroup>
-      <AuToolbarGroup>
+      </Group>
+      <Group>
         <AuButtonGroup>
           <AuButton {{on "click" this.resetFilters}} @skin="tertiary">
             <AuIcon @icon="cross" @alignment="left" /> Herstel alle filters
           </AuButton>
         </AuButtonGroup>
-      </AuToolbarGroup>
+      </Group>
     </AuToolbar>
 
     {{!-- FILTERS --}}
