@@ -1,10 +1,9 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 import { task, timeout, restartableTask } from 'ember-concurrency';
 
 export default class MockLoginController extends Controller {
-  constructor() {
-    super(...arguments);
-  }
+  @service store;
 
   queryParams = ['gemeente', 'page'];
   gemeente = '';

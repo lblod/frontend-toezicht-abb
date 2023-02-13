@@ -7,6 +7,7 @@ export default class UserSearchQueriesIndexRoute extends Route.extend(
   DataTableRouteMixin
 ) {
   @service currentSession;
+  @service store;
 
   queryParams = {
     page: { refreshModel: true },
