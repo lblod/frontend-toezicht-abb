@@ -15,7 +15,7 @@
             <span class="au-u-hidden-visually">Aan het laden</span>
           {{else}}
             {{#if login.errorMessage}}
-              <AuAlert @alertIcon="info-circle" @alertTitle={{login.errorMessage}}  @alertskin={{"error"}}>{{login.errorMessage}}</AuAlert>
+              <AuAlert @icon="info-circle" @title={{login.errorMessage}} @skin="error">{{login.errorMessage}}</AuAlert>
             {{/if}}
             {{#each this.model as |account|}}
               <AuButton

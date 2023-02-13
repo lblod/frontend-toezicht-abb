@@ -32,10 +32,10 @@
       <span class="au-u-hidden-visually">Aan het laden</span>
     {{else}}
       {{#if this.error}}
-        <AuAlert @alertIcon="cross"
-                 @alertTitle="Oeps! Dit is genant ..."
-                 @alertskin={{"error"}}
-                 @closable="true"
+        <AuAlert @icon="cross"
+                 @title="Oeps! Dit is genant ..."
+                 @skin={{"error"}}
+                 @closable={{true}}
                  class="au-o-grid__item au-u-1-1 au-u-1-2@medium">
           <p>Er is iets onverwacht misgelopen tijdens het verwerken van uw zoekopdracht.</p>
           <p>Als dit probleem zich blijft voortdoen, twijfel er dan niet aan ondersteuning te contacteren.</p>
