@@ -3,12 +3,12 @@ import { inject as service } from '@ember/service';
 import SessionService from 'ember-simple-auth/services/session';
 import ENV from 'frontend-toezicht-abb/config/environment';
 
-export default class LoketSessionService extends SessionService {
+export default class AppSessionService extends SessionService {
   @service currentSession;
 
-  handleAuthentication(routeAfterAuthentication) {
+  async handleAuthentication(routeAfterAuthentication) {
+    await this.currentSession.load();
     super.handleAuthentication(routeAfterAuthentication);
-    this.currentSession.load();
   }
 
   handleInvalidation() {
