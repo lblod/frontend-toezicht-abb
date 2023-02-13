@@ -27,13 +27,15 @@
     "test:ember": "ember test"
   },
   "overrides": {
+    "@appuniversum/ember-appuniversum": "$@appuniversum/ember-appuniversum",
     "ember-cli-babel": "$ember-cli-babel"
   },
   "overridesNotes": {
+    "@appuniversum/ember-appuniversum": "ember-submission-form-fields v1 doesn't support v2 yet, so we override it until we update to v2 of that addon",
     "ember-cli-babel": "torii and ember-cli-deploy-ssh-index bring in ember-cli-babel v6 which triggers the build warning"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "^1.0.0",
+    "@appuniversum/ember-appuniversum": "^2.4.1",
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^2.0.5",
     "@ember/test-helpers": "^2.6.0",
