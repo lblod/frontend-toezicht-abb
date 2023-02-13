@@ -1,5 +1,4 @@
 {{#if this.initStatuses.lastSuccessful}}
-<AuToolbarGroup>
   <div>
     <AuAlert @alertTitle="Medewerkers locatiesecretariaat" @alertsize={{"tiny"}} @alertskin={{"success"}}>
       <label class="au-c-control au-c-control--checkbox">
@@ -17,5 +16,4 @@
       <AuButton @skin="secondary" {{ on "click" this.cancel }}>Sluit venster</AuButton>
     </AuButtonGroup>
   </div>
-</AuToolbarGroup>
 {{/if}}

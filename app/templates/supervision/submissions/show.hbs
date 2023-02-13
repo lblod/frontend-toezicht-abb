@@ -1,21 +1,21 @@
 <div class="au-o-grid__item au-u-1-1 au-u-2-5@medium">
   <div class="au-c-body-container au-c-action-sidebar">
-    <AuToolbar @border="bottom" @size="large" @nowrap="true" tabindex="0">
-      <AuToolbarGroup>
+    <AuToolbar @border="bottom" @size="large" @nowrap="true" tabindex="0" as |Group|>
+      <Group>
         <div>
           <p class="au-u-margin-bottom-xsmall">
             <Submissions::StatusPill @status={{this.model.review.status}}/>
           </p>
           <AuHeading @level="2" @skin="3">Melding {{this.model.organization.fullName}}</AuHeading>
         </div>
-      </AuToolbarGroup>
-      <AuToolbarGroup>
+      </Group>
+      <Group>
         <div class="au-o-box">
           <LinkTo @route='supervision.submissions.index' class="link--icon--close">
             <span class="au-u-hidden-visually">Venster sluiten</span>
           </LinkTo>
         </div>
-      </AuToolbarGroup>
+      </Group>
     </AuToolbar>
     <div class="au-o-box au-c-body-container au-c-body-container--scroll">
       <div class="au-u-margin-bottom">
@@ -38,7 +38,8 @@
       </div>
       <Submissions::Form @submission={{this.model}}/>
     </div>
-    <AuToolbar @border="top" @size="large" class="au-u-hide-on-print">
+    <AuToolbar @border="top" @size="large" class="au-u-hide-on-print" as |Group|>
+      <Group>
         {{#if this.currentSession.canWrite}}
           <Submissions::Review
                   @model={{await this.model.review}}
@@ -49,6 +50,7 @@
             <LinkTo @route="supervision.submissions.index" class="au-c-button au-c-button--secondary">Sluit venster</LinkTo>
           </div>
         {{/if}}
+      </Group>
     </AuToolbar>
   </div>
 </div>
