@@ -1,15 +1,14 @@
-/* eslint-disable ember/no-mixins */
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import { getOwner } from '@ember/application';
 
-export default class SupervisionRoute extends Route.extend(
-  AuthenticatedRouteMixin
-) {
+export default class SupervisionRoute extends Route {
   @service currentSession;
+  @service session;
 
   beforeModel(transition) {
+    this.session.requireAuthentication(transition, 'login');
+
     if (!(this.currentSession.canWrite || this.currentSession.canReadVlabel)) {
       const target = transition.targetName;
       const showSearchRoute = 'search.submissions.show';
