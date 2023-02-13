@@ -12,7 +12,7 @@ export default class MockLoginRoute extends Route {
   @service store;
 
   beforeModel() {
-    if (this.session.isAuthenticated) this.transitionTo('index');
+    this.session.prohibitAuthentication('index');
   }
 
   model(params) {

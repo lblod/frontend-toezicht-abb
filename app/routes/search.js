@@ -1,7 +1,10 @@
-/* eslint-disable ember/no-mixins */
 import Route from '@ember/routing/route';
-import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import { inject as service } from '@ember/service';
 
-export default class SearchRoute extends Route.extend(
-  AuthenticatedRouteMixin
-) {}
+export default class SearchRoute extends Route {
+  @service session;
+
+  beforeModel(transition) {
+    this.session.requireAuthentication(transition, 'login');
+  }
+}
