@@ -27,11 +27,9 @@
     "test:ember": "ember test"
   },
   "overrides": {
-    "@appuniversum/ember-appuniversum": "$@appuniversum/ember-appuniversum",
     "ember-cli-babel": "$ember-cli-babel"
   },
   "overridesNotes": {
-    "@appuniversum/ember-appuniversum": "ember-submission-form-fields v1 doesn't support v2 yet, so we override it until we update to v2 of that addon",
     "ember-cli-babel": "torii and ember-cli-deploy-ssh-index bring in ember-cli-babel v6 which triggers the build warning"
   },
   "devDependencies": {
@@ -43,10 +41,9 @@
     "@glimmer/tracking": "^1.0.4",
     "@lblod/ember-acmidm-login": "^1.0.0",
     "@lblod/ember-mock-login": "^0.7.0",
-    "@lblod/ember-submission-form-fields": "^1.9.2",
+    "@lblod/ember-submission-form-fields": "^2.6.1",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
-    "browser-rdflib": "^1.1.0",
     "ember-auto-import": "^2.6.0",
     "ember-cli": "~3.28.6",
     "ember-cli-app-version": "^6.0.0",
@@ -72,7 +69,7 @@
     "ember-moment": "^10.0.0",
     "ember-mu-transform-helpers": "^2.0.0",
     "ember-page-title": "^7.0.0",
-    "ember-power-select": "^5.0.1",
+    "ember-power-select": "^6.0.1",
     "ember-promise-helpers": "^2.0.0",
     "ember-qunit": "^5.1.5",
     "ember-resolver": "^8.0.3",
@@ -93,6 +90,7 @@
     "prettier": "^2.5.1",
     "qunit": "^2.17.2",
     "qunit-dom": "^2.0.0",
+    "rdflib": "^2.2.26",
     "release-it": "^15.5.0",
     "sass": "^1.23.7",
     "webpack": "^5.75.0"

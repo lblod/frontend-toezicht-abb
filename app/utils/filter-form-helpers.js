@@ -1,25 +1,21 @@
-import rdflib from 'browser-rdflib';
+import { NamedNode, Namespace, serialize } from 'rdflib';
 import fetch from 'fetch';
 
-export const RDF = new rdflib.Namespace(
-  'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
-);
-export const FORM = new rdflib.Namespace(
-  'http://lblod.data.gift/vocabularies/forms/'
-);
-export const SH = new rdflib.Namespace('http://www.w3.org/ns/shacl#');
-export const SEARCH = new rdflib.Namespace(
+export const RDF = new Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+export const FORM = new Namespace('http://lblod.data.gift/vocabularies/forms/');
+export const SH = new Namespace('http://www.w3.org/ns/shacl#');
+export const SEARCH = new Namespace(
   'http://redpencil.data.gift/vocabularies/search-queries/'
 );
 
-export const TEMP_SOURCE_NODE = new rdflib.NamedNode(
+export const TEMP_SOURCE_NODE = new NamedNode(
   'http://frontend-toezicht-abb/temp-source-node'
 );
 
 export const FORM_GRAPHS = {
-  formGraph: new rdflib.NamedNode('http://data.lblod.info/form'),
-  metaGraph: new rdflib.NamedNode('http://data.lblod.info/metagraph'),
-  sourceGraph: new rdflib.NamedNode(`http://data.lblod.info/sourcegraph`),
+  formGraph: new NamedNode('http://data.lblod.info/form'),
+  metaGraph: new NamedNode('http://data.lblod.info/metagraph'),
+  sourceGraph: new NamedNode(`http://data.lblod.info/sourcegraph`),
 };
 
 // API CALLS
@@ -43,7 +39,7 @@ export async function retrieveMetaData(url, store) {
 }
 
 export async function retrieveSourceData(uri, url, store) {
-  const sourceNode = new rdflib.NamedNode(uri);
+  const sourceNode = new NamedNode(uri);
 
   // NOTE: update everything that exists in the source-graph to the given URI
   const existing = store.match(
@@ -70,7 +66,7 @@ export async function retrieveSourceData(uri, url, store) {
 export async function saveSourceData(url, store) {
   // NOTE: store.serializeDataMergedGraph() will always use format 'text/turtle', regardless of attempts to override this
   // there for the function has been "copied" from the forking-store to add 'application/n-triples' as serialization format.
-  const body = rdflib.serialize(
+  const body = serialize(
     store.mergedGraph(FORM_GRAPHS.sourceGraph),
     store.graph,
     undefined,
@@ -177,7 +173,7 @@ export function queryParamsToFormStore(query, store, node) {
       const values = query[key] && query[key].split(',');
       if (values && values.length) {
         for (let value of values) {
-          const rdfv = validURI(value) ? new rdflib.NamedNode(value) : value;
+          const rdfv = validURI(value) ? new NamedNode(value) : value;
           store.graph.add(node, path, rdfv, FORM_GRAPHS.sourceGraph);
         }
       }
