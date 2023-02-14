@@ -104,13 +104,13 @@
           {{#unless @displaySubset}}
             <td class="au-u-visible-from@medium">{{row.organization.provincie.naam}}</td>
           {{/unless}}
-          <td class="au-u-visible-until@small" style={{html-safe "max-width: 250px;"}}>
+          <td class="au-u-visible-until@small" style="max-width: 250px;" {{! template-lint-disable no-inline-styles}}>
             {{row.organization.naam}}
             <br>
             <AuHelpText class="au-u-hidden-from@medium text-fade">{{row.organization.classificatie.label}}</AuHelpText>
           </td>
           <td class="au-u-visible-from@medium">{{row.organization.classificatie.label}}</td>
-          <td style={{html-safe "max-width: 250px;"}}>
+          <td style="max-width: 250px;" {{! template-lint-disable no-inline-styles}}>
             {{#if row.formData.decisionType}}
               <p>{{row.formData.decisionType.label}}</p>
             {{else}}
@@ -122,8 +122,8 @@
             <td class="au-u-visible-from@medium">{{moment-format row.formData.sessionStartedAtTime 'DD-MM-YYYY'}}</td>
             <td class="au-u-visible-from@medium">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
           {{/unless}}
-          <td style={{html-safe "max-width:120px;"}}>
-            <Submissions::StatusPill @status={{row.review.status}}/>{{!--  <AuPill resource="{{capitalize row.status}}">{{capitalize row.status}}</AuPill> --}}
+          <td style="max-width:120px;" {{! template-lint-disable no-inline-styles}}>
+            <Submissions::StatusPill @status={{row.review.status}}/>
           </td>
           <td class="au-u-hide-on-print">
             <LinkTo @route="supervision.submissions.show" @model={{row.id}}>Bekijk</LinkTo>

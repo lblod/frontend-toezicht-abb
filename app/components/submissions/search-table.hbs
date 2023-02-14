@@ -36,7 +36,7 @@
               {{#unless @displaySubset}}
                 <td class="au-u-visible-from@medium">{{row.province}}</td>
               {{/unless}}
-              <td style={{html-safe "max-width: 175px;"}}>{{row.administrativeUnit}}
+              <td style="max-width: 175px;" {{! template-lint-disable no-inline-styles}}>{{row.administrativeUnit}}
                 {{#if @displaySubset}}
                   <p class="text-fade">{{row.administrativeUnitClassification}}</p>
                 {{else}}
@@ -46,7 +46,7 @@
               {{#unless @displaySubset}}
                 <td class="au-u-visible-from@medium">{{row.administrativeUnitClassification}}</td>
               {{/unless}}
-              <td style={{html-safe "max-width: 200px;"}}>
+              <td style="max-width: 200px;" {{! template-lint-disable no-inline-styles}}>
                 {{#if row.decisionType}}
                   <p>{{row.decisionType}}</p>
                 {{else}}
@@ -58,10 +58,10 @@
                 <td class="au-u-visible-from@medium">{{moment-format row.sessionDatetime 'DD-MM-YYYY HH:mm'}}</td>
                 <td class="au-u-visible-from@medium">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
               {{/unless}}
-              <td style={{html-safe "max-width:120px;"}}>
-                <AuPill resource="{{capitalize row.status}}">{{capitalize row.status}}</AuPill>
+              <td style="max-width:120px;" {{! template-lint-disable no-inline-styles}}>
+                <AuPill resource={{row.status}}>{{row.status}}</AuPill>
               </td>
-              <td class="au-u-hide-on-print" style={{html-safe "width:70px;"}}>
+              <td class="au-u-hide-on-print" style="width:70px;" {{! template-lint-disable no-inline-styles}}>
                 <LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo>
               </td>
             </c.body>
