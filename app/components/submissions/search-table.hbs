@@ -64,7 +64,7 @@
                 </Submissions::ReviewStatus>
               </td>
               <td class="au-u-hide-on-print" style="width:70px;" {{! template-lint-disable no-inline-styles}}>
-                <LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo>
+                <AuLink @route="search.submissions.show" @model={{row.id}} @icon="eye">Bekijk</AuLink>
               </td>
             </c.body>
             <tr>

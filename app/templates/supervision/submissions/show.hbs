@@ -47,7 +47,7 @@
                   @onClose={{this.onCloseComponent}} />
         {{else}}
           <AuButtonGroup>
-            <LinkTo @route="supervision.submissions.index" class="au-c-button au-c-button--secondary">Sluit venster</LinkTo>
+            <AuLink @route="supervision.submissions.index" @skin="button-secondary">Sluit venster</AuLink>
           </AuButtonGroup>
         {{/if}}
       </Group>

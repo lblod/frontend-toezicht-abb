@@ -62,11 +62,9 @@
         Bewaar
       </AuButton>
       {{#unless this.isNewForm}}
-        <LinkTo class="button button--narrow button--alt" type="button"
-                @route="search.submissions.search-queries.select"
-                @model={{@query.id}}>
+        <AuLink @route="search.submissions.search-queries.select" @model={{@query.id}} @skin="button-secondary">
           Laad filterset in
-        </LinkTo>
+        </AuLink>
       {{/unless}}
       <AuButton @skin="tertiary" {{on "click" this.back}}>Annuleer</AuButton>
     </AuButtonGroup>

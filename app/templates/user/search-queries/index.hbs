@@ -24,10 +24,10 @@
     </Group>
     <Group>
       <AuButtonGroup>
-        <LinkTo @route="user.search-queries.new" class="au-c-button" type="button">
+        <AuLink @route="user.search-queries.new" @skin="button">
           Maak nieuwe zoekopdracht
-        </LinkTo>
-        <AuLink @route="search.submissions" class="au-c-button au-c-button--secondary" type="button">
+        </AuLink>
+        <AuLink @route="search.submissions" @skin="button-secondary">
           Terug naar toezicht
         </AuLink>
       </AuButtonGroup>
@@ -65,15 +65,12 @@
         </td>
         <td>
           <AuButtonGroup>
-            {{!-- TODO: Figure out why this button does not work with AuLink and linkRoute --}}
-            <LinkTo class="au-c-button" type="button" @route="search.submissions.search-queries.select"
-                    @model={{row.id}}>
+            <AuLink @route="search.submissions.search-queries.select" @model={{row.id}} @skin="button">
               Laad in
-            </LinkTo>
-            <LinkTo class="au-c-button au-c-button--secondary" type="button" @route="user.search-queries.edit"
-                    @model={{row.id}}>
+            </AuLink>
+            <AuLink @route="user.search-queries.edit" @model={{row.id}} @skin="button-secondary">
               Bewerk
-            </LinkTo>
+            </AuLink>
             <AuButton @skin="tertiary" @alert="true" {{on "click" (perform this.delete row.id)}}>Verwijder</AuButton>
           </AuButtonGroup>
         </td>
