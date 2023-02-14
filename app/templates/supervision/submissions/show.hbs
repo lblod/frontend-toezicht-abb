@@ -3,8 +3,10 @@
     <AuToolbar @border="bottom" @size="large" @nowrap="true" tabindex="0" as |Group|>
       <Group>
         <div>
-          <p class="au-u-margin-bottom-xsmall">
-            <Submissions::StatusPill @status={{this.model.review.status}}/>
+          <p class="au-u-margin-bottom-tiny">
+            <Submissions::ReviewStatus @statusURI={{this.model.review.status.uri}}>
+              {{this.model.review.status.label}}
+            </Submissions::ReviewStatus>
           </p>
           <AuHeading @level="2" @skin="3">Melding {{this.model.organization.fullName}}</AuHeading>
         </div>

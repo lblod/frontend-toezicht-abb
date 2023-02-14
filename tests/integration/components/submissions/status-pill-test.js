@@ -10,15 +10,15 @@ module('Integration | Component | submissions/status-pill', function (hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<Submissions::StatusPill />`);
+    await render(hbs`<Submissions::ReviewStatus />`);
 
     assert.equal(this.element.textContent.trim(), '');
 
     // Template block usage:
     await render(hbs`
-      <Submissions::StatusPill>
+      <Submissions::ReviewStatus>
         template block text
-      </Submissions::StatusPill>
+      </Submissions::ReviewStatus>
     `);
 
     assert.equal(this.element.textContent.trim(), 'template block text');
