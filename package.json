@@ -60,7 +60,6 @@
     "ember-cli-inject-live-reload": "^2.1.0",
     "ember-cli-sass": "^11.0.1",
     "ember-cli-sri": "^2.1.1",
-    "ember-cli-string-helpers": "^6.0.0",
     "ember-cli-terser": "^4.0.2",
     "ember-concurrency": "^2.3.7",
     "ember-data": "~3.28.6",
@@ -94,9 +93,6 @@
     "release-it": "^15.5.0",
     "sass": "^1.23.7",
     "webpack": "^5.75.0"
-  },
-  "dependencyRemovalNotes": {
-    "ember-cli-string-helpers": "capitalize and html-safe are still used."
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
