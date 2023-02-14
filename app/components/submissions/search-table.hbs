@@ -59,7 +59,7 @@
                 <td class="au-u-visible-from@medium">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
               {{/unless}}
               <td style="max-width:120px;" {{! template-lint-disable no-inline-styles}}>
-                <AuPill resource="{{capitalize row.status}}">{{capitalize row.status}}</AuPill>
+                <AuPill resource={{row.status}}>{{row.status}}</AuPill>
               </td>
               <td class="au-u-hide-on-print" style="width:70px;" {{! template-lint-disable no-inline-styles}}>
                 <LinkTo @route="search.submissions.show" @model={{row.id}}>Bekijk</LinkTo>

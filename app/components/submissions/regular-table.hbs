@@ -123,7 +123,7 @@
             <td class="au-u-visible-from@medium">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
           {{/unless}}
           <td style="max-width:120px;" {{! template-lint-disable no-inline-styles}}>
-            <Submissions::StatusPill @status={{row.review.status}}/>{{!--  <AuPill resource="{{capitalize row.status}}">{{capitalize row.status}}</AuPill> --}}
+            <Submissions::StatusPill @status={{row.review.status}}/>
           </td>
           <td class="au-u-hide-on-print">
             <LinkTo @route="supervision.submissions.show" @model={{row.id}}>Bekijk</LinkTo>
