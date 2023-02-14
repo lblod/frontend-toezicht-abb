@@ -40,7 +40,7 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
 
   // NOTE: the problem here lies in that if an outsider makes changes in the store,
   // the field components are not aware of this. There for, for now, we force the form to rerender by temporarily
-  // changing the "show" argument.
+  // not rendering the form and showing a loader instead.
   @task
   *resetFilters() {
     yield super.setupForm(FILTER_FORM_UUID);
