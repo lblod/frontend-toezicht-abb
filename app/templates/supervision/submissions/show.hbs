@@ -48,9 +48,9 @@
                   @status={{await this.model.review.status}}
                   @onClose={{this.onCloseComponent}} />
         {{else}}
-          <div class="button-group u-spacer--tiny">
+          <AuButtonGroup>
             <LinkTo @route="supervision.submissions.index" class="au-c-button au-c-button--secondary">Sluit venster</LinkTo>
-          </div>
+          </AuButtonGroup>
         {{/if}}
       </Group>
     </AuToolbar>
