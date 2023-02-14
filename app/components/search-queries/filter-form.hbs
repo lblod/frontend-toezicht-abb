@@ -1,17 +1,17 @@
 <div class="au-c-sidebar">
   <div class="au-c-sidebar__content">
     <div class="au-c-sidebar__header">
-      {{#if this.init.isRunning}}
-        <span>Aan het laden...</span>
+      {{#if (or this.init.isRunning this.resetFilters.isRunning)}}
+        <AuLoader @size="small" />
       {{else}}
         <RdfForm
-                @groupClass="au-o-grid__item au-u-1-2 au-u-1-1@small"
-                @form={{this.form}}
-                @graphs={{this.graphs}}
-                @sourceNode={{this.sourceNode}}
-                @formStore={{this.formStore}}
-                @show={{if this.resetFilters.isRunning true false}}
-                @forceShowErrors={{false}} />
+          @groupClass="au-o-grid__item au-u-1-2 au-u-1-1@small"
+          @form={{this.form}}
+          @graphs={{this.graphs}}
+          @sourceNode={{this.sourceNode}}
+          @formStore={{this.formStore}}
+          @forceShowErrors={{false}}
+        />
       {{/if}}
     </div>
   </div>
