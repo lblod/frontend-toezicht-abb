@@ -82,14 +82,12 @@
           <th class="au-u-hide-on-print"></th>
         </c.header>
         <c.body as |row|>
-
-          <td style={{html-safe "max-width: 100px;"}}>
+          <td style="max-width: 100px;" {{! template-lint-disable no-inline-styles}}>
             {{row.organization.naam}}
             <br>
             <AuHelpText class="au-u-hidden-from@medium text-fade">{{row.organization.classificatie.label}}</AuHelpText>
           </td>
-
-          <td style={{html-safe "max-width: 150px;"}}>{{row.formData.chartOfAccount.notation}} - {{row.formData.chartOfAccount.label}}</td>
+          <td style="max-width: 150px;" {{! template-lint-disable no-inline-styles}}>{{row.formData.chartOfAccount.notation}} - {{row.formData.chartOfAccount.label}}</td>
           {{#unless @displaySubset}}
             <td class="au-u-visible-from@medium">{{moment-format row.formData.sessionStartedAtTime 'DD-MM-YYYY'}}</td>
             <td class="au-u-visible-from@medium">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
