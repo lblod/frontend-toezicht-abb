@@ -8,9 +8,6 @@ module.exports = function (defaults) {
     '@appuniversum/ember-appuniversum': {
       dutchDatePickerLocalization: true,
     },
-    'ember-cli-babel': {
-      includePolyfill: true,
-    },
     'ember-simple-auth': {
       useSessionSetupMethod: true,
     },
