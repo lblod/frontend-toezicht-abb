@@ -41,7 +41,10 @@ export default class SubmissionRegularTableComponent extends Component {
   }
 
   get regulationTypeIsSelected() {
-    return this.besluitTypes.filterBy('isRegulation', true).length > 0;
+    return (
+      this.besluitTypes.filter((besluitType) => besluitType.isRegulation)
+        .length > 0
+    );
   }
 
   get isStatusFilterEnabled() {
