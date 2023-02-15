@@ -23,7 +23,7 @@ export default class GoverningBodyClassificationSelectComponent extends Componen
         sort: 'label',
       }
     );
-    this.options = options;
+    this.options = options.slice();
 
     this.updateSelectedValue();
   }
@@ -31,10 +31,12 @@ export default class GoverningBodyClassificationSelectComponent extends Componen
   @restartableTask
   *search(term) {
     yield timeout(600);
-    return this.store.query('bestuursorgaan-classificatie-code', {
+    let results = yield this.store.query('bestuursorgaan-classificatie-code', {
       sort: 'label',
       filter: term,
     });
+
+    return results.slice();
   }
 
   @action
@@ -46,13 +48,14 @@ export default class GoverningBodyClassificationSelectComponent extends Componen
   @action
   async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-      this.selected = await this.store.query(
+      let selected = await this.store.query(
         'bestuursorgaan-classificatie-code',
         {
           filter: { id: this.args.value },
           page: { size: this.args.value.split(',').length },
         }
       );
+      this.selected = selected.slice();
     } else if (!this.args.value) {
       this.selected = null;
     }

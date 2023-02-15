@@ -23,7 +23,7 @@ export default class FilterProvinceSelectComponent extends Component {
       },
       sort: 'naam',
     });
-    this.options = options;
+    this.options = options.slice();
 
     this.updateSelectedValue();
   }
@@ -31,12 +31,14 @@ export default class FilterProvinceSelectComponent extends Component {
   @restartableTask
   *search(term) {
     yield timeout(600);
-    return this.store.query('werkingsgebied', {
+    let results = yield this.store.query('werkingsgebied', {
       filter: {
         niveau: 'provincie',
         naam: term,
       },
     });
+
+    return results.slice();
   }
 
   @action
@@ -48,10 +50,12 @@ export default class FilterProvinceSelectComponent extends Component {
   @action
   async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-      this.selected = await this.store.query('werkingsgebied', {
+      let selected = await this.store.query('werkingsgebied', {
         filter: { id: this.args.value },
         page: { size: this.args.value.split(',').length },
       });
+
+      this.selected = selected.slice();
     } else if (!this.args.value) {
       this.selected = null;
     }

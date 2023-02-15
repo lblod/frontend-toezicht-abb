@@ -26,7 +26,7 @@ export default class AdministrativeUnitClassificationSelectComponent extends Com
       },
       sort: 'label',
     });
-    this.options = options;
+    this.options = options.slice();
 
     this.updateSelectedValue();
   }
@@ -34,7 +34,7 @@ export default class AdministrativeUnitClassificationSelectComponent extends Com
   @restartableTask
   *search(term) {
     yield timeout(600);
-    return this.store.query('concept', {
+    let results = yield this.store.query('concept', {
       filter: {
         label: term,
         'concept-schemes': {
@@ -42,6 +42,8 @@ export default class AdministrativeUnitClassificationSelectComponent extends Com
         },
       },
     });
+
+    return results.slice();
   }
 
   @action
