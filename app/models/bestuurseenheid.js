@@ -14,6 +14,7 @@ export default class Bestuurseenheid extends Model {
   @hasMany('bestuursorgaan', { async: true, inverse: null }) bestuursorganen;
 
   get fullName() {
-    return `${this.classificatie.get('label')} ${this.naam}`.trim();
+    let classificatie = this.belongsTo('classificatie').value().label;
+    return `${classificatie} ${this.naam}`.trim();
   }
 }
