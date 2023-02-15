@@ -19,15 +19,22 @@ export default class Submission extends Model {
   @attr uri;
   @attr href;
 
-  @belongsTo('gebruiker') creator;
-  @belongsTo('gebruiker') lastModifier;
-  @belongsTo('form-data') formData;
-  @belongsTo('bestuurseenheid') organization;
-  @belongsTo('vendor') publisher;
-  @belongsTo('submission-document') submissionDocument;
-  @belongsTo('submission-document-status') status;
-  @hasMany('file') files;
-  @belongsTo('automatic-submission-task') task;
-  @belongsTo('submission-review') review;
-  @belongsTo('inzending-voor-toezicht') inzendingVoorToezicht;
+  @belongsTo('gebruiker', { async: true, inverse: null }) creator;
+  @belongsTo('gebruiker', { async: true, inverse: null }) lastModifier;
+  @belongsTo('form-data', { async: true, inverse: 'submission' }) formData;
+  @belongsTo('bestuurseenheid', { async: true, inverse: null }) organization;
+  @belongsTo('submission-document', { async: true, inverse: 'submission' })
+  submissionDocument;
+  @belongsTo('submission-document-status', { async: true, inverse: null })
+  status;
+  @hasMany('file', { async: true, inverse: null }) files;
+  @belongsTo('automatic-submission-task', {
+    async: true,
+    inverse: 'submission',
+  })
+  task;
+  @belongsTo('submission-review', { async: true, inverse: 'submission' })
+  review;
+  @belongsTo('inzending-voor-toezicht', { async: true, inverse: null })
+  inzendingVoorToezicht;
 }
