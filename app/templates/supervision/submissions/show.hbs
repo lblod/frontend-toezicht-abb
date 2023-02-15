@@ -12,11 +12,9 @@
         </div>
       </Group>
       <Group>
-        <div class="au-o-box">
-          <LinkTo @route='supervision.submissions.index' class="link--icon--close">
-            <span class="au-u-hidden-visually">Venster sluiten</span>
-          </LinkTo>
-        </div>
+        <AuLink @route="supervision.submissions.index" @icon="cross" @hideText={{true}}>
+          Venster sluiten
+        </AuLink>
       </Group>
     </AuToolbar>
     <div class="au-o-box au-c-body-container au-c-body-container--scroll">
@@ -49,7 +47,7 @@
                   @onClose={{this.onCloseComponent}} />
         {{else}}
           <AuButtonGroup>
-            <LinkTo @route="supervision.submissions.index" class="au-c-button au-c-button--secondary">Sluit venster</LinkTo>
+            <AuLink @route="supervision.submissions.index" @skin="button-secondary">Sluit venster</AuLink>
           </AuButtonGroup>
         {{/if}}
       </Group>
