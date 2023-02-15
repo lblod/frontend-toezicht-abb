@@ -1,8 +1,8 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 export default class Bestuursorgaan extends Model {
-  @attr() uri;
-  @attr() naam;
+  @attr uri;
+  @attr naam;
   @attr('date') bindingStart;
   @attr('date') bindingEinde;
 

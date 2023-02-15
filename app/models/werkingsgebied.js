@@ -1,9 +1,9 @@
 import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class Werkingsgebied extends Model {
-  @attr() uri;
-  @attr() naam;
-  @attr() niveau;
+  @attr uri;
+  @attr naam;
+  @attr niveau;
 
   @hasMany('bestuurseenheid', { async: true, inverse: null }) bestuurseenheid;
   @hasMany('bestuurseenheid', { async: true, inverse: null })

@@ -7,5 +7,5 @@ export const TREATED_STATUS =
 
 export default class SubmissionReviewStatus extends Model {
   @attr uri;
-  @attr('string') label;
+  @attr label;
 }
