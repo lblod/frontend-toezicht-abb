@@ -42,4 +42,3 @@ inflector.irregular('concept', 'concepts');
 inflector.irregular('concept-scheme', 'concept-schemes');
 inflector.irregular('submission-review', 'submission-reviews');
 inflector.irregular('search-query', 'search-queries');
-export default {};
