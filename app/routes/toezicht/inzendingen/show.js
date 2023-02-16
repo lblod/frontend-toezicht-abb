@@ -15,7 +15,7 @@ export default class ToezichtInzendingenShowRoute extends Route {
     });
     return {
       id: params.id,
-      submission: submissions.firstObject,
+      submission: submissions[0],
     };
   }
 

@@ -30,7 +30,7 @@ export default class FilterAdministrativeUnitSelectComponent extends Component {
       sort: 'naam',
       include: ['classificatie'],
     });
-    this.preloadedOptions = options;
+    this.preloadedOptions = options.slice();
 
     this.updateSelectedValue();
   }
@@ -46,7 +46,7 @@ export default class FilterAdministrativeUnitSelectComponent extends Component {
     this.searchData = new SearchData({
       totalResultAmount: results.meta.count,
       searchTerm: term,
-      results: results.toArray(),
+      results: results.slice(),
     });
   }
 
@@ -58,7 +58,7 @@ export default class FilterAdministrativeUnitSelectComponent extends Component {
         'page[number]': ++this.searchData.currentPage,
       });
 
-      this.searchData.addSearchResults(results.toArray());
+      this.searchData.addSearchResults(results.slice());
     }
   }
 

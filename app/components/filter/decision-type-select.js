@@ -27,7 +27,7 @@ export default class FilterDecisionTypeSelectComponent extends Component {
       sort: 'label',
       page: { size: 100 },
     });
-    this.options = options;
+    this.options = options.slice();
 
     this.updateSelectedValue();
   }
@@ -35,7 +35,7 @@ export default class FilterDecisionTypeSelectComponent extends Component {
   @restartableTask
   *search(term) {
     yield timeout(600);
-    return this.store.query('concept', {
+    let results = yield this.store.query('concept', {
       filter: {
         label: term,
         'concept-schemes': {
@@ -45,6 +45,8 @@ export default class FilterDecisionTypeSelectComponent extends Component {
       sort: 'label',
       page: { size: 100 },
     });
+
+    return results.slice();
   }
 
   @action
@@ -56,7 +58,7 @@ export default class FilterDecisionTypeSelectComponent extends Component {
   @action
   async updateSelectedValue() {
     if (this.args.value && !this.selected) {
-      this.selected = await this.store.query('concept', {
+      let selected = await this.store.query('concept', {
         filter: {
           id: this.args.value,
           'concept-schemes': {
@@ -65,6 +67,7 @@ export default class FilterDecisionTypeSelectComponent extends Component {
         },
         page: { size: this.args.value.split(',').length },
       });
+      this.selected = selected.slice();
     } else if (!this.args.value) {
       this.selected = null;
     }

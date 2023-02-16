@@ -8,7 +8,7 @@ export default class AutomaticSubmissionTask extends Model {
   @attr downloadStatus;
   @attr creator;
 
-  @belongsTo('file', { inverse: null }) download;
+  @belongsTo('file', { async: true, inverse: null }) download;
 
   get downloadLink() {
     return `/files/${this.id}/download`;
