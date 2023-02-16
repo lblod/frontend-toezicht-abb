@@ -83,14 +83,13 @@ export default class FilterDateRangeComponent extends Component {
   }
 
   @action
-  updateDate(varName, date) {
-    const dateString = date.toISOString();
+  updateDate(varName, isoDate) {
     if (varName == 'fromDate') {
-      this.fromValue = dateString;
-      this.args.onChangeFromValue(dateString);
+      this.fromValue = isoDate;
+      this.args.onChangeFromValue(isoDate);
     } else {
-      this.toValue = dateString;
-      this.args.onChangeToValue(dateString);
+      this.toValue = isoDate;
+      this.args.onChangeToValue(isoDate);
     }
   }
 
