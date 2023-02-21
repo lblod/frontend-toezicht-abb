@@ -57,6 +57,7 @@
     <AuButtonGroup>
       <AuButton @disabled={{if (or this.init.isRunning this.isFormEmpty) "true"}}
                 @loading={{if this.save.isRunning "true"}}
+                @loadingMessage="Aan het bewaren"
                 @skin={{"primary"}}
         {{on "click" (perform this.save)}}>
         Bewaar
@@ -72,6 +73,7 @@
   {{#unless this.isNewForm}}
     <AuButton @disabled={{if this.init.isRunning "true"}}
               @loading={{if this.remove.isRunning "true"}}
+              @loadingMessage="Aan het verwijderen"
               @skin="tertiary" @alert="true"
       {{ on "click" (perform this.remove) }}>
       <AuIcon @icon="bin" @alignment="left"/>
