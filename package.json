@@ -28,11 +28,15 @@
   },
   "overrides": {
     "ember-cli-babel": "$ember-cli-babel",
-    "torii": "1.0.0-beta.1"
+    "torii": "1.0.0-beta.1",
+    "n3": {
+      "readable-stream": "4.3.0"
+    }
   },
   "overridesNotes": {
     "ember-cli-babel": "ember-cli-deploy-ssh-index brings in ember-cli-babel v6 which triggers the build warning",
-    "torii": "torii is used by ember-acmidm-login but v1.0.0-beta fixes some Ember 4 issues"
+    "torii": "torii is used by ember-acmidm-login but v1.0.0-beta fixes some Ember 4 issues",
+    "readable-stream": "it accidentally required node's stream in the most recent release: https://github.com/nodejs/readable-stream/issues/516"
   },
   "dependenciesNotes": {
     "ember-data": "ember-data is pinned on v4.7 until this issue is resolved: https://github.com/emberjs/data/issues/8312"
