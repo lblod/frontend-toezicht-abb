@@ -36,7 +36,9 @@ export default class SearchSubmissionsRoute extends Route {
 
     const query = {};
     // TODO generate this based on form configuration?
-    query[`:sqs:data`] = isEmpty(params.search) ? '*' : params.search;
+    query[`:sqs:data.content,data`] = isEmpty(params.search)
+      ? '*'
+      : params.search;
     if (params.administrativeUnites)
       query[':terms:administrativeUnitURI'] = params.administrativeUnites;
     if (params.administrativeUnitClassifications) {
