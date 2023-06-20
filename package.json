@@ -33,7 +33,8 @@
     "torii": "1.0.0-beta.1",
     "n3": {
       "readable-stream": "4.3.0"
-    }
+    },
+    "aria-query": "5.1.3"
   },
   "overridesNotes": {
     "ember-cli-babel": "ember-cli-deploy-ssh-index brings in ember-cli-babel v6 which triggers the build warning",
@@ -117,5 +118,8 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "volta": {
+    "node": "16.20.0"
   }
 }
