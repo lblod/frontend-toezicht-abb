@@ -5,6 +5,7 @@ pipeline:
       repo: ${CI_REPO}
       tags: ${CI_COMMIT_TAG##v}
     secrets: [ docker_username, docker_password ]
+    group: build
   build-prod:
     image: plugins/docker
     settings:
@@ -12,7 +13,7 @@ pipeline:
       repo: ${CI_REPO}
       tags: ${CI_COMMIT_TAG##v}-prod
     secrets: [ docker_username, docker_password ]
-
+    group: build
 when:
   event: tag
   tag: v*
