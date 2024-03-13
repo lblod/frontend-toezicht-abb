@@ -30,6 +30,7 @@
   },
   "overrides": {
     "ember-cli-babel": "$ember-cli-babel",
+    "ember-modifier": "$ember-modifier",
     "torii": "1.0.0-beta.1",
     "n3": {
       "readable-stream": "4.3.0"
@@ -38,6 +39,7 @@
   },
   "overridesNotes": {
     "ember-cli-babel": "ember-cli-deploy-ssh-index brings in ember-cli-babel v6 which triggers the build warning",
+    "ember-modifier": "Appuniversum v2 and ember-auto-focus depend on v3 of ember-modifier. The override can be removed once we update to Appuniversum v3",
     "torii": "torii is used by ember-acmidm-login but v1.0.0-beta fixes some Ember 4 issues",
     "readable-stream": "it accidentally required node's stream in the most recent release: https://github.com/nodejs/readable-stream/issues/516"
   },
@@ -56,7 +58,7 @@
     "@glimmer/tracking": "^1.1.2",
     "@lblod/ember-acmidm-login": "^1.0.0",
     "@lblod/ember-mock-login": "^0.7.0",
-    "@lblod/ember-submission-form-fields": "^2.11.0",
+    "@lblod/ember-submission-form-fields": "^2.19.0",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.0.1",
     "ember-auto-import": "^2.6.3",
@@ -80,11 +82,11 @@
     "ember-data": "~4.11.0",
     "ember-fetch": "^8.1.2",
     "ember-load-initializers": "^2.1.2",
-    "ember-modifier": "^3.2.0",
+    "ember-modifier": "^4.1.0",
     "ember-moment": "^10.0.0",
     "ember-mu-transform-helpers": "^2.0.0",
     "ember-page-title": "^7.0.0",
-    "ember-power-select": "^6.0.1",
+    "ember-power-select": "^7.0.0",
     "ember-promise-helpers": "^2.0.0",
     "ember-qunit": "^6.2.0",
     "ember-resolver": "^10.0.0",
