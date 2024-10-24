@@ -119,7 +119,13 @@
             <AuHelpText>{{row.formData.regulationType.label}}</AuHelpText>
           </td>
           {{#unless @displaySubset}}
-            <td class="au-u-visible-from@medium">{{moment-format row.formData.sessionStartedAtTime 'DD-MM-YYYY'}}</td>
+            <td class="au-u-visible-from@medium">
+              {{#if row.formData.sessionStartedAtTime}}
+              {{moment-format row.formData.sessionStartedAtTime 'DD-MM-YYYY'}}
+              {{else}}
+              <span class="au-u-muted grey au-u-italic">Niet van toepassing</span>
+              {{/if}}
+            </td>
             <td class="au-u-visible-from@medium">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
           {{/unless}}
           <td style="max-width:120px;" {{! template-lint-disable no-inline-styles}}>
