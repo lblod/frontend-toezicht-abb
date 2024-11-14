@@ -55,7 +55,13 @@
                 <AuHelpText>{{row.regulationType}}</AuHelpText>
               </td>
               {{#unless @displaySubset}}
-                <td class="au-u-visible-from@medium">{{moment-format row.sessionDatetime 'DD-MM-YYYY HH:mm'}}</td>
+                <td class="au-u-visible-from@medium">
+                  {{#if row.sessionDatetime}}
+                  {{moment-format row.sessionDatetime 'DD-MM-YYYY'}}
+                  {{else}}
+                  <span class="au-u-muted grey au-u-italic">Niet van toepassing</span>
+                  {{/if}}
+                </td>
                 <td class="au-u-visible-from@medium">{{moment-format row.sentDate 'DD-MM-YYYY'}}</td>
               {{/unless}}
               <td style="max-width:120px;" {{! template-lint-disable no-inline-styles}}>
