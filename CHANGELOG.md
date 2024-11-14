@@ -1,3 +1,8 @@
+## v0.28.2 (2024-11-14)
+
+#### :rocket: Enhancement
+* [#50](https://github.com/lblod/frontend-toezicht-abb/pull/50) [DL-5435] Show 'niet van toepassing' instead of today's date when no date available ([@wolfderechter](https://github.com/wolfderechter))
+
 ## v0.28.1 (2024-10-30)
 
 #### :rocket: Enhancement
