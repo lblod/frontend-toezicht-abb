@@ -32,11 +32,20 @@
     "torii": "1.0.0-beta.1",
     "n3": {
       "readable-stream": "4.3.0"
+    },
+    "ember-math-helpers": "^3.0.0",
+    "@appuniversum/ember-appuniversum": {
+      "ember-concurrency": "3.1.1"
+    },
+    "@lblod/ember-mock-login": {
+      "ember-concurrency": "3.1.1"
     }
   },
   "overridesNotes": {
     "torii": "torii is used by ember-acmidm-login but v1.0.0-beta fixes some Ember 4 issues",
-    "readable-stream": "it accidentally required node's stream in the most recent release: https://github.com/nodejs/readable-stream/issues/516"
+    "readable-stream": "it accidentally required node's stream in the most recent release: https://github.com/nodejs/readable-stream/issues/516",
+    "ember-math-helpers": "ember-data-table still brings in v2 but we can't force it to v4 because that's a v2 addon which requires ember-auto-import v2. We can remove the override once this pr is merged: https://github.com/mu-semtech/ember-data-table/pull/35",
+    "ember-concurrency": "pinning the versions until we bump ember-mock-login which uses an older version of ember-concurrency."
   },
   "dependenciesNotes": {
     "ember-data": "ember-data is pinned on v4.7 until this issue is resolved: https://github.com/emberjs/data/issues/8312"
@@ -74,7 +83,7 @@
     "ember-cli-sass": "^11.0.1",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
-    "ember-concurrency": "^2.3.7",
+    "ember-concurrency": "^3.1.1",
     "ember-data": "~4.11.0",
     "ember-data-table": "^2.1.0",
     "ember-fetch": "^8.1.2",
@@ -94,7 +103,7 @@
     "ember-truth-helpers": "^3.1.1",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-ember": "^11.6.0",
+    "eslint-plugin-ember": "^12.2.1",
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-qunit": "^7.3.4",
@@ -102,7 +111,6 @@
     "lodash.camelcase": "4.3.0",
     "moment": "^2.29.4",
     "prettier": "^2.8.8",
-    "prettier-plugin-ember-template-tag": "^2.0.4",
     "qunit": "^2.19.4",
     "qunit-dom": "^2.0.0",
     "rdflib": "^2.2.26",

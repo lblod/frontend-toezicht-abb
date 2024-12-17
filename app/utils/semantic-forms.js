@@ -15,6 +15,6 @@ export function isRequiredField(fieldUri, store, formGraph) {
   return constraints.some(
     (constraint) =>
       constraint.type.value ===
-      'http://lblod.data.gift/vocabularies/forms/RequiredConstraint',
+      'http://lblod.data.gift/vocabularies/forms/RequiredConstraint'
   );
 }
