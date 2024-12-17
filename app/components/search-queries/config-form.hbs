@@ -8,7 +8,7 @@
         </AuLink>
       </li>
       <li class="au-c-list-horizontal__item">
-        <AuButton @skin="tertiary" {{on "click" this.back}}>Bewaarde zoekopdrachten</AuButton>
+        <AuButton @skin="link" {{on "click" this.back}}>Bewaarde zoekopdrachten</AuButton>
       </li>
       <li class="au-c-list-horizontal__item">
         <strong>Toezicht ABB - {{if this.isNewForm "Nieuwe" "Bewerk"}} zoekopdracht</strong>
@@ -28,7 +28,7 @@
 <div class="au-c-main-container__content au-c-main-container__content--scroll">
   <div class="au-o-box">
     {{#if this.init.isRunning}}
-      <AuLoader @size="large"/>
+      <AuLoader @padding="large"/>
       <span class="au-u-hidden-visually">Aan het laden</span>
     {{else}}
       {{#if this.error}}
@@ -67,14 +67,14 @@
           Laad filterset in
         </AuLink>
       {{/unless}}
-      <AuButton @skin="tertiary" {{on "click" this.back}}>Annuleer</AuButton>
+      <AuButton @skin="link" {{on "click" this.back}}>Annuleer</AuButton>
     </AuButtonGroup>
   </Group>
   {{#unless this.isNewForm}}
     <AuButton @disabled={{if this.init.isRunning "true"}}
               @loading={{if this.remove.isRunning "true"}}
               @loadingMessage="Aan het verwijderen"
-              @skin="tertiary" @alert="true"
+              @skin="link" @alert="true"
       {{ on "click" (perform this.remove) }}>
       <AuIcon @icon="bin" @alignment="left"/>
       Verwijder

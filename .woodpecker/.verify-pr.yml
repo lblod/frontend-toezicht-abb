@@ -1,22 +1,22 @@
 pipeline:
   install:
-    image: danlynn/ember-cli:4.2.0-node_16.14
+    image: danlynn/ember-cli:5.8.0-node_20.12
     commands:
       - npm ci
   lint:js:
-    image: danlynn/ember-cli:4.2.0-node_16.14
+    image: danlynn/ember-cli:5.8.0-node_20.12
     commands:
       - npm run lint:js
   lint:hbs:
-    image: danlynn/ember-cli:4.2.0-node_16.14
+    image: danlynn/ember-cli:5.8.0-node_20.12
     commands:
       - npm run lint:hbs
   lint:dependencies:
-    image: danlynn/ember-cli:4.2.0-node_16.14
+    image: danlynn/ember-cli:5.8.0-node_20.12
     commands:
       - ember dependency-lint
   test:
-    image: danlynn/ember-cli:4.2.0-node_16.14
+    image: danlynn/ember-cli:5.8.0-node_20.12
     commands:
       - npm run test:ember
 when:

@@ -1,11 +1,17 @@
 {{#if this.initStatuses.lastSuccessful}}
   <div>
     <AuAlert @title="Medewerkers locatiesecretariaat" @size="tiny" @skin="success">
-      <AuControlCheckbox @checked={{this.isHandled}} @disabled={{@readonly}} @onChange={{this.toggleIsHandled}}>
+      <AuCheckbox @checked={{this.isHandled}} @disabled={{@readonly}} @onChange={{this.toggleIsHandled}}>
         Melding afgehandeld
-      </AuControlCheckbox>
+      </AuCheckbox>
       <AuLabel for="behandelaar">Behandelaar <span class="au-u-muted au-u-light au-u-italic">en eventueel extra informatie</span></AuLabel>
-      <AuInput id="behandelaar" @value={{@model.comment}} @disabled={{@readonly}} @width="block" />
+      <AuInput
+        id="behandelaar"
+        value={{@model.comment}}
+        @disabled={{@readonly}}
+        @width="block"
+        {{on "input" (event-value (fn (mut @model.comment)))}}
+      />
     </AuAlert>
     <AuButtonGroup>
       <AuButton @disabled={{@readonly}} {{ on "click" this.save }}>Bewaar</AuButton>

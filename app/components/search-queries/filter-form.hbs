@@ -2,7 +2,7 @@
   <div class="au-c-sidebar__content">
     <div class="au-c-sidebar__header">
       {{#if (or this.init.isRunning this.resetFilters.isRunning)}}
-        <AuLoader @size="small" />
+        <AuLoader @padding="small" />
       {{else}}
         <RdfForm
           @groupClass="au-o-grid__item au-u-1-2 au-u-1-1@small"
@@ -19,15 +19,15 @@
     {{! template-lint-disable no-inline-styles}}
     <AuToolbar @size="normal" style="min-height: 45px;" as |Group|>
       <Group>
-        <AuButton @skin="tertiary" {{ on "click" this.loadFilters }}>
+        <AuButton @skin="link" {{ on "click" this.loadFilters }}>
           <AuIcon @icon="export" @alignment="left"/>
           Laad&nbsp;filters
         </AuButton>
-        <AuButton @skin="tertiary" {{ on "click" (perform this.saveFilter) }}>
+        <AuButton @skin="link" {{ on "click" (perform this.saveFilter) }}>
           <AuIcon @icon="plus-text" @alignment="left"/>
           Bewaar&nbsp;<span class="au-u-visible-from@large">filters</span>
         </AuButton>
-        <AuButton @skin="tertiary" @alert="true" {{ on "click" (perform this.resetFilters) }}>
+        <AuButton @skin="link" @alert="true" {{ on "click" (perform this.resetFilters) }}>
           <AuIcon @icon="redo" @alignment="left"/>
           Reset
         </AuButton>

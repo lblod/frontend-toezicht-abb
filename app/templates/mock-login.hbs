@@ -11,7 +11,7 @@
       <div class="au-o-region">
         <MockLogin as |login|>
           {{#if this.queryStore.isRunning}}
-            <AuLoader @size="small" />
+            <AuLoader @padding="small" />
             <span class="au-u-hidden-visually">Aan het laden</span>
           {{else}}
             {{#if login.errorMessage}}
