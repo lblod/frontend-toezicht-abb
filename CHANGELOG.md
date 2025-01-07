@@ -1,3 +1,12 @@
+## 0.29.0 (2025-01-07)
+
+#### :rocket: Enhancement
+* [#51](https://github.com/lblod/frontend-toezicht-abb/pull/51) Add cross referencing components ([@claire-lovisa](https://github.com/claire-lovisa))
+
+#### Committers: 2
+- Claire Lovisa ([@claire-lovisa](https://github.com/claire-lovisa))
+- [@wolfderechter](https://github.com/wolfderechter)
+
 ## v0.28.1 (2024-10-30)
 
 #### :rocket: Enhancement
