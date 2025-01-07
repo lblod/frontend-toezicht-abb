@@ -8,11 +8,15 @@
         <AuButtonGroup>
           <span>
             <div class="checkbox--switch__wrapper">
-              <AuToggleSwitch @label="Toon enkel te behandelen dossiers" @checked={{this.isStatusFilterEnabled}}
-                        @onChange={{this.setToTreatStatus}} />
+              <AuToggleSwitch
+                @checked={{this.isStatusFilterEnabled}}
+                @onChange={{this.setToTreatStatus}}
+              >
+                Toon enkel te behandelen dossiers
+              </AuToggleSwitch>
             </div>
           </span>
-          <AuButton {{on "click" this.resetFilters}} @skin="tertiary">
+          <AuButton {{on "click" this.resetFilters}} @skin="link">
             <AuIcon @icon="cross" @alignment="left" /> Herstel alle filters
           </AuButton>
         </AuButtonGroup>

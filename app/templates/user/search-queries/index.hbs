@@ -71,7 +71,7 @@
             <AuLink @route="user.search-queries.edit" @model={{row.id}} @skin="button-secondary">
               Bewerk
             </AuLink>
-            <AuButton @skin="tertiary" @alert="true" {{on "click" (perform this.delete row.id)}}>Verwijder</AuButton>
+            <AuButton @skin="link" @alert="true" {{on "click" (perform this.delete row.id)}}>Verwijder</AuButton>
           </AuButtonGroup>
         </td>
 {{!--         TODO: add add button when the table is empty

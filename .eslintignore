@@ -2,6 +2,12 @@
 /blueprints/*/files/
 /vendor/
 
+# Ignore .gjs files for now since our linting setup doesn't support them yet
+# We'll get that for free once we update to newer Ember versions
+# Since the only .gjs files are copy pasted from loket I think that's fine for now.
+# TODO: remove this once supported by the Ember blueprint.
+*.gjs
+
 # compiled output
 /dist/
 /tmp/
