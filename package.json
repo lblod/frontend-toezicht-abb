@@ -122,6 +122,6 @@
     "edition": "octane"
   },
   "volta": {
-    "node": "16.20.0"
+    "node": "22.13.0"
   }
 }
