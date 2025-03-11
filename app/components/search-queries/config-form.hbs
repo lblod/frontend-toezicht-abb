@@ -1,9 +1,8 @@
-<AuToolbar @size="medium" @skin="tint" @border="bottom" as |Group|>
+<AuToolbar @size="small" @skin="tint" @border="bottom" as |Group|>
   <Group>
     <ul class="au-c-list-horizontal">
       <li class="au-c-list-horizontal__item">
-        <AuLink @route="search.submissions" class="au-c-button au-c-button--tertiary" type="button">
-          <AuIcon @icon="arrow-left" @alignment="left"/>
+        <AuLink @route="search.submissions" @skin="button-naked" @icon="arrow-left">
           Toezicht ABB
         </AuLink>
       </li>
@@ -11,7 +10,7 @@
         <AuButton @skin="link" {{on "click" this.back}}>Bewaarde zoekopdrachten</AuButton>
       </li>
       <li class="au-c-list-horizontal__item">
-        <strong>Toezicht ABB - {{if this.isNewForm "Nieuwe" "Bewerk"}} zoekopdracht</strong>
+        <strong>{{if this.isNewForm "Nieuwe" "Bewerk"}} zoekopdracht</strong>
       </li>
     </ul>
   </Group>
@@ -34,7 +33,7 @@
       {{#if this.error}}
         <AuAlert @icon="cross"
                  @title="Oeps! Dit is genant ..."
-                 @skin={{"error"}}
+                 @skin="error"
                  @closable={{true}}
                  class="au-o-grid__item au-u-1-1 au-u-1-2@medium">
           <p>Er is iets onverwacht misgelopen tijdens het verwerken van uw zoekopdracht.</p>
