@@ -1,4 +1,10 @@
-## 0.29.0 (2025-01-07)
+## v0.29.1 (2025-03-11)
+
+#### :bug: Bug Fix
+* [#56](https://github.com/lblod/frontend-toezicht-abb/pull/56) [DL-6466] Fix some issues after updating to Appuniversum v3 ([@Windvis](https://github.com/Windvis))
+* [#55](https://github.com/lblod/frontend-toezicht-abb/pull/55) [DL-6466] Fix an issue with the search field ([@Windvis](https://github.com/Windvis))
+
+## v0.29.0 (2025-01-07)
 
 #### :rocket: Enhancement
 * [#51](https://github.com/lblod/frontend-toezicht-abb/pull/51) Add cross referencing components ([@claire-lovisa](https://github.com/claire-lovisa))
