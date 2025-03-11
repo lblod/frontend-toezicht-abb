@@ -112,18 +112,22 @@
               Waar gaat uw bericht over?
             </f.legend>
             <f.content>
-              <AuControlRadio
-                @label="Een functionaliteit, bug of probleem"
-                @value="LoketLokaalBestuur@vlaanderen.be?subject=Functionaliteit of bug of probleem"
+              <AuRadioGroup
                 @name="contact-subject"
                 @onChange={{fn (mut this.mailto)}}
-              />
-              <AuControlRadio
-                @label="Een inhoudelijke vraag"
-                @value="LoketLokaalBestuur@vlaanderen.be?subject=Inhoudelijke vraag"
-                @name="contact-subject"
-                @onChange={{fn (mut this.mailto)}}
-              />
+                as |Group|
+              >
+                <Group.Radio
+                  @value="LoketLokaalBestuur@vlaanderen.be?subject=Functionaliteit of bug of probleem"
+                >
+                  Een functionaliteit, bug of probleem
+                </Group.Radio>
+                <Group.Radio
+                  @value="LoketLokaalBestuur@vlaanderen.be?subject=Inhoudelijke vraag"
+                >
+                  Een inhoudelijke vraag
+                </Group.Radio>
+              </AuRadioGroup>
             </f.content>
           </AuFieldset>
 
