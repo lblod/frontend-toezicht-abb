@@ -40,6 +40,7 @@ Router.map(function () {
   });
 
   this.route('mock-login');
+  this.route('authorization-callback', { path: '/authorization/callback' });
   this.route('help');
 
   this.route('user', function () {

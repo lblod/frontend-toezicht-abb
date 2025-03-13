@@ -17,17 +17,12 @@ module.exports = function (environment) {
     moment: {
       allowEmpty: true,
     },
-    torii: {
-      disableRedirectInitializer: true,
-      providers: {
-        'acmidm-oauth2': {
-          apiKey: '{{ACMIDM_CLIENT_ID}}',
-          baseUrl: '{{ACMIDM_AUTH_URL}}',
-          scope: 'openid vo profile ABBDatabankToezicht',
-          redirectUri: '{{ACMIDM_AUTH_REDIRECT_URL}}',
-          logoutUrl: '{{ACMIDM_LOGOUT_URL}}',
-        },
-      },
+    acmidm: {
+      clientId: '{{ACMIDM_CLIENT_ID}}',
+      baseUrl: '{{ACMIDM_BASE_URL}}',
+      scope: 'openid vo profile ABBDatabankToezicht',
+      redirectUrl: '{{ACMIDM_AUTH_REDIRECT_URL}}',
+      logoutUrl: '{{ACMIDM_LOGOUT_URL}}',
     },
   };
 

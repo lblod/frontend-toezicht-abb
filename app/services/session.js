@@ -1,4 +1,3 @@
-import { warn } from '@ember/debug';
 import { inject as service } from '@ember/service';
 import SessionService from 'ember-simple-auth/services/session';
 import ENV from 'frontend-toezicht-abb/config/environment';
@@ -11,14 +10,12 @@ export default class AppSessionService extends SessionService {
     super.handleAuthentication(routeAfterAuthentication);
   }
 
-  handleInvalidation() {
-    const logoutUrl = ENV['torii']['providers']['acmidm-oauth2']['logoutUrl'];
-    if (logoutUrl.startsWith('http')) {
-      super.handleInvalidation(logoutUrl);
+  handleInvalidation(logoutUrl) {
+    const acmidmLogoutUrl = ENV.acmidm.logoutUrl;
+    if (acmidmLogoutUrl.startsWith('http')) {
+      super.handleInvalidation(acmidmLogoutUrl);
     } else {
-      warn('Incorrect logout URL configured', {
-        id: 'session-invalidation-failure',
-      });
+      super.handleInvalidation(logoutUrl);
     }
   }
 }
