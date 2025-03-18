@@ -11,6 +11,6 @@ The [static-file-service](https://github.com/mu-semtech/static-file-service?tab=
 | Name                               | Description                                                                                                                                              |
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `EMBER_ACMIDM_CLIENT_ID`           | The unique client id for a specific environment                                                                                                          |
-| `EMBER_ACMIDM_AUTH_URL`            | The URL where users will be redirected to when they want to log in                                                                                       |
+| `EMBER_ACMIDM_BASE_URL`            | The URL where users will be redirected to when they want to log in                                                                                       |
 | `EMBER_ACMIDM_AUTH_REDIRECT_URL`   | The callback URL that ACM/IDM will use after the user logs in successfully                                                                               |
 | `EMBER_ACMIDM_LOGOUT_URL`          | The URL where users will be redirected to when they want to log out                                                                                      |

@@ -29,26 +29,16 @@
     "test:ember": "ember test"
   },
   "overrides": {
-    "torii": "1.0.0-beta.1",
+    "@ember/test-waiters": "^4.1.0",
     "n3": {
       "readable-stream": "4.3.0"
     },
-    "ember-math-helpers": "^3.0.0",
-    "@appuniversum/ember-appuniversum": {
-      "ember-concurrency": "3.1.1"
-    },
-    "@lblod/ember-mock-login": {
-      "ember-concurrency": "3.1.1"
-    }
+    "ember-math-helpers": "^3.0.0"
   },
   "overridesNotes": {
-    "torii": "torii is used by ember-acmidm-login but v1.0.0-beta fixes some Ember 4 issues",
+    "@ember/test-waiters": "ember-simple-auth v7 doesn't support test-waiters v4 yet, which causes issues because both v3 and v4 will be present",
     "readable-stream": "it accidentally required node's stream in the most recent release: https://github.com/nodejs/readable-stream/issues/516",
-    "ember-math-helpers": "ember-data-table still brings in v2 but we can't force it to v4 because that's a v2 addon which requires ember-auto-import v2. We can remove the override once this pr is merged: https://github.com/mu-semtech/ember-data-table/pull/35",
-    "ember-concurrency": "pinning the versions until we bump ember-mock-login which uses an older version of ember-concurrency."
-  },
-  "dependenciesNotes": {
-    "ember-data": "ember-data is pinned on v4.7 until this issue is resolved: https://github.com/emberjs/data/issues/8312"
+    "ember-math-helpers": "ember-data-table still brings in v2 but we can't force it to v4 because that's a v2 addon which requires ember-auto-import v2. We can remove the override once this pr is merged: https://github.com/mu-semtech/ember-data-table/pull/35"
   },
   "devDependencies": {
     "@appuniversum/ember-appuniversum": "^3.7.0",
@@ -57,11 +47,11 @@
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^2.0.5",
     "@ember/string": "^3.0.1",
-    "@ember/test-helpers": "^2.9.3",
+    "@ember/test-helpers": "^4.0.0",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
-    "@lblod/ember-acmidm-login": "^1.0.0",
-    "@lblod/ember-mock-login": "^0.7.0",
+    "@lblod/ember-acmidm-login": "^2.2.0",
+    "@lblod/ember-mock-login": "^0.12.0",
     "@lblod/ember-submission-form-fields": "^2.26.2",
     "@lblod/submission-form-helpers": "^2.10.2",
     "broccoli-asset-rev": "^3.0.0",
@@ -88,9 +78,9 @@
     "ember-page-title": "^7.0.0",
     "ember-power-select": "^7.0.0",
     "ember-promise-helpers": "^2.0.0",
-    "ember-qunit": "^6.2.0",
+    "ember-qunit": "^8.0.0",
     "ember-resolver": "^10.0.0",
-    "ember-simple-auth": "^4.2.2",
+    "ember-simple-auth": "^7.0.0",
     "ember-source": "~4.12.0",
     "ember-template-imports": "^4.2.0",
     "ember-template-lint": "^5.8.0",
