@@ -29,7 +29,6 @@
     "test:ember": "ember test"
   },
   "overrides": {
-    "@ember/string": "^4.0.0",
     "@ember/test-waiters": "^4.1.0",
     "n3": {
       "readable-stream": "4.3.0"
@@ -37,7 +36,6 @@
     "ember-math-helpers": "^3.0.0"
   },
   "overridesNotes": {
-    "@ember/string": "ember-simple-auth v7 doesn't support v4 yet, we can remove this once we update to v8",
     "@ember/test-waiters": "ember-simple-auth v7 doesn't support test-waiters v4, which causes issues because both v3 and v4 will be present",
     "readable-stream": "it accidentally required node's stream in the most recent release: https://github.com/nodejs/readable-stream/issues/516",
     "ember-math-helpers": "ember-data-table still brings in v2 but we can't force it to v4 because that's a v2 addon which requires ember-auto-import v2. We can remove the override once this pr is merged: https://github.com/mu-semtech/ember-data-table/pull/35"
@@ -64,6 +62,7 @@
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.2.2",
     "ember-auto-import": "^2.8.1",
+    "ember-basic-dropdown": "^8.6.0",
     "ember-cli": "~5.12.0",
     "ember-cli-app-version": "^7.0.0",
     "ember-cli-babel": "^8.2.0",
@@ -73,7 +72,7 @@
     "ember-cli-htmlbars": "^6.3.0",
     "ember-cli-inject-live-reload": "^2.1.0",
     "ember-cli-sass": "^11.0.1",
-    "ember-concurrency": "^3.1.1",
+    "ember-concurrency": "^4.0.0",
     "ember-data": "~5.3.8",
     "ember-data-table": "^2.1.0",
     "ember-load-initializers": "^2.1.2",
@@ -81,7 +80,7 @@
     "ember-moment": "^10.0.0",
     "ember-mu-transform-helpers": "^2.0.0",
     "ember-page-title": "^8.2.3",
-    "ember-power-select": "^7.0.0",
+    "ember-power-select": "^8.0.0",
     "ember-promise-helpers": "^2.0.0",
     "ember-qunit": "^8.1.0",
     "ember-resolver": "^12.0.1",
