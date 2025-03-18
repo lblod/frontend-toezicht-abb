@@ -4,7 +4,6 @@ import { warn } from '@ember/debug';
 import { tracked } from '@glimmer/tracking';
 
 import { NamedNode, Namespace } from 'rdflib';
-import fetch from 'fetch';
 import { ForkingStore } from '@lblod/ember-submission-form-fields';
 import { task } from 'ember-concurrency';
 
