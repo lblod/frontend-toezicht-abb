@@ -29,6 +29,7 @@
     "test:ember": "ember test"
   },
   "overrides": {
+    "@ember/string": "^4.0.0",
     "@ember/test-waiters": "^4.1.0",
     "n3": {
       "readable-stream": "4.3.0"
@@ -36,6 +37,7 @@
     "ember-math-helpers": "^3.0.0"
   },
   "overridesNotes": {
+    "@ember/string": "ember-simple-auth v7 doesn't support v4 yet",
     "@ember/test-waiters": "ember-simple-auth v7 doesn't support test-waiters v4 yet, which causes issues because both v3 and v4 will be present",
     "readable-stream": "it accidentally required node's stream in the most recent release: https://github.com/nodejs/readable-stream/issues/516",
     "ember-math-helpers": "ember-data-table still brings in v2 but we can't force it to v4 because that's a v2 addon which requires ember-auto-import v2. We can remove the override once this pr is merged: https://github.com/mu-semtech/ember-data-table/pull/35"
@@ -49,6 +51,9 @@
     "@ember/render-modifiers": "^2.0.5",
     "@ember/string": "^4.0.0",
     "@ember/test-helpers": "^4.0.0",
+    "@embroider/compat": "^3.6.1",
+    "@embroider/core": "^3.4.16",
+    "@embroider/webpack": "^4.0.5",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "@lblod/ember-acmidm-login": "^2.2.0",
@@ -68,8 +73,6 @@
     "ember-cli-htmlbars": "^6.3.0",
     "ember-cli-inject-live-reload": "^2.1.0",
     "ember-cli-sass": "^11.0.1",
-    "ember-cli-sri": "^2.1.1",
-    "ember-cli-terser": "^4.0.2",
     "ember-concurrency": "^3.1.1",
     "ember-data": "~5.3.8",
     "ember-data-table": "^2.1.0",
