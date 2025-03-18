@@ -55,6 +55,7 @@
     "@lblod/ember-mock-login": "^0.12.0",
     "@lblod/ember-submission-form-fields": "^2.26.2",
     "@lblod/submission-form-helpers": "^2.10.2",
+    "@warp-drive/build-config": "^0.0.1",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.2.2",
     "ember-auto-import": "^2.8.1",
