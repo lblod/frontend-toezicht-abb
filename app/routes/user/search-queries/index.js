@@ -4,7 +4,7 @@ import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import { inject as service } from '@ember/service';
 
 export default class UserSearchQueriesIndexRoute extends Route.extend(
-  DataTableRouteMixin
+  DataTableRouteMixin,
 ) {
   @service currentSession;
   @service store;

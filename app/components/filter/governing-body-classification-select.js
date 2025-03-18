@@ -21,7 +21,7 @@ export default class GoverningBodyClassificationSelectComponent extends Componen
       'bestuursorgaan-classificatie-code',
       {
         sort: 'label',
-      }
+      },
     );
     this.options = options.slice();
 
@@ -53,7 +53,7 @@ export default class GoverningBodyClassificationSelectComponent extends Componen
         {
           filter: { id: this.args.value },
           page: { size: this.args.value.split(',').length },
-        }
+        },
       );
       this.selected = selected.slice();
     } else if (!this.args.value) {

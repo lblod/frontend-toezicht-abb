@@ -1,6 +1,5 @@
 # unconventional js
 /blueprints/*/files/
-/vendor/
 
 # Ignore .gjs files for now since our linting setup doesn't support them yet
 # We'll get that for free once we update to newer Ember versions
@@ -9,23 +8,13 @@
 *.gjs
 
 # compiled output
+/declarations/
 /dist/
-/tmp/
-
-# dependencies
-/bower_components/
-/node_modules/
 
 # misc
 /coverage/
 !.*
 .*/
-.eslintcache
 
 # ember-try
 /.node_modules.ember-try/
-/bower.json.ember-try
-/npm-shrinkwrap.json.ember-try
-/package.json.ember-try
-/package-lock.json.ember-try
-/yarn.lock.ember-try

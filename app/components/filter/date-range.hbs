@@ -1,4 +1,4 @@
-<fieldset {{did-update this.updateSelectedValues @fromValue @toValue}}>
+<fieldset {{did-update this.updateSelectedValues @fromValue @toValue}} {{!template-lint-disable no-at-ember-render-modifiers}}>
   <legend class="au-c-label">{{@label}}</legend>
   <AuButtonGroup @inline={{true}}>
     <AuButton

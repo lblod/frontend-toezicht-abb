@@ -34,7 +34,7 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
   *saveFilter() {
     yield this.router.transitionTo(
       'user.search-queries.new',
-      formStoreToQueryParams(this.formStore, this.sourceNode)
+      formStoreToQueryParams(this.formStore, this.sourceNode),
     );
   }
 
@@ -66,7 +66,7 @@ export default class SearchQueriesFilterFormComponent extends SearchQueriesFormC
     queryParamsToFormStore(
       this.args.queryParams,
       this.formStore,
-      this.sourceNode
+      this.sourceNode,
     );
   }
 
