@@ -1,6 +1,11 @@
-<div {{did-update (perform this.loadData) @submission }} {{!template-lint-disable no-at-ember-render-modifiers}}>
+<div
+  {{did-update (perform this.loadData) @submission}}
+  {{!template-lint-disable no-at-ember-render-modifiers}}
+>
   {{#if this.loadData.isRunning}}
-    <span>Aan het laden...</span>
+    <AuLoader class="au-o-box au-o-box--large">
+      Aan het laden
+    </AuLoader>
   {{else}}
     <SubmissionForm
       @form={{this.form}}
@@ -8,6 +13,7 @@
       @sourceNode={{this.sourceNode}}
       @formStore={{this.formStore}}
       @show={{true}}
-      @forceShowErrors={{false}} />
+      @forceShowErrors={{false}}
+    />
   {{/if}}
 </div>
