@@ -26,10 +26,10 @@ export default class SubmissionsReviewComponent extends Component {
   *initStatuses() {
     let statuses = this.store.peekAll('submission-review-status');
     let teBehandelenStatus = statuses.find(
-      (status) => status.uri === TREAT_STATUS
+      (status) => status.uri === TREAT_STATUS,
     );
     let afgehandeldStatus = statuses.find(
-      (status) => status.uri === TREATED_STATUS
+      (status) => status.uri === TREATED_STATUS,
     );
 
     if (
@@ -42,10 +42,10 @@ export default class SubmissionsReviewComponent extends Component {
         reload: true,
       });
       teBehandelenStatus = statuses.find(
-        (status) => status.uri === TREAT_STATUS
+        (status) => status.uri === TREAT_STATUS,
       );
       afgehandeldStatus = statuses.find(
-        (status) => status.uri === TREATED_STATUS
+        (status) => status.uri === TREATED_STATUS,
       );
     }
 

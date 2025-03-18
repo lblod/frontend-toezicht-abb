@@ -5,11 +5,11 @@ export const RDF = new Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
 export const FORM = new Namespace('http://lblod.data.gift/vocabularies/forms/');
 export const SH = new Namespace('http://www.w3.org/ns/shacl#');
 export const SEARCH = new Namespace(
-  'http://redpencil.data.gift/vocabularies/search-queries/'
+  'http://redpencil.data.gift/vocabularies/search-queries/',
 );
 
 export const TEMP_SOURCE_NODE = new NamedNode(
-  'http://frontend-toezicht-abb/temp-source-node'
+  'http://frontend-toezicht-abb/temp-source-node',
 );
 
 export const FORM_GRAPHS = {
@@ -46,7 +46,7 @@ export async function retrieveSourceData(uri, url, store) {
     undefined,
     undefined,
     undefined,
-    FORM_GRAPHS.sourceGraph
+    FORM_GRAPHS.sourceGraph,
   );
   store.removeStatements(existing);
 
@@ -70,7 +70,7 @@ export async function saveSourceData(url, store) {
     store.mergedGraph(FORM_GRAPHS.sourceGraph),
     store.graph,
     undefined,
-    'application/n-triples'
+    'application/n-triples',
   );
   await fetch(url, {
     method: 'PUT',
@@ -125,7 +125,7 @@ export function formStoreToQueryParams(store, node) {
     undefined,
     SEARCH('emberQueryParameterKey'),
     undefined,
-    FORM_GRAPHS.formGraph
+    FORM_GRAPHS.formGraph,
   );
   if (keys && keys.length) {
     for (let key of keys) {
@@ -133,13 +133,13 @@ export function formStoreToQueryParams(store, node) {
         key.subject,
         SH('path'),
         undefined,
-        FORM_GRAPHS.formGraph
+        FORM_GRAPHS.formGraph,
       );
       const values = store.match(
         node,
         path,
         undefined,
-        FORM_GRAPHS.sourceGraph
+        FORM_GRAPHS.sourceGraph,
       );
       if (values && values.length) {
         query.queryParams[key.object.value] = values
@@ -161,14 +161,14 @@ export function queryParamsToFormStore(query, store, node) {
       undefined,
       SEARCH('emberQueryParameterKey'),
       key,
-      FORM_GRAPHS.formGraph
+      FORM_GRAPHS.formGraph,
     );
     if (field) {
       const path = store.any(
         field,
         SH('path'),
         undefined,
-        FORM_GRAPHS.formGraph
+        FORM_GRAPHS.formGraph,
       );
       const values = query[key] && query[key].split(',');
       if (values && values.length) {

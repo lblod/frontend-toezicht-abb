@@ -9,7 +9,7 @@ import Snapshot from '../../utils/snapshot';
 import { VLABEL_CHART_OF_ACCOUNTS, VLABEL_TYPE } from '../../models/concept';
 
 export default class SupervisionSubmissionsRoute extends Route.extend(
-  DataTableRouteMixin
+  DataTableRouteMixin,
 ) {
   @service currentSession;
   @service store;
@@ -135,22 +135,22 @@ export default class SupervisionSubmissionsRoute extends Route.extend(
 
     if (params.dateOfEntryIntoForceFrom)
       query['filter[form-data][:gte:first-date-in-force]'] = moment(
-        params.dateOfEntryIntoForceFrom
+        params.dateOfEntryIntoForceFrom,
       ).format('YYYY-MM-DD');
 
     if (params.dateOfEntryIntoForceTo)
       query['filter[form-data][:lte:first-date-in-force]'] = moment(
-        params.dateOfEntryIntoForceTo
+        params.dateOfEntryIntoForceTo,
       ).format('YYYY-MM-DD');
 
     if (params.endDateFrom)
       query['filter[form-data][:gte:date-no-longer-in-force]'] = moment(
-        params.endDateFrom
+        params.endDateFrom,
       ).format('YYYY-MM-DD');
 
     if (params.endDateTo)
       query['filter[form-data][:lte:date-no-longer-in-force]'] = moment(
-        params.endDateTo
+        params.endDateTo,
       ).format('YYYY-MM-DD');
 
     if (params.statusUri)

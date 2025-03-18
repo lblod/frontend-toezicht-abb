@@ -76,7 +76,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
     queryParamsToFormStore(
       this.args.queryParams,
       this.formStore,
-      this.sourceNode
+      this.sourceNode,
     );
   }
 
@@ -97,7 +97,7 @@ export default class SearchQueriesConfigFormComponent extends SearchQueriesFormC
         this.sourceNode,
         undefined,
         undefined,
-        this.graphs.sourceGraph
+        this.graphs.sourceGraph,
       ).length
     );
   }

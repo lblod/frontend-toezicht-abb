@@ -23,12 +23,12 @@ export default class ToezichtInzendingenShowRoute extends Route {
     if (model.submission) {
       this.router.transitionTo(
         'supervision.submissions.show',
-        model.submission
+        model.submission,
       );
     } else {
       this.router.transitionTo(
         'route-not-found',
-        `toezicht/inzendingen/${model.id}`
+        `toezicht/inzendingen/${model.id}`,
       );
     }
   }

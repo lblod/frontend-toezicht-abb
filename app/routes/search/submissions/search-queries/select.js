@@ -19,7 +19,7 @@ export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
     const node = await retrieveSourceData(
       query.uri,
       `/search-queries/${query.id}`,
-      store
+      store,
     );
     return {
       store,
@@ -31,7 +31,7 @@ export default class SearchSubmissionSearchQueriesSelectRoute extends Route {
     const { store, node } = model;
     this.router.transitionTo(
       'search.submissions',
-      formStoreToQueryParams(store, node)
+      formStoreToQueryParams(store, node),
     );
   }
 }
