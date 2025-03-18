@@ -21,9 +21,5 @@
 /package-lock.json.ember-try
 /yarn.lock.ember-try
 
-*~
-.idea/
-.log/
-
 # broccoli-debug
 /DEBUG/
