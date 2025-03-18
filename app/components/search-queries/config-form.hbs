@@ -27,8 +27,7 @@
 <div class="au-c-main-container__content au-c-main-container__content--scroll">
   <div class="au-o-box">
     {{#if this.init.isRunning}}
-      <AuLoader @padding="large"/>
-      <span class="au-u-hidden-visually">Aan het laden</span>
+      <AuLoader>Aan het laden</AuLoader>
     {{else}}
       {{#if this.error}}
         <AuAlert @icon="cross"

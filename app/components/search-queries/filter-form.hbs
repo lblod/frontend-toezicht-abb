@@ -2,7 +2,9 @@
   <div class="au-c-sidebar__content">
     <div class="au-c-sidebar__header">
       {{#if (or this.init.isRunning this.resetFilters.isRunning)}}
-        <AuLoader @padding="small" />
+        <AuLoader @hideMessage={{true}} class="au-o-box">
+          Aan het laden
+        </AuLoader>
       {{else}}
         <RdfForm
           @groupClass="au-o-grid__item au-u-1-2 au-u-1-1@small"
