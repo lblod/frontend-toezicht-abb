@@ -1,3 +1,16 @@
+## v0.30.0 (2025-03-19)
+
+#### :rocket: Enhancement
+* [#61](https://github.com/lblod/frontend-toezicht-abb/pull/61) [DL-6517] Resolve `<AuLoader>` deprecations ([@Windvis](https://github.com/Windvis))
+* [#60](https://github.com/lblod/frontend-toezicht-abb/pull/60) [DL-6507] Enable Embroider ([@Windvis](https://github.com/Windvis))
+* [#59](https://github.com/lblod/frontend-toezicht-abb/pull/59) [DL-6505] Update the authentication setup ([@Windvis](https://github.com/Windvis))
+
+#### :house: Internal
+* [#53](https://github.com/lblod/frontend-toezicht-abb/pull/53) [DL-6506] Update to the Ember v5.12 blueprint ([@Windvis](https://github.com/Windvis))
+* [#62](https://github.com/lblod/frontend-toezicht-abb/pull/62) [DL-6518] Dependency maintenance ([@Windvis](https://github.com/Windvis))
+* [#58](https://github.com/lblod/frontend-toezicht-abb/pull/58) [DL-6504] Add a "feature" ci pipeline ([@Windvis](https://github.com/Windvis))
+* [#57](https://github.com/lblod/frontend-toezicht-abb/pull/57) [DL-6503] Remove the need for 2 docker builds ([@Windvis](https://github.com/Windvis))
+
 ## v0.29.1 (2025-03-11)
 
 #### :bug: Bug Fix
