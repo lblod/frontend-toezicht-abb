@@ -4,7 +4,11 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = async function (defaults) {
   const app = new EmberApp(defaults, {
-    // Add options here
+    babel: {
+      plugins: [
+        require.resolve('ember-concurrency/async-arrow-task-transform'),
+      ],
+    },
   });
 
   const { setConfig } = await import('@warp-drive/build-config');

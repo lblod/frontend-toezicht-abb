@@ -29,7 +29,13 @@
                 {{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}
               </AuButton>
             {{/each}}
-            <NumberPagination @page={{this.page}} @size={{this.size}} @nbOfItems={{this.model.length}} @total={{this.model.meta.count}} @links={{this.model.meta.pagination}} />
+            <AuDataTableNumberPagination
+              @page={{this.page}}
+              @size={{this.size}}
+              @nbOfItems={{this.model.length}}
+              @total={{this.model.meta.count}}
+              @links={{this.model.meta.pagination}}
+            />
           {{/if}}
         </MockLogin>
       </div>
