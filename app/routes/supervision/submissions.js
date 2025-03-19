@@ -1,20 +1,13 @@
-/* eslint-disable ember/no-mixins */
+import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-
-import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import moment from 'moment';
-
 import Snapshot from '../../utils/snapshot';
 import { VLABEL_CHART_OF_ACCOUNTS, VLABEL_TYPE } from '../../models/concept';
 
-export default class SupervisionSubmissionsRoute extends Route.extend(
-  DataTableRouteMixin,
-) {
+export default class SupervisionSubmissionsRoute extends Route {
   @service currentSession;
   @service store;
-
-  modelName = 'submission';
 
   filterParams = [
     'bestuurseenheidIds',
@@ -65,12 +58,17 @@ export default class SupervisionSubmissionsRoute extends Route.extend(
     this.lastParams = new Snapshot();
   }
 
-  mergeQueryOptions(params) {
+  model(params) {
+    return this.store.query('submission', this.getQueryOptions(params));
+  }
+
+  getQueryOptions(params) {
     this.lastParams.stageLive(params);
 
     if (this.lastParams.anyFieldChanged(this.filterParams)) params.page = 0;
 
     const query = {
+      sort: params.sort,
       page: { number: params.page },
     };
 
@@ -165,5 +163,17 @@ export default class SupervisionSubmissionsRoute extends Route.extend(
     super.setupController(...arguments);
     if (controller.page !== this.lastParams.committed.page)
       controller.set('page', this.lastParams.committed.page);
+  }
+
+  @action
+  loading(transition) {
+    // eslint-disable-next-line ember/no-controller-access-in-routes
+    let controller = this.controllerFor(this.routeName);
+    controller.set('isLoadingModel', true);
+    transition.promise.finally(function () {
+      controller.set('isLoadingModel', false);
+    });
+
+    return true; // bubble the loading event
   }
 }
