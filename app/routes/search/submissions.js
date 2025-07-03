@@ -27,6 +27,7 @@ export default class SearchSubmissionsRoute extends Route {
     this.lastParams.stageLive(params);
 
     if (
+      this.lastParams.committed &&
       this.lastParams.anyFieldChanged(
         Object.keys(params).filter((key) => key !== 'page'),
       )
