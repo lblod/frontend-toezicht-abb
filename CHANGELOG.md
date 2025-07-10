@@ -1,3 +1,8 @@
+## v0.30.1 (2025-07-10)
+
+#### :bug: Bug Fix
+* [#64](https://github.com/lblod/frontend-toezicht-abb/pull/64) Use correct province data [DL-6429] ([@kobemertens](https://github.com/kobemertens))
+
 ## v0.30.0 (2025-03-19)
 
 #### :rocket: Enhancement
