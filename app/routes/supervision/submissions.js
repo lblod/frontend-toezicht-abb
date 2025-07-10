@@ -113,7 +113,8 @@ export default class SupervisionSubmissionsRoute extends Route {
       query['filter[form-data][chart-of-account][:id:]'] = params.marCodeIds;
 
     if (params.provincieIds)
-      query['filter[organization][primary-site][address][provincie][:id:]'] = params.provincieIds;
+      query['filter[organization][primary-site][address][provincie][:id:]'] =
+        params.provincieIds;
 
     if (params.besluitTypeIds) {
       query['filter[form-data][decision-type][:id:]'] = params.besluitTypeIds;
