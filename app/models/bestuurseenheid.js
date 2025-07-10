@@ -6,6 +6,7 @@ export default class Bestuurseenheid extends Model {
 
   @belongsTo('werkingsgebied', { async: true, inverse: null }) werkingsgebied;
   @belongsTo('werkingsgebied', { async: true, inverse: null }) provincie;
+  @belongsTo('site', { async: true, inverse: null }) primarySite;
   @belongsTo('bestuurseenheid-classificatie-code', {
     async: true,
     inverse: null,

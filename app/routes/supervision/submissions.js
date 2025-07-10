@@ -65,7 +65,11 @@ export default class SupervisionSubmissionsRoute extends Route {
   getQueryOptions(params) {
     this.lastParams.stageLive(params);
 
-    if (this.lastParams.anyFieldChanged(this.filterParams)) params.page = 0;
+    if (
+      this.lastParams.committed &&
+      this.lastParams.anyFieldChanged(this.filterParams)
+    )
+      params.page = 0;
 
     const query = {
       sort: params.sort,
@@ -77,7 +81,7 @@ export default class SupervisionSubmissionsRoute extends Route {
         'form-data.types',
         'form-data.chart-of-account',
         'organization.classificatie',
-        'organization.provincie',
+        'organization.primary-site.address.provincie',
       ].join(',');
       query['filter[form-data][types][:uri:]'] = VLABEL_TYPE;
       query['filter[form-data][chart-of-account][id]'] =
@@ -85,7 +89,7 @@ export default class SupervisionSubmissionsRoute extends Route {
     } else {
       query['include'] = [
         'organization.classificatie',
-        'organization.provincie',
+        'organization.primary-site.address.provincie',
         'review.status',
         'form-data.decision-type',
         'form-data.regulation-type',
@@ -109,7 +113,8 @@ export default class SupervisionSubmissionsRoute extends Route {
       query['filter[form-data][chart-of-account][:id:]'] = params.marCodeIds;
 
     if (params.provincieIds)
-      query['filter[organization][provincie][:id:]'] = params.provincieIds;
+      query['filter[organization][primary-site][address][provincie][:id:]'] =
+        params.provincieIds;
 
     if (params.besluitTypeIds) {
       query['filter[form-data][decision-type][:id:]'] = params.besluitTypeIds;

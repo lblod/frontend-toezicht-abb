@@ -1,4 +1,4 @@
-import Model, { attr, hasMany } from '@ember-data/model';
+import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 
 export default class Werkingsgebied extends Model {
   @attr uri;
@@ -8,6 +8,7 @@ export default class Werkingsgebied extends Model {
   @hasMany('bestuurseenheid', { async: true, inverse: null }) bestuurseenheid;
   @hasMany('bestuurseenheid', { async: true, inverse: null })
   bestuurseenhedenInProvincie;
+  @belongsTo('concept', { async: true, inverse: null }) provincie;
 
   get longName() {
     let niveau = this.niveau;

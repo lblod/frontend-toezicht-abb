@@ -91,7 +91,7 @@
       <t.content as |c|>
         <c.header>
           {{#unless @displaySubset}}
-            <AuDataTableThSortable @label="Provincie" @field="organization.provincie.naam" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
+            <AuDataTableThSortable @label="Provincie" @field="organization.primarySite.address.provincie.label" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
           {{/unless}}
           <AuDataTableThSortable @label="Bestuurseenheid" @field="organization" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-from@medium"/>
           <AuDataTableThSortable @label="Type bestuur" @field="organization.classificatie.label" @currentSorting={{@sort}} @class="data-table__header-title au-u-visible-until@small"/>
@@ -106,7 +106,7 @@
         </c.header>
         <c.body as |row|>
           {{#unless @displaySubset}}
-            <td class="au-u-visible-from@medium">{{row.organization.provincie.naam}}</td>
+            <td class="au-u-visible-from@medium">{{row.organization.primarySite.address.provincie.label}}</td>
           {{/unless}}
           <td class="au-u-visible-until@small" style="max-width: 250px;" {{! template-lint-disable no-inline-styles}}>
             {{row.organization.naam}}
