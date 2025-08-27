@@ -1,3 +1,13 @@
+## v0.30.3 (2025-08-27)
+
+#### :bug: Bug Fix
+* [#67](https://github.com/lblod/frontend-toezicht-abb/pull/67) Use correct province data [DL-6777] ([@cecemel](https://github.com/cecemel))
+
+## v0.30.2 (2025-08-26)
+
+#### :bug: Bug Fix
+- Update Dockerfile: ensure semtech/static-file-service:0.2.0 is used.
+
 ## v0.30.1 (2025-07-10)
 
 #### :bug: Bug Fix
