@@ -6,6 +6,7 @@ import Snapshot from '../../utils/snapshot';
 import { tracked } from '@glimmer/tracking';
 import { TREAT_STATUS } from '../../models/submission-review-status';
 import { getQueryParams } from '../../utils/filter-form-helpers';
+import { parseISO, addDays } from 'date-fns';
 
 export default class SearchSubmissionsRoute extends Route {
   @tracked filter;
@@ -61,9 +62,16 @@ export default class SearchSubmissionsRoute extends Route {
     if (params.sessionDateFrom)
       query[':gte:sessionDatetime'] = params.sessionDateFrom;
     if (params.sessionDateTo)
-      query[':lte:sessionDatetime'] = params.sessionDateTo;
+      query[':lte:sessionDatetime'] = addDays(
+        parseISO(params.sessionDateTo),
+        1,
+      ).toISOString();
     if (params.sentDateFrom) query[':gte:sentDate'] = params.sentDateFrom;
-    if (params.sentDateTo) query[':lte:sentDate'] = params.sentDateTo;
+    if (params.sentDateTo)
+      query[':lte:sentDate'] = addDays(
+        parseISO(params.sentDateTo),
+        1,
+      ).toISOString();
     if (params.dateOfEntryIntoForceFrom)
       query[':gte:dateOfEntryIntoForce'] = params.dateOfEntryIntoForceFrom;
     if (params.dateOfEntryIntoForceTo)
