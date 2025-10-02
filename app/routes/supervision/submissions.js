@@ -130,7 +130,7 @@ export default class SupervisionSubmissionsRoute extends Route {
       ).toISOString();
 
     if (params.sessionDateTo)
-      query['filter[form-data][:lte:session-started-at-time]'] = addDays(
+      query['filter[form-data][:lt:session-started-at-time]'] = addDays(
         parseISO(params.sessionDateTo),
         1,
       ).toISOString();
@@ -141,7 +141,7 @@ export default class SupervisionSubmissionsRoute extends Route {
       ).toISOString();
 
     if (params.sentDateTo)
-      query['filter[:lte:sent-date]'] = addDays(
+      query['filter[:lt:sent-date]'] = addDays(
         parseISO(params.sentDateTo),
         1,
       ).toISOString();

@@ -62,13 +62,13 @@ export default class SearchSubmissionsRoute extends Route {
     if (params.sessionDateFrom)
       query[':gte:sessionDatetime'] = params.sessionDateFrom;
     if (params.sessionDateTo)
-      query[':lte:sessionDatetime'] = addDays(
+      query[':lt:sessionDatetime'] = addDays(
         parseISO(params.sessionDateTo),
         1,
       ).toISOString();
     if (params.sentDateFrom) query[':gte:sentDate'] = params.sentDateFrom;
     if (params.sentDateTo)
-      query[':lte:sentDate'] = addDays(
+      query[':lt:sentDate'] = addDays(
         parseISO(params.sentDateTo),
         1,
       ).toISOString();
