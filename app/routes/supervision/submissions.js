@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 import moment from 'moment';
 import Snapshot from '../../utils/snapshot';
 import { VLABEL_CHART_OF_ACCOUNTS, VLABEL_TYPE } from '../../models/concept';
+import { parseISO, addDays } from 'date-fns';
 
 export default class SupervisionSubmissionsRoute extends Route {
   @service currentSession;
@@ -124,17 +125,26 @@ export default class SupervisionSubmissionsRoute extends Route {
     }
 
     if (params.sessionDateFrom)
-      query['filter[form-data][:gte:session-started-at-time]'] =
-        params.sessionDateFrom;
+      query['filter[form-data][:gte:session-started-at-time]'] = parseISO(
+        params.sessionDateFrom,
+      ).toISOString();
 
     if (params.sessionDateTo)
-      query['filter[form-data][:lte:session-started-at-time]'] =
-        params.sessionDateTo;
+      query['filter[form-data][:lt:session-started-at-time]'] = addDays(
+        parseISO(params.sessionDateTo),
+        1,
+      ).toISOString();
 
     if (params.sentDateFrom)
-      query['filter[:gte:sent-date]'] = params.sentDateFrom;
+      query['filter[:gte:sent-date]'] = parseISO(
+        params.sentDateFrom,
+      ).toISOString();
 
-    if (params.sentDateTo) query['filter[:lte:sent-date]'] = params.sentDateTo;
+    if (params.sentDateTo)
+      query['filter[:lt:sent-date]'] = addDays(
+        parseISO(params.sentDateTo),
+        1,
+      ).toISOString();
 
     if (params.dateOfEntryIntoForceFrom)
       query['filter[form-data][:gte:first-date-in-force]'] = moment(
