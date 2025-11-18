@@ -1,7 +1,6 @@
 <div {{did-update this.updateSelectedValue @value}} {{!template-lint-disable no-at-ember-render-modifiers}}>
   <PowerSelectMultiple
           @search={{perform this.search}}
-          @searchField="naam"
           @searchPlaceholder="Typ om te zoeken..."
           @options={{this.options}}
           @searchEnabled={{true}}
@@ -16,7 +15,7 @@
           }}
           @registerAPI={{this.registerAPI}}
           @allowClear={{true}} as |bestuurseenheid|>
-    {{bestuurseenheid.naam}} ({{bestuurseenheid.classificatie.label}})
+    {{bestuurseenheid.naam}} ({{bestuurseenheid.classificatie.label}}) <span class="au-u-muted au-u-para-small">- {{bestuurseenheid.kboNumber}}</span>
   </PowerSelectMultiple>
   <AuHelpText class="au-u-margin-none">vb. Gemeente Hasselt, OCMW Gent</AuHelpText>
 </div>
