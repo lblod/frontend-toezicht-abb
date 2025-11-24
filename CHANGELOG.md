@@ -1,3 +1,8 @@
+## v0.30.5 (2025-11-24)
+
+#### :rocket: Enhancement
+* [#70](https://github.com/lblod/frontend-toezicht-abb/pull/70) Include KBO-number in Bestuurseenheden-filter in Databank Toezicht ABB [DL-6558] ([@kobemertens](https://github.com/kobemertens))
+
 ## v0.30.3 (2025-08-27)
 
 #### :bug: Bug Fix
