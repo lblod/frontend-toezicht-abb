@@ -35,7 +35,7 @@
     "@ember/test-waiters": "ember-simple-auth v7 doesn't support test-waiters v4, which causes issues because both v3 and v4 will be present"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "^3.7.0",
+    "@appuniversum/ember-appuniversum": "^3.18.0",
     "@babel/core": "^7.25.2",
     "@babel/eslint-parser": "^7.25.1",
     "@babel/plugin-proposal-decorators": "^7.24.7",
@@ -50,8 +50,8 @@
     "@glimmer/tracking": "^1.1.2",
     "@lblod/ember-acmidm-login": "^2.2.0",
     "@lblod/ember-mock-login": "^0.12.0",
-    "@lblod/ember-submission-form-fields": "^2.26.2",
-    "@lblod/submission-form-helpers": "^2.10.2",
+    "@lblod/ember-submission-form-fields": "^3.4.0",
+    "@lblod/submission-form-helpers": "^3.0.0",
     "@warp-drive/build-config": "^0.0.1",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.2.2",
