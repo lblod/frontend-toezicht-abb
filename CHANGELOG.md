@@ -1,4 +1,4 @@
-## v0.36.0 (2026-04-02)
+## v0.31.0 (2026-04-02)
 
 #### :rocket: Enhancement
 * [#78](https://github.com/lblod/frontend-toezicht-abb/pull/78) DL-7236:  Adjust front-end for new URL-formatting in Databank Toezicht ([@kikef98](https://github.com/kikef98))
