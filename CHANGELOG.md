@@ -1,3 +1,8 @@
+## v0.31.1 (2026-04-21)
+
+#### :bug: Bug Fix
+* [#79](https://github.com/lblod/frontend-toezicht-abb/pull/79) Register the custom form fields earlier ([@Windvis](https://github.com/Windvis))
+
 ## v0.31.0 (2026-04-02)
 
 #### :rocket: Enhancement
