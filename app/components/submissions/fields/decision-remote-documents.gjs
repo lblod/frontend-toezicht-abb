@@ -496,10 +496,10 @@ export default class DecisionRemoteDocumentsShowComponent extends Component {
 
   downloadAsZip = task(async () => {
     const promises = this.downloadableRemoteUrls.map((rdo) => {
-      return fetch(rdo.downloadLink).then((response) => {
+      return fetch(downloadLink(rdo)).then((response) => {
         if (!response.ok) {
           throw new Error(
-            `Something went wrong while trying to download '${rdo.downloadLink}': ${response.status} ${response.statusText}`,
+            `Something went wrong while trying to download '${downloadLink(rdo)}': ${response.status} ${response.statusText}`,
           );
         }
         return response;
