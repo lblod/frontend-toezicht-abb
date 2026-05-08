@@ -1,3 +1,8 @@
+## v0.31.2 (2026-05-08)
+
+#### :bug: Bug Fix
+* [#80](https://github.com/lblod/frontend-toezicht-abb/pull/80) Register the custom form fields earlier ([@DamonKennes](https://github.com/DamonKennes))
+
 ## v0.31.1 (2026-04-21)
 
 #### :bug: Bug Fix
