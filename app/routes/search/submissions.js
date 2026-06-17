@@ -37,9 +37,15 @@ export default class SearchSubmissionsRoute extends Route {
 
     const query = {};
     // TODO generate this based on form configuration?
-    query[`:sqs:data.content,data`] = isEmpty(params.search)
-      ? '*'
-      : params.search;
+    // We only search for content if a filter has been provided.
+    // If not search param provided, we don't care wether the submission
+    //  has content or not.
+    // The previous version was too strict.
+    // If something went wrong during the index with tika, and submission had no textual content
+    // then it is excluded. What we have now is less bad
+    if (!isEmpty(params.search)) {
+      query[`:sqs:data.content,data`] = params.search;
+    }
     if (params.administrativeUnites)
       query[':terms:administrativeUnitURI'] = params.administrativeUnites;
     if (params.administrativeUnitClassifications) {
