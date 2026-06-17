@@ -1,3 +1,8 @@
+## v0.31.3 (2026-06-17)
+
+#### :bug: Bug Fix
+* [#81](https://github.com/lblod/frontend-toezicht-abb/pull/81) More liberal search if no search param is provided. ([@cecemel](https://github.com/cecemel))
+
 ## v0.31.2 (2026-05-08)
 
 #### :bug: Bug Fix
