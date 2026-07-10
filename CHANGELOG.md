@@ -1,3 +1,8 @@
+## v0.31.4 (2026-07-10)
+
+#### :bug: Bug Fix
+* [#82](https://github.com/lblod/frontend-toezicht-abb/pull/82) [DL-7363] fix downloads with special characters. ([@DamonKennes](https://github.com/DamonKennes))
+
 ## v0.31.3 (2026-06-17)
 
 #### :bug: Bug Fix
