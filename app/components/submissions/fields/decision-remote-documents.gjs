@@ -502,7 +502,7 @@ export default class DecisionRemoteDocumentsShowComponent extends Component {
             `Something went wrong while trying to download '${downloadLink(rdo)}': ${response.status} ${response.statusText}`,
           );
         }
-        return response;
+        return { input: response, name: rdo.file.filename };
       });
     });
 
