@@ -94,7 +94,7 @@
     "prettier": "^3.3.3",
     "qunit": "^2.22.0",
     "qunit-dom": "^3.2.1",
-    "rdflib": "^2.2.26",
+    "rdflib": "^2.4.0",
     "release-it": "^15.5.0",
     "sass": "^1.23.7",
     "stylelint": "^15.11.0",
